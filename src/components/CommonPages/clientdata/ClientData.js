@@ -19,7 +19,7 @@ export default function UniRegister() {
     call_status: "",
     call_status: "",
     attach_file: "",
-   
+
   });
 
   const [add, setAdd] = useState({
@@ -54,7 +54,7 @@ export default function UniRegister() {
     data.append("call_schedule_date", formData.call_schedule_date);
     data.append("call_status", formData.call_status);
     data.append("attach_file", formData.attach_file);
-    
+
 
     // Append address fields
     Object.keys(add).forEach((key) => {
@@ -69,7 +69,7 @@ export default function UniRegister() {
       };
       const res = await axios.post(
         `${EXACHANGE_URLS_TELLE}/addclientdata`,
-        data,axiosConfig
+        data, axiosConfig
       );
 
       if (res?.status === 200) {
@@ -127,32 +127,32 @@ export default function UniRegister() {
 
         <div className="first_box1">
           <div>
-            <h4>Your Client Details :-</h4>
+            <h4 className="h41">Your Client Details :-</h4>
           </div>
 
-          <div>
+          <div className="columnnn">
             <div className="name">
               {" "}
-              University Name
+              Client Name
               <input
                 type="name"
                 value={formData?.client_name}
                 onChange={(e) => {
                   setFormData({ ...formData, client_name: e.target.value });
                 }}
-                placeholder="University Name"
+                placeholder="Client Name"
               />
             </div>
             <div className="name">
               {" "}
-              company_name
-                            <input
+              Company name
+              <input
                 type="name"
                 value={formData?.company_name}
                 onChange={(e) => {
                   setFormData({ ...formData, company_name: e.target.value });
                 }}
-                placeholder="Ambassador Name"
+                placeholder="Company Name"
               />
             </div>
             <div className="name">
@@ -163,14 +163,14 @@ export default function UniRegister() {
                 onChange={(e) => {
                   setFormData({ ...formData, gst_no: e.target.value });
                 }}
-                placeholder="Phone Number"
+                placeholder="GST Number"
               />
             </div>
-          </div>
 
-          <div>
-            <div className="nameyy">
-              Email
+
+
+            <div className="name">
+              Dob CLient
               <input
                 type="date"
                 pattern="\d{2}/\d{2}/\d{4}"
@@ -178,23 +178,23 @@ export default function UniRegister() {
                 onChange={(e) => {
                   setFormData({ ...formData, dob_client: e.target.value });
                 }}
-                placeholder="ex-phanom@gmail.com"
+                placeholder="Dob Client"
               />
             </div>
-            <div className="nameyy">
-              User Name
+            <div className="name">
+              Client Aniversary
               <input
-                 type="date"
-                 pattern="\d{2}/\d{2}/\d{4}"
+                type="date"
+                pattern="\d{2}/\d{2}/\d{4}"
                 value={formData?.client_anniversary}
                 onChange={(e) => {
                   setFormData({ ...formData, client_anniversary: e.target.value });
                 }}
-                placeholder="User Name"
+                placeholder="Date"
               />
             </div>
-            <div className="nameyy">
-              Year Established
+            <div className="name">
+              Call Schedule
               <input
                 type="date"
                 pattern="\d{2}/\d{2}/\d{4}"
@@ -205,24 +205,23 @@ export default function UniRegister() {
                     call_schedule_date: e.target.value,
                   });
                 }}
-                placeholder="Established in Year"
+                placeholder="Call Schedule on which date"
               />
+
+              <div className="name">
+                Call Status
+                <select
+                  onChange={(e) => {
+                    setFormData({ ...formData, call_status: e.target.value });
+                  }}
+                >
+                  <option value="">Please Select</option>
+                  <option value="cold_lead">cold_lead</option>
+                  <option value="hot_lead">hot_lead</option>
+                </select>
+              </div>
+
             </div>
-             <div>
-        <div className="nameyy">
-          Type Of University
-          <select
-            onChange={(e) => {
-              setFormData({ ...formData, call_status: e.target.value });
-            }}
-          >
-            <option value="">Please Select</option>
-            <option value="cold_lead">cold_lead</option>
-            <option value="government">hot_lead</option>
-          </select>
-        </div>
-       
-      </div>
           </div>
         </div>
       </div>
@@ -236,64 +235,63 @@ export default function UniRegister() {
           <div>
             {" "}
             <div className="name">
-              ca name
+            Chartered accountant Name
               <input
                 value={add?.ca_name}
                 onChange={(e) => {
                   setAdd({ ...add, ca_name: e.target.value });
                 }}
-                placeholder="Street Address"
+                placeholder=" Chartered accountant Name"
               />
             </div>
             <div className="name">
-              City
+            Chartered accountant Number
               <input
-              type="number"
+                type="number"
                 value={add?.ca_number}
                 onChange={(e) => {
                   setAdd({ ...add, ca_number: e.target.value });
                 }}
-                placeholder="City"
+                placeholder="Chartered accountant Number"
               />
             </div>
             <div className="name">
-              State
+              CA Accountant Name
               <input
                 value={add?.ca_accountant_name}
                 onChange={(e) => {
                   setAdd({ ...add, ca_accountant_name: e.target.value });
                 }}
-                placeholder="State"
+                placeholder="CA Accountant Name"
               />
             </div>
-          </div>
-          <div>
-            <div className="nameyy">
-              Country
-              <input
+
+            <div className="name">
+            Chartered accountant Company Name
+              <input className="inputtt"
                 value={add?.ca_company_name}
                 onChange={(e) => {
                   setAdd({ ...add, ca_company_name: e.target.value });
                 }}
-                placeholder="Country"
+                placeholder=" Chartered accountant Company Name"
               />
             </div>
-            <div className="nameyy">
-              Postal Code
-              <input
-              type="number"
+            <div className="name">
+            CA Accountant Number
+              <input className="inputtt"
+                type="number"
                 value={add.ca_accountant_number}
                 onChange={(e) => {
                   setAdd({ ...add, ca_accountant_number: e.target.value });
                 }}
-                placeholder="Postal Code"
+                placeholder="CA Accountant Number"
               />
             </div>
           </div>
           <div>
-            <div className="nameyyy">
-              Upload University Image
-              <div className="imgg" style={selectContainerStyle}>
+            <div className="name">
+              Attach Any File
+               <div className="imgg" style={selectContainerStyle}>
                 Click Here
                 <img
                   src={
@@ -306,13 +304,13 @@ export default function UniRegister() {
                 <input type="file" onChange={handleUniversityImagePreview} />
               </div>
             </div>
-          
+
           </div>
         </div>
-        
 
-          
-          
+
+
+
         <div className="regis">
           <button
             className="btnn"
@@ -320,17 +318,17 @@ export default function UniRegister() {
               handleRegisterClick();
             }}
           >
-            Register
+            Submit
           </button>
         </div>
-      
+
       </div>
     </Root>
   );
 }
 const Root = styled.section`
   font-family: 20px "Roboto", sans-serif;
-  margin: 80px 0px 0px 80px;
+  margin: 10px 0px 0px 80px;
   max-width: 100vw;
   width: 100%;
 
@@ -343,18 +341,18 @@ const Root = styled.section`
     color: #0e4d92;
     margin: 0;
   }
-  .nameyy {
+  .name{
     display: flex;
     flex-direction: column;
     font-size: small;
-    width: 32.5%;
+    width: 33%;
     margin-right: 10px;
     color: black;
     input {
       border-radius: 10px;
       padding: 5px;
       color: #202020;
-      width: 90%;
+      width: 100%;
       text-decoration: none;
       border: 2px solid #a5d8fa;
       @media (max-width: 600px) {
@@ -371,7 +369,7 @@ const Root = styled.section`
       text-decoration: none;
       border: 2px solid #a5d8fa;
       line-height: 1.5em;
-      width: 90%;
+      width: 100%;
       padding: 6px;
       border-radius: 10px;
       -webkit-box-sizing: border-box;
@@ -416,6 +414,7 @@ const Root = styled.section`
     flex-direction: column;
     font-size: small;
     width: 90%;
+    padding: 5px;
     margin-right: 10px;
     color: black;
     input {
@@ -423,6 +422,7 @@ const Root = styled.section`
       padding: 5px;
       color: #202020;
       width: 90%;
+      margin: 5px;
       text-decoration: none;
       border: 2px solid #a5d8fa;
       @media (max-width: 900px) {
@@ -470,7 +470,7 @@ const Root = styled.section`
       border-radius: 10px;
       padding: 5px;
       color: #202020;
-      width: 90%;
+      /* width: 90%; */
       text-decoration: none;
       border: 2px solid #a5d8fa;
       @media (max-width: 900px) {
@@ -505,54 +505,7 @@ const Root = styled.section`
     }
   }
 
-  .nameee {
-    display: flex;
-    flex-direction: column;
-    font-size: small;
-    width: 100%;
-    justify-content: space-around;
-    color: black;
-    select {
-      background-color: white;
-      color: black;
-      text-decoration: none;
-      border: 2px solid #a5d8fa;
-      line-height: 1.5em;
-      width: 29%;
-      padding: 8px;
-      border-radius: 10px;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      background-image: linear-gradient(45deg, transparent 50%, blue 50%),
-        linear-gradient(135deg, blue 50%, transparent 50%),
-        linear-gradient(to right, skyblue, skyblue);
-      background-position: calc(100% - 20px) calc(1em + 2px),
-        calc(100% - 15px) calc(1em + 2px), 100% 0;
-      background-size: 5px 5px, 5px 5px, 40px 45px;
-      background-repeat: no-repeat;
-      @media (max-width: 555px) {
-        padding: 8px;
-        background-size: 5px 5px, 5px 5px, 30px 45px;
-        align-items: center;
-      }
-
-      select:focus {
-        background-image: linear-gradient(45deg, white 50%, transparent 50%),
-          linear-gradient(135deg, transparent 50%, white 50%),
-          linear-gradient(to right, gray, gray);
-        background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em,
-          100% 0;
-        background-size: 5px 5px, 5px 5px, 2.5em 2.5em;
-        background-repeat: no-repeat;
-        border-color: grey;
-        outline: 0;
-      }
-    }
-  }
-
+ 
   .first_div {
     h2 {
       color: #0e4d92;
@@ -564,6 +517,10 @@ const Root = styled.section`
     .first_box1 {
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      /* text-align: center; */
+      width: 100%;
+      align-items: center;
       margin: 0px 10px;
       > div {
         display: flex;
@@ -576,19 +533,20 @@ const Root = styled.section`
 
   .second_div {
     display: flex;
-    flex-direction: column;
-    font-family: Roboto, sans-serif;
-    flex-wrap: wrap;
-    width: 100%;
+justify-content: center;
+      align-items: center;
+      flex-direction: column;
 
     .company {
-      display: flex;
-      flex-direction: column;
+      display: flex;   
+        flex-direction: column;
       margin: 0px 10px;
-      width: 100%;
+      width: 60%;
 
       > div {
+        
         display: flex;
+      flex-direction: column;
         padding: 10px;
         width: 100%;
 
@@ -596,7 +554,7 @@ const Root = styled.section`
           display: flex;
           flex-direction: column;
           font-size: small;
-          width: 100%;
+          width: 6110%;
           margin-right: 10px;
           color: black;
         }
@@ -676,7 +634,7 @@ const Root = styled.section`
       border-radius: 10px;
       font-size: small;
       border-color: transparent;
-      width: 15%;
+      width: 100%;
       font-size: medium;
       color: #ffffff;
       margin-right: 108px;
@@ -715,5 +673,28 @@ const Root = styled.section`
     .fifth_box {
       margin: 20px;
     }
+
+  }
+  .columnnn{
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+  }
+  .h41{
+    font-family: -webkit-body;
+    align-items: flex-end;
+    text-align: left;
+    font-size: 19px;
+  }
+  .inputtt{
+    border-radius: 101px;
+      padding: 5px;
+      color: #202020;
+      /* width: 90%; */
+      text-decoration: none;
+      border: 2px solid #a5d8fa;
+      @media (max-width: 900px) {
+        width: 100%;
+      }
   }
 `;

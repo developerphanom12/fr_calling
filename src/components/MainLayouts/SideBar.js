@@ -99,143 +99,20 @@ export default function SideBar() {
                 }}
               >
                 {<MdWorkHistory />}
-                <p>Application History</p>
+                <p>Client History</p>
               </div>
-              <div
-                className={activeParam === "action" ? "active" : ""}
-                onClick={() => {
-                  navigate("/latestupdates");
-                }}
-              >
-                {<MdPersonSearch />}
-                <p>Latest Updates</p>
-              </div>
-              <div
-                className={activeParam === "ugrequire" ? "active" : ""}
-                onClick={() => {
-                  navigate("/ugrequire");
-                }}
-              >
-                {<MdPersonSearch />}
-                <p>UG Entry Requirement</p>
-              </div>
-              <div
-                className={activeParam === "pgrequire" ? "active" : ""}
-                onClick={() => {
-                  navigate("/pgrequire");
-                }}
-              >
-                {<MdPersonSearch />}
-                <p>PG Entry Requirement</p>
-              </div>
-              <div
-                className={activeParam === "urm" ? "active" : ""}
-                onClick={() => {
-                  navigate("/urm");
-                }}
-              >
-                {<FaUniversity />}
-                <p>URM university</p>
-              </div>
-              {/* <div
-                className={activeParam === "search" ? "active" : ""}
-                onClick={() => {
-                  navigate("/search");
-                }}
-              >
-                {<MdSearch />}
-                <p>Search Course</p>
-              </div> */}
-              <div
-                className={activeParam === "listcourses" ? "active" : ""}
-                onClick={() => {
-                  navigate("/listcourses");
-                }}
-              >
-                {<MdPersonSearch />}
-                <p>Courses List</p>
-              </div>
+             
+            
+            
+             
             </>
           ) : (
             ""
           )}
 
-          {userDetails.role === "university" ? (
-            <>
-              <div
-                className={activeParam === "unidash" ? "active" : ""}
-                onClick={() => {
-                  navigate("/unidash");
-                }}
-              >
-                <FaHome />
-                <p>Dashboard</p>
-              </div>
-              <div
-                className={activeParam === "uniaddcourses" ? "active" : ""}
-                onClick={() => {
-                  navigate("/uniaddcourses");
-                }}
-              >
-                {<MdPersonSearch />}
-                <p>Add New Courses</p>
-              </div>
-              <div
-                className={activeParam === "ugrequire" ? "active" : ""}
-                onClick={() => {
-                  navigate("/ugrequire");
-                }}
-              >
-                {<MdPersonSearch />}
-                <p>UG Entry Requirement</p>
-              </div>
-              <div
-                className={activeParam === "pgrequire" ? "active" : ""}
-                onClick={() => {
-                  navigate("/pgrequire");
-                }}
-              >
-                {<MdPersonSearch />}
-                <p>PG Entry Requirement</p>
-              </div>
-              <div
-                className={activeParam === "listcourses" ? "active" : ""}
-                onClick={() => {
-                  navigate("/listcourses");
-                }}
-              >
-                {<MdPersonSearch />}
-                <p>Courses List</p>
-              </div>
-            </>
-          ) : (
-            ""
-          )}
+         
 
-          {userDetails.role === "admin" ? (
-            <>
-              <div
-                className={activeParam === "action" ? "active" : ""}
-                onClick={() => {
-                  navigate("/action");
-                }}
-              >
-                {<MdPersonSearch />}
-                <p>Action</p>
-              </div>
-              <div
-                className={activeParam === "createstaff" ? "active" : ""}
-                onClick={() => {
-                  navigate("/createstaff");
-                }}
-              >
-                {<MdPersonSearch />}
-                <p>Create Staff</p>
-              </div>
-            </>
-          ) : (
-            ""
-          )}
+       
           <div
             className="logout"
             onClick={() => {
