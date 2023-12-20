@@ -12,9 +12,9 @@ export default function Page1() {
     <Root>
       <div className="childfirst">
         <div className="child1">
-          <h1>Read Reviews.</h1>
-          <h1>Write Reviews.</h1>
-          <h1>Find Employee</h1>
+          <h1>Check Portfilo.</h1>
+          <h1>Tellecallerr</h1>
+          <h1>Find Best Solution</h1>
           <h1>You Can Trust.</h1>
         </div>
         <div className="child2">

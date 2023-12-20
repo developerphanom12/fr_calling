@@ -25,12 +25,12 @@ export default function PostNav() {
   return (
     <Root>
       <div className="logo"
-      onClick={() => {
-        handleLogoutClick();
-      }}
+        onClick={() => {
+          handleLogoutClick();
+        }}
       >
         <IoMdStarOutline />
-        ReviewMe
+        TeleCaller
       </div>
       <div className="search_bar">
         <FaSearch />
@@ -49,94 +49,24 @@ export default function PostNav() {
           Home
         </button>
 
-        <button
-          className={active === "mynetwork" ? "btn_1 active" : "btn_1"}
-          onClick={() => {
-            setActive("mynetwork")
-            navigate("/mynetwork");
-
-          }}
-        >
-          <FaUserGroup />
-          My Network
-        </button>
-
-        <button
-          className={active === "jobs" ? "btn_1 active" : "btn_1"}
-          onClick={() => {
-            setActive("jobs")
-            navigate("/jobs");
-
-          }}
-        >
-          <FaBagShopping />
-          Jobs
-        </button>
-
-        <button
-          className={active === "message" ? " active" : "btn_1"}
-          onClick={() => {
-            setActive("message")
-            navigate("/message");
-
-          }}
-        >
-          <BiSolidMessageRoundedDots />
-          Message
-        </button>
-
-        <button
-          className={active === "notification" ? " active" : "btn_1"}
-          onClick={() => {
-            setActive("notification")
-            navigate("/notification");
-
-          }}
-        >
-          <IoNotifications />
-          Notification
-        </button>
 
 
-{userDetails.role === "employ" ? (
+ 
 
-<button
-className={active === "profile" ? " active" : "btn_1"}
-onClick={() => {
-  setActive("profile")
-  navigate("/employeeprofile");
-}}
->
-<FaUserCircle />
-Profile
-</button>
-):(
-
-  <button
-  className={active === "profile" ? " active" : "btn_1"}
-  onClick={() => {
-    setActive("profile")
-    navigate("/employerprofile");
-  }}
->
-  <FaUserCircle />
-  Profile
-</button>
-)}
-       
-
-        <div className="business">
           <button
-            className={active === "forbusiness" ? " active" : "btn_1"}
+            className={active === "profile" ? " active" : "btn_1"}
             onClick={() => {
-              setActive("forbusiness")
-              navigate("/forbusiness");
+              setActive("profile")
+              navigate("/employeeprofile");
             }}
           >
-            <IoApps />
-            For Business
+            <FaUserCircle />
+            Profile
           </button>
-        </div>
+   
+
+ 
+ 
       </div>
       <div
         className="menu"
@@ -163,38 +93,7 @@ Profile
         >
           Home
         </div>
-        <div
-          className="opt_btn"
-          onClick={() => {
-            navigate("/mynetwork");
-          }}
-        >
-          My Network
-        </div>
-        <div
-          className="opt_btn"
-          onClick={() => {
-            navigate("/jobs");
-          }}
-        >
-          Jobs
-        </div>
-        <div
-          className="opt_btn"
-          onClick={() => {
-            navigate("/message");
-          }}
-        >
-          Message
-        </div>
-        <div
-          className="opt_btn"
-          onClick={() => {
-            navigate("/notification");
-          }}
-        >
-          Notification
-        </div>
+       
         <div
           className="opt_btn"
           onClick={() => {
@@ -203,14 +102,7 @@ Profile
         >
           Profile
         </div>
-        <div
-          className="opt_btn"
-          onClick={() => {
-            navigate("/forbusiness");
-          }}
-        >
-          For Business
-        </div>
+         
       </div>
     </Root>
   );

@@ -1,2 +1,2 @@
-export const EXCHANGE_URLS_EMPLOYER = 'http://localhost:3500/api/employer';
-export const EXCHANGE_URLS_EMPLOYEE = 'http://localhost:3500/api/employ';
+export const EXCHANGE_URLS_ADMIN= 'http://localhost:3600/api/admin';
+export const EXACHANGE_URLS_TELLE = 'http://localhost:3600/api/telle';

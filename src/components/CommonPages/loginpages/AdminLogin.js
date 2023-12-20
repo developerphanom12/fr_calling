@@ -4,7 +4,7 @@ import { IoEyeOffSharp, IoEyeSharp, IoLogoLinkedin } from "react-icons/io5";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { EXCHANGE_URLS_EMPLOYER } from "../../URLS";
+import { EXCHANGE_URLS_ADMIN } from "../../URLS";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import cogoToast from "cogo-toast";
@@ -13,18 +13,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 const schema = yup.object().shape({
-  email: yup
+  username: yup
     .string()
-    .required("Email is required.")
-    .email("Email is not valid."),
+    .required("Email is required."),
   password: yup
     .string()
     .required("Password is required.")
-    .min(5, "Password should be at least 5 characters.")
-    .matches(
-      /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)(?=.*[!@#$*])/,
-      "Password should contain at least one uppercase letter, lowercase letter, digit, and special symbol."
-    ),
 });
 
 export default function Employerlogin() {
@@ -35,13 +29,13 @@ export default function Employerlogin() {
   
   const  onSubmit = async (data) => {
     try {
-      const res = await axios.post(`${EXCHANGE_URLS_EMPLOYER}/login`, data);
+      const res = await axios.post(`${EXCHANGE_URLS_ADMIN}/login`, data);
       console.log("resres", res?.data?.data);
       if (res?.status === 201) {
         localStorage.setItem("token", res?.data?.data?.token);
-        dispatch(userDataAction(res?.data?.data?.user));
+        dispatch(userDataAction(res?.data?.data));
         dispatch(userCheckAction(true));
-        navigate("/employerprofile");
+        navigate("/dashboard");
         cogoToast.success("Login Successfully");
       }
     } catch (err) {
@@ -96,8 +90,8 @@ export default function Employerlogin() {
 
               <input
                 onKeyDown={handleKeyDown}
-                type="text" {...register('email')} />
-                {errors.email && <p>{errors.email.message}</p>}
+                type="text" {...register('username')} />
+                {errors.username && <p>{errors.username.message}</p>}
             </div>
             <div className="child_box">
               <p>
@@ -110,7 +104,7 @@ export default function Employerlogin() {
                     type="password" {...register('password')} />
                   <button
                     className="btn_outline_primary"
-                    onClick={()=>{togglePassword}}
+                    onClick={togglePassword}
                   >
                     {passwordType === "password" ? (
                       <i className="eye_slash">

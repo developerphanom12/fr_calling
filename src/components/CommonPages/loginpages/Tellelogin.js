@@ -9,23 +9,17 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { EXCHANGE_URLS_EMPLOYEE } from "../../URLS";
+import { EXCHANGE_URLS_ADMIN } from "../../URLS";
 import { userCheckAction, userDataAction } from "../../../redux/users/action";
 import cogoToast from "cogo-toast";
 
 const schema = yup.object().shape({
-  email: yup
+  username: yup
     .string()
-    .required("Email is required.")
-    .email("Email is not valid."),
-  password: yup
+    .required("username is required."),
+    passsword: yup
     .string()
     .required("Password is required.")
-    .min(5, "Password should be at least 5 characters.")
-    .matches(
-      /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)(?=.*[!@#$*])/,
-      "Password should contain at least one uppercase letter, lowercase letter, digit, and special symbol."
-    ),
 });
 
 export default function EmployLogin() {
@@ -35,7 +29,7 @@ export default function EmployLogin() {
 
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post(`${EXCHANGE_URLS_EMPLOYEE}/login`, data);
+      const res = await axios.post(`${EXCHANGE_URLS_ADMIN}/telecallerlogin`, data);
       console.log("resres", res?.data?.data);
       if (res?.status === 201) {
         localStorage.setItem("token", res?.data?.data?.token);
@@ -49,12 +43,6 @@ export default function EmployLogin() {
       cogoToast.error("An error occurred during login");
     }
   };
-
-  // const [passwordInput, setPasswordInput] = useState("");
-  // const handlePasswordChange = (evnt) => {
-  //   setPasswordInput(evnt.target.value);
-  // };
-
   const {
     register,
     handleSubmit,
@@ -64,11 +52,11 @@ export default function EmployLogin() {
   });
 
   const togglePassword = () => {
-    if (passwordType === "password") {
+    if (passwordType === "passsword") {
       setPasswordType("text");
       return;
     }
-    setPasswordType("password");
+    setPasswordType("passsword");
   };
   
   const handleKeyDown = (e) => {
@@ -81,35 +69,35 @@ export default function EmployLogin() {
     <Root>
       <div className="main1">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h1>Welcome To Employee Professional Community</h1>
+          <h1>Welcome To Tellecallerr Professional Community</h1>
           <div className="child">
             <div className="child_box">
               <p>
                 {" "}
-                <label>Email or Phone</label>
+                <label>Username or Phone</label>
               </p>
 
               <input
                 onKeyDown={handleKeyDown}
                 type="text"
-                {...register("email")}
+                {...register("username")}
               />
-              {errors.email && <p>{errors.email.message}</p>}
+              {errors.username && <p>{errors.username.message}</p>}
             </div>
             <div className="child_box">
               <p>
-                <label htmlFor="password">Password</label>
+                <label htmlFor="passsword">Password</label>
               </p>
-              <div className="password_div">
+              <div className="passsword_div">
                 <div>
                   <input
                     onKeyDown={handleKeyDown}
                     type={passwordType}
-                    {...register("password")}
+                    {...register("passsword")}
                   />
                   <button
                     className="btn_outline_primary"
-                    onClick={()=>{togglePassword}}
+                    onClick={togglePassword}
                   >
                     {passwordType === "password" ? (
                       <i className="eye_slash">
@@ -122,7 +110,7 @@ export default function EmployLogin() {
                     )}
                   </button>
                 </div>
-                {errors.password && <p>{errors.password.message}</p>}
+                {errors.passsword && <p>{errors.passsword.message}</p>}
               </div>
             </div>
             <div className="child_box">

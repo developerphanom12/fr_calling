@@ -18,7 +18,7 @@ export default function NavBar() {
           <h2>
             {" "}
             <IoMdStarOutline />
-            ReviewMe.
+            Tellecallerr.
           </h2>
         </div>
       </div>
@@ -30,7 +30,7 @@ export default function NavBar() {
             navigate("/employlogin");
           }}
         >
-          EMPLOYEE LOGIN
+          Telle LOGIN
         </div>
         <div
           className="login"
