@@ -32,7 +32,7 @@ function App() {
               <Route path="/dashboard"element={<Dashboard/>} />
                 <Route path="/applications" element={<EmployeeSign />} />
                 <Route path="/telleRegister" element={<TelleRegister />} />
-
+     
               </>
             ) : (
               ""
