@@ -114,10 +114,7 @@ export default function TelleRegister() {
   );
 }
 const Root = styled.section`
-  padding-left: 90px;
-  @media (max-width: 788px) {
-    padding-left: 60px;
-  }
+ 
   h3 {
     text-shadow: 4px 5px 5px gray;
     margin: 10px;

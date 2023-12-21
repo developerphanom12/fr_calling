@@ -7,6 +7,7 @@ import { BsFillEyeFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { appDetailsAction } from "../../../redux/users/action";
 import Download from "./DownloadData";
+import { GrAdd } from "react-icons/gr";
 
 export default function ClientHistory({ popUser = () => { } }) {
     const [applications, setApplications] = useState([]);
@@ -137,10 +138,7 @@ const Root = styled.section`
   font-weight: normal;
   vertical-align: middle;
   height: 100%;
-  padding-left: 80px;
-    @media (max-width:788px){
-      padding-left: 60px;
-    }
+ 
   .header {
     display: flex;
     justify-content: space-between;

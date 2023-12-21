@@ -4,14 +4,16 @@ import { MdPersonSearch } from "react-icons/md";
 import { MdWorkHistory } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { FaRegUser } from "react-icons/fa";
+
 import cogoToast from "cogo-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { userCheckAction } from "../../redux/users/action";
-const  logo = require('../images/54803.jpg')
+const logo = require("../images/logo_final_web (1).webp");
 export default function SideBar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleLogoutClick = () => { 
+  const handleLogoutClick = () => {
     localStorage.setItem("token", "");
     dispatch(userCheckAction(false));
     cogoToast.success("Logout Successfully");
@@ -33,7 +35,7 @@ export default function SideBar() {
             navigate("/");
           }}
         >
-          <img src={logo} alt="img" /> 
+          <img src={logo} alt="img" />
         </div>
 
         <div className="nav_section">
@@ -42,13 +44,13 @@ export default function SideBar() {
               <div
                 className={activeParam === "dashboardd" ? "active" : ""}
                 onClick={() => {
-                  navigate("/dashboardd");
+                  navigate("/dashboard");
                 }}
               >
                 <FaHome />
                 <p>Dashboard</p>
               </div>
-              <div
+              {/* <div
                 className={activeParam === "applications" ? "active" : ""}
                 onClick={() => {
                   navigate("/applications");
@@ -56,7 +58,7 @@ export default function SideBar() {
               >
                 {<MdPersonSearch />}
                 <p>Add Cleint Data</p>
-              </div>
+              </div> */}
               <div
                 className={activeParam === "history" ? "active" : ""}
                 onClick={() => {
@@ -67,22 +69,22 @@ export default function SideBar() {
                 <p>Client History</p>
               </div>
 
-              <div className={activeParam === "telleRegister" ? "active" : ""}
+              {/* <div className={activeParam === "telleRegister" ? "active" : ""}
                onClick={ () =>{
                 navigate("/telleRegister")
                }} 
                >
                 {<MdPersonSearch/>}
                 <p>Add Tellecaller</p>
-               </div>   
+               </div>    */}
 
-               <div
+              <div
                 className={activeParam === "dashboardd" ? "active" : ""}
                 onClick={() => {
                   navigate("/listalltelle");
                 }}
               >
-                <FaHome />
+                <FaRegUser />
                 <p>Tellecaller List</p>
               </div>
             </>
@@ -92,7 +94,7 @@ export default function SideBar() {
 
           {userDetails.role === "telecaller" ? (
             <>
-             <div
+              <div
                 className={activeParam === "studash" ? "active" : ""}
                 onClick={() => {
                   navigate("/studash");
@@ -119,18 +121,11 @@ export default function SideBar() {
                 {<MdWorkHistory />}
                 <p>Client History</p>
               </div>
-             
-            
-            
-             
             </>
           ) : (
             ""
           )}
 
-         
-
-       
           <div
             className="logout"
             onClick={() => {
@@ -153,10 +148,9 @@ const Root = styled.section`
   height: 100%;
   max-height: 100vh;
   color: black;
+  background-color: #0088ff;
   font-family: "Roboto", sans-serif;
-  position: sticky;
-  top: 0px;
-
+  overflow: hidden;
   .menu_top {
     display: flex;
     flex-direction: column;
@@ -164,11 +158,11 @@ const Root = styled.section`
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 8px 0px 8px 0px;
+      /* padding: 8px 0px 8px 0px; */
 
       img {
         width: 100%;
-        padding: 4px;
+        padding: 0px 4px;
         cursor: pointer;
       }
     }
@@ -177,18 +171,17 @@ const Root = styled.section`
       flex-direction: column;
       padding-top: 15px;
       height: 100%;
-      gap: 20px;
+      /* gap: 20px; */
       font-size: 13px;
       padding: 6px;
       position: relative;
       top: 20px;
-      &:hover{
-        gap: 10px;
-      }
 
       > div {
         display: flex;
-        width: 100%;
+        /* width: 100%; */
+        margin-top: 33px;
+        color: white;
         gap: 5px;
         border-radius: 10px;
         align-items: center;
@@ -197,9 +190,9 @@ const Root = styled.section`
         }
 
         p {
-          display: none;
+          /* display: none; */
           font-size: small;
-          padding-top: 10px;
+          /* padding-top: 10px; */
         }
         svg {
           width: 25px;
@@ -211,16 +204,6 @@ const Root = styled.section`
         background: #000080;
         padding: 4px;
       }
-      &:hover {
-        display: flex;
-      }
-    }
-  }
-  &:hover {
-    .nav_section > div > p {
-      display: block;
-      gap: 0px;
-      padding-top: 2px;
     }
   }
 `;

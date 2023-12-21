@@ -34,7 +34,7 @@ function App() {
             ) : userDetails?.role === "admin" ? (
               <>
               <Route path="/dashboard"element={<Dashboard/>} />
-                <Route path="/applications" element={<EmployeeSign />} />
+                {/* <Route path="/applications" element={<EmployeeSign />} /> */}
                 <Route path="/history" element={<ClientHistory />} />
                 <Route path="/telleRegister" element={<TelleRegister />} />
                 <Route path="/listalltelle" element={<Telledata/>} />

@@ -108,10 +108,10 @@ export default function PostNav() {
   );
 }
 const Root = styled.section`
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   align-items: center;
-  padding-left: 30px;
+  /* padding-left: 30px; */
   border-bottom: 1px solid lightgray;
   gap: 40px;
   .logo {

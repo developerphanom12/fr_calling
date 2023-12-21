@@ -47,37 +47,28 @@ const Root = styled.section`
 display: flex;
 min-height: 100vh;
 height: 100%;
+gap: 10px;
 .sideBar {
-  position: fixed;
-  width: 60px;
-  top: 0;
-  height: 100vh;
-  z-index: 100;
-  background-color: white;
+  position: sticky;
+  width: 15%;
   overflow: hidden;
-  transition: width 0.3s ease;
+  background-color: #0088ff;
   cursor: pointer;
   box-shadow: 4px 7px 10px rgba(0, 0, 0, 0.4);
-  &:hover {
-    width: 180px;
-  }
-  @media screen and (min-width: 600px) {
-    width: 80px;
-  }
 }
 
 .main_bar {
   display: flex;
   flex-direction: column;
   flex: 1;
-  width: 100%;
+  width: 75%;
   overflow: hidden;
   
   .top_bar {
     background: #ffffff;
     display: flex;
     height: 80px;
-    padding-left: 90px;
+    /* padding-left: 90px; */
     width: 100%;
   }
   .main_body {

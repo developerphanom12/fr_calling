@@ -6,113 +6,112 @@ import { useDispatch } from "react-redux";
 import { BsFillEyeFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { appDetailsAction } from "../../../redux/users/action";
+import ClientHistory from "../clientdata/ClientHistory";
+import TelleRegister from "../clientdata/TellecallerRegiter";
 
 export default function Telledata({ popUser = () => { } }) {
-    const [applications, setApplications] = useState([]);
+  const [applications, setApplications] = useState([]);
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const getHistory = async () => {
-        const axiosConfig = {
-            headers: {
-                authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-        };
-        try {
-            const res = await axios.get(
-                `${EXCHANGE_URLS_ADMIN}/getalltelle`,
-                axiosConfig
-            );
-            if (res.status === 201) {
-
-                setApplications(res?.data?.data);
-            }
-        } catch (e) {
-            console.log(e);
-        }
+  const getHistory = async () => {
+    const axiosConfig = {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     };
+    try {
+      const res = await axios.get(
+        `${EXCHANGE_URLS_ADMIN}/getalltelle`,
+        axiosConfig
+      );
+      if (res.status === 201) {
+
+        setApplications(res?.data?.data);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
 
 
-    useEffect(() => {
-        getHistory();
-    }, []);
+  useEffect(() => {
+    getHistory();
+  }, []);
 
 
 
 
-    const handlePassData = (i) => {
-        console.log("getDetails1", i);
-        dispatch(appDetailsAction(i));
-        popUser(true);
-    };
+  const handlePassData = (i) => {
+    console.log("getDetails1", i);
+    dispatch(appDetailsAction(i));
+    popUser(true);
+  };
 
-    const uniqueApplications = applications.reduce((uniqueArray, currentItem) => {
-        const isUnique = uniqueArray.some(item => item?.id === currentItem?.id);
+  const uniqueApplications = applications.reduce((uniqueArray, currentItem) => {
+    const isUnique = uniqueArray.some(item => item?.id === currentItem?.id);
 
-        if (!isUnique) {
-            uniqueArray.push(currentItem);
-        }
+    if (!isUnique) {
+      uniqueArray.push(currentItem);
+    }
 
-        return uniqueArray;
-    }, []);
+    return uniqueArray;
+  }, []);
 
-    return (
-        <Root>
+  return (
+    <Root>
 
-            <>
-               
-                <div className="header">
-                    <h1>Tellecaller Data</h1>
+      <>
+
+        <div className="header">
+          <h1>Tellecaller Data</h1>
+        </div>
+        <div className="addtelle">
+          <button className="" onClick={() => { navigate("/telleRegister") }}>Add Tellecaller</button>
+        </div>
+        <div className="app_table">
+          <div className="app_header">
+            <div> Id</div>
+            <div>Tellecaller Name</div>
+            <div>Email</div>
+            <div>Role</div>
+            <div>Action</div>
+          </div>
+          {uniqueApplications &&
+            uniqueApplications.map(i => {
+              return (
+                <div
+                  className="app_body"
+                  onClick={() => {
+                    handlePassData(i);
+                  }}
+                >
+                  <div className="cams">#{i?.id}</div>
+                  <div>
+                    <p>
+                      <span>{i?.username}</span>
+                    </p>
+
+                  </div>
+
+
+                  <div>{i?.email}</div>
+                  <div>{i?.role}</div>
+                  <div
+                    className="iconn"
+                  >
+                    <button>  Block </button>
+                  </div>
                 </div>
-               <div>
-                <button> </button>
-               </div>
-                <div className="app_table">
-                    <div className="app_header">
-                        <div> Id</div>
-                        <div>Tellecaller Name</div>
-                        <div>Email</div>
-                        <div>Role</div>
-                        <div>Action</div>
-                    </div>
-                    {uniqueApplications &&
-                        uniqueApplications.map(i => {
-                            return (
-                                <div
-                                    className="app_body"
-                                    onClick={() => {
-                                        handlePassData(i);
-                                    }}
-                                >
-                                    <div className="cams">#{i?.id}</div>
-                                    <div>
-                                        <p>
-                                         <span>{i?.username}</span>
-                                        </p>
-                                    
-                                    </div>
-                                   
+              );
+            })}
+        </div>
+      </>
 
-                                    <div>{i?.email}</div>
-                                    <div>{i?.role}</div>
-                                    <div
-                                        className="iconn"
-                                        onClick={() => {
-                                            navigate(`/detailview/${i?.id}`);
-                                        }}
-                                    >
-                                        <BsFillEyeFill />
-                                    </div>
-                                </div>
-                            );
-                        })}
-                </div>
-            </>
-
-        </Root>
-    );
+    </Root>
+  );
 }
 const Root = styled.section`
   display: flex;
@@ -125,10 +124,7 @@ const Root = styled.section`
   font-weight: normal;
   vertical-align: middle;
   height: 100%;
-  padding-left: 80px;
-    @media (max-width:788px){
-      padding-left: 60px;
-    }
+ 
   .header {
     display: flex;
     justify-content: space-between;
@@ -238,6 +234,17 @@ const Root = styled.section`
         display: flex;
         align-items: center;
         justify-content: center;
+
+        button{
+          color: white;
+    border: 2px solid white;
+    border-radius: 14px;
+    width: 39%;
+    background-color: #ff0000a3;
+    height: 45px;
+    padding: 0px;
+    font-weight: 600;
+        }
       }
       > div {
         flex: 1;
@@ -330,6 +337,33 @@ button{
     cursor: pointer;
     margin-right: 12px;
   }
- 
- 
+ .addtelle{
+  justify-content: right;
+  display: flex;
+  text-align: left;
+  align-items: center;
+  padding: 13px;
+  margin-right: 12px;
+ }
+ button{
+  color: white;
+    border: 2px solid white;
+    border-radius: 43px;
+    width: 15%;
+    background-color: #ff0000a3;
+    height: 50px;
+    padding: 0px;
+    font-weight: 600;
+
+ }
+ .divbtn{
+  color: white;
+    border: 2px solid white;
+    border-radius: 43px;
+    width: 15%;
+    background-color: red;
+    height: 50px;
+    padding: 0px;
+
+ }
 `;

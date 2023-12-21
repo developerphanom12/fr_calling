@@ -142,7 +142,7 @@ const Root = styled.section`
   border-bottom: 1px solid black;
   justify-content: space-between;
   height: 100%;
-  width: 100%;
+  /* width: 100%; */
   @media (max-width: 989px) {
     flex-direction: column;
     align-items: center;
