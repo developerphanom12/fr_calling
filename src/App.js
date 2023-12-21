@@ -8,6 +8,8 @@ import Employerlogin from "./components/CommonPages/loginpages/AdminLogin";
 import EmployeeSign from "./components/CommonPages/clientdata/ClientData";
 import Dashboard from "./components/Dashboard";
 import TelleRegister from "./components/CommonPages/clientdata/TellecallerRegiter";
+import ClientHistory from "./components/CommonPages/clientdata/ClientHistory";
+import Telledata from "./components/CommonPages/admin/ListAllTellecaller";
 
 function App() {
   const userCheck = useSelector((state) => state?.users?.userCheck);
@@ -23,7 +25,9 @@ function App() {
        
             {userDetails?.role === "telecaller" ? (
               <>
+              <Route path="/dashboard"element={<Dashboard/>} />
              <Route path="/applications" element={<EmployeeSign />} />
+             <Route path="/history" element={<ClientHistory />} />
 
 
               </>
@@ -31,7 +35,9 @@ function App() {
               <>
               <Route path="/dashboard"element={<Dashboard/>} />
                 <Route path="/applications" element={<EmployeeSign />} />
+                <Route path="/history" element={<ClientHistory />} />
                 <Route path="/telleRegister" element={<TelleRegister />} />
+                <Route path="/listalltelle" element={<Telledata/>} />
      
               </>
             ) : (

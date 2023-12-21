@@ -2,17 +2,16 @@ import { FaHome } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { MdPersonSearch } from "react-icons/md";
 import { MdWorkHistory } from "react-icons/md";
-import { FaUniversity } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import cogoToast from "cogo-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { userCheckAction } from "../../redux/users/action";
-
+const  logo = require('../images/54803.jpg')
 export default function SideBar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleLogoutClick = () => {
+  const handleLogoutClick = () => { 
     localStorage.setItem("token", "");
     dispatch(userCheckAction(false));
     cogoToast.success("Logout Successfully");
@@ -34,7 +33,7 @@ export default function SideBar() {
             navigate("/");
           }}
         >
-         TeleCaller 
+          <img src={logo} alt="img" /> 
         </div>
 
         <div className="nav_section">
@@ -58,6 +57,15 @@ export default function SideBar() {
                 {<MdPersonSearch />}
                 <p>Add Cleint Data</p>
               </div>
+              <div
+                className={activeParam === "history" ? "active" : ""}
+                onClick={() => {
+                  navigate("/history");
+                }}
+              >
+                {<MdWorkHistory />}
+                <p>Client History</p>
+              </div>
 
               <div className={activeParam === "telleRegister" ? "active" : ""}
                onClick={ () =>{
@@ -66,7 +74,17 @@ export default function SideBar() {
                >
                 {<MdPersonSearch/>}
                 <p>Add Tellecaller</p>
-               </div>            
+               </div>   
+
+               <div
+                className={activeParam === "dashboardd" ? "active" : ""}
+                onClick={() => {
+                  navigate("/listalltelle");
+                }}
+              >
+                <FaHome />
+                <p>Tellecaller List</p>
+              </div>
             </>
           ) : (
             ""

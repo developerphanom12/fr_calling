@@ -38,7 +38,7 @@ export default function NavBar() {
             navigate("/employerlogin");
           }}
         >
-          EMPLOYER LOGIN
+          Admin LOGIN
         </div>
       </div>
       <div

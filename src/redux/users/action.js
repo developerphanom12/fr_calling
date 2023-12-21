@@ -16,3 +16,10 @@ export const UserDetails = (data) => {
       payload: data,
     };
   };
+
+  export const appDetailsAction = (data) => {
+    return {
+      type: "APP_DETAILS",
+      payload: data,
+    };
+  };
