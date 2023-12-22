@@ -7,7 +7,6 @@ import { EXACHANGE_URLS_TELLE } from "../../URLS";
 
 export default function UniRegister() {
   const [universityImagePreview, setUniversityImagePreview] = useState("");
-  const [certificatePreview, setCertificatePreview] = useState("");
 
   const [formData, setFormData] = useState({
     client_name: "",

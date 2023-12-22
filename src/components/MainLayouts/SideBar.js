@@ -22,6 +22,7 @@ export default function SideBar() {
 
   const userDetails = useSelector((state) => state?.users.user);
   const currentUrl = window.location.href;
+  console.log("currenturul",currentUrl)
   const activeParam = currentUrl.replace("?", "/").split("/")[3];
 
   console.log("activeparam", activeParam);

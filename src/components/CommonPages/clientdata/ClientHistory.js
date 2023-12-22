@@ -141,14 +141,19 @@ const Root = styled.section`
  
   .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    text-align: center;
     align-items: center;
-    padding: 10px;
+    padding: 5px;
     @media (max-width: 566px) {
       padding: 10px;
       flex-direction: column;
       h1 {
-        font-size: small;
+        color: #202020;
+    font-family: "Roboto",sans-serif;
+    font-size: 32px;
+    font-weight: 900;
+    font-size: 33px;
       }
     }
     h1 {
@@ -224,7 +229,7 @@ const Root = styled.section`
     font-family: "Roboto", "sana-serif";
     .app_header {
       display: flex;
-      background-color: green;
+      background-color: #0088ff;
       text-align: center;
       color: white;
 
@@ -331,7 +336,7 @@ const Root = styled.section`
 button{
     margin: 0px;
     color: white;
-    background-color: green;
+    background-color: #0088ff;
     font-size: 21px;
     border: 12px solid white;
     border-radius: 22px;
