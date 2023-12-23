@@ -1,72 +1,44 @@
 import React, { useState } from "react";
-import { IoMdStarOutline } from "react-icons/io";
-import { IoApps, IoHome, IoNotifications } from "react-icons/io5";
-import { FaBagShopping, FaUserGroup } from "react-icons/fa6";
+import { IoHome } from "react-icons/io5";
 import { FaSearch, FaUserCircle } from "react-icons/fa";
 import styled from "styled-components";
 import { FcList } from "react-icons/fc";
-import { BiSolidMessageRoundedDots } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineClear } from "react-icons/md";
-import { userCheckAction } from "../../redux/users/action";
-import { useDispatch, useSelector } from "react-redux";
+
 export default function PostNav() {
   const [active, setActive] = useState("Home");
   const [activePop, setActivePop] = useState(false);
-  const userDetails = useSelector((state) => state?.users.user);
-
   const navigate = useNavigate();
-  const dispatch = useDispatch()
-  const handleLogoutClick = () => {
-    localStorage.setItem("token", "");
-    dispatch(userCheckAction(false));
-    navigate("/");
-  };
+
   return (
     <Root>
-      <div className="logo"
-        onClick={() => {
-          handleLogoutClick();
-        }}
-      >
-        <IoMdStarOutline />
-        TeleCaller
-      </div>
       <div className="search_bar">
-        <FaSearch />
         <input type="text" placeholder="Search" />
+        <FaSearch />
       </div>
       <div className="main_nav">
         <button
           className={active === "home" ? "btn_1 active" : "btn_1"}
           onClick={() => {
-            setActive("home")
+            setActive("home");
             navigate("/home");
-
           }}
         >
           <IoHome />
           Home
         </button>
 
-
-
- 
-
-          <button
-            className={active === "profile" ? " active" : "btn_1"}
-            onClick={() => {
-              setActive("profile")
-              navigate("/employeeprofile");
-            }}
-          >
-            <FaUserCircle />
-            Profile
-          </button>
-   
-
- 
- 
+        <button
+          className={active === "profile" ? " active" : "btn_1"}
+          onClick={() => {
+            setActive("profile");
+            navigate("/employeeprofile");
+          }}
+        >
+          <FaUserCircle />
+          Profile
+        </button>
       </div>
       <div
         className="menu"
@@ -93,7 +65,7 @@ export default function PostNav() {
         >
           Home
         </div>
-       
+
         <div
           className="opt_btn"
           onClick={() => {
@@ -102,48 +74,27 @@ export default function PostNav() {
         >
           Profile
         </div>
-         
       </div>
     </Root>
   );
 }
 const Root = styled.section`
-  /* width: 100%; */
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  /* padding-left: 30px; */
   border-bottom: 1px solid lightgray;
   gap: 40px;
-  .logo {
-    background-color: dodgerblue;
-    border-radius: 4px;
-    padding: 5px;
-    font-weight: 500;
-    cursor: pointer;
-    color: #ffffff;
-    font-size: 22px;
-    svg {
-      color: #ffffff;
-      font-weight: 600;
-      width: 25px;
-      height: 25px;
-    }
-    @media (max-width: 999px) {
-      font-size: 18px;
-      svg {
-        color: #ffffff;
-        font-weight: 600;
-        width: 20px;
-        height: 20px;
-      }
-    }
-  }
+  width: 100%;
+
+
   .search_bar {
+    margin-left: 5px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     border-radius: 4px;
     padding: 8px;
-    width: 27%;
+    width: 50%;
     gap: 5px;
     background-color: rgb(120 144 156 / 26%);
     input {
@@ -295,12 +246,12 @@ const Root = styled.section`
       }
     }
 
-    .opt_btn{
+    .opt_btn {
       padding: 10px;
       border-bottom: 1px solid white;
-      &:hover{
+      &:hover {
         background-color: #fff;
-        color:dodgerblue ;
+        color: dodgerblue;
       }
     }
     @media (min-width: 951px) {

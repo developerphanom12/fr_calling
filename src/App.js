@@ -3,13 +3,13 @@ import Layout from "./components/MainLayouts/Layout";
 import PageNF from "./components/PageNF";
 import AllPages from "./components/CommonPages/HomePages/AllPages";
 import { useSelector } from "react-redux";
-import EmployLogin from "./components/CommonPages/loginpages/Tellelogin";
+import Tellelogin from "./components/CommonPages/loginpages/Tellelogin";
 import Employerlogin from "./components/CommonPages/loginpages/AdminLogin";
-import EmployeeSign from "./components/CommonPages/clientdata/ClientData";
 import Dashboard from "./components/Dashboard";
-import TelleRegister from "./components/CommonPages/clientdata/TellecallerRegiter";
+import TellecallerRegister from "./components/CommonPages/clientdata/TellecallerRegiter";
 import ClientHistory from "./components/CommonPages/clientdata/ClientHistory";
-import Telledata from "./components/CommonPages/admin/ListAllTellecaller";
+import ListAllTellecaller from "./components/CommonPages/admin/ListAllTellecaller";
+import ClientData from "./components/CommonPages/clientdata/ClientData";
 
 function App() {
   const userCheck = useSelector((state) => state?.users?.userCheck);
@@ -28,16 +28,16 @@ function App() {
               <Route path="/dashboard"element={<Dashboard/>} />
              <Route path="/applications" element={<EmployeeSign />} />
              <Route path="/history" element={<ClientHistory />} />
+             <Route path="/clientdata" element={<ClientData />} />
 
 
               </>
             ) : userDetails?.role === "admin" ? (
               <>
               <Route path="/dashboard"element={<Dashboard/>} />
-                {/* <Route path="/applications" element={<EmployeeSign />} /> */}
                 <Route path="/history" element={<ClientHistory />} />
-                <Route path="/telleRegister" element={<TelleRegister />} />
-                <Route path="/listalltelle" element={<Telledata/>} />
+                <Route path="/telleRegister" element={<TellecallerRegister />} />
+                <Route path="/listalltelle" element={<ListAllTellecaller/>} />
      
               </>
             ) : (
@@ -47,7 +47,7 @@ function App() {
         ) : (
           <>
             <Route path="*" element={<PageNF />} />
-            <Route path="/employlogin" element={<EmployLogin />} />
+            <Route path="/employlogin" element={<Tellelogin />} />
             <Route path="/employerlogin" element={<Employerlogin />} />
             <Route path="/" element={<AllPages />} />
             <Route path="/allpages" element={<AllPages />} />

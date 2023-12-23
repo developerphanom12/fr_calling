@@ -1,9 +1,9 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { EXCHANGE_URLS_ADMIN } from "../../URLS";
 import cogoToast from "cogo-toast";
 import { useNavigate } from "react-router-dom";
+import { EXCHANGE_URLS_ADMIN } from "../../URLS";
 
 export default function TelleRegister() {
   const navigate = useNavigate();

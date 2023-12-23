@@ -5,11 +5,11 @@ import { MdWorkHistory } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FaRegUser } from "react-icons/fa";
-
 import cogoToast from "cogo-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { userCheckAction } from "../../redux/users/action";
-const logo = require("../images/logo_final_web (1).webp");
+import { IoMdCall } from "react-icons/io";
+
 export default function SideBar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ export default function SideBar() {
 
   const userDetails = useSelector((state) => state?.users.user);
   const currentUrl = window.location.href;
-  console.log("currenturul",currentUrl)
+  console.log("currenturul", currentUrl);
   const activeParam = currentUrl.replace("?", "/").split("/")[3];
 
   console.log("activeparam", activeParam);
@@ -31,14 +31,15 @@ export default function SideBar() {
     <Root>
       <div className="menu_top">
         <div
-          className="company_logo"
+          className="logo"
           onClick={() => {
-            navigate("/");
+            handleLogoutClick();
           }}
         >
-          <img src={logo} alt="img" />
+       <IoMdCall />
+       <p>TeleCaller</p>
+         
         </div>
-
         <div className="nav_section">
           {userDetails.role === "admin" ? (
             <>
@@ -51,15 +52,7 @@ export default function SideBar() {
                 <FaHome />
                 <p>Dashboard</p>
               </div>
-              {/* <div
-                className={activeParam === "applications" ? "active" : ""}
-                onClick={() => {
-                  navigate("/applications");
-                }}
-              >
-                {<MdPersonSearch />}
-                <p>Add Cleint Data</p>
-              </div> */}
+
               <div
                 className={activeParam === "history" ? "active" : ""}
                 onClick={() => {
@@ -69,15 +62,6 @@ export default function SideBar() {
                 {<MdWorkHistory />}
                 <p>Client History</p>
               </div>
-
-              {/* <div className={activeParam === "telleRegister" ? "active" : ""}
-               onClick={ () =>{
-                navigate("/telleRegister")
-               }} 
-               >
-                {<MdPersonSearch/>}
-                <p>Add Tellecaller</p>
-               </div>    */}
 
               <div
                 className={activeParam === "dashboardd" ? "active" : ""}
@@ -152,19 +136,39 @@ const Root = styled.section`
   background-color: #0088ff;
   font-family: "Roboto", sans-serif;
   overflow: hidden;
+
   .menu_top {
     display: flex;
     flex-direction: column;
-    .company_logo {
+    .logo {
+      background-color: dodgerblue;
+      border-radius: 4px;
+      padding: 15px;
+      margin: 20px 0px;
+      font-weight: 500;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      /* padding: 8px 0px 8px 0px; */
-
-      img {
-        width: 100%;
-        padding: 0px 4px;
-        cursor: pointer;
+      cursor: pointer;
+      color: #ffffff;
+      font-size: 18px;
+      p{
+        @media (max-width: 699px) {
+            display: none;
+          }
+      }
+      svg {
+        color: #ffffff;
+        font-weight: 600;
+        width: 25px;
+        height: 25px;
+      }
+      @media (max-width: 999px) {
+        font-size: 18px;
+        svg {
+          color: #ffffff;
+          font-weight: 600;
+          width: 30px;
+          height: 30px;
+        }
       }
     }
     .nav_section {
@@ -172,7 +176,6 @@ const Root = styled.section`
       flex-direction: column;
       padding-top: 15px;
       height: 100%;
-      /* gap: 20px; */
       font-size: 13px;
       padding: 6px;
       position: relative;
@@ -191,9 +194,11 @@ const Root = styled.section`
         }
 
         p {
-          /* display: none; */
           font-size: small;
           /* padding-top: 10px; */
+          @media (max-width: 699px) {
+            display: none;
+          }
         }
         svg {
           width: 25px;

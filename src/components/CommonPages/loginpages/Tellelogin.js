@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import logpage from "../../images/5092143.jpg";
 import { IoEyeOffSharp, IoEyeSharp } from "react-icons/io5";
-import { IoLogoLinkedin } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -22,7 +21,7 @@ const schema = yup.object().shape({
     .required("Password is required.")
 });
 
-export default function EmployLogin() {
+export default function Tellelogin() {
   const [passwordType, setPasswordType] = useState("password");
   const navigate = useNavigate();
   const dispatch = useDispatch();

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { EXACHANGE_URLS_TELLE } from "../../URLS";
 
-export default function UniRegister() {
+export default function ClientData() {
   const [universityImagePreview, setUniversityImagePreview] = useState("");
 
   const [formData, setFormData] = useState({
@@ -16,9 +16,7 @@ export default function UniRegister() {
     client_anniversary: "",
     call_schedule_date: "",
     call_status: "",
-    call_status: "",
     attach_file: "",
-
   });
 
   const [add, setAdd] = useState({
@@ -42,7 +40,6 @@ export default function UniRegister() {
     }
   };
 
-
   const registerApi = async () => {
     const data = new FormData();
     data.append("client_name", formData.client_name);
@@ -53,7 +50,6 @@ export default function UniRegister() {
     data.append("call_schedule_date", formData.call_schedule_date);
     data.append("call_status", formData.call_status);
     data.append("attach_file", formData.attach_file);
-
 
     // Append address fields
     Object.keys(add).forEach((key) => {
@@ -68,7 +64,8 @@ export default function UniRegister() {
       };
       const res = await axios.post(
         `${EXACHANGE_URLS_TELLE}/addclientdata`,
-        data, axiosConfig
+        data,
+        axiosConfig
       );
 
       if (res?.status === 200) {
@@ -81,7 +78,6 @@ export default function UniRegister() {
           dob_client: "",
           client_anniversary: "",
           call_schedule_date: "",
-          call_status: "",
           call_status: "",
           attach_file: "",
         });
@@ -166,8 +162,6 @@ export default function UniRegister() {
               />
             </div>
 
-
-
             <div className="name">
               Dob CLient
               <input
@@ -187,7 +181,10 @@ export default function UniRegister() {
                 pattern="\d{2}/\d{2}/\d{4}"
                 value={formData?.client_anniversary}
                 onChange={(e) => {
-                  setFormData({ ...formData, client_anniversary: e.target.value });
+                  setFormData({
+                    ...formData,
+                    client_anniversary: e.target.value,
+                  });
                 }}
                 placeholder="Date"
               />
@@ -206,7 +203,6 @@ export default function UniRegister() {
                 }}
                 placeholder="Call Schedule on which date"
               />
-
               <div className="name">
                 Call Status
                 <select
@@ -219,7 +215,6 @@ export default function UniRegister() {
                   <option value="hot_lead">hot_lead</option>
                 </select>
               </div>
-
             </div>
           </div>
         </div>
@@ -234,7 +229,7 @@ export default function UniRegister() {
           <div>
             {" "}
             <div className="name">
-            Chartered accountant Name
+              Chartered accountant Name
               <input
                 value={add?.ca_name}
                 onChange={(e) => {
@@ -244,7 +239,7 @@ export default function UniRegister() {
               />
             </div>
             <div className="name">
-            Chartered accountant Number
+              Chartered accountant Number
               <input
                 type="number"
                 value={add?.ca_number}
@@ -264,10 +259,10 @@ export default function UniRegister() {
                 placeholder="CA Accountant Name"
               />
             </div>
-
             <div className="name">
-            Chartered accountant Company Name
-              <input className="inputtt"
+              Chartered accountant Company Name
+              <input
+                className="inputtt"
                 value={add?.ca_company_name}
                 onChange={(e) => {
                   setAdd({ ...add, ca_company_name: e.target.value });
@@ -276,8 +271,9 @@ export default function UniRegister() {
               />
             </div>
             <div className="name">
-            CA Accountant Number
-              <input className="inputtt"
+              CA Accountant Number
+              <input
+                className="inputtt"
                 type="number"
                 value={add.ca_accountant_number}
                 onChange={(e) => {
@@ -290,7 +286,7 @@ export default function UniRegister() {
           <div>
             <div className="name">
               Attach Any File
-               <div className="imgg" style={selectContainerStyle}>
+              <div className="imgg" style={selectContainerStyle}>
                 Click Here
                 <img
                   src={
@@ -303,12 +299,8 @@ export default function UniRegister() {
                 <input type="file" onChange={handleUniversityImagePreview} />
               </div>
             </div>
-
           </div>
         </div>
-
-
-
 
         <div className="regis">
           <button
@@ -320,7 +312,6 @@ export default function UniRegister() {
             Submit
           </button>
         </div>
-
       </div>
     </Root>
   );
@@ -340,7 +331,7 @@ const Root = styled.section`
     color: #0e4d92;
     margin: 0;
   }
-  .name{
+  .name {
     display: flex;
     flex-direction: column;
     font-size: small;
@@ -504,7 +495,6 @@ const Root = styled.section`
     }
   }
 
- 
   .first_div {
     h2 {
       color: #0e4d92;
@@ -532,20 +522,19 @@ const Root = styled.section`
 
   .second_div {
     display: flex;
-justify-content: center;
-      align-items: center;
-      flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
     .company {
-      display: flex;   
-        flex-direction: column;
+      display: flex;
+      flex-direction: column;
       margin: 0px 10px;
       width: 60%;
 
       > div {
-        
         display: flex;
-      flex-direction: column;
+        flex-direction: column;
         padding: 10px;
         width: 100%;
 
@@ -672,28 +661,27 @@ justify-content: center;
     .fifth_box {
       margin: 20px;
     }
-
   }
-  .columnnn{
+  .columnnn {
     display: flex;
     width: 60%;
     flex-direction: column;
   }
-  .h41{
+  .h41 {
     font-family: -webkit-body;
     align-items: flex-end;
     text-align: left;
     font-size: 19px;
   }
-  .inputtt{
+  .inputtt {
     border-radius: 101px;
-      padding: 5px;
-      color: #202020;
-      /* width: 90%; */
-      text-decoration: none;
-      border: 2px solid #a5d8fa;
-      @media (max-width: 900px) {
-        width: 100%;
-      }
+    padding: 5px;
+    color: #202020;
+    /* width: 90%; */
+    text-decoration: none;
+    border: 2px solid #a5d8fa;
+    @media (max-width: 900px) {
+      width: 100%;
+    }
   }
 `;

@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import styled from "styled-components";
 
 function Download() {
   const handleDownloadClick = () => {
@@ -35,14 +34,13 @@ function Download() {
 
 
   return (
-    <Root>
+    <div>
       <button onClick={handleDownloadClick}>Download</button>
-    </Root>
+    </div>
   );
 }
 
 export default Download;
-const Root = styled.section`
+ 
 
-
-`
+ 
