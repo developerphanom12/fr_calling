@@ -26,7 +26,7 @@ function App() {
             {userDetails?.role === "telecaller" ? (
               <>
               <Route path="/dashboard"element={<Dashboard/>} />
-             <Route path="/applications" element={<EmployeeSign />} />
+             {/* <Route path="/applications" element={<EmployeeSign/>} /> */}
              <Route path="/history" element={<ClientHistory />} />
              <Route path="/clientdata" element={<ClientData />} />
 
