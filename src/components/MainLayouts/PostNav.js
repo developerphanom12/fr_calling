@@ -13,7 +13,12 @@ export default function PostNav() {
 
   return (
     <Root>
+      <div>
+
+       <p>Dashboard</p>
+      </div>
       <div className="search_bar">
+       
         <input type="text" placeholder="Search" />
         <FaSearch />
       </div>
@@ -80,25 +85,33 @@ export default function PostNav() {
 }
 const Root = styled.section`
   display: flex;
-  justify-content: space-between;
+  justify-content:space-between;
   align-items: center;
   border-bottom: 1px solid lightgray;
   gap: 40px;
   width: 100%;
 
-
+ >div{
+  justify-content: left;
+  display: flex;
+  font-size: 24px;
+    margin-left: 46px;
+    font-weight: 900;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+ }
   .search_bar {
-    margin-left: 5px;
+    margin-left: 45px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-radius: 4px;
     padding: 8px;
-    width: 50%;
+    width: 25%;
     gap: 5px;
     background-color: rgb(120 144 156 / 26%);
     input {
-      border: none;
+      border: none;     
       padding: 5px;
       background-color: rgb(120 144 156 / 0%);
     }

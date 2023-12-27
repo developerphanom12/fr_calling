@@ -10,6 +10,7 @@ import TellecallerRegister from "./components/CommonPages/clientdata/Tellecaller
 import ClientHistory from "./components/CommonPages/clientdata/ClientHistory";
 import ListAllTellecaller from "./components/CommonPages/admin/ListAllTellecaller";
 import ClientData from "./components/CommonPages/clientdata/ClientData";
+import ColdLead from "./components/TelleData/ColdLead";
 
 function App() {
   const userCheck = useSelector((state) => state?.users?.userCheck);
@@ -38,7 +39,8 @@ function App() {
                 <Route path="/history" element={<ClientHistory />} />
                 <Route path="/telleRegister" element={<TellecallerRegister />} />
                 <Route path="/listalltelle" element={<ListAllTellecaller/>} />
-     
+                <Route path="/coldlead" element={<ColdLead/>} />
+
               </>
             ) : (
               ""

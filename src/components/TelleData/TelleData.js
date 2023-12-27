@@ -99,6 +99,9 @@ const Root = styled.section`
       padding: 10px;
       color: dodgerblue;
       font-weight: 600;
+
+    font-size: 16px;
+
       &:hover {
         cursor: pointer;
       }
@@ -129,7 +132,7 @@ const Root = styled.section`
     background-color: #ffffff;
     justify-content: center;
     align-items: center;
-    width: 80%;
+    width: 100%;
     @media (max-width: 600px) {
       padding: 0;
     width: 90%;

@@ -5,8 +5,13 @@ import ApexChart2 from "./CommonPages/admin/chart/Apexchart2";
 import { TfiMenu } from "react-icons/tfi";
 import { HiDotsHorizontal } from "react-icons/hi";
 import TelleData from "./TelleData/TelleData";
+import DatePicker from "react-datepicker";
 
+import "react-datepicker/dist/react-datepicker.css";
+import { useState } from "react";
 export default function Dashboard() {
+  const [startDate, setStartDate] = useState(new Date());
+
   return (
     <Root>
       <div className="char1">
@@ -22,6 +27,16 @@ export default function Dashboard() {
       </div>
       <div className="chart1">
         <div className="upcoming">
+          <div className="div1">
+            <p className="none">Recent Activity</p>
+            <div className="datapicker">
+              <DatePicker
+                className="p1"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+              />
+            </div>
+          </div>
           <TelleData />
         </div>
         <div className="upcoming1">
@@ -29,7 +44,7 @@ export default function Dashboard() {
             <div className="child1">
               <h1>Upcoming Appointments</h1>
               <p>
-                <TfiMenu/>
+                <TfiMenu />
               </p>
             </div>
           </div>
@@ -111,7 +126,10 @@ const Root = styled.section`
     margin-left: 18px;
     padding: 10px;
     margin-top: 50px;
-    box-shadow: 2px 6px 15px #888888;
+    width: 30%;
+    border-radius: 21px;
+
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
     .curent {
       font-size: 1.125rem;
       font-weight: 600;
@@ -133,6 +151,13 @@ const Root = styled.section`
       color: rgba(55, 77, 103, 0.54) !important;
     }
   }
+  .char1:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 1px 2px 0px rgba(0, 255, 255, 0.7),
+      1px 2px 4px 0px rgba(0, 255, 255, 0.7),
+      2px 4px 8px 0px rgba(0, 255, 255, 0.7),
+      2px 4px 16px 0px rgba(0, 255, 255, 0.7);
+  }
 
   .char {
     width: 50%;
@@ -140,8 +165,7 @@ const Root = styled.section`
     border: 2px solid blanchedalmond;
     /* box-shadow: 0px 1px 4px 0px; */
     margin-top: 50px;
-    box-shadow: 2px 6px 15px #888888;
-
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
     /* background-color: green; */
   }
 
@@ -150,14 +174,53 @@ const Root = styled.section`
     width: 100%;
     justify-content: space-around;
     margin-top: 23px;
-    .upcoming {  display: flex;
+
+    .upcoming {
+      display: flex;
       flex-direction: column;
       min-height: 51vh;
+      min-height: 51vh;
       height: 51vh;
-      min-width: 55%;
+      width: 57%;
+      margin-top: 35px;
       /* border: 1px solid black; */
       box-shadow: 2px 6px 15px #888888;
-    
+      border-radius: 21px;
+
+      .div1 {
+        display: flex;
+        justify-content: space-between;
+        .none {
+          text-align: center;
+        }
+        p {
+          font-size: 1.2rem;
+          font-weight: 600;
+          font-family: Roboto, sans-serif;
+          letter-spacing: 0;
+          color: rgba(61, 78, 101, 0.84);
+          margin: 20px;
+        }
+        .datapicker {
+          display: flex;
+
+          .p1 {
+            border: 2px solid #0088ff;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 23px;
+            width: 120px;
+            height: 9px;
+            margin-top: 18px;
+            padding: 14px;
+            margin-right: 15px;
+            background: #0088ff;
+          }
+        }
+      }
     }
 
     .upcoming1 {
@@ -166,6 +229,8 @@ const Root = styled.section`
       min-height: 51vh;
       height: 51vh;
       min-width: 35%;
+      margin-top: 35px;
+
       /* border: 1px solid black; */
       box-shadow: 2px 6px 15px #888888;
       h1 {
@@ -183,7 +248,6 @@ const Root = styled.section`
           justify-content: space-between;
 
           p {
-            
             width: 9%;
             font-size: 25px;
             cursor: pointer;
@@ -194,7 +258,7 @@ const Root = styled.section`
         display: flex;
         /* align-items: center; */
         flex-direction: column;
-       
+
         h1 {
           display: flex;
         }
@@ -209,16 +273,16 @@ const Root = styled.section`
             margin: 12px;
             border-radius: 21px;
           }
-          .child11  {
-          display: flex;
-          align-items: center;
+          .child11 {
+            display: flex;
+            align-items: center;
 
-          p {
-            margin-left: 144px;
-            font-size: 25px;
-            cursor: pointer;
+            p {
+              margin-left: 144px;
+              font-size: 25px;
+              cursor: pointer;
+            }
           }
-        }
           .data {
             display: flex;
             flex-direction: column;
@@ -235,10 +299,16 @@ const Root = styled.section`
               font-size: 0.8125rem;
               font-weight: 400;
             }
-          
           }
         }
       }
     }
+  }
+  .char:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 1px 2px 0px rgba(0, 255, 255, 0.7),
+      1px 2px 4px 0px rgba(0, 255, 255, 0.7),
+      2px 4px 8px 0px rgba(0, 255, 255, 0.7),
+      2px 4px 16px 0px rgba(0, 255, 255, 0.7);
   }
 `;

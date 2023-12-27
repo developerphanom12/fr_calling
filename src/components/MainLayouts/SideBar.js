@@ -179,7 +179,7 @@ const Root = styled.section`
       font-size: 13px;
       padding: 6px;
       position: relative;
-      top: 20px;
+      /* top: 20px; */
 
       > div {
         display: flex;
