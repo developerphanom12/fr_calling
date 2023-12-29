@@ -11,7 +11,7 @@ const formatDate = (dateString) => {
 };
 
 export default function CloseLead() {
-  const { callStatus = "close_lead" } = useParams();
+  const { callStatus = "close_status" } = useParams();
   const [applications, setApplications] = useState([]);
 
   const getColdLead = async () => {

@@ -129,7 +129,7 @@ const Root = styled.section`
     width: 30%;
     border-radius: 21px;
 
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    height: 46vh;
     .curent {
       font-size: 1.125rem;
       font-weight: 600;
@@ -152,20 +152,14 @@ const Root = styled.section`
     }
   }
   .char1:hover {
-    transform: scale(1.1);
-    box-shadow: 0px 1px 2px 0px rgba(0, 255, 255, 0.7),
-      1px 2px 4px 0px rgba(0, 255, 255, 0.7),
-      2px 4px 8px 0px rgba(0, 255, 255, 0.7),
-      2px 4px 16px 0px rgba(0, 255, 255, 0.7);
+    
   }
 
   .char {
     width: 50%;
     margin-left: 23px;
-    border: 2px solid blanchedalmond;
     /* box-shadow: 0px 1px 4px 0px; */
     margin-top: 50px;
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
     /* background-color: green; */
   }
 
@@ -184,9 +178,7 @@ const Root = styled.section`
       width: 57%;
       margin-top: 35px;
       /* border: 1px solid black; */
-      box-shadow: 2px 6px 15px #888888;
-      border-radius: 21px;
-
+    
       .div1 {
         display: flex;
         justify-content: space-between;
@@ -232,7 +224,6 @@ const Root = styled.section`
       margin-top: 35px;
 
       /* border: 1px solid black; */
-      box-shadow: 2px 6px 15px #888888;
       h1 {
         margin: 14px;
         font-size: 1.125rem;
@@ -305,10 +296,6 @@ const Root = styled.section`
     }
   }
   .char:hover {
-    transform: scale(1.1);
-    box-shadow: 0px 1px 2px 0px rgba(0, 255, 255, 0.7),
-      1px 2px 4px 0px rgba(0, 255, 255, 0.7),
-      2px 4px 8px 0px rgba(0, 255, 255, 0.7),
-      2px 4px 16px 0px rgba(0, 255, 255, 0.7);
+   
   }
 `;

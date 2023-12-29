@@ -7,10 +7,11 @@ import Tellelogin from "./components/CommonPages/loginpages/Tellelogin";
 import Employerlogin from "./components/CommonPages/loginpages/AdminLogin";
 import Dashboard from "./components/Dashboard";
 import TellecallerRegister from "./components/CommonPages/clientdata/TellecallerRegiter";
-import ClientHistory from "./components/CommonPages/clientdata/ClientHistory";
+import ClientHistory from "./components/CommonPages/clientdata/viewdetails/ClientHistory";
 import ListAllTellecaller from "./components/CommonPages/admin/ListAllTellecaller";
 import ClientData from "./components/CommonPages/clientdata/ClientData";
 import ColdLead from "./components/TelleData/ColdLead";
+import DetailView from "./components/CommonPages/clientdata/viewdetails/DetailView";
 
 function App() {
   const userCheck = useSelector((state) => state?.users?.userCheck);
@@ -30,6 +31,8 @@ function App() {
              {/* <Route path="/applications" element={<EmployeeSign/>} /> */}
              <Route path="/history" element={<ClientHistory />} />
              <Route path="/clientdata" element={<ClientData />} />
+             <Route path="/detailviewss"element={<DetailView/>} />
+
 
 
               </>
@@ -40,6 +43,8 @@ function App() {
                 <Route path="/telleRegister" element={<TellecallerRegister />} />
                 <Route path="/listalltelle" element={<ListAllTellecaller/>} />
                 <Route path="/coldlead" element={<ColdLead/>} />
+                <Route path="/detailview/:cd" element={<DetailView/>} />
+
 
               </>
             ) : (

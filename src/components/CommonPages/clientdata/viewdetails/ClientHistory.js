@@ -4,9 +4,9 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { BsFillEyeFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import Download from "./DownloadData";
-import { appDetailsAction } from "../../../redux/users/action";
-import { EXCHANGE_URLS_ADMIN } from "../../URLS";
+import Download from "../DownloadData";
+import { appDetailsAction } from "../../../../redux/users/action";
+import { EXCHANGE_URLS_ADMIN } from "../../../URLS";
 
 export default function ClientHistory({ popUser = () => {} }) {
   const [applications, setApplications] = useState([]);
@@ -102,7 +102,7 @@ export default function ClientHistory({ popUser = () => {} }) {
                   <div
                     className="iconn"
                     onClick={() => {
-                      navigate(`/detailview/${i?.id}`);
+                      navigate(`/detailview/${i?.cd}`);
                     }}
                   >
                     <BsFillEyeFill />

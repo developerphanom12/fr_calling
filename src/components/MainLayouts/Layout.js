@@ -50,6 +50,7 @@ const Root = styled.section`
   .sideBar {
     position: sticky;
     width: 15%;
+    margin-bottom: 2px;
     overflow: hidden;
     background-color: #0088ff;
     cursor: pointer;

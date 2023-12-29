@@ -140,6 +140,7 @@ const Root = styled.section`
   .menu_top {
     display: flex;
     flex-direction: column;
+    position: fixed;
     .logo {
       background-color: dodgerblue;
       border-radius: 4px;
