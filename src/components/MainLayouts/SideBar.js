@@ -17,7 +17,7 @@ export default function SideBar() {
     localStorage.setItem("token", "");
     dispatch(userCheckAction(false));
     cogoToast.success("Logout Successfully");
-    navigate("/home");
+    navigate("/allpages");
   };
 
   const userDetails = useSelector((state) => state?.users.user);
