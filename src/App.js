@@ -12,6 +12,8 @@ import ListAllTellecaller from "./components/CommonPages/admin/ListAllTellecalle
 import ClientData from "./components/CommonPages/clientdata/ClientData";
 import ColdLead from "./components/TelleData/ColdLead";
 import DetailView from "./components/CommonPages/clientdata/viewdetails/DetailView";
+import ApexChart from "./components/CommonPages/admin/chart/ApexChart";
+import Mainchart from "./components/CommonPages/admin/chart/Mainchart";
 
 function App() {
   const userCheck = useSelector((state) => state?.users?.userCheck);
@@ -44,9 +46,10 @@ function App() {
                 <Route path="/listalltelle" element={<ListAllTellecaller/>} />
                 <Route path="/coldlead" element={<ColdLead/>} />
                 <Route path="/detailview/:cd" element={<DetailView/>} />
+                <Route path ="/apex" element={<Mainchart/>} />
+                <Route path ="/apexs" element={<ApexChart/>} />
 
-
-              </>
+                              </>
             ) : (
               ""
             )}
