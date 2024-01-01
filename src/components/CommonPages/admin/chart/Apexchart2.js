@@ -1,17 +1,14 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 
-class ApexChart2 extends React.Component {
+class ApexChart2 extends  React.Component {
   constructor(props) {
     super(props);
 
+    const seriesData = props.data ? props.data.map(item => item.total_sales) : [0];
+    const categories = props.data ? props.data.map(item => item.month) : [0];
+
     this.state = {
-      series: [
-        {
-          name: "Desktops",
-          data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
-        },
-      ],
       options: {
         chart: {
           height: 350,
@@ -24,36 +21,34 @@ class ApexChart2 extends React.Component {
           enabled: false,
         },
         stroke: {
-          curve: "straight",
+          curve: "smooth",
         },
         title: {
-          text: "Sales Check By Year",
+          text: "Sales Check By year",
           align: "left",
         },
         grid: {
           row: {
-            colors: ["#f3f3f3", "transparent"], 
+            colors: ["#f3f3f3", "transparent"],
             opacity: 0.5,
           },
         },
         xaxis: {
-          categories: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-          ],
+          categories: categories,
+          text : 'sales'
         },
       },
+      series: [
+        {
+          name: "Total Sales",
+          data: seriesData,
+        },
+      ],
     };
   }
-
   render() {
+    console.log("sssss",this.props)
+
     return (
       <div id="chart">
         <ReactApexChart

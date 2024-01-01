@@ -3,12 +3,13 @@ import ApexChart from "./ApexChart";
 import axios from "axios";
 import { EXACHANGE_URLS_TELLE } from "../../../URLS";
 import styled from "styled-components";
+import ApexChart2 from "./Apexchart2";
 
-const Mainchart = () => {
+const   Mainchart2 = () => {
   const [salesData, setSalesData] = useState([]);
-  const [selection, setSelection] = useState("today");
+  const [selection, setSelection] = useState("2023");
 
-  const getHistory = async () => {
+  const getDataYearly = async () => {
     const axiosConfig = {
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -16,7 +17,7 @@ const Mainchart = () => {
     };
     try {
       const res = await axios.get(
-        `${EXACHANGE_URLS_TELLE}/admincheckaalsales?selection=${selection}`,
+        `${EXACHANGE_URLS_TELLE}/admincheckaalsales?year=${selection}`,
         axiosConfig
       );
       console.log("resss", res);
@@ -29,7 +30,7 @@ const Mainchart = () => {
   };
 
   useEffect(() => {
-    getHistory();
+    getDataYearly();
   }, [selection]);
 
   const handleSelectionChange = (newSelection) => {
@@ -40,23 +41,22 @@ const Mainchart = () => {
     <Root>
       <div>
         <div className="delta">
-          <label htmlFor="periodSelect">Select Period:</label>
+          <label htmlFor="periodSelect">Select Year:</label>
           <select
             id="periodSelect"
             onChange={(e) => handleSelectionChange(e.target.value)}
             value={selection}
           >
-            <option value="today">Today</option>
-            <option value="last7days">Last 7 Days</option>
+            <option value="2023">2023</option>
           </select>
         </div>
-        <ApexChart key={JSON.stringify(salesData)} data={salesData} />
+        <ApexChart2 key={JSON.stringify(salesData)} data={salesData} />
       </div>
     </Root>
   );
 };
 
-export default Mainchart;
+export default Mainchart2;
 
 const Root = styled.section`
   > div {

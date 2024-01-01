@@ -14,6 +14,8 @@ import ColdLead from "./components/TelleData/ColdLead";
 import DetailView from "./components/CommonPages/clientdata/viewdetails/DetailView";
 import ApexChart from "./components/CommonPages/admin/chart/ApexChart";
 import Mainchart from "./components/CommonPages/admin/chart/Mainchart";
+import Mainchart2 from "./components/CommonPages/admin/chart/Mainchart2";
+import ApexChart2 from "./components/CommonPages/admin/chart/Apexchart2";
 
 function App() {
   const userCheck = useSelector((state) => state?.users?.userCheck);
@@ -48,6 +50,8 @@ function App() {
                 <Route path="/detailview/:cd" element={<DetailView/>} />
                 <Route path ="/apex" element={<Mainchart/>} />
                 <Route path ="/apexs" element={<ApexChart/>} />
+                <Route path = "/apex2" element={<Mainchart2/>}/>
+                <Route path = "/apex22" element={<ApexChart2/>}/>
 
                               </>
             ) : (
