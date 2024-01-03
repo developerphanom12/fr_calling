@@ -16,6 +16,7 @@ import ApexChart from "./components/CommonPages/admin/chart/ApexChart";
 import Mainchart from "./components/CommonPages/admin/chart/Mainchart";
 import Mainchart2 from "./components/CommonPages/admin/chart/Mainchart2";
 import ApexChart2 from "./components/CommonPages/admin/chart/Apexchart2";
+import UpcomingGet from "./components/CommonPages/admin/chart/UpcomingGet";
 
 function App() {
   const userCheck = useSelector((state) => state?.users?.userCheck);
@@ -48,6 +49,8 @@ function App() {
                 <Route path="/listalltelle" element={<ListAllTellecaller/>} />
                 <Route path="/coldlead" element={<ColdLead/>} />
                 <Route path="/detailview/:cd" element={<DetailView/>} />
+                <Route path="/upcomingdata/:id" element={<UpcomingGet/>} />
+
                 <Route path ="/apex" element={<Mainchart/>} />
                 <Route path ="/apexs" element={<ApexChart/>} />
                 <Route path = "/apex2" element={<Mainchart2/>}/>

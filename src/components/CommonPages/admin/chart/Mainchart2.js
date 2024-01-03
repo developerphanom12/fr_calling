@@ -41,13 +41,17 @@ const   Mainchart2 = () => {
     <Root>
       <div>
         <div className="delta">
-          <label htmlFor="periodSelect">Select Year:</label>
+          <div>
+            <p>Check  Sale Yearly</p>
+          </div>
+          <label htmlFor="periodSelect">Select Period:</label>
           <select
             id="periodSelect"
             onChange={(e) => handleSelectionChange(e.target.value)}
             value={selection}
           >
             <option value="2023">2023</option>
+            <option value="2022">2022</option>
           </select>
         </div>
         <ApexChart2 key={JSON.stringify(salesData)} data={salesData} />
@@ -60,13 +64,23 @@ export default Mainchart2;
 
 const Root = styled.section`
   > div {
-    .delta {
-      gap: 4px;
       display: flex;
-      justify-content: right;
+      flex-direction: column;
+      justify-content: left;
+      height: 57vh;
+    .delta {
+      /* gap: 4px; */
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-around;
       align-items: center;
       label {
-        /* justify-content: center; */
+        justify-content: center;
+display:flex;
+margin-left:123px      }
+      p{
+        margin: 0;
+        color: rgba(55, 77, 103, 0.54)!important;
       }
       select {
         font-family: ui-serif;

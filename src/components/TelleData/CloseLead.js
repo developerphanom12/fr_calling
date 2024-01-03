@@ -195,6 +195,7 @@ const Root = styled.section`
           font-weight: 600;
           text-align: left;
           font-size: small;
+          margin: 0;
           @media (max-width: 789px) {
             font-size: 10px;
           }

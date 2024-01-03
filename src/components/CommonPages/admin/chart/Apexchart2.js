@@ -23,10 +23,7 @@ class ApexChart2 extends  React.Component {
         stroke: {
           curve: "smooth",
         },
-        title: {
-          text: "Sales Check By year",
-          align: "left",
-        },
+      
         grid: {
           row: {
             colors: ["#f3f3f3", "transparent"],
