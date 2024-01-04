@@ -67,9 +67,6 @@ const Root = styled.section`
     display: flex;
     flex-direction: column;
     gap: 30px;
-    /* margin: 0; */
-    /* padding: 12px; */
-    /* justify-content: space-between; */
     .delta {
      
       /* gap: 4px; */

@@ -34,7 +34,7 @@ export default function Tellelogin() {
         localStorage.setItem("token", res?.data?.data?.token);
         dispatch(userDataAction(res?.data?.data));
         dispatch(userCheckAction(true));
-        navigate("/dashboard");
+        navigate("/studash");
         cogoToast.success("Login Successfully");
       }
     } catch (err) {
@@ -42,6 +42,7 @@ export default function Tellelogin() {
       cogoToast.error("An error occurred during login");
     }
   };
+  
   const {
     register,
     handleSubmit,

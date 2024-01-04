@@ -89,9 +89,9 @@ export default function SideBar() {
                 <p>Dashboard</p>
               </div>
               <div
-                className={activeParam === "applications" ? "active" : ""}
+                className={activeParam === "clientdata" ? "active" : ""}
                 onClick={() => {
-                  navigate("/applications");
+                  navigate("/clientdata");
                 }}
               >
                 {<MdPersonSearch />}
@@ -105,6 +105,15 @@ export default function SideBar() {
               >
                 {<MdWorkHistory />}
                 <p>Client History</p>
+              </div>
+              <div
+                className={activeParam === "refrencedata" ? "active" : ""}
+                onClick={() => {
+                  navigate("/refrencedata");
+                }}
+              >
+                {<MdWorkHistory />}
+                <p>Refrence Data</p>
               </div>
             </>
           ) : (

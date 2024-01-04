@@ -17,6 +17,7 @@ import Mainchart from "./components/CommonPages/admin/chart/Mainchart";
 import Mainchart2 from "./components/CommonPages/admin/chart/Mainchart2";
 import ApexChart2 from "./components/CommonPages/admin/chart/Apexchart2";
 import UpcomingGet from "./components/CommonPages/admin/chart/UpcomingGet";
+import RefrenceData from "./components/CommonPages/clientdata/RefrenceData";
 
 function App() {
   const userCheck = useSelector((state) => state?.users?.userCheck);
@@ -37,6 +38,7 @@ function App() {
              <Route path="/history" element={<ClientHistory />} />
              <Route path="/clientdata" element={<ClientData />} />
              <Route path="/detailviewss"element={<DetailView/>} />
+             <Route path="/refrencedata"element={<RefrenceData />} />
 
 
 
