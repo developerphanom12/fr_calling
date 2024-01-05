@@ -16,8 +16,15 @@ export default function HotLead() {
 
   const getColdLead = async () => {
     try {
+      const axiosConfig = {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
+
       const res = await axios.get(
-        `${EXCHANGE_URLS_ADMIN}/callstatuscheck/${callStatus}`
+        `${EXCHANGE_URLS_ADMIN}/callstatuscheck/${callStatus}`,
+        axiosConfig
       );
       if (res.status === 200) {
         const formattedApplications = res.data.data.map((app) => ({

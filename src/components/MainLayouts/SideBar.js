@@ -9,6 +9,7 @@ import cogoToast from "cogo-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { userCheckAction } from "../../redux/users/action";
 import { IoMdCall } from "react-icons/io";
+import { FaShareAlt } from "react-icons/fa";
 
 export default function SideBar() {
   const navigate = useNavigate();
@@ -64,13 +65,23 @@ export default function SideBar() {
               </div>
 
               <div
-                className={activeParam === "dashboardd" ? "active" : ""}
+                className={activeParam === "listalltelle" ? "active" : ""}
                 onClick={() => {
                   navigate("/listalltelle");
                 }}
               >
                 <FaRegUser />
                 <p>Tellecaller List</p>
+              </div>
+
+              <div
+                className={activeParam === "sharedata" ? "active" : ""}
+                onClick={() => {
+                  navigate("/sharedata");
+                }}
+              >
+                <FaShareAlt />
+                <p>Share Data</p>
               </div>
             </>
           ) : (

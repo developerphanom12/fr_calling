@@ -18,47 +18,47 @@ import Mainchart2 from "./components/CommonPages/admin/chart/Mainchart2";
 import ApexChart2 from "./components/CommonPages/admin/chart/Apexchart2";
 import UpcomingGet from "./components/CommonPages/admin/chart/UpcomingGet";
 import RefrenceData from "./components/CommonPages/clientdata/RefrenceData";
+import ClientDashboard from "./components/CommonPages/clientdashboard/ClientDashboard";
 
 function App() {
   const userCheck = useSelector((state) => state?.users?.userCheck);
   const userDetails = useSelector((state) => state?.users.user);
   const token = localStorage.getItem("token");
-  console.log("role",  userDetails?.role)
+  console.log("role", userDetails?.role);
   return (
     <Layout>
       <Routes>
         {userCheck && token ? (
           <>
-       
-       
             {userDetails?.role === "telecaller" ? (
               <>
-              <Route path="/dashboard"element={<Dashboard/>} />
-             {/* <Route path="/applications" element={<EmployeeSign/>} /> */}
-             <Route path="/history" element={<ClientHistory />} />
-             <Route path="/clientdata" element={<ClientData />} />
-             <Route path="/detailviewss"element={<DetailView/>} />
-             <Route path="/refrencedata"element={<RefrenceData />} />
+                <Route path="/studash" element={<ClientDashboard />} />
+                {/* <Route path="/applications" element={<EmployeeSign/>} /> */}
+                <Route path="/detailview/:cd" element={<DetailView />} />
+                <Route path="/history" element={<ClientHistory />} />
+                <Route path="/clientdata" element={<ClientData />} />
+                <Route path="/detailviewss" element={<DetailView />} />
+                <Route path="/refrencedata" element={<RefrenceData />} />
 
-
-
+                <Route path="/upcomingdata/:id" element={<UpcomingGet />} />
               </>
             ) : userDetails?.role === "admin" ? (
               <>
-              <Route path="/dashboard"element={<Dashboard/>} />
+                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/history" element={<ClientHistory />} />
-                <Route path="/telleRegister" element={<TellecallerRegister />} />
-                <Route path="/listalltelle" element={<ListAllTellecaller/>} />
-                <Route path="/coldlead" element={<ColdLead/>} />
-                <Route path="/detailview/:cd" element={<DetailView/>} />
-                <Route path="/upcomingdata/:id" element={<UpcomingGet/>} />
-
-                <Route path ="/apex" element={<Mainchart/>} />
-                <Route path ="/apexs" element={<ApexChart/>} />
-                <Route path = "/apex2" element={<Mainchart2/>}/>
-                <Route path = "/apex22" element={<ApexChart2/>}/>
-
-                              </>
+                <Route
+                  path="/telleRegister"
+                  element={<TellecallerRegister />}
+                />
+                <Route path="/listalltelle" element={<ListAllTellecaller />} />
+                <Route path="/coldlead" element={<ColdLead />} />
+                <Route path="/detailview/:cd" element={<DetailView />} />
+                <Route path="/upcomingdata/:id" element={<UpcomingGet />} />
+                <Route path="/apex" element={<Mainchart />} />
+                <Route path="/apexs" element={<ApexChart />} />
+                <Route path="/apex2" element={<Mainchart2 />} />
+                <Route path="/apex22" element={<ApexChart2 />} />
+              </>
             ) : (
               ""
             )}
@@ -72,9 +72,6 @@ function App() {
             <Route path="/allpages" element={<AllPages />} />
           </>
         )}
-
-
-        
       </Routes>
     </Layout>
   );
