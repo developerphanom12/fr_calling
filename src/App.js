@@ -19,6 +19,7 @@ import ApexChart2 from "./components/CommonPages/admin/chart/Apexchart2";
 import UpcomingGet from "./components/CommonPages/admin/chart/UpcomingGet";
 import RefrenceData from "./components/CommonPages/clientdata/RefrenceData";
 import ClientDashboard from "./components/CommonPages/clientdashboard/ClientDashboard";
+import ShareData from "./components/CommonPages/admin/sharedata/ShareData";
 
 function App() {
   const userCheck = useSelector((state) => state?.users?.userCheck);
@@ -33,13 +34,11 @@ function App() {
             {userDetails?.role === "telecaller" ? (
               <>
                 <Route path="/studash" element={<ClientDashboard />} />
-                {/* <Route path="/applications" element={<EmployeeSign/>} /> */}
                 <Route path="/detailview/:cd" element={<DetailView />} />
                 <Route path="/history" element={<ClientHistory />} />
                 <Route path="/clientdata" element={<ClientData />} />
                 <Route path="/detailviewss" element={<DetailView />} />
                 <Route path="/refrencedata" element={<RefrenceData />} />
-
                 <Route path="/upcomingdata/:id" element={<UpcomingGet />} />
               </>
             ) : userDetails?.role === "admin" ? (
@@ -58,6 +57,7 @@ function App() {
                 <Route path="/apexs" element={<ApexChart />} />
                 <Route path="/apex2" element={<Mainchart2 />} />
                 <Route path="/apex22" element={<ApexChart2 />} />
+                <Route path="/sharedata" element={<ShareData />} />
               </>
             ) : (
               ""
