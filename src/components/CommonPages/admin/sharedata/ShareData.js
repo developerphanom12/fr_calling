@@ -12,6 +12,7 @@ export default function ShareData() {
   const [formData, setFormData] = useState({
     reciever_id: "",
     share_id: "",
+    call_status : ""
   });
 
   const staffApi = async () => {
@@ -124,6 +125,18 @@ export default function ShareData() {
                     sendername.map((i) => {
                       return <option value={i?.cds}>{i.username}</option>;
                     })}
+                </select>
+              </div>
+              <div className="name">
+                Call Status
+                <select
+                  onChange={(e) => {
+                    setFormData({ ...formData, call_status: e.target.value });
+                  }}
+                >
+                  <option value="">Please Select</option>
+                  <option value="cold lead">cold_lead</option>
+                  <option value="hot_lead">hot_lead</option>
                 </select>
               </div>
     
