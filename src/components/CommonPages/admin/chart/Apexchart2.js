@@ -11,7 +11,7 @@ class ApexChart2 extends  React.Component {
     this.state = {
       options: {
         chart: {
-          height: 350,
+          height: 300,
           type: "line",
           zoom: {
             enabled: false,
@@ -52,7 +52,7 @@ class ApexChart2 extends  React.Component {
           options={this.state.options}
           series={this.state.series}
           type="line"
-          height={350}
+          height={300}
         />
       </div>
     );

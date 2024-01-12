@@ -49,7 +49,7 @@ const Root = styled.section`
   height: 100%;
   .sideBar {
     position: sticky;
-    width: 15%;
+    width: 13%;
     margin-bottom: 2px;
     overflow: hidden;
     background-color: #0088ff;
@@ -64,7 +64,7 @@ const Root = styled.section`
     display: flex;
     flex-direction: column;
     flex: 1;
-    width: 75%;
+    width: 87%;
     overflow: hidden;
 
     .top_bar {

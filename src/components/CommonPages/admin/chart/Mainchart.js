@@ -65,35 +65,32 @@ const Root = styled.section`
   > div {
     margin-top: 63px;
     display: flex;
+    height: 64vh;
     flex-direction: column;
-    gap: 30px;
     .delta {
-     
-      /* gap: 4px; */
       width: 100%;
       margin-bottom: 5px;
       display: flex;
       justify-content: space-evenly;
       align-items: center;
-      /* height: 67px; */
       border-radius: 5px;
       > div {
         margin-right: 54px;
         p {
-          /* margin-right: 12px; */
+        font-size: 16px;
         }
       }
 
       label {
-        /* justify-content: center; */
+        font-size: 14px;
       }
       select {
         font-family: ui-serif;
-        font-size: 16px;
+        font-size: 13px;
         margin: 5px;
-        width: 26%;
+        width: 100px;
         font-weight: 400;
-        border: 1px solid #35fddb;
+        border: 1px solid dodgerblue;
         border-radius: 6px;
         height: 4vh;
         padding: 4px;

@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
   const day = date.getDate().toString().padStart(2, "0");
-  const month = (date.getMonth() + 1).toString().padStart(2, "0"); 
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 };
@@ -26,8 +26,6 @@ export default function Dashboard() {
   const [startDate, setStartDate] = useState(new Date());
   const [applications, Setcount] = useState([]);
   const [week, weekCount] = useState([]);
-
-
 
   const navigate = useNavigate();
 
@@ -90,9 +88,7 @@ export default function Dashboard() {
     <Root>
       <div className="chartmain">
         <div className="char1">
-          <div className="apex">
-            <Mainchart />
-          </div>
+          <Mainchart />
         </div>
         <div className="char">
           <Mainchart2 />
@@ -107,19 +103,19 @@ export default function Dashboard() {
             <span>{applications?.close_status}</span>
           </p>
         </div>
-        <div className="hot">
+        <div className="cold">
           <h1>Hot Client</h1>
           <p>
             <span>{applications?.hot_lead}</span>
           </p>{" "}
         </div>
-        <div className="negative">
+        <div className="cold">
           <h1>Negative Client</h1>
           <p>
             <span>{applications?.negative_client}</span>
           </p>{" "}
         </div>
-        <div className="Ghost">
+        <div className="cold">
           <h1>Ghost Client</h1>
           <p>
             <span>{applications?.ghost_client}</span>
@@ -149,7 +145,7 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="upcomming_child1">
-            <div>
+         
               {UniqueIdea &&
                 UniqueIdea.map((i) => {
                   return (
@@ -166,22 +162,19 @@ export default function Dashboard() {
                           <p>{formatDate(i?.call_schedule_date)}</p>
                         </h5>
                       </div>
-                      {/* <div className="child11">
-                        <p>
-                          <HiDotsHorizontal />
-                        </p>
-                      </div> */}
-                      <div className="child11"
-                    onClick={() => {
-                      navigate(`/upcomingdata/${i?.id}`);
-                    }}
-                  >
-                    <BsFillEyeFill />
-                  </div>
+
+                      <div
+                        className="child11"
+                        onClick={() => {
+                          navigate(`/upcomingdata/${i?.id}`);
+                        }}
+                      >
+                        <BsFillEyeFill />
+                      </div>
                     </div>
                   );
                 })}
-            </div>
+          
           </div>
         </div>
       </div>
@@ -215,11 +208,11 @@ const Root = styled.section`
       display: flex;
       flex-direction: column;
       justify-content: space-around;
-      /* margin-top: 50px; */
-      padding:7px;
-      width: 38%;
+      padding: 10px;
+      width: 40%;
       border-radius: 1px;
-      background-color: #f8f9fa!important;      box-shadow: 0 0px 2px 0px rgba(0,0,0,0.45) inset;      height: 56vh;
+      background-color: #f8f9fa !important;
+      height: 60vh;
       .curent {
         font-size: 1.125rem;
         font-weight: 600;
@@ -227,7 +220,6 @@ const Root = styled.section`
         letter-spacing: 0;
         color: rgba(61, 78, 101, 0.84);
       }
-      border-radius: -1px -1px 0 0;
       .price {
         letter-spacing: 2.1px;
         color: #112b4a;
@@ -248,15 +240,12 @@ const Root = styled.section`
 
     .char {
       width: 50%;
-      margin-right  : 34px;
-      background-color: #f8f9fa!important;
-      box-shadow: 0 0px 2px 0px rgba(0,0,0,0.45) inset;      /* background-color: green; */
+      margin-right: 34px;
+      background-color: #f8f9fa !important;
     }
   }
   .chart1 {
     display: flex;
-    /* flex-direction: column; */
-    /* width: 100%; */
     justify-content: space-around;
     margin-top: 23px;
 
@@ -264,10 +253,10 @@ const Root = styled.section`
       display: flex;
       flex-direction: column;
       width: 49%;
-      margin-top: 35px;
       padding: 9px;
-      background-color: #f8f9fa!important;
-      box-shadow: 0 0px 2px 0px rgba(0,0,0,0.45) inset;      .div1 {
+      background-color: #f8f9fa !important;
+      box-shadow: 0 0px 2px 0px rgba(0, 0, 0, 0.45) inset;
+      .div1 {
         display: flex;
         justify-content: space-between;
         .none {
@@ -283,20 +272,17 @@ const Root = styled.section`
         }
         .datapicker {
           display: flex;
-
+          align-items: center;
           .p1 {
-            border: 2px solid #0088ff;
+            border: 1px solid #0088ff;
             border-radius: 8px;
             text-align: center;
             color: white;
+            width: 80px;
             cursor: pointer;
+            padding: 5px;
             font-weight: 500;
-            font-size: 18px;
-            width: 91px;
-            height: 9px;
-            margin-top: 18px;
-            padding: 12px;
-            margin-right: 15px;
+            font-size: 16px;
             background: #0088ff;
           }
         }
@@ -306,15 +292,11 @@ const Root = styled.section`
     .upcoming1 {
       display: flex;
       flex-direction: column;
-      margin-top: 35px;
-      padding: 11.5px;
+      padding: 10px;
       width: 36%;
-      /* height: 51vh; */
-      background-color: #f8f9fa!important;      box-shadow: 0 0px 2px 0px rgba(0,0,0,0.45) inset;
-      /* border: 1px solid black; */
+      background-color: #f8f9fa !important;
+      box-shadow: 0 0px 2px 0px rgba(0, 0, 0, 0.45) inset;
       h1 {
-        /* margin: 14px; */
-        font-size: 1.125rem;
         font-weight: 600;
         font-family: Roboto, sans-serif;
         letter-spacing: 0;
@@ -340,7 +322,6 @@ const Root = styled.section`
       }
       .upcomming_child1 {
         display: flex;
-        /* align-items: center; */
         flex-direction: column;
         margin-right: 14px;
 
@@ -360,7 +341,6 @@ const Root = styled.section`
           .child11 {
             display: flex;
             width: 90%;
-            /* justify-content: space-between; */
             align-items: center;
             justify-content: right;
             margin-right: 12px;
@@ -377,12 +357,10 @@ const Root = styled.section`
             margin-bottom: 7px;
 
             > div {
-              /* margin: 0; */
               font-size: 1.125rem;
               font-weight: 600;
 
               font-family: Roboto, sans-serif;
-              /* letter-spacing: 0; */
               margin: 0;
               width: 60%;
               display: flex;
@@ -419,9 +397,6 @@ const Root = styled.section`
     }
   }
 
-  .char:hover {
-  }
-
   p {
     font-size: 1.2rem;
     font-weight: 600;
@@ -431,91 +406,21 @@ const Root = styled.section`
     margin-top: 50px;
   }
   .hotlead {
+    display: flex;
+    flex-wrap: wrap;
     color: white;
     cursor: pointer;
-    /* margin-top: 50px; */
     display: flex;
-    /* flex-direction: column; */
     justify-content: space-between;
-    /* background: red; */
     width: 100%;
     gap: 10px;
-    /* background: red; */
-    height: 18vh;
     .cold {
       padding: 12px;
-      width: 25%;
+      width: 16%;
       margin: 9px;
       border-radius: 13px;
       background-color: #bce0ff6b;
-      border: 2px solid #bce0ff6b;
-      h1 {
-        font-size: 1.125rem;
-        font-weight: 600;
-        font-family: Roboto, sans-serif;
-        letter-spacing: 0;
-        color: rgba(61, 78, 101, 0.84);
-      }
-      p {
-        font-size: 30px;
-        margin: 4px;
-        letter-spacing: 2.1px;
-        color: #112b4a;
-        line-height: 2.1875rem;
-      }
-    }
-    .hot {
-      padding: 12px;
-      width: 25%;
-      margin: 9px;
-      border-radius: 13px;
-      background-color: #bce0ff6b;
-      border: 2px solid #bce0ff6b;
-      h1 {
-        font-size: 1.125rem;
-        font-weight: 600;
-        font-family: Roboto, sans-serif;
-        letter-spacing: 0;
-        color: rgba(61, 78, 101, 0.84);
-      }
-      p {
-        font-size: 30px;
-        letter-spacing: 2.1px;
-        margin: 4px;
-        color: #112b4a;
-        line-height: 2.1875rem;
-      }
-    }
-    .negative {
-      padding: 12px;
-      width: 25%;
-      margin: 9px;
-      border-radius: 13px;
-      background-color: #bce0ff6b;
-      border: 2px solid #bce0ff6b;
-      h1 {
-        font-size: 1.125rem;
-        font-weight: 600;
-        font-family: Roboto, sans-serif;
-        letter-spacing: 0;
-        color: rgba(61, 78, 101, 0.84);
-      }
-      p {
-        font-size: 30px;
-        letter-spacing: 2.1px;
-        margin: 4px;
-        color: #112b4a;
-        line-height: 2.1875rem;
-      }
-    }
-    .Ghost {
-      padding: 12px;
-      width: 25%;
-      margin: 9px;
-      border-radius: 13px;
-      background-color: #bce0ff6b;
-      border: 2px solid #bce0ff6b;
-      color: white;
+      border: 1px solid #bce0ff6b;
       h1 {
         font-size: 1.125rem;
         font-weight: 600;

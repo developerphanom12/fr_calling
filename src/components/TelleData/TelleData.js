@@ -18,7 +18,7 @@ export default function TelleData() {
             setActive("CloseLead");
           }}
         >
-        CloseLead
+          CloseLead
         </button>
         <button
           className={active === "ColdLead" ? "btn_1 active" : "btn_1"}
@@ -37,14 +37,12 @@ export default function TelleData() {
           GhostClient
         </button>
         <button
-          className={
-            active === "HotLead" ? "btn_1 active" : "btn_1"
-          }
+          className={active === "HotLead" ? "btn_1 active" : "btn_1"}
           onClick={() => {
             setActive("HotLead");
           }}
         >
-        HotLead
+          HotLead
         </button>
         <button
           className={active === "NegativeClient" ? "btn_1 active" : "btn_1"}
@@ -54,7 +52,6 @@ export default function TelleData() {
         >
           NegativeClient
         </button>
-
       </div>
       <div className="table">
         {active === "CloseLead" ? (
@@ -80,14 +77,14 @@ const Root = styled.section`
   align-items: center;
   background: #e9a6a62b;
   justify-content: center;
-  padding-bottom:20px;
+  padding-bottom: 20px;
   .nav_tab {
     display: flex;
-    gap: 10px;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    /* padding: 10px; */
     margin: 10px;
+    gap: 10px;
     @media (max-width: 786px) {
       flex-direction: column;
     }
@@ -96,11 +93,10 @@ const Root = styled.section`
       background-color: transparent;
       border: none;
       width: fit-content;
-      padding: 10px;
+      padding: 7px;
       color: dodgerblue;
       font-weight: 600;
-
-    font-size: 16px;
+      font-size: 14px;
 
       &:hover {
         cursor: pointer;
@@ -135,8 +131,7 @@ const Root = styled.section`
     width: 100%;
     @media (max-width: 600px) {
       padding: 0;
-    width: 90%;
-
+      width: 90%;
     }
   }
 `;

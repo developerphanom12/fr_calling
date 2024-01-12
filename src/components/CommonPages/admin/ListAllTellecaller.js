@@ -5,12 +5,17 @@ import { EXCHANGE_URLS_ADMIN } from "../../URLS";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { appDetailsAction } from "../../../redux/users/action";
+import cogoToast from "cogo-toast";
 
 export default function ListAllTellecaller({ popUser = () => {} }) {
   const [applications, setApplications] = useState([]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [status, setStatus] = useState({
+    id: "",
+    is_deleted: "",
+  });
 
   const getHistory = async () => {
     const axiosConfig = {
@@ -28,6 +33,27 @@ export default function ListAllTellecaller({ popUser = () => {} }) {
       }
     } catch (e) {
       console.log(e);
+    }
+  };
+
+  const statusApi = async () => {
+    const axiosConfig = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+    try {
+      const response = await axios.post(
+        `${EXCHANGE_URLS_ADMIN}/deleteuser`,
+        status,
+        axiosConfig
+      );
+
+      if (response?.status === 201) {
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      console.error("Error",error);
     }
   };
 
@@ -50,6 +76,22 @@ export default function ListAllTellecaller({ popUser = () => {} }) {
 
     return uniqueArray;
   }, []);
+
+  const handleClick = (id, isApproved) => {
+    const currentUser = applications.find((caller) => caller.id === id);
+    if (currentUser) {
+      setStatus({
+        id,
+        is_deleted: isApproved ? 1 : 0,
+      });
+      if (status.is_deleted === 1) {
+        cogoToast.warning("Caller Blocked");
+      }
+      statusApi();
+    } else {
+      cogoToast.error("User not found");
+    }
+  };
 
   return (
     <Root>
@@ -94,7 +136,13 @@ export default function ListAllTellecaller({ popUser = () => {} }) {
                   <div className="email">{i?.email}</div>
                   <div>{i?.role}</div>
                   <div className="iconn">
-                    <button> Block </button>
+                  
+                    <button
+                      className="wrong"
+                      onClick={() => handleClick(i.id, 1)}
+                    >
+                      Block
+                    </button>
                   </div>
                 </div>
               );
@@ -145,7 +193,7 @@ const Root = styled.section`
     font-family: "Roboto", "sana-serif";
     .app_header {
       display: flex;
-      background-color: green;
+      background-color: #0088ff;
       text-align: center;
       color: white;
 
@@ -159,7 +207,7 @@ const Root = styled.section`
       display: flex;
       flex: 1;
       font-family: "Roboto", sans-serif;
-      .email{
+      .email {
         font-size: 10px;
       }
       .cams {
@@ -176,9 +224,8 @@ const Root = styled.section`
         button {
           color: white;
           border: 2px solid white;
-          border-radius: 14px;
-          background-color: #ff0000a3;
-          height: 45px;
+          border-radius: 10px;
+          background-color: #0088ff;
           padding: 10px;
           font-weight: 600;
         }

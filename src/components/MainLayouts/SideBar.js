@@ -37,9 +37,8 @@ export default function SideBar() {
             handleLogoutClick();
           }}
         >
-       <IoMdCall />
-       <p>TeleCaller</p>
-         
+          <IoMdCall />
+          <p>TeleCaller</p>
         </div>
         <div className="nav_section">
           {userDetails.role === "admin" ? (
@@ -171,19 +170,22 @@ const Root = styled.section`
       cursor: pointer;
       color: #ffffff;
       font-size: 18px;
-      p{
+      p {
         @media (max-width: 699px) {
-            display: none;
-          }
+          display: none;
+        }
       }
       svg {
         color: #ffffff;
         font-weight: 600;
-        width: 25px;
-        height: 25px;
+        width: 20px;
+        height: 20px;
       }
       @media (max-width: 999px) {
-        font-size: 18px;
+        font-size: 14px;
+        margin: 10px 0px;
+        padding: 10px;
+
         svg {
           color: #ffffff;
           font-weight: 600;
@@ -195,20 +197,18 @@ const Root = styled.section`
     .nav_section {
       display: flex;
       flex-direction: column;
-      padding-top: 15px;
       height: 100%;
+      gap: 30px;
       font-size: 13px;
-      padding: 6px;
+      padding: 6px 6px 6px 1px;
       position: relative;
-      /* top: 20px; */
 
       > div {
         display: flex;
-        /* width: 100%; */
-        margin-top: 33px;
         color: white;
         gap: 5px;
-        border-radius: 10px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
         align-items: center;
         &:hover {
           cursor: pointer;
@@ -216,19 +216,18 @@ const Root = styled.section`
 
         p {
           font-size: small;
-          /* padding-top: 10px; */
           @media (max-width: 699px) {
             display: none;
           }
         }
         svg {
-          width: 25px;
-          height: 25px;
+          width: 22px;
+          height: 22px;
         }
       }
       .active {
-        color: white;
-        background: #000080;
+        color: #000080;
+        background: #fff;
         padding: 4px;
       }
     }

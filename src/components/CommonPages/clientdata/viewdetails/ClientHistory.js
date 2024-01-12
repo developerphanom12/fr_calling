@@ -55,63 +55,60 @@ export default function ClientHistory({ popUser = () => {} }) {
 
   return (
     <Root>
-      
-        <div className="header">
-          <h2>Client History</h2>
+      <div className="header">
+        <h2>Client History</h2>
+        <button className="h1down">
+          <Download />{" "}
+        </button>
+      </div>
+
+      <div className="app_table">
+        <div className="app_header">
+          <div> Id</div>
+          <div>Client Details</div>
+          <div>Tellecaller Name</div>
+          <div>CA Name</div>
+          <div>Status</div>
+          <div>View</div>
         </div>
-        <div className="h11">
-          <button className="h1down">
-            <Download />{" "}
-          </button>
-        </div>
-        <div className="app_table">
-          <div className="app_header">
-            <div> Id</div>
-            <div>Client Details</div>
-            <div>Tellecaller Name</div>
-            <div>CA Name</div>
-            <div>Status</div>
-            <div>View</div>
-          </div>
-          {uniqueApplications &&
-            uniqueApplications.map((i) => {
-              return (
+        {uniqueApplications &&
+          uniqueApplications.map((i) => {
+            return (
+              <div
+                className="app_body"
+                onClick={() => {
+                  handlePassData(i);
+                }}
+              >
+                <div className="cams">#{i?.cd}</div>
+                <div>
+                  <p>
+                    Client Name <span>{i?.client_name}</span>
+                  </p>
+                  <p>
+                    Company Name: <span>{i?.company_name}</span>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    Tellecaller name : <span>{i?.user?.username}</span>
+                  </p>
+                </div>
+
+                <div><p>{i?.ca?.ca_name}</p></div>
+                <div><p>{i?.call_status}</p></div>
                 <div
-                  className="app_body"
+                  className="iconn"
                   onClick={() => {
-                    handlePassData(i);
+                    navigate(`/detailview/${i?.cd}`);
                   }}
                 >
-                  <div className="cams">#{i?.cd}</div>
-                  <div>
-                    <p>
-                      Client Name <span>{i?.client_name}</span>
-                    </p>
-                    <p>
-                      Company Name: <span>{i?.company_name}</span>
-                    </p>
-                  </div>
-                  <div>
-                    <p>
-                      Tellecaller name : <span>{i?.user?.username}</span>
-                    </p>
-                  </div>
-
-                  <div>{i?.ca?.ca_name}</div>
-                  <div>{i?.call_status}</div>
-                  <div
-                    className="iconn"
-                    onClick={() => {
-                      navigate(`/detailview/${i?.cd}`);
-                    }}
-                  >
-                    <BsFillEyeFill />
-                  </div>
+                  <BsFillEyeFill />
                 </div>
-              );
-            })}
-        </div>
-  
+              </div>
+            );
+          })}
+      </div>
     </Root>
   );
 }
@@ -122,14 +119,13 @@ const Root = styled.section`
   background-color: #f8f8f8;
   color: #202020;
   font-family: "Roboto", sans-serif;
-  font-size: 14px;
-  font-weight: normal;
-  vertical-align: middle;
   height: 100%;
 
   .header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    margin: 10px 10px;
     @media (max-width: 566px) {
       padding: 10px;
       flex-direction: column;
@@ -145,25 +141,23 @@ const Root = styled.section`
     h2 {
       color: #202020;
       font-family: "Roboto", sans-serif;
-      font-size: 32px;
       font-weight: 700;
-      /* text-shadow: 4px 5px 5px gray; */
+      margin: 0px 10px;
     }
-    
-  }
-  .h11 {
-    text-align: right;
-    margin-right: 10px;
     button {
       color: white;
       background-color: #0088ff;
-      font-size: 18px;
-      padding: 5px;
+      font-size: 16px;
+      padding: 5px 7px;
       border: none;
       text-align: center;
       border-radius: 15px;
       cursor: pointer;
     }
+  }
+  .h11 {
+    text-align: right;
+    margin-right: 10px;
   }
 
   .app_table {
@@ -198,6 +192,15 @@ const Root = styled.section`
         display: flex;
         align-items: center;
         justify-content: center;
+        svg{
+          color: #0088ff;
+          width: 20px;
+          height: 20px;
+
+          &:hover{
+            color: green;
+          }
+        }
       }
       > div {
         flex: 1;
@@ -214,19 +217,20 @@ const Root = styled.section`
           }
         }
         p {
-          font-weight: 600;
+          font-weight: 500;
           text-align: left;
-          font-size: small;
+          font-size: 13px;
           @media (max-width: 789px) {
             font-size: 10px;
           }
           span {
+            font-size: 13px;
             font-weight: 500;
           }
         }
 
         &:nth-child(odd) {
-          background-color: #e7e7e8;
+          background-color: #0088ff2b;
         }
 
         &:nth-child(even) {
@@ -247,7 +251,6 @@ const Root = styled.section`
       overflow-x: scroll;
       .app_header {
         min-width: 135px;
-        /* width: 100%; */
         > div {
           padding: 5px;
           font-size: smaller;
@@ -257,11 +260,9 @@ const Root = styled.section`
         min-width: 105px;
         width: 100%;
         > div {
-          /* flex: 1; */
-          font-size: smaller;
+          font-size: 12px;
         }
       }
     }
   }
- 
 `;
