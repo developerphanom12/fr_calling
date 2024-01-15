@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { IoMdStarOutline } from "react-icons/io";
+import { IoCall } from "react-icons/io5";
 import { IoMenu } from "react-icons/io5";
 
 export default function NavBar() {
@@ -15,11 +15,11 @@ export default function NavBar() {
             navigate("/allpages");
           }}
         >
-          <h2>
+          <h3>
             {" "}
-            <IoMdStarOutline />
-            Tellecallerr.
-          </h2>
+            <IoCall />
+            Telecaller
+          </h3>
         </div>
       </div>
 
@@ -30,7 +30,7 @@ export default function NavBar() {
             navigate("/employlogin");
           }}
         >
-          Telle LOGIN
+          TELE LOGIN
         </div>
         <div
           className="login"
@@ -38,7 +38,7 @@ export default function NavBar() {
             navigate("/employerlogin");
           }}
         >
-          Admin LOGIN
+          ADMIN LOGIN
         </div>
       </div>
       <div
@@ -82,15 +82,15 @@ const Root = styled.section`
   justify-content: space-between;
   gap: 10px;
   .main1 {
-    h2 {
-      color: dodgerblue;
+    h3 {
+      color: #461c6c;
       margin: 10px;
       padding-left: 50px;
       cursor: pointer;
-      font-size: 35px;
+      font-size: 30px;
       svg {
-        width: 35px;
-        height: 35px;
+        width: 28px;
+        height: 28px;
       }
     }
   }
@@ -98,13 +98,13 @@ const Root = styled.section`
   .main2 {
     display: flex;
     gap: 10px;
+    margin-right: 20px;
     .login {
-      padding: 10px;
-      height: 325x;
-      border-radius: 25px;
-      background-color: dodgerblue;
+      padding: 7px;
+      border-radius: 10px;
+      background-color: #461c6c;
       color: #ffffff;
-      font-size: 13px;
+      font-size: 11px;
       &:hover {
         cursor: pointer;
         box-shadow: 3px 2px 2px gray;

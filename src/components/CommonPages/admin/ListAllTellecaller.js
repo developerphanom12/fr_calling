@@ -53,7 +53,7 @@ export default function ListAllTellecaller({ popUser = () => {} }) {
         navigate("/dashboard");
       }
     } catch (error) {
-      console.error("Error",error);
+      console.error("Error", error);
     }
   };
 
@@ -136,7 +136,6 @@ export default function ListAllTellecaller({ popUser = () => {} }) {
                   <div className="email">{i?.email}</div>
                   <div>{i?.role}</div>
                   <div className="iconn">
-                  
                     <button
                       className="wrong"
                       onClick={() => handleClick(i.id, 1)}

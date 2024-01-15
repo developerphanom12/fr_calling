@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import NavBar from "./NavBar";
 import PostNav from "./PostNav";
-import Footer from "../CommonPages/Footer";
 import { useSelector } from "react-redux";
 import SideBar from "./SideBar";
 
@@ -31,13 +30,7 @@ export default function Layout({ children }) {
         )}
         <div className="main_body">{children}</div>
 
-        {!token && !userCheck ? (
-          <div className="footer">
-            <Footer />
-          </div>
-        ) : (
-          ""
-        )}
+        
       </div>
     </Root>
   );
@@ -74,7 +67,7 @@ const Root = styled.section`
       width: 100%;
     }
     .main_body {
-      height: 90%;
+      height: 100%;
       width: 100%;
     }
   }
