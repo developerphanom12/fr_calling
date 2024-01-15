@@ -115,6 +115,10 @@ const Root = styled.section`
     }
   }
   .menu {
+    svg{
+      width: 20px;
+      height: 20px;
+    }
     @media (max-width: 887px) {
       display: block;
       padding-right: 10px;
@@ -132,17 +136,17 @@ const Root = styled.section`
     position: fixed;
     top: 50px;
     right: 0px;
-    border: 4px solid darkgrey;
-    border-radius: 20px ;
-    height: 100px;
+    border: 2px solid #461c6c;
+    border-radius: 10px ;
+    margin-right: 20px;
+    height: 60px;
     width: 30%;
     padding: 20px 0px;
     gap: 10px;
-    color: white;
-    background: dodgerblue;
-    .login{
-      border-bottom: 2px solid darkgray;
-    }
+    color: #461c6c;
+    background: #fff;
+    cursor: pointer;
+     z-index: 2;
   }
   .pop_off {
     display: none;
