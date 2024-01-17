@@ -3,17 +3,18 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { BsFillEyeFill } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Download from "../DownloadData";
 import { appDetailsAction } from "../../../../redux/users/action";
 import { EXCHANGE_URLS_ADMIN } from "../../../URLS";
 
 export default function ClientHistory({ popUser = () => {} }) {
   const [applications, setApplications] = useState([]);
-
+  const [uniqueClientNames, setUniqueClientNames] = useState([]);
+  const [selectedTele, setSelectedTele] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  let { cd } = useParams;
   const getHistory = async () => {
     const axiosConfig = {
       headers: {
@@ -43,20 +44,43 @@ export default function ClientHistory({ popUser = () => {} }) {
     popUser(true);
   };
 
-  const uniqueApplications = applications.reduce((uniqueArray, currentItem) => {
-    const isUnique = uniqueArray.some((item) => item?.cd === currentItem?.cd);
+  const filteredApplications = applications.reduce(
+    (filteredArray, currentItem) => {
+      const isUnique = filteredArray.some(
+        (item) => item?.cd === currentItem?.cd
+      );
+      const matchesSelectedTele = currentItem?.user?.username === selectedTele;
 
-    if (!isUnique) {
-      uniqueArray.push(currentItem);
-    }
+      if (!isUnique && (!selectedTele || matchesSelectedTele)) {
+        filteredArray.push(currentItem);
+      }
 
-    return uniqueArray;
-  }, []);
+      return filteredArray;
+    },
+    []
+  );
 
+  useEffect(() => {
+    const uniqueNames = Array.from(
+      new Set(applications.map((item) => item?.user?.username))
+    );
+    setUniqueClientNames(uniqueNames);
+  }, [applications]);
   return (
     <Root>
       <div className="header">
         <h2>Client History</h2>
+        <select
+          value={selectedTele}
+          onChange={(e) => setSelectedTele(e.target.value)}
+        >
+          <option value="">All Client</option>
+          {uniqueClientNames.map((username) => (
+            <option key={username} value={username}>
+              {username}
+            </option>
+          ))}
+        </select>
         <button className="h1down">
           <Download />{" "}
         </button>
@@ -71,8 +95,8 @@ export default function ClientHistory({ popUser = () => {} }) {
           <div>Status</div>
           <div>View</div>
         </div>
-        {uniqueApplications &&
-          uniqueApplications.map((i) => {
+        {filteredApplications &&
+          filteredApplications.map((i) => {
             return (
               <div
                 className="app_body"
@@ -95,8 +119,12 @@ export default function ClientHistory({ popUser = () => {} }) {
                   </p>
                 </div>
 
-                <div><p>{i?.ca?.ca_name}</p></div>
-                <div><p>{i?.call_status}</p></div>
+                <div>
+                  <p>{i?.ca?.ca_name}</p>
+                </div>
+                <div>
+                  <p>{i?.call_status}</p>
+                </div>
                 <div
                   className="iconn"
                   onClick={() => {
@@ -192,12 +220,12 @@ const Root = styled.section`
         display: flex;
         align-items: center;
         justify-content: center;
-        svg{
+        svg {
           color: #0088ff;
           width: 20px;
           height: 20px;
 
-          &:hover{
+          &:hover {
             color: green;
           }
         }

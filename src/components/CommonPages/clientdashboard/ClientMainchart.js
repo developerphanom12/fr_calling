@@ -66,22 +66,17 @@ const Root = styled.section`
     margin-top: 63px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
     .delta {
      
-      /* gap: 4px; */
       width: 100%;
       margin-bottom: 5px;
       display: flex;
       justify-content: space-evenly;
       align-items: center;
-      /* height: 67px; */
       border-radius: 5px;
       > div {
         margin-right: 54px;
-        p {
-          /* margin-right: 12px; */
-        }
+         
       }
 
       label {

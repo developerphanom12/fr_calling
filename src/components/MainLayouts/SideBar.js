@@ -152,7 +152,7 @@ const Root = styled.section`
   height: 100%;
   max-height: 100vh;
   color: black;
-  background-color: #0088ff;
+  background-image:  linear-gradient(to right, #3a1864, #623084 ,#461c6c);
   font-family: "Roboto", sans-serif;
   overflow: hidden;
 
@@ -161,7 +161,7 @@ const Root = styled.section`
     flex-direction: column;
     position: fixed;
     .logo {
-      background-color: dodgerblue;
+      background-image: linear-gradient(to right #120422 ) ;
       border-radius: 4px;
       padding: 15px;
       margin: 20px 0px;
@@ -226,9 +226,10 @@ const Root = styled.section`
         }
       }
       .active {
-        color: #000080;
+        color: #1e0945;
         background: #fff;
         padding: 4px;
+         
       }
     }
   }

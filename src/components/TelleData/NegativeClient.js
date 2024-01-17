@@ -53,7 +53,7 @@ export default function NegativeClient() {
           <div>Client Name</div>
           <div>Schedule date</div>
           <div>Call Status</div>
-          <div>CA Name</div>
+         
         </div>
         {applications.map((application) => (
           <div className="child1" key={application.id}>
@@ -83,12 +83,7 @@ export default function NegativeClient() {
                 <span>{application.client_data.call_status}</span>
               </p>
             </div>
-            <div>
-              <p>
-                {" "}
-                <span>{application.clientCA_data.ca_name}</span>
-              </p>
-            </div>
+           
           </div>
         ))}
       </div>

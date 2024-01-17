@@ -1,15 +1,60 @@
-import React from "react";
+import cogoToast from "cogo-toast";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { UserDetails } from "../../../../redux/users/action";
+import axios from "axios";
+import { EXACHANGE_URLS_TELLE } from "../../../URLS";
+import { useNavigate } from "react-router-dom";
 
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
   const day = date.getDate().toString().padStart(2, "0");
-  const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 };
 
 export default function ClientDetail({ detail }) {
+  const [select, setSelect] = useState({
+    clientid:"",
+    call_status: "",
+  });
+  console.log("data",select)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const getDetails = useSelector((state) => state?.users?.appDetails);
+  console.log("data12",getDetails)
+  const approveApi = async () => {
+    if (select.call_status === "blank" || select.call_status === "") {
+      cogoToast.warn("Please select status");
+    } else {
+      try { 
+        const axiosConfig = {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        };
+        const res = await axios.post(
+          `${EXACHANGE_URLS_TELLE}/updatecallstatus`,
+          select,
+          axiosConfig
+        );
+        cogoToast.success("Status Submitted");
+       navigate('/studash')
+        if (res?.status === 200) {
+          dispatch(UserDetails(res?.data?.data?.appDetails));
+        }
+      } catch (error) {
+        cogoToast.error("Error");
+      }
+    }
+  };
+
+  const handleSubmit = () => {
+    approveApi();
+  };
+
   return (
     <Root>
       <div className="app_table">
@@ -27,11 +72,9 @@ export default function ClientDetail({ detail }) {
           <div>
             <p>{detail?.client_name}</p>
           </div>
-
           <div>
             <p>{detail?.company_name}</p>
           </div>
-
           <div>
             <p>{detail?.gst_no}</p>
           </div>
@@ -43,6 +86,34 @@ export default function ClientDetail({ detail }) {
           </div>
           <div>
             <p>{detail?.call_status}</p>
+            <div className="status">
+              <select
+                onChange={(e) => {
+                  setSelect({
+                    ...select,
+                    call_status: e.target.value,
+                    clientid: getDetails.cd,
+                  });
+                }}
+              >
+                <option value="blank">Select Status</option>
+                <option value="hot_lead">Hot Lead</option>
+                <option value="cold_lead">Cold Lead</option>
+                <option value="prospective_client">Prospective client  </option>
+                <option value="ghost_client">Ghost Client  </option>
+                <option value="negative_client">Negative Client</option>
+                <option value="close_status">Close Status</option>
+              </select>
+
+              <button
+                onClick={() => {
+                  handleSubmit();
+                }}
+              >
+                {" "}
+                Submit
+              </button>
+            </div>
           </div>
           <div>
             <p>{formatDate(detail?.updated_at)}</p>
@@ -58,13 +129,15 @@ const Root = styled.section`
   .app_table {
     display: flex;
     flex: 1;
-    margin-top: 50px;
+    border-radius: 5px;
+    margin-top: 5px;
     justify-content: center;
     font-family: "Roboto", "sana-serif";
     .app_header {
       display: flex;
+      height: 500px;
       flex-direction: column;
-      width: 24%;
+      width: 30%;
       text-align: center;
       color: black;
       > div {
@@ -80,6 +153,7 @@ const Root = styled.section`
       display: flex;
       flex-direction: column;
       font-family: "Roboto", sans-serif;
+      width: 30%;
 
       > div {
         flex: 1;
@@ -87,6 +161,7 @@ const Root = styled.section`
         border: 1px solid #dee2e6;
         text-transform: capitalize;
         align-items: center;
+        justify-content: space-around;
         padding: 15px;
         p {
           font-weight: 600;
@@ -94,6 +169,17 @@ const Root = styled.section`
           @media (max-width: 789px) {
             font-size: 10px;
           }
+        }
+      }
+      .status {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        select,
+        button {
+          background-color: white;
+          color: #623084;
+          border: 1px solid #623084;
         }
       }
     }

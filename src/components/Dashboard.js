@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-
 import { TfiMenu } from "react-icons/tfi";
-import { HiDotsHorizontal } from "react-icons/hi";
 import TelleData from "./TelleData/TelleData";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -94,7 +92,6 @@ export default function Dashboard() {
           <Mainchart2 />
         </div>
       </div>
-
       <p> Current Month</p>
       <div className="hotlead">
         <div className="cold">
@@ -145,42 +142,41 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="upcomming_child1">
-         
-              {UniqueIdea &&
-                UniqueIdea.map((i) => {
-                  return (
-                    <div className="data">
-                      <div>
-                        <img
-                          src={
-                            "https://cdn.pixabay.com/photo/2016/03/31/20/37/client-1295901_1280.png"
-                          }
-                          alt="hloo"
-                        />
-                        <h5>
-                          {i.client_name}{" "}
-                          <p>{formatDate(i?.call_schedule_date)}</p>
-                        </h5>
-                      </div>
-
-                      <div
-                        className="child11"
-                        onClick={() => {
-                          navigate(`/upcomingdata/${i?.id}`);
-                        }}
-                      >
-                        <BsFillEyeFill />
-                      </div>
+            {UniqueIdea &&
+              UniqueIdea.map((i) => {
+                return (
+                  <div className="data">
+                    <div>
+                      <img width="40px" 
+                        src={
+                          "https://cdn.pixabay.com/photo/2016/03/31/20/37/client-1295901_1280.png"
+                        }
+                        alt="img"
+                      />
+                      <h5>
+                        {i.client_name}{" "}
+                        <p>{formatDate(i?.call_schedule_date)}</p>
+                      </h5>
                     </div>
-                  );
-                })}
-          
+
+                    <div
+                      className="child11"
+                      onClick={() => {
+                        navigate(`/upcomingdata/${i?.id}`);
+                      }}
+                    >
+                      <BsFillEyeFill />
+                    </div>
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>
     </Root>
   );
 }
+
 
 const Root = styled.section`
   display: flex;
@@ -249,14 +245,14 @@ const Root = styled.section`
     justify-content: space-around;
     margin-top: 23px;
 
-    .upcoming {
+    .upcoming {  
       display: flex;
       flex-direction: column;
       width: 49%;
       padding: 9px;
       background-color: #f8f9fa !important;
       box-shadow: 0 0px 2px 0px rgba(0, 0, 0, 0.45) inset;
-      .div1 {
+      .div1 {  
         display: flex;
         justify-content: space-between;
         .none {
@@ -335,7 +331,6 @@ const Root = styled.section`
         }
         > div {
           display: flex;
-          flex-direction: column;
           align-items: left;
 
           .child11 {
@@ -347,6 +342,7 @@ const Root = styled.section`
             align-items: center;
             cursor: pointer;
           }
+        }
           .data {
             display: flex;
             margin-top: 12px;
@@ -357,13 +353,12 @@ const Root = styled.section`
             margin-bottom: 7px;
 
             > div {
+              display: flex;
               font-size: 1.125rem;
               font-weight: 600;
-
               font-family: Roboto, sans-serif;
               margin: 0;
-              width: 60%;
-              display: flex;
+              width: 49%;
               gap: 10px;
               color: rgba(61, 78, 101, 0.84);
               margin-right: 12px;
@@ -392,7 +387,6 @@ const Root = styled.section`
               }
             }
           }
-        }
       }
     }
   }

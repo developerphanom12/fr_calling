@@ -6,17 +6,18 @@ import styled from "styled-components";
 import { EXACHANGE_URLS_TELLE } from "../../URLS";
 
 export default function ClientData() {
-  const [universityImagePreview, setUniversityImagePreview] = useState("");
-
   const [formData, setFormData] = useState({
     client_name: "",
     company_name: "",
-    gst_no: "",
     dob_client: "",
     client_anniversary: "",
     call_schedule_date: "",
+    client_companyaddress:"",
+    client_phonenumber:"",
+    client_email:"",
+    remark:"",
+    attach_file:"",
     call_status: "",
-    attach_file: "",
   });
 
   const [add, setAdd] = useState({
@@ -28,30 +29,19 @@ export default function ClientData() {
   });
 
   const navigate = useNavigate();
-
-  const handleUniversityImagePreview = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFormData({ ...formData, attach_file: file });
-      setUniversityImagePreview(URL.createObjectURL(file));
-    } else {
-      setFormData({ ...formData, attach_file: "" });
-      setUniversityImagePreview("");
-    }
-  };
-
   const registerApi = async () => {
     const data = new FormData();
     data.append("client_name", formData.client_name);
+    data.append("client_email", formData.client_email);
+    data.append("client_phonenumber", formData.client_phonenumber);
+    data.append("client_companyaddress", formData.client_companyaddress);
     data.append("company_name", formData.company_name);
-    data.append("gst_no", formData.gst_no);
+    data.append("remark", formData.remark);
     data.append("dob_client", formData.dob_client);
     data.append("client_anniversary", formData.client_anniversary);
     data.append("call_schedule_date", formData.call_schedule_date);
     data.append("call_status", formData.call_status);
     data.append("attach_file", formData.attach_file);
-
-    // Append address fields
     Object.keys(add).forEach((key) => {
       data.append(`ca_data[${key}]`, add[key]);
     });
@@ -70,16 +60,15 @@ export default function ClientData() {
 
       if (res?.status === 200) {
         cogoToast.success("Registered Successfully");
-        // Reset form data and navigate to login page
         setFormData({
           client_name: "",
           company_name: "",
-          gst_no: "",
           dob_client: "",
           client_anniversary: "",
           call_schedule_date: "",
           call_status: "",
           attach_file: "",
+          remark:"",
         });
         setAdd({
           ca_name: "",
@@ -88,7 +77,6 @@ export default function ClientData() {
           ca_company_name: "",
           ca_accountant_number: "",
         });
-        setUniversityImagePreview("");
         navigate("/dashboard");
       }
     } catch (err) {
@@ -96,520 +84,385 @@ export default function ClientData() {
       cogoToast.error("Registration Failed");
     }
   };
-  const selectContainerStyle = {
-    position: "relative",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "90%",
-    padding: "10px",
-    borderRadius: "10px",
-    margin: "10px",
-    border: "2px dashed #555",
-    color: "#444",
-    cursor: "pointer",
-    transition: "background .2s ease-in-out, border .2s ease-in-out",
-  };
 
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFormData({ ...formData, attach_file: file });
+    } else {
+      setFormData({ ...formData, attach_file: "" });
+    }
+  };
   const handleRegisterClick = () => {
     registerApi();
   };
   return (
     <Root>
-      <div className="first_div">
-        <h2>Client Data</h2>
-
-        <div className="first_box1">
-          <div>
-            <h4 className="h41">Your Client Details :-</h4>
-          </div>
-
-          <div className="columnnn">
-            <div className="name">
-              {" "}
-              Client Name
-              <input
-                type="name"
-                value={formData?.client_name}
-                onChange={(e) => {
-                  setFormData({ ...formData, client_name: e.target.value });
-                }}
-                placeholder="Client Name"
-              />
-            </div>
-            <div className="name">
-              {" "}
-              Company name
-              <input
-                type="name"
-                value={formData?.company_name}
-                onChange={(e) => {
-                  setFormData({ ...formData, company_name: e.target.value });
-                }}
-                placeholder="Company Name"
-              />
-            </div>
-            <div className="name">
-              GST NO
-              <input
-                type="name"
-                value={formData?.gst_no}
-                onChange={(e) => {
-                  setFormData({ ...formData, gst_no: e.target.value });
-                }}
-                placeholder="GST Number"
-              />
-            </div>
-
-            <div className="name">
-              Dob CLient
-              <input
-                type="date"
-                pattern="\d{2}/\d{2}/\d{4}"
-                value={formData?.dob_client}
-                onChange={(e) => {
-                  setFormData({ ...formData, dob_client: e.target.value });
-                }}
-                placeholder="Dob Client"
-              />
-            </div>
-            <div className="name">
-              Client Aniversary
-              <input
-                type="date"
-                pattern="\d{2}/\d{2}/\d{4}"
-                value={formData?.client_anniversary}
-                onChange={(e) => {
-                  setFormData({
-                    ...formData,
-                    client_anniversary: e.target.value,
-                  });
-                }}
-                placeholder="Date"
-              />
-            </div>
-            <div className="name">
-              Call Schedule
-              <input
-                type="date"
-                pattern="\d{2}/\d{2}/\d{4}"
-                value={formData?.call_schedule_date}
-                onChange={(e) => {
-                  setFormData({
-                    ...formData,
-                    call_schedule_date: e.target.value,
-                  });
-                }}
-                placeholder="Call Schedule on which date"
-              />
-              <div className="name">
-                Call Status
-                <select
-                  onChange={(e) => {
-                    setFormData({ ...formData, call_status: e.target.value });
-                  }}
-                >
-                  <option value="">Please Select</option>
-                  <option value="cold_lead">cold_lead</option>
-                  <option value="hot_lead">hot_lead</option>
-                </select>
-              </div>
-            </div>
-          </div>
+      <h4>Your Client Data :-</h4>
+      <div className="first_box1">
+        <div className="name">
+          {" "}
+          Client Name
+          <input
+            type="name"
+            value={formData?.client_name}
+            onChange={(e) => {
+              setFormData({ ...formData, client_name: e.target.value });
+            }}
+            placeholder="Client Name"
+          />
         </div>
-      </div>
-      <div className="second_div">
-        <div className="company">
-          <div>
-            {" "}
-            <h4> Your CA Details :-</h4>
-          </div>
-
-          <div>
-            {" "}
-            <div className="name">
-              Chartered accountant Name
-              <input
-                value={add?.ca_name}
-                onChange={(e) => {
-                  setAdd({ ...add, ca_name: e.target.value });
-                }}
-                placeholder=" Chartered accountant Name"
-              />
-            </div>
-            <div className="name">
-              Chartered accountant Number
-              <input
-                type="number"
-                value={add?.ca_number}
-                onChange={(e) => {
-                  setAdd({ ...add, ca_number: e.target.value });
-                }}
-                placeholder="Chartered accountant Number"
-              />
-            </div>
-            <div className="name">
-              CA Accountant Name
-              <input
-                value={add?.ca_accountant_name}
-                onChange={(e) => {
-                  setAdd({ ...add, ca_accountant_name: e.target.value });
-                }}
-                placeholder="CA Accountant Name"
-              />
-            </div>
-            <div className="name">
-              Chartered accountant Company Name
-              <input
-                className="inputtt"
-                value={add?.ca_company_name}
-                onChange={(e) => {
-                  setAdd({ ...add, ca_company_name: e.target.value });
-                }}
-                placeholder=" Chartered accountant Company Name"
-              />
-            </div>
-            <div className="name">
-              CA Accountant Number
-              <input
-                className="inputtt"
-                type="number"
-                value={add.ca_accountant_number}
-                onChange={(e) => {
-                  setAdd({ ...add, ca_accountant_number: e.target.value });
-                }}
-                placeholder="CA Accountant Number"
-              />
-            </div>
-          </div>
-          <div>
-            <div className="name">
-              Attach Any File
-              <div className="imgg" style={selectContainerStyle}>
-                Click Here
-                <img
-                  src={
-                    universityImagePreview ||
-                    "https://www.crizac.co.uk/catalog/assets/images/upload_icon.svg"
-                  }
-                  alt="Upload"
-                  className="inside_img"
-                />
-                <input type="file" onChange={handleUniversityImagePreview} />
-              </div>
-            </div>
-          </div>
+        <div className="name">
+          {" "}
+          Client Email
+          <input
+            type="email"
+            value={formData?.client_email}
+            onChange={(e) => {
+              setFormData({ ...formData, client_email: e.target.value });
+            }}
+            placeholder="Email"
+          />
+        </div>
+        <div className="name">
+          {" "}
+          Client Number
+          <input
+            type="email"
+            value={formData?.client_phonenumber}
+            onChange={(e) => {
+              setFormData({ ...formData, client_phonenumber: e.target.value });
+            }}
+            placeholder="Number"
+          />
+        </div>
+        <div className="name">
+          {" "}
+          Company name
+          <input
+            type="name"
+            value={formData?.company_name}
+            onChange={(e) => {
+              setFormData({ ...formData, company_name: e.target.value });
+            }}
+            placeholder="Company Name"
+          />
+        </div>
+        <div className="name">
+          {" "}
+          Company Address
+          <input
+            type="name"
+            value={formData?.client_companyaddress}
+            onChange={(e) => {
+              setFormData({ ...formData, client_companyaddress: e.target.value });
+            }}
+            placeholder="Company Address"
+          />
         </div>
 
-        <div className="regis">
-          <button
-            className="btnn"
-            onClick={() => {
-              handleRegisterClick();
+        <div className="name">
+          Dob CLient
+          <input
+            type="date"
+            pattern="\d{2}/\d{2}/\d{4}"
+            value={formData?.dob_client}
+            onChange={(e) => {
+              setFormData({ ...formData, dob_client: e.target.value });
+            }}
+            placeholder="Dob Client"
+          />
+        </div>
+        <div className="name">
+          Client Aniversary (optional)
+          <input
+            type="date"
+            pattern="\d{2}/\d{2}/\d{4}"
+            value={formData?.client_anniversary}
+            onChange={(e) => {
+              setFormData({
+                ...formData,
+                client_anniversary: e.target.value,
+              });
+            }}
+            placeholder="(Optional)"
+          />
+        </div>
+        <div className="name">
+          Call Schedule
+          <input
+            type="date"
+            pattern="\d{2}/\d{2}/\d{4}"
+            value={formData?.call_schedule_date}
+            onChange={(e) => {
+              setFormData({
+                ...formData,
+                call_schedule_date: e.target.value,
+              });
+            }}
+            placeholder="Call Schedule on which date"
+          />
+        </div>
+        <div className="name">
+          Call Status
+          <select
+            onChange={(e) => {
+              setFormData({ ...formData, call_status: e.target.value });
             }}
           >
-            Submit
-          </button>
+            <option value="">Please Select</option>
+            <option value="cold_lead">cold_lead</option>
+            <option value="hot_lead">hot_lead</option>
+          </select>
         </div>
+        <div className="name">
+          {" "}
+           Remark  
+          <input
+            type="name"
+            value={formData?.remark}
+            onChange={(e) => {
+              setFormData({ ...formData, remark: e.target.value });
+            }}
+            placeholder="Remark  "
+          />
+        </div>
+      </div>
+      <h4> Your CA Details :-</h4>{" "}
+      <div className="second_div">
+        <div className="name">
+          CA Name
+          <input
+            value={add?.ca_name}
+            onChange={(e) => {
+              setAdd({ ...add, ca_name: e.target.value });
+            }}
+            placeholder=" Chartered accountant Name"
+          />
+        </div>
+        <div className="name">
+          CA Number
+          <input
+            type="number"
+            value={add?.ca_number}
+            onChange={(e) => {
+              setAdd({ ...add, ca_number: e.target.value });
+            }}
+            placeholder="CA Number"
+          />
+        </div>
+        <div className="name">
+          CA Company Name
+          <input
+            value={add?.ca_company_name}
+            onChange={(e) => {
+              setAdd({ ...add, ca_company_name: e.target.value });
+            }}
+            placeholder=" Chartered accountant Company Name"
+          />
+        </div>
+        <div className="name">
+        CA Address
+          <input
+            value={add?.ca_company_name}
+            onChange={(e) => {
+              setAdd({ ...add, ca_company_name: e.target.value });
+            }}
+            placeholder="CA Address"
+          />
+        </div>
+        <div className="name">
+          Accountant Name
+          <input
+            value={add?.ca_accountant_name}
+            onChange={(e) => {
+              setAdd({ ...add, ca_accountant_name: e.target.value });
+            }}
+            placeholder="CA Accountant Name"
+          />
+        </div>
+        <div className="name">
+          Accountant Number
+          <input
+            type="number"
+            value={add.ca_accountant_number}
+            onChange={(e) => {
+              setAdd({ ...add, ca_accountant_number: e.target.value });
+            }}
+            placeholder="Accountant Number"
+          />
+        </div>
+        <div className="name">
+          Attach Any File
+          <input
+              type="file"
+              onChange={handleImage}
+            />
+        </div>
+      </div>
+      <div className="regis">
+        <button
+          className="btnn"
+          onClick={() => {
+            handleRegisterClick();
+          }}
+        >
+          Submit
+        </button>
       </div>
     </Root>
   );
 }
 const Root = styled.section`
   font-family: 20px "Roboto", sans-serif;
-  margin: 10px 0px 0px 80px;
-  max-width: 100vw;
+  margin: 0px;
   width: 100%;
-
-  .flex-container {
-    display: flex;
-    flex-wrap: wrap;
-  }
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   h4 {
-    color: #0e4d92;
-    margin: 0;
-  }
-  .name {
-    display: flex;
-    flex-direction: column;
-    font-size: small;
-    width: 33%;
-    margin-right: 10px;
-    color: black;
-    input {
-      border-radius: 10px;
-      padding: 5px;
-      color: #202020;
-      width: 100%;
-      text-decoration: none;
-      border: 2px solid #a5d8fa;
-      @media (max-width: 600px) {
-        width: 100%;
-      }
-    }
-    @media (max-width: 900px) {
-      width: 90%;
-    }
-
-    select {
-      background-color: white;
-      color: gray;
-      text-decoration: none;
-      border: 2px solid #a5d8fa;
-      line-height: 1.5em;
-      width: 100%;
-      padding: 6px;
-      border-radius: 10px;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      background-image: linear-gradient(45deg, transparent 50%, blue 50%),
-        linear-gradient(135deg, blue 50%, transparent 50%),
-        linear-gradient(to right, skyblue, skyblue);
-      background-position: calc(100% - 20px) calc(1em + 2px),
-        calc(100% - 15px) calc(1em + 2px), 100% 0;
-      background-size: 5px 5px, 5px 5px, 40px 45px;
-      background-repeat: no-repeat;
-      @media (max-width: 555px) {
-        padding: 8px;
-        background-size: 5px 5px, 5px 5px, 30px 45px;
-        align-items: center;
-      }
-
-      select:focus {
-        background-image: linear-gradient(45deg, white 50%, transparent 50%),
-          linear-gradient(135deg, transparent 50%, white 50%),
-          linear-gradient(to right, gray, gray);
-        background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em,
-          100% 0;
-        background-size: 5px 5px, 5px 5px, 2.5em 2.5em;
-        background-repeat: no-repeat;
-        border-color: grey;
-        outline: 0;
-      }
-    }
-
-    input:focus,
-    input:active {
-      border-color: #ff6525;
-    }
-  }
-
-  .name {
-    display: flex;
-    flex-direction: column;
-    font-size: small;
-    width: 90%;
+    color: #461c6c;
+    margin: 10px 0px;
     padding: 5px;
-    margin-right: 10px;
-    color: black;
-    input {
-      border-radius: 10px;
-      padding: 5px;
-      color: #202020;
-      width: 90%;
-      margin: 5px;
-      text-decoration: none;
-      border: 2px solid #a5d8fa;
-      @media (max-width: 900px) {
-        width: 100%;
-      }
-    }
-
-    input:focus,
-    input:active {
-      border-color: #ff6525;
-    }
-
-    .imgg {
-      text-align: center;
-      position: relative;
-      cursor: pointer;
-      width: 40%;
-      height: 40%;
-      &:hover {
-        opacity: 0.5;
-      }
-      .inside_img {
-        width: 25%;
-        object-fit: contain;
-      }
-      input {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        opacity: 0;
-      }
-    }
-    @media (max-width: 900px) {
-      width: 90%;
-    }
   }
-  .nameyyy {
+
+  .first_box1 {
     display: flex;
-    flex-direction: column;
-    font-size: small;
-    width: 33%;
-    margin-right: 10px;
-    color: black;
-    input {
-      border-radius: 10px;
-      padding: 5px;
-      color: #202020;
-      /* width: 90%; */
-      text-decoration: none;
-      border: 2px solid #a5d8fa;
-      @media (max-width: 900px) {
-        width: 100%;
-      }
-    }
+    flex-wrap: wrap;
+    width: 90%;
+    box-shadow: 1px 1px 5px 1px gray;
+    border-radius: 10px;
 
-    input:focus,
-    input:active {
-      border-color: #ff6525;
-    }
-
-    .imgg {
-      text-align: center;
-      position: relative;
-      cursor: pointer;
-      width: 70%;
-      height: 40%;
-      &:hover {
-        opacity: 0.5;
-      }
-      .inside_img {
-        width: 25%;
-        object-fit: contain;
-      }
-      input {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        opacity: 0;
-      }
-    }
-  }
-
-  .first_div {
-    h2 {
-      color: #0e4d92;
-      display: flex;
-      justify-content: center;
-      margin: 0;
-    }
-
-    .first_box1 {
+    .name {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      /* text-align: center; */
-      width: 100%;
-      align-items: center;
-      margin: 0px 10px;
-      > div {
-        display: flex;
-        flex: 1;
-        padding: 10px;
-        gap: 5px;
+      font-size: 13px;
+      width: 24%;
+      padding: 5px;
+      color: black;
+      input {
+        border-radius: 10px;
+        padding: 5px;
+        color: #202020;
+        width: 90%;
+        margin: 10px 0px;
+        text-decoration: none;
+        border: 1px solid #623084;
+        @media (max-width: 600px) {
+          width: 100%;
+        }
+      }
+      @media (max-width: 900px) {
+        width: 90%;
+      }
+
+      select {
+        background-color: white;
+        color: gray;
+        text-decoration: none;
+        border: 1px solid #623084;
+        line-height: 1.5em;
+        width: 93%;
+        padding: 3px;
+        margin: 10px 0px;
+        border-radius: 10px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: linear-gradient(45deg, transparent 50%, #1e0945 50%),
+          linear-gradient(135deg, #1e0945 50%, transparent 50%),
+          linear-gradient(to right, #63276f, #f064e7, #a74fad);
+        background-position: calc(100% - 20px) calc(1em + 2px),
+          calc(100% - 15px) calc(1em + 2px), 100% 0;
+        background-size: 5px 5px, 5px 5px, 40px 45px;
+        background-repeat: no-repeat;
+        @media (max-width: 555px) {
+          padding: 8px;
+          background-size: 5px 5px, 5px 5px, 30px 45px;
+          align-items: center;
+        }
+      }
+
+      input:focus,
+      input:active {
+        border-color: #ff6525;
       }
     }
   }
 
   .second_div {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    .company {
-      display: flex;
-      flex-direction: column;
-      margin: 0px 10px;
-      width: 60%;
-
-      > div {
-        display: flex;
-        flex-direction: column;
-        padding: 10px;
-        width: 100%;
-
-        .name1 {
-          display: flex;
-          flex-direction: column;
-          font-size: small;
-          width: 6110%;
-          margin-right: 10px;
-          color: black;
-        }
-        .name2 {
-          display: flex;
-          flex-direction: column;
-          font-size: small;
-          width: 100%;
-          margin-right: 10px;
-          /* padding: 20px; */
-          /* gap: 10px; */
-          color: black;
-        }
-      }
-    }
-
-    .password {
-      display: flex;
-      flex-direction: column;
-      padding: 10px;
-      width: 70%;
-      > div {
-        display: flex;
-        padding: 10px;
-      }
-    }
-  }
-
-  .fifth_div {
-    background: #0e4d92;
-    color: white;
-    display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
-    padding: 10px;
+    width: 90%;
+    box-shadow: 1px 1px 5px 1px gray;
+    border-radius: 10px;
 
-    .fifth_box {
-      margin: 40px;
-      padding: 10px;
+    .name {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      text-align: center;
-      /* width:50%; */
-      justify-content: center;
-      .btnn {
-        padding: 10px;
+      font-size: 13px;
+      width: 24%;
+      padding: 5px;
+      color: black;
+      input {
         border-radius: 10px;
-        font-size: small;
-        border-color: transparent;
-        width: 80%;
-        font-size: medium;
-        color: #ffffff;
-        background: rgb(255 94 0);
-        margin: 20px;
-        background: #000080;
-        border-radius: 10px;
-        color: #fff;
-        padding: 10px 5px;
-        background-size: 300% 100%;
-        transition: all 0.3s ease-in-out 0s;
-        text-transform: uppercase;
-        &:hover {
-          box-shadow: 10px 5px 5px gray;
-          transition: all 0.2s ease-in-out 0s;
-          background: linear-gradient(-25deg, #000080 49%, #000080 100%);
+        padding: 5px;
+        color: #202020;
+        width: 90%;
+        margin: 10px 0px;
+        text-decoration: none;
+        border: 1px solid #623084;
+        @media (max-width: 900px) {
+          width: 100%;
         }
+      }
+
+      input:focus,
+      input:active {
+        border-color: #ff6525;
+      }
+      input[type="file"]::file-selector-button {
+        background-color: #623084;
+        border: 1px solid #3a1864;
+        padding: 0.2em 0.4em;
+        border-radius: 0.4em;
+        transition: 1s;
+        color: #fff;
+        cursor: pointer;
+        margin-left: 10px;
+      }
+
+      input[type="file"]::file-selector-button:hover {
+        border: 1px solid #119af6;
+        background-color: #62bdfa;
+      }
+      .imgg {
+        text-align: center;
+        position: relative;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        &:hover {
+          opacity: 0.5;
+        }
+        .inside_img {
+          width: 60px;
+          object-fit: contain;
+        }
+        input {
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          opacity: 0;
+        }
+      }
+      @media (max-width: 900px) {
+        width: 90%;
       }
     }
   }
@@ -619,69 +472,27 @@ const Root = styled.section`
     padding: 10px;
     .btnn {
       padding: 10px;
-      border-radius: 10px;
+      border-radius: 50px;
       font-size: small;
-      border-color: transparent;
-      width: 100%;
+      border: none;
+      width: 200px;
       font-size: medium;
       color: #ffffff;
       margin-right: 108px;
-      background: #000080;
-      color: #fff;
+      background-image: linear-gradient(to right, #3a1864, #623084, #461c6c);
       background-size: 300% 100%;
       transition: all 0.3s ease-in-out 0s;
       text-transform: uppercase;
       &:hover {
-        box-shadow: 10px 5px 5px gray;
+        box-shadow: 1px 1px 5px 1px gray;
         transition: all 0.2s ease-in-out 0s;
-        background: linear-gradient(-25deg, #000080 49%, #000080 100%);
+        background: linear-gradient(
+          -25deg,
+          #3a1864 20%,
+          #461c6c 49%,
+          #471f75 100%
+        );
       }
-    }
-  }
-  @media (max-width: 768px) {
-    .first_box1 > div,
-    .company > div,
-    .password {
-      flex-direction: column;
-    }
-
-    .name,
-    .name1,
-    .name2 {
-      width: 100%;
-      margin-right: 0;
-    }
-
-    .name input,
-    .name1 input,
-    .name2 input {
-      width: calc(100% - 28px);
-    }
-
-    .fifth_box {
-      margin: 20px;
-    }
-  }
-  .columnnn {
-    display: flex;
-    width: 60%;
-    flex-direction: column;
-  }
-  .h41 {
-    font-family: -webkit-body;
-    align-items: flex-end;
-    text-align: left;
-    font-size: 19px;
-  }
-  .inputtt {
-    border-radius: 101px;
-    padding: 5px;
-    color: #202020;
-    /* width: 90%; */
-    text-decoration: none;
-    border: 2px solid #a5d8fa;
-    @media (max-width: 900px) {
-      width: 100%;
     }
   }
 `;

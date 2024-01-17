@@ -42,7 +42,6 @@ export default function DetailView() {
   console.log("userr", user);
   return (
     <Root>
-      <h2>History</h2>
       <div className="nav_tab">
         <button
           className={active === "telledetail" ? "btn_1 active" : "btn_1"}

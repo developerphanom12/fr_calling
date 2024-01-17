@@ -42,7 +42,7 @@ export default function Tellelogin() {
       }
     } catch (err) {
       console.log("err", err);
-      cogoToast.error("An error occurred during login");
+      cogoToast.error("Invalid User");
     }
   };
 
@@ -70,8 +70,8 @@ export default function Tellelogin() {
               <p>Password</p>
               <div className="passsword_div">
                 <input
-                  type={showPassword ? "text" : "password"}
-                  {...register("password")}
+                  type={showPassword ? "text" : "passsword"}
+                  {...register("passsword")}
                 />
                 <button
                   className="btn_outline_primary"
@@ -87,7 +87,7 @@ export default function Tellelogin() {
               <button className="forget">Forget password?</button>
             </div>
             <div className="child_box2">
-              <button className="sign">Sign in</button>
+              <button type="submit" className="sign">Sign in</button>
             </div>
           </div>
         </form>
@@ -115,7 +115,7 @@ const Root = styled.section`
   .main1 {
     margin: 10px;
     border: 2px solid #fff;
-    border-radius: 10px;
+    border-radius: 20px;
     height: fit-content;
     backdrop-filter: blur(3px);
     text-align: center;
@@ -136,11 +136,10 @@ const Root = styled.section`
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width: 60%;
+        width: 66%;
         .child_box {
           padding: 10px 0px;
           width: 100%;
-          margin-left: 20px;
           text-align: left;
           .passsword_div {
             display: flex;
@@ -169,6 +168,7 @@ const Root = styled.section`
             border: 1px solid black;
             font-size: 16px;
             color: #000000e6;
+            width: 85%;
             padding: 5px 10px;
             border-radius: 10px;
             &:hover {
@@ -177,10 +177,8 @@ const Root = styled.section`
           }
         }
         .child_box1 {
-          text-align: center;
-          padding: 10px 0px;
-          margin-left: 20px;
-          width: 100%;
+          text-align: right;
+          padding-right: 30px;
           .forget {
             background-color: transparent;
             color: #fff;
@@ -192,18 +190,18 @@ const Root = styled.section`
           }
         }
         .child_box2 {
-          text-align: left;
+          text-align: center;
           padding: 10px 0px;
-          margin-left: 20px;
           width: 100%;
           .sign {
             background-color: #fff;
             color: #3a1864;
             padding: 6px;
-            width: 80%;
+            width: 200px;
             border: none;
             font-size: 14px;
-            border-radius: 10px;
+            border-radius: 50px;
+            margin: 10px;
             font-weight: 600;
             &:hover {
               cursor: pointer;

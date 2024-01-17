@@ -15,7 +15,7 @@ class ApexChart extends React.Component {
       }],
       options: {
         chart: {
-          height: 300,
+          height: 250,
           type: 'bar',
         },
         xaxis: {
@@ -46,7 +46,7 @@ class ApexChart extends React.Component {
           options={this.state.options}
           series={this.state.series}
           type="bar"
-          height={300}  
+          height={250}  
         />
       </div>
     );

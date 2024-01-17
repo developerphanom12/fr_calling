@@ -140,7 +140,7 @@ const Root = styled.section`
     border-radius: 10px ;
     margin-right: 20px;
     height: 60px;
-    width: 30%;
+    width: 200px;
     padding: 20px 0px;
     gap: 10px;
     color: #461c6c;

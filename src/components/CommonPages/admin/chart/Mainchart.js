@@ -62,10 +62,10 @@ const Mainchart = () => {
 export default Mainchart;
 
 const Root = styled.section`
+padding: 10px;
   > div {
-    margin-top: 63px;
+    margin-top: 60px;
     display: flex;
-    height: 64vh;
     flex-direction: column;
     .delta {
       width: 100%;

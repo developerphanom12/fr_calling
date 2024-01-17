@@ -10,10 +10,8 @@ import { EXCHANGE_URLS_ADMIN } from "../../URLS";
 import axios from "axios";
 import { BsFillEyeFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import ReactDatePicker, {Data} from "react-datepicker";
+import ReactDatePicker, { Data } from "react-datepicker";
 import TelleData from "../../TelleData/TelleData";
-
-
 
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
@@ -23,48 +21,45 @@ const formatDate = (isoDate) => {
   return `${day}/${month}/${year}`;
 };
 
-
 export default function ClientDashboard() {
   const [week, weekCount] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
 
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
-
-
-const getUpcomingMeeetingtelle = async () => {
-  const axiosConfig = {
-    headers: {
-      authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  };
-  try {
-    const res = await axios.get(
-      `${EXCHANGE_URLS_ADMIN}/getweekdata`,
-      axiosConfig
-    );
-    console.log("res123", res);
-    if (res.status === 200) {
-      weekCount(res?.data?.data);
+  const getUpcomingMeeetingtelle = async () => {
+    const axiosConfig = {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+    try {
+      const res = await axios.get(
+        `${EXCHANGE_URLS_ADMIN}/getweekdata`,
+        axiosConfig
+      );
+      console.log("res123", res);
+      if (res.status === 200) {
+        weekCount(res?.data?.data);
+      }
+    } catch (e) {
+      console.log(e);
     }
-  } catch (e) {
-    console.log(e);
-  }
-};
+  };
 
-useEffect(() => {
-  getUpcomingMeeetingtelle();
-},[]);
+  useEffect(() => {
+    getUpcomingMeeetingtelle();
+  }, []);
 
-const UniqueIdea = week.reduce((uniqueArray, currentItem) => {
-  const isUnique = uniqueArray.some((item) => item?.id === currentItem?.id);
+  const UniqueIdea = week.reduce((uniqueArray, currentItem) => {
+    const isUnique = uniqueArray.some((item) => item?.id === currentItem?.id);
 
-  if (!isUnique) {
-    uniqueArray.push(currentItem);
-  }
+    if (!isUnique) {
+      uniqueArray.push(currentItem);
+    }
 
-  return uniqueArray;
-}, []);
+    return uniqueArray;
+  }, []);
 
   return (
     <Root>
@@ -78,37 +73,8 @@ const UniqueIdea = week.reduce((uniqueArray, currentItem) => {
           <CLientMainchart2 />
         </div>
       </div>
-
-      <p> Current Month</p>
-      {/* <div className="hotlead">
-        <div className="cold">
-          <h1>Close Client</h1>
-          <p>
-            <span>{applications?.close_status}</span>
-          </p>
-        </div>
-        <div className="hot">
-          <h1>Hot Client</h1>
-          <p>
-            <span>{applications?.hot_lead}</span>
-          </p>{" "}
-        </div>
-        <div className="negative">
-          <h1>Negative Client</h1>
-          <p>
-            <span>{applications?.negative_client}</span>
-          </p>{" "}
-        </div>
-        <div className="Ghost">
-          <h1>Ghost Client</h1>
-          <p>
-            <span>{applications?.ghost_client}</span>
-          </p>{" "}
-        </div>
-      </div> */}
-     
       
-     <div className="chart1">
+      <div className="chart1">
         <div className="upcoming">
           <div className="div1">
             <p className="none">Recent Activity</p>
@@ -148,14 +114,15 @@ const UniqueIdea = week.reduce((uniqueArray, currentItem) => {
                           <p>{formatDate(i?.call_schedule_date)}</p>
                         </h5>
                       </div>
-                     
-                      <div className="child11"
-                    onClick={() => {
-                      navigate(`/upcomingdata/${i?.id}`);
-                    }}
-                  >
-                    <BsFillEyeFill />
-                  </div>
+
+                      <div
+                        className="child11"
+                        onClick={() => {
+                          navigate(`/upcomingdata/${i?.id}`);
+                        }}
+                      >
+                        <BsFillEyeFill />
+                      </div>
                     </div>
                   );
                 })}
@@ -166,6 +133,7 @@ const UniqueIdea = week.reduce((uniqueArray, currentItem) => {
     </Root>
   );
 }
+
 
 const Root = styled.section`
   display: flex;
@@ -193,7 +161,6 @@ const Root = styled.section`
       display: flex;
       flex-direction: column;
       justify-content: space-around;
-      /* margin-top: 50px; */
       padding:7px;
       width: 38%;
       border-radius: 1px;
@@ -228,7 +195,7 @@ const Root = styled.section`
       width: 50%;
       margin-right  : 34px;
       background-color: #f8f9fa!important;
-      box-shadow: 0 0px 2px 0px rgba(0,0,0,0.45) inset;      /* background-color: green; */
+      box-shadow: 0 0px 2px 0px rgba(0,0,0,0.45) inset;     
     }
   }
   .chart1 {
@@ -285,11 +252,8 @@ const Root = styled.section`
       margin-top: 35px;
       padding: 11.5px;
       width: 36%;
-      /* height: 51vh; */
       background-color: #f8f9fa!important;      box-shadow: 0 0px 2px 0px rgba(0,0,0,0.45) inset;
-      /* border: 1px solid black; */
       h1 {
-        /* margin: 14px; */
         font-size: 1.125rem;
         font-weight: 600;
         font-family: Roboto, sans-serif;
@@ -316,7 +280,6 @@ const Root = styled.section`
       }
       .upcomming_child1 {
         display: flex;
-        /* align-items: center; */
         flex-direction: column;
         margin-right: 14px;
 
@@ -336,7 +299,6 @@ const Root = styled.section`
           .child11 {
             display: flex;
             width: 90%;
-            /* justify-content: space-between; */
             align-items: center;
             justify-content: right;
             margin-right: 12px;
@@ -354,12 +316,9 @@ const Root = styled.section`
             margin-bottom: 7px;
 
             > div {
-              /* margin: 0; */
               font-size: 1.125rem;
               font-weight: 600;
-
               font-family: Roboto, sans-serif;
-              /* letter-spacing: 0; */
               margin: 0;
               width: 60%;
               display: flex;
@@ -410,14 +369,10 @@ const Root = styled.section`
   .hotlead {
     color: white;
     cursor: pointer;
-    /* margin-top: 50px; */
     display: flex;
-    /* flex-direction: column; */
     justify-content: space-between;
-    /* background: red; */
     width: 100%;
     gap: 10px;
-    /* background: red; */
     height: 18vh;
     .cold {
       padding: 12px;
@@ -515,11 +470,9 @@ const Root = styled.section`
       margin-top: 35px;
       padding: 11.5px;
       width: 36%;
-      /* height: 51vh; */
-      background-color: #f8f9fa!important;      box-shadow: 0 0px 2px 0px rgba(0,0,0,0.45) inset;
-      /* border: 1px solid black; */
+      background-color: #f8f9fa!important;  
+          box-shadow: 0 0px 2px 0px rgba(0,0,0,0.45) inset;
       h1 {
-        /* margin: 14px; */
         font-size: 1.125rem;
         font-weight: 600;
         font-family: Roboto, sans-serif;
@@ -546,7 +499,6 @@ const Root = styled.section`
       }
       .upcomming_child1 {
         display: flex;
-        /* align-items: center; */
         flex-direction: column;
         margin-right: 14px;
 
@@ -566,7 +518,6 @@ const Root = styled.section`
           .child11 {
             display: flex;
             width: 90%;
-            /* justify-content: space-between; */
             align-items: center;
             justify-content: right;
             margin-right: 12px;
@@ -583,12 +534,9 @@ const Root = styled.section`
             margin-bottom: 7px;
 
             > div {
-              /* margin: 0; */
               font-size: 1.125rem;
               font-weight: 600;
-
               font-family: Roboto, sans-serif;
-              /* letter-spacing: 0; */
               margin: 0;
               width: 60%;
               display: flex;
@@ -624,3 +572,4 @@ const Root = styled.section`
       }
     }
 `;
+

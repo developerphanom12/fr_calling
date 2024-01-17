@@ -27,7 +27,7 @@ class ApexChart2 extends  React.Component {
         grid: {
           row: {
             colors: ["#f3f3f3", "transparent"],
-            opacity: 0.5,
+            opacity: 0.2,
           },
         },
         xaxis: {

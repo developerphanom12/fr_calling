@@ -93,7 +93,7 @@ export default function Employerlogin() {
   );
 }
 const Root = styled.section`
-  display: flex;
+   display: flex;
   justify-content: center;
   border-bottom: 1px solid black;
   align-items: center;
@@ -112,7 +112,7 @@ const Root = styled.section`
   .main1 {
     margin: 10px;
     border: 2px solid #fff;
-    border-radius: 10px;
+    border-radius: 20px;
     height: fit-content;
     backdrop-filter: blur(3px);
     text-align: center;
@@ -133,11 +133,10 @@ const Root = styled.section`
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width: 60%;
+        width: 66%;
         .child_box {
           padding: 10px 0px;
           width: 100%;
-          margin-left: 20px;
           text-align: left;
           .passsword_div {
             display: flex;
@@ -166,6 +165,7 @@ const Root = styled.section`
             border: 1px solid black;
             font-size: 16px;
             color: #000000e6;
+            width: 85%;
             padding: 5px 10px;
             border-radius: 10px;
             &:hover {
@@ -173,25 +173,25 @@ const Root = styled.section`
             }
           }
         }
-
+         
         .child_box2 {
-          text-align: left;
+          text-align: center;
           padding: 10px 0px;
-          margin-left: 20px;
           width: 100%;
           .sign {
             background-color: #fff;
             color: #3a1864;
             padding: 6px;
-            width: 80%;
-            border: 1px solid black;
+            width: 200px;
+            border: none;
             font-size: 14px;
-            border-radius: 10px;
+            border-radius: 50px;
+            margin: 10px;
             font-weight: 600;
             &:hover {
               cursor: pointer;
               color: #fff;
-              background-color: #d3d3d347;
+              background-color: #3a1864;
             }
           }
         }
