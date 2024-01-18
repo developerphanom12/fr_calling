@@ -26,6 +26,7 @@ export default function ClientData() {
     ca_accountant_name: "",
     ca_company_name: "",
     ca_accountant_number: "",
+    company_address:"",
   });
 
   const navigate = useNavigate();
@@ -264,9 +265,9 @@ export default function ClientData() {
         <div className="name">
         CA Address
           <input
-            value={add?.ca_company_name}
+            value={add?.company_address}
             onChange={(e) => {
-              setAdd({ ...add, ca_company_name: e.target.value });
+              setAdd({ ...add, company_address: e.target.value });
             }}
             placeholder="CA Address"
           />

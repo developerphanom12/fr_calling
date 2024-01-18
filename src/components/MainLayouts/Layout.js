@@ -37,7 +37,7 @@ const Root = styled.section`
   height: 100%;
   .sideBar {
     position: sticky;
-    width: 13%;
+    width: 132px;
     margin-bottom: 2px;
     padding-bottom: 10px;
     overflow: hidden;

@@ -124,9 +124,9 @@ const Root = styled.section`
       }
     }
     .active {
-      border-bottom: 4px solid #0088ff;
+      border-bottom: 4px solid #63276f;
       background-color: #fff;
-      color: #57be1f;
+      color: #63276f;
     }
   }
 `;

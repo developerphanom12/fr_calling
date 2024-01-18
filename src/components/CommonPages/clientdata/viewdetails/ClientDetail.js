@@ -17,19 +17,19 @@ const formatDate = (isoDate) => {
 
 export default function ClientDetail({ detail }) {
   const [select, setSelect] = useState({
-    clientid:"",
+    clientid: "",
     call_status: "",
   });
-  console.log("data",select)
+  console.log("data", select);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const getDetails = useSelector((state) => state?.users?.appDetails);
-  console.log("data12",getDetails)
+  console.log("data12", getDetails);
   const approveApi = async () => {
     if (select.call_status === "blank" || select.call_status === "") {
       cogoToast.warn("Please select status");
     } else {
-      try { 
+      try {
         const axiosConfig = {
           headers: {
             authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -41,7 +41,7 @@ export default function ClientDetail({ detail }) {
           axiosConfig
         );
         cogoToast.success("Status Submitted");
-       navigate('/studash')
+        navigate("/studash");
         if (res?.status === 200) {
           dispatch(UserDetails(res?.data?.data?.appDetails));
         }
@@ -54,6 +54,7 @@ export default function ClientDetail({ detail }) {
   const handleSubmit = () => {
     approveApi();
   };
+  
 
   return (
     <Root>
@@ -61,7 +62,6 @@ export default function ClientDetail({ detail }) {
         <div className="app_header">
           <div>Client Name</div>
           <div>Company Name</div>
-          <div>GST No</div>
           <div>DOB Client</div>
           <div>Client Aniversary</div>
           <div>Call Status</div>
@@ -74,9 +74,6 @@ export default function ClientDetail({ detail }) {
           </div>
           <div>
             <p>{detail?.company_name}</p>
-          </div>
-          <div>
-            <p>{detail?.gst_no}</p>
           </div>
           <div>
             <p>{formatDate(detail?.dob_client)}</p>
@@ -99,8 +96,8 @@ export default function ClientDetail({ detail }) {
                 <option value="blank">Select Status</option>
                 <option value="hot_lead">Hot Lead</option>
                 <option value="cold_lead">Cold Lead</option>
-                <option value="prospective_client">Prospective client  </option>
-                <option value="ghost_client">Ghost Client  </option>
+                <option value="prospective_client">Prospective client </option>
+                <option value="ghost_client">Ghost Client </option>
                 <option value="negative_client">Negative Client</option>
                 <option value="close_status">Close Status</option>
               </select>
