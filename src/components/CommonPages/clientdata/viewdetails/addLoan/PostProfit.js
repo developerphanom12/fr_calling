@@ -39,7 +39,11 @@ export default function PostProfit() {
     <Root>
       Add Profit Detail
       <div>
-        <input placeholder="Profit Details" value={profit?.profit_details} />
+        <input placeholder="Profit Details" value={profit?.profit_details}
+       onChange={(e) => {
+        setProfit({ ...profit, profit_details: e.target.value });
+      }}
+        />
       </div>
       <div>
         <button onClick={handleSubmit}>Submit</button>
