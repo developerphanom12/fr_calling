@@ -52,7 +52,6 @@ export default function ClientDetail({ detail }) {
       }
     }
   };
-
   const handleSubmit = () => {
     approveApi();
   };

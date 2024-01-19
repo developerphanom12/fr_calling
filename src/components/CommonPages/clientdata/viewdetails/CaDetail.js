@@ -72,14 +72,14 @@ export default function CaDetail({ detail }) {
   const handleSubmit = () => {
     postApiData();
   };
-
   const handleEditClick = () => {
     setIsEditing(true);
   };
   const handleDoneEditing = () => {
     setIsEditing(false);
     updateApiData();
-  };
+  }; 
+
   return (
     <Root>
       <h4>Application : {detail?.cadetails?.ca_id}</h4>

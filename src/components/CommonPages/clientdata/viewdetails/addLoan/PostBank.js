@@ -4,9 +4,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { EXACHANGE_URLS_TELLE } from "../../../../URLS";
 
-export default function PostBank() {
+export default function PostBank({ detail}) {
   const [loan, setLoan] = useState({
-    data_id: "",
     loan_date: "",
     bankname: "",
     loan_amount: "",
@@ -42,7 +41,7 @@ export default function PostBank() {
   };
   return (
     <Root>
-      Add Bank Detail :{loan?.data_id}
+      Add Bank Detail :{ detail?.loan?.data_id}
       <div>
         <input
           placeholder="Date"

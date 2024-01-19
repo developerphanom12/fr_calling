@@ -121,7 +121,7 @@ export default function DetailView() {
         ) : active === "postprofit" ? (
           <PostProfit />
         ) : active === "postbank" ? (
-          <PostBank />
+          <PostBank detail={user} />
         ) : (
           <TelleDetail detail={user} />
         )}
