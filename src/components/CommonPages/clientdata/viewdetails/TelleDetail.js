@@ -42,14 +42,13 @@ const Root = styled.section`
     .app_header {
       display: flex;
       flex-direction: column;
-      width: 24%;
       text-align: center;
       color: black;
       > div {
         flex: 1;
         padding: 15px;
         border: 1px solid #dee2e6;
-        font-size: 17px;
+        font-size: 14px;
         align-items: center;
         display: flex;
       }

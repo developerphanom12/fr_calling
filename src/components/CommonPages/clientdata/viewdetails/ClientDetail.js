@@ -6,6 +6,7 @@ import { UserDetails } from "../../../../redux/users/action";
 import axios from "axios";
 import { EXACHANGE_URLS_TELLE } from "../../../URLS";
 import { useNavigate } from "react-router-dom";
+import { IoMdAdd } from "react-icons/io";
 
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
@@ -16,6 +17,7 @@ const formatDate = (isoDate) => {
 };
 
 export default function ClientDetail({ detail }) {
+  const [addedButton, setAddedButton] = useState(false);
   const [select, setSelect] = useState({
     clientid: "",
     call_status: "",
@@ -54,8 +56,9 @@ export default function ClientDetail({ detail }) {
   const handleSubmit = () => {
     approveApi();
   };
-  
-
+  const isAdded = () => {
+    setAddedButton(true);
+  };
   return (
     <Root>
       <div className="app_table">
@@ -83,34 +86,41 @@ export default function ClientDetail({ detail }) {
           </div>
           <div>
             <p>{detail?.call_status}</p>
-            <div className="status">
-              <select
-                onChange={(e) => {
-                  setSelect({
-                    ...select,
-                    call_status: e.target.value,
-                    clientid: getDetails.cd,
-                  });
-                }}
-              >
-                <option value="blank">Select Status</option>
-                <option value="hot_lead">Hot Lead</option>
-                <option value="cold_lead">Cold Lead</option>
-                <option value="prospective_client">Prospective client </option>
-                <option value="ghost_client">Ghost Client </option>
-                <option value="negative_client">Negative Client</option>
-                <option value="close_status">Close Status</option>
-              </select>
+            <button onClick={isAdded}>
+              <IoMdAdd />
+              {addedButton && (
+                <div className="status">
+                  <select
+                    onChange={(e) => {
+                      setSelect({
+                        ...select,
+                        call_status: e.target.value,
+                        clientid: getDetails.cd,
+                      });
+                    }}
+                  >
+                    <option value="blank">Select Status</option>
+                    <option value="hot_lead">Hot Lead</option>
+                    <option value="cold_lead">Cold Lead</option>
+                    <option value="prospective_client">
+                      Prospective client{" "}
+                    </option>
+                    <option value="ghost_client">Ghost Client </option>
+                    <option value="negative_client">Negative Client</option>
+                    <option value="close_status">Close Status</option>
+                  </select>
 
-              <button
-                onClick={() => {
-                  handleSubmit();
-                }}
-              >
-                {" "}
-                Submit
-              </button>
-            </div>
+                  <button
+                    onClick={() => {
+                      handleSubmit();
+                    }}
+                  >
+                    {" "}
+                    Submit
+                  </button>
+                </div>
+              )}
+            </button>
           </div>
           <div>
             <p>{formatDate(detail?.updated_at)}</p>
@@ -123,8 +133,11 @@ export default function ClientDetail({ detail }) {
 
 const Root = styled.section`
   display: flex;
+  flex-wrap: wrap;
+
   .app_table {
     display: flex;
+    flex-wrap: wrap;
     flex: 1;
     border-radius: 5px;
     margin-top: 5px;
@@ -132,16 +145,15 @@ const Root = styled.section`
     font-family: "Roboto", "sana-serif";
     .app_header {
       display: flex;
-      height: 500px;
+      height: 450px;
       flex-direction: column;
-      width: 30%;
       text-align: center;
       color: black;
       > div {
         flex: 1;
-        padding: 15px;
+        padding: 10px;
         border: 1px solid #dee2e6;
-        font-size: 17px;
+        font-size: 14px;
         align-items: center;
         display: flex;
       }
@@ -150,7 +162,6 @@ const Root = styled.section`
       display: flex;
       flex-direction: column;
       font-family: "Roboto", sans-serif;
-      width: 30%;
 
       > div {
         flex: 1;
@@ -159,13 +170,23 @@ const Root = styled.section`
         text-transform: capitalize;
         align-items: center;
         justify-content: space-around;
-        padding: 15px;
+        padding: 10px;
         p {
           font-weight: 600;
           font-size: 13px;
           @media (max-width: 789px) {
             font-size: 10px;
           }
+        }
+      }
+      button {
+        background-color: #fff;
+        border: none;
+        svg {
+          background-color: #fff;
+          color: black;
+          width: 20px;
+          height: 20px;
         }
       }
       .status {

@@ -140,7 +140,7 @@ const Root = styled.section`
     h2 {
       color: #202020;
       font-family: "Roboto", sans-serif;
-      font-size: 32px;
+      font-size: 22px;
       font-weight: 700;
       /* text-shadow: 4px 5px 5px gray; */
     }
@@ -168,7 +168,7 @@ const Root = styled.section`
     font-family: "Roboto", "sana-serif";
     .app_header {
       display: flex;
-      background-color: #0088ff;
+      background:#5d05abb8;
       text-align: center;
       color: white;
 

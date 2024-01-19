@@ -73,7 +73,7 @@ export default function ClientDashboard() {
           <CLientMainchart2 />
         </div>
       </div>
-      
+
       <div className="chart1">
         <div className="upcoming">
           <div className="div1">
@@ -134,7 +134,6 @@ export default function ClientDashboard() {
   );
 }
 
-
 const Root = styled.section`
   display: flex;
   flex-direction: column;
@@ -161,10 +160,12 @@ const Root = styled.section`
       display: flex;
       flex-direction: column;
       justify-content: space-around;
-      padding:7px;
+      padding: 7px;
       width: 38%;
       border-radius: 1px;
-      background-color: #f8f9fa!important;      box-shadow: 0 0px 2px 0px rgba(0,0,0,0.45) inset;      height: 56vh;
+      background-color: #f8f9fa !important;
+      box-shadow: 0 0px 2px 0px rgba(0, 0, 0, 0.45) inset;
+      height: 56vh;
       .curent {
         font-size: 1.125rem;
         font-weight: 600;
@@ -193,9 +194,9 @@ const Root = styled.section`
 
     .char {
       width: 50%;
-      margin-right  : 34px;
-      background-color: #f8f9fa!important;
-      box-shadow: 0 0px 2px 0px rgba(0,0,0,0.45) inset;     
+      margin-right: 34px;
+      background-color: #f8f9fa !important;
+      box-shadow: 0 0px 2px 0px rgba(0, 0, 0, 0.45) inset;
     }
   }
   .chart1 {
@@ -206,11 +207,13 @@ const Root = styled.section`
     .upcoming {
       display: flex;
       flex-direction: column;
-      width: 49%;
+      width: 45%;
       margin-top: 35px;
       padding: 9px;
-      background-color: #f8f9fa!important;
-      box-shadow: 0 0px 2px 0px rgba(0,0,0,0.45) inset;      .div1 {
+      border-radius: 5px;
+      background-color: #f8f9fa !important;
+      box-shadow: 1px 1px 5px 1px lightgray  ;
+      .div1 {
         display: flex;
         justify-content: space-between;
         .none {
@@ -226,10 +229,9 @@ const Root = styled.section`
         }
         .datapicker {
           display: flex;
-
           .p1 {
-            border: 2px solid #0088ff;
-            border-radius: 8px;
+            border: 2px solid #4b2079;
+            border-radius: 20px;
             text-align: center;
             color: white;
             cursor: pointer;
@@ -240,7 +242,7 @@ const Root = styled.section`
             margin-top: 18px;
             padding: 12px;
             margin-right: 15px;
-            background: #0088ff;
+            background: #4b2079;
           }
         }
       }
@@ -252,7 +254,8 @@ const Root = styled.section`
       margin-top: 35px;
       padding: 11.5px;
       width: 36%;
-      background-color: #f8f9fa!important;      box-shadow: 0 0px 2px 0px rgba(0,0,0,0.45) inset;
+      border-radius: 5px;
+      box-shadow: 1px 1px 5px 1px lightgray  ;
       h1 {
         font-size: 1.125rem;
         font-weight: 600;
@@ -311,7 +314,6 @@ const Root = styled.section`
             margin-top: 12px;
             width: 100%;
             padding: 6px;
-            background: #e1cdcdb5;
             border-radius: 12px;
             margin-bottom: 7px;
 
@@ -465,111 +467,109 @@ const Root = styled.section`
     }
   }
   .upcoming1 {
-      display: flex;
-      flex-direction: column;
-      margin-top: 35px;
-      padding: 11.5px;
-      width: 36%;
-      background-color: #f8f9fa!important;  
-          box-shadow: 0 0px 2px 0px rgba(0,0,0,0.45) inset;
-      h1 {
-        font-size: 1.125rem;
-        font-weight: 600;
-        font-family: Roboto, sans-serif;
-        letter-spacing: 0;
-        color: rgba(61, 78, 101, 0.84);
-      }
-      .upcomming_child {
-        .child1 {
-          display: flex;
-          align-items: center;
-          text-align: center;
-          padding: 10px;
-          justify-content: space-between;
-          cursor: pointer;
-          p {
-            font-size: 25px;
-            display: flex;
-            margin: 0;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-          }
-        }
-      }
-      .upcomming_child1 {
+    display: flex;
+    flex-direction: column;
+    margin-top: 35px;
+    padding: 11.5px;
+    width: 36%;
+    background-color: #f8f9fa !important;
+    box-shadow: 0 0px 2px 0px rgba(0, 0, 0, 0.45) inset;
+    h1 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      font-family: Roboto, sans-serif;
+      letter-spacing: 0;
+      color: rgba(61, 78, 101, 0.84);
+    }
+    .upcomming_child {
+      .child1 {
         display: flex;
-        flex-direction: column;
-        margin-right: 14px;
-
-        .cams {
-          display: flex;
-          flex-direction: row;
-        }
-        h1 {
+        align-items: center;
+        text-align: center;
+        padding: 10px;
+        justify-content: space-between;
+        cursor: pointer;
+        p {
+          font-size: 25px;
           display: flex;
           margin: 0;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
         }
-        > div {
+      }
+    }
+    .upcomming_child1 {
+      display: flex;
+      flex-direction: column;
+      margin-right: 14px;
+
+      .cams {
+        display: flex;
+        flex-direction: row;
+      }
+      h1 {
+        display: flex;
+        margin: 0;
+      }
+      > div {
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+
+        .child11 {
           display: flex;
-          flex-direction: column;
-          align-items: left;
+          width: 90%;
+          align-items: center;
+          justify-content: right;
+          margin-right: 12px;
+          align-items: center;
+          cursor: pointer;
+        }
+        .data {
+          display: flex;
+          margin-top: 12px;
+          width: 100%;
+          padding: 6px;
+          border-bottom: 1px solid lightgray;
+          margin-bottom: 7px;
 
-          .child11 {
+          > div {
+            font-size: 1.125rem;
+            font-weight: 600;
+            font-family: Roboto, sans-serif;
+            margin: 0;
+            width: 60%;
             display: flex;
-            width: 90%;
-            align-items: center;
-            justify-content: right;
+            gap: 10px;
+            color: rgba(61, 78, 101, 0.84);
             margin-right: 12px;
-            align-items: center;
-            cursor: pointer;
-          }
-          .data {
-            display: flex;
-            margin-top: 12px;
-            width: 100%;
-            padding: 6px;
-            background: #e1cdcdb5;
-            border-radius: 12px;
-            margin-bottom: 7px;
-
-            > div {
-              font-size: 1.125rem;
-              font-weight: 600;
-              font-family: Roboto, sans-serif;
+            h5 {
               margin: 0;
-              width: 60%;
-              display: flex;
-              gap: 10px;
-              color: rgba(61, 78, 101, 0.84);
-              margin-right: 12px;
-              h5 {
-                margin: 0;
-                margin-top: 5px;
-                font-size: 18px;
-                font-family: Arial, Helvetica, sans-serif;
-              }
+              margin-top: 5px;
+              font-size: 18px;
+              font-family: Arial, Helvetica, sans-serif;
+            }
 
-              img {
-                width: 46px;
-                display: flex;
-                height: 46px;
-                justify-content: center;
-                text-align: center;
-                align-items: center;
-              }
-              p {
-                font-size: 17px;
-                font-weight: 400;
-                margin: -1px;
-                font-family: Arial, Helvetica, sans-serif;
-                padding: 0px;
-                margin-top: 3px;
-              }
+            img {
+              width: 46px;
+              display: flex;
+              height: 46px;
+              justify-content: center;
+              text-align: center;
+              align-items: center;
+            }
+            p {
+              font-size: 17px;
+              font-weight: 400;
+              margin: -1px;
+              font-family: Arial, Helvetica, sans-serif;
+              padding: 0px;
+              margin-top: 3px;
             }
           }
         }
       }
     }
+  }
 `;
-

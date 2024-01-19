@@ -81,9 +81,8 @@ export default function ClientHistory({ popUser = () => {} }) {
             </option>
           ))}
         </select>
-        <button className="h1down">
-          <Download />{" "}
-        </button>
+       
+     
       </div>
 
       <div className="app_table">
@@ -154,6 +153,35 @@ const Root = styled.section`
     align-items: center;
     justify-content: space-between;
     margin: 10px 10px;
+    h2 {
+      color: #202020;
+      font-family: "Roboto", sans-serif;
+      font-weight: 700;
+      margin: 0px 10px;
+    }
+    select {
+      background-color: white;
+      color: gray;
+      text-decoration: none;
+      border: 1px solid #623084;
+      line-height: 1.5em;
+      width: 250px;
+      padding: 5px;
+      margin: 10px 0px;
+      border-radius: 10px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: linear-gradient(45deg, transparent 50%, #1e0945 50%),
+        linear-gradient(135deg, #1e0945 50%, transparent 50%),
+        linear-gradient(to right, #63276f, #f064e7, #a74fad);
+      background-position: calc(100% - 20px) calc(1em + 2px),
+        calc(100% - 15px) calc(1em + 2px), 100% 0;
+      background-size: 5px 5px, 5px 5px, 40px 45px;
+      background-repeat: no-repeat;
+    }
     @media (max-width: 566px) {
       padding: 10px;
       flex-direction: column;
@@ -166,44 +194,48 @@ const Root = styled.section`
         margin: 0;
       }
     }
-    h2 {
-      color: #202020;
-      font-family: "Roboto", sans-serif;
-      font-weight: 700;
-      margin: 0px 10px;
-    }
-    button {
-      color: white;
-      background-color: #0088ff;
-      font-size: 16px;
-      padding: 5px 7px;
-      border: none;
-      text-align: center;
-      border-radius: 15px;
-      cursor: pointer;
-    }
-  }
-  .h11 {
-    text-align: right;
-    margin-right: 10px;
-  }
 
+ 
+
+   button {
+     padding: 5px;
+     border-radius: 20px;
+     font-size: 13px;
+     border: none;
+     color: #ffffff;
+     background-image: linear-gradient(to right, #3a1864, #623084, #461c6c);
+     transition: all 0.3s ease-in-out 0s;
+     text-transform: uppercase;
+     &:hover {
+      cursor: pointer;
+       transition: all 0.2s ease-in-out 0s;
+       background: linear-gradient(
+         -25deg,
+         #3a1864 20%,
+         #461c6c 49%,
+         #471f75 100%
+       );
+     }
+   }
+ }
+ 
+  
   .app_table {
     display: flex;
     flex-direction: column;
-    width: 98%;
+    width: 88%;
     margin: 10px;
     font-family: "Roboto", "sana-serif";
     .app_header {
       display: flex;
-      background-color: #0088ff;
+      background:#5d05abb8;
       text-align: center;
       color: white;
-
+      border-bottom: 4px solid #4b217b;
       > div {
         flex: 1;
         border: 1px solid #dee2e6;
-        padding: 15px;
+        padding: 10px;
       }
     }
     .app_body {
@@ -221,7 +253,7 @@ const Root = styled.section`
         align-items: center;
         justify-content: center;
         svg {
-          color: #0088ff;
+          color: #63276f;
           width: 20px;
           height: 20px;
 
@@ -236,7 +268,7 @@ const Root = styled.section`
         text-transform: capitalize;
         background-color: #e7e7e8;
         text-align: center;
-        padding: 15px 5px;
+        padding: 10px 5px;
         .person {
           color: #8995ad;
           font-size: 14px;
@@ -258,7 +290,7 @@ const Root = styled.section`
         }
 
         &:nth-child(odd) {
-          background-color: #0088ff2b;
+          background-color: #a061ef26;
         }
 
         &:nth-child(even) {

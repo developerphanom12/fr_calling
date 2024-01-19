@@ -7,6 +7,10 @@ import { EXACHANGE_URLS_TELLE } from "../../../URLS";
 import TelleDetail from "./TelleDetail";
 import ClientDetail from "./ClientDetail";
 import CaDetail from "./CaDetail";
+import BankDetail from "./addLoan/BankDetail";
+import ProfitDetail from "./addLoan/ProfitDetail";
+import PostProfit from "./addLoan/PostProfit";
+import PostBank from "./addLoan/PostBank";
 
 export default function DetailView() {
   const [active, setActive] = useState("");
@@ -67,6 +71,40 @@ export default function DetailView() {
         >
           CA Detail
         </button>
+        <button
+          className={active === "profitdetail" ? "btn_1 active" : "btn_1"}
+          onClick={() => {
+            setActive("profitdetail");
+          }}
+        >
+          Profit Detail
+        </button>
+        <button
+          className={active === "bankdetail" ? "btn_1 active" : "btn_1"}
+          onClick={() => {
+            setActive("bankdetail");
+          }}
+        >
+          Bank Detail
+        </button>
+      </div>
+      <div className="post_detail">
+        <button
+          className={active === "postprofit" ? "btn_1 active" : "btn_1"}
+          onClick={() => {
+            setActive("postprofit");
+          }}
+        >
+          Add Profit Detail
+        </button>
+        <button
+          className={active === "postbank" ? "btn_1 active" : "btn_1"}
+          onClick={() => {
+            setActive("postbank");
+          }}
+        >
+          Add Bank Detail
+        </button>
       </div>
 
       <div>
@@ -76,6 +114,14 @@ export default function DetailView() {
           <ClientDetail detail={user} />
         ) : active === "cadetail" ? (
           <CaDetail detail={user} />
+        ) : active === "profitdetail" ? (
+          <ProfitDetail detail={user} />
+        ) : active === "bankdetail" ? (
+          <BankDetail detail={user} />
+        ) : active === "postprofit" ? (
+          <PostProfit />
+        ) : active === "postbank" ? (
+          <PostBank />
         ) : (
           <TelleDetail detail={user} />
         )}
@@ -86,6 +132,20 @@ export default function DetailView() {
 const Root = styled.section`
   h2 {
     margin: 10px;
+  }
+  .post_detail {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 10px;
+    gap: 10px;
+    button {
+      border: none;
+      border-radius: 20px;
+      padding: 7px;
+      background: #461c6c;
+      color: #fff;
+    }
   }
   .nav_tab {
     display: flex;
@@ -109,6 +169,7 @@ const Root = styled.section`
       font-weight: 600;
       border-radius: 5px;
       background-color: #fff;
+      cursor: pointer;
       &:hover {
         box-shadow: 1px 1px 5px 1px #a1a2a5;
       }

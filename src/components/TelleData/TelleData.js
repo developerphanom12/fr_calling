@@ -75,7 +75,6 @@ const Root = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #e9a6a62b;
   justify-content: center;
   padding-bottom: 20px;
   .nav_tab {
@@ -94,7 +93,7 @@ const Root = styled.section`
       border: none;
       width: fit-content;
       padding: 7px;
-      color: dodgerblue;
+      color: #3a1864;
       font-weight: 600;
       font-size: 14px;
 
