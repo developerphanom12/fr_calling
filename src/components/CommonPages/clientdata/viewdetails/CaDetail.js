@@ -56,6 +56,7 @@ export default function CaDetail({ detail }) {
         },
       };
       const caId = detail?.cadetails?.ca_id;
+      console.log("datatatatatta",caId)
       const res = await axios.put(
         `${EXACHANGE_URLS_TELLE}/updateadetail/${caId}`,
         update,

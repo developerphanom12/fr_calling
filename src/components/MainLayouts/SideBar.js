@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userCheckAction } from "../../redux/users/action";
 import { IoMdCall } from "react-icons/io";
 import { FaShareAlt } from "react-icons/fa";
+import { TbReportMedical } from "react-icons/tb";
 
 export default function SideBar() {
   const navigate = useNavigate();
@@ -124,6 +125,16 @@ export default function SideBar() {
               >
                 {<MdWorkHistory />}
                 <p>Refrence Data</p>
+              </div>
+
+              <div
+                className={activeParam === "dailyreport" ? "active" : ""}
+                onClick={() => {
+                  navigate("/dailyreport");
+                }}
+              >
+                <TbReportMedical />
+                <p>Daily Report</p>
               </div>
             </>
           ) : (

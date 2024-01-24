@@ -3,12 +3,17 @@ import cogoToast from "cogo-toast";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { EXACHANGE_URLS_TELLE } from "../../../../URLS";
+import { useSelector } from "react-redux";
 
 export default function PostProfit() {
   const [profit, setProfit] = useState({
     data_id: "",
     profit_details: "",
   });
+console.log("datat11",profit)
+
+const getDetails = useSelector((state) => state?.users?.appDetails);
+console.log("datat111",getDetails)
 
   const postProfitApi = async () => {
     try {
@@ -18,11 +23,11 @@ export default function PostProfit() {
         },
       };
       const res = await axios.post(
-        `${EXACHANGE_URLS_TELLE}/addprofitdata'`,
+        `${EXACHANGE_URLS_TELLE}/addprofitdata`,
         profit,
         axiosConfig
       );
-      console.log("resres", res?.data?.data);
+      console.log("resres", res?.data);
       if (res?.status === 201) {
         cogoToast.success("Added Successfully");
       }
@@ -41,7 +46,8 @@ export default function PostProfit() {
       <div>
         <input placeholder="Profit Details" value={profit?.profit_details}
        onChange={(e) => {
-        setProfit({ ...profit, profit_details: e.target.value });
+        setProfit({ ...profit, profit_details: e.target.value ,
+          data_id: getDetails.cd,});
       }}
         />
       </div>

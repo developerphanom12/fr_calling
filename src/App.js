@@ -20,6 +20,7 @@ import UpcomingGet from "./components/CommonPages/admin/chart/UpcomingGet";
 import RefrenceData from "./components/CommonPages/clientdata/RefrenceData";
 import ClientDashboard from "./components/CommonPages/clientdashboard/ClientDashboard";
 import ShareData from "./components/CommonPages/admin/sharedata/ShareData";
+import { DailyReport } from "./components/CommonPages/dailyreport/DailyReport";
 
 function App() {
   const userCheck = useSelector((state) => state?.users?.userCheck);
@@ -40,6 +41,8 @@ function App() {
                 <Route path="/detailviewss" element={<DetailView />} />
                 <Route path="/refrencedata" element={<RefrenceData />} />
                 <Route path="/upcomingdata/:id" element={<UpcomingGet />} />
+                <Route path="/dailyreport" element={<DailyReport />} />
+
               </>
             ) : userDetails?.role === "admin" ? (
               <>

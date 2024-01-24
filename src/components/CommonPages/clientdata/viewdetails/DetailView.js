@@ -11,8 +11,10 @@ import BankDetail from "./addLoan/BankDetail";
 import ProfitDetail from "./addLoan/ProfitDetail";
 import PostProfit from "./addLoan/PostProfit";
 import PostBank from "./addLoan/PostBank";
+import { useSelector } from "react-redux";
 
 export default function DetailView() {
+  const userDetails = useSelector((state) => state?.users.user);
   const [active, setActive] = useState("");
   const [user, setUser] = useState();
 
@@ -46,6 +48,9 @@ export default function DetailView() {
   console.log("userr", user);
   return (
     <Root>
+
+{userDetails.role === "admin" ? (
+     <>
       <div className="nav_tab">
         <button
           className={active === "telledetail" ? "btn_1 active" : "btn_1"}
@@ -106,8 +111,39 @@ export default function DetailView() {
           Add Bank Detail
         </button>
       </div>
+      </>
+): (
+  <div className="nav_tab">
+  <button
+    className={active === "telledetail" ? "btn_1 active" : "btn_1"}
+    onClick={() => {
+      setActive("telledetail");
+    }}
+  >
+    Tellecaller Detail
+  </button>
+  <button
+    className={active === "clientdetail" ? "btn_1 active" : "btn_1"}
+    onClick={() => {
+      setActive("clientdetail");
+    }}
+  >
+    Client Detail
+  </button>
+  <button
+    className={active === "cadetail" ? "btn_1 active" : "btn_1"}
+    onClick={() => {
+      setActive("cadetail");
+    }}
+  >
+    CA Detail
+  </button>
+  </div>
+)},
 
       <div>
+        
+  
         {active === "telledetail" ? (
           <TelleDetail detail={user} />
         ) : active === "clientdetail" ? (

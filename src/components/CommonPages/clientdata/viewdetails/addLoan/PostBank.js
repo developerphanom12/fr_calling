@@ -3,9 +3,11 @@ import cogoToast from "cogo-toast";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { EXACHANGE_URLS_TELLE } from "../../../../URLS";
+import { useSelector } from "react-redux";
 
 export default function PostBank({ detail}) {
   const [loan, setLoan] = useState({
+    data_id: "",
     loan_date: "",
     bankname: "",
     loan_amount: "",
@@ -17,6 +19,7 @@ export default function PostBank({ detail}) {
     gst_amount: "",
     bank_amount: "",
   });
+  const getDetails = useSelector((state) => state?.users?.appDetails);
 
   const postBankApi = async () => {
     try {
@@ -138,10 +141,12 @@ export default function PostBank({ detail}) {
           type="text"
           value={loan?.bank_amount}
           onChange={(e) => {
-            setLoan({ ...loan, bank_amount: e.target.value });
+            setLoan({ ...loan, bank_amount: e.target.value,
+              data_id:getDetails.cd  });
           }}
         />
       </div>
+    
       <div>
         <button onClick={handleSubmit}>Submit</button>
       </div>
