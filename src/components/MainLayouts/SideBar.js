@@ -11,6 +11,7 @@ import { userCheckAction } from "../../redux/users/action";
 import { IoMdCall } from "react-icons/io";
 import { FaShareAlt } from "react-icons/fa";
 import { TbReportMedical } from "react-icons/tb";
+import { ImDatabase } from "react-icons/im";
 
 export default function SideBar() {
   const navigate = useNavigate();
@@ -82,6 +83,15 @@ export default function SideBar() {
               >
                 <FaShareAlt />
                 <p>Share Data</p>
+              </div>
+              <div
+                className={activeParam === "mastersheet" ? "active" : ""}
+                onClick={() => {
+                  navigate("/mastersheet");
+                }}
+              >
+                <ImDatabase />
+                <p>MasterSheet</p>
               </div>
             </>
           ) : (

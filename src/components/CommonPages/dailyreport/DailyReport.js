@@ -1,7 +1,74 @@
-import React from "react";
-import styled from "styled-components";
 
-export const DailyReport = ({ detail }) => {
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { EXACHANGE_URLS_TELLE } from "../../URLS";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { appDetailsAction } from "../../../redux/users/action";
+
+
+
+
+const formatDate = (isoDate) => {
+  const date = new Date(isoDate);
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`;
+};
+
+
+export const DailyReport = ({ popUser = () => {} }) => {
+  const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const dispatch = useDispatch();
+
+  const getdata = async () => {
+    const axiosConfig = {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+  
+    try {
+      const res = await axios.get(
+        `${EXACHANGE_URLS_TELLE}/getMaster?page=${currentPage}`,
+        axiosConfig
+      );
+  
+      console.log("data", res);
+  
+      if (res.status === 200) {
+        const responseData = res?.data?.data?.data;
+  
+        if (Array.isArray(responseData)) {
+          setData(responseData);
+        } else if (responseData) {
+          setData([responseData]);
+        }
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  
+  useEffect(() => {
+    getdata();
+  }, [currentPage]);
+
+  const handlePassData = (i) => {
+    console.log("getDetails1", i);
+    dispatch(appDetailsAction(i));
+    popUser(true);
+  };
+  const handleNext = () => {
+    const isConfirmed = window.confirm("Are you sure you want to submit this data and show the next data?");
+    
+    if (isConfirmed) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
   return (
     <Root>
       <div className="app_table">
@@ -16,31 +83,51 @@ export const DailyReport = ({ detail }) => {
           <div>Date</div>
         </div>
         <div className="app_body">
-          <div className="btnus">
-            <p>dhfbvhsd</p>
-          </div>
-          <div>
-            <p>dhfbvhsd</p>
-          </div>
-          <div className="btnus">
-            <p>dhfbvhsd</p>
-          </div>
-          <div>
-            <p>dhfbvhsd</p>
-          </div>
-          <div className="btnus">
-            <p>dhfbvhsd</p>
-          </div>
+          {Array.isArray(data) && data.length > 0 ? (
+            data.map((i) => (
+              <div
+                key={i.id}
+                className="app_body"
+                onClick={() => {
+                  handlePassData(i);
+                }}
+              >
+                <div className="cams">{i?.client_name}</div>
+                <div>
+                  <p>
+                    <span>{i?.company_name}</span>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <span>{formatDate(i?.call_schedule_date)}</span>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <span>Hot Client</span>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <span>{formatDate(i?.update_date)}</span>
+                  </p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="no-data-message">No data available at this time.</div>
+          )}
         </div>
-
         <div className="btn1">
-          <button className="nt2">Next</button>
+          <button className="nt2" onClick={handleNext}>
+            Next
+          </button>
         </div>
       </div>
     </Root>
   );
 };
-
 const Root = styled.section`
   display: flex;
   max-width: 100vw;
@@ -76,6 +163,7 @@ const Root = styled.section`
     display: flex;
     background-color: #5d05abb8;
     border: 1px solid #dee2e6;
+    
     > div {
       font-weight: 500;
       display: flex;
@@ -90,7 +178,6 @@ const Root = styled.section`
       font-size: 12px;
     }
   }
-
   .app_body {
     display: flex;
     /* gap: 54px; */
@@ -98,11 +185,12 @@ const Root = styled.section`
     height: 6vh;
     > div {
       border: 1px solid #dee2e6;
-      width: 15vw;
+      width: 40vw;
       justify-content: center;
       text-align: center;
       align-items: center;
       display: flex;
+      height: 5vh
     }
     .btnus {
       color: black;
@@ -111,6 +199,13 @@ const Root = styled.section`
       justify-content: center;
       text-align: center;
       align-items: center;
+    }
+    .no-data-message{
+      color: red;
+    font-family: -webkit-body;
+    margin-top: 13px;
+    font-size: 21px;
+    font-weight: 900;
     }
   }
   .btn1 {
@@ -133,3 +228,4 @@ const Root = styled.section`
     }
   }
 `;
+

@@ -1,21 +1,30 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { EXCHANGE_URLS_ADMIN } from "../../URLS";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { appDetailsAction } from "../../../redux/users/action";
 import cogoToast from "cogo-toast";
+import { appDetailsAction } from "../../../../redux/users/action";
+import { EXCHANGE_URLS_ADMIN } from "../../../URLS";
 
-export default function ListAllTellecaller({ popUser = () => {} }) {
+
+
+
+const formatDate = (isoDate) => {
+  const date = new Date(isoDate);
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`;
+};
+
+
+export default function MasterSheet({ popUser = () => {} }) {
   const [applications, setApplications] = useState([]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [status, setStatus] = useState({
-    id: "",
-    is_deleted: "",
-  });
+  
 
   const getHistory = async () => {
     const axiosConfig = {
@@ -25,7 +34,7 @@ export default function ListAllTellecaller({ popUser = () => {} }) {
     };
     try {
       const res = await axios.get(
-        `${EXCHANGE_URLS_ADMIN}/getalltelle`,
+        `${EXCHANGE_URLS_ADMIN}/getmastersheetdata`,
         axiosConfig
       );
       if (res.status === 201) {
@@ -36,26 +45,6 @@ export default function ListAllTellecaller({ popUser = () => {} }) {
     }
   };
 
-  const statusApi = async () => {
-    const axiosConfig = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    };
-    try {
-      const response = await axios.post(
-        `${EXCHANGE_URLS_ADMIN}/deleteuser`,
-        status,
-        axiosConfig
-      );
-
-      if (response?.status === 201) {
-        navigate("/dashboard");
-      }
-    } catch (error) {
-      console.error("Error", error);
-    }
-  };
 
   useEffect(() => {
     getHistory();
@@ -77,45 +66,30 @@ export default function ListAllTellecaller({ popUser = () => {} }) {
     return uniqueArray;
   }, []);
 
-  const handleClick = (id, isApproved) => {
-    const currentUser = applications.find((caller) => caller.id === id);
-    if (currentUser) {
-      setStatus({
-        id,
-        is_deleted: isApproved ? 1 : 0,
-      });
-      if (status.is_deleted === 1) {
-        cogoToast.warning("Caller Blocked");
-      }
-      statusApi();
-    } else {
-      cogoToast.error("User not found");
-    }
-  };
-
+  
   return (
     <Root>
       <>
         <div className="header">
-          <h1>Tellecaller Data</h1>
+          <h1>MasterSheet Data</h1>
         </div>
         <div className="addtelle">
           <button
             className=""
             onClick={() => {
-              navigate("/telleRegister");
+              navigate("/adddata");
             }}
           >
-            Add Tellecaller
+            Add ExcelSheet Data
           </button>
         </div>
         <div className="app_table">
           <div className="app_header">
             <div> Id</div>
-            <div>Tellecaller Name</div>
-            <div>Email</div>
-            <div>Role</div>
-            <div>Action</div>
+            <div>Client Name</div>
+            <div>Company Name</div>
+            <div>Call Scheduled ate</div>
+            <div>Date</div>
           </div>
           {uniqueApplications &&
             uniqueApplications.map((i) => {
@@ -129,20 +103,14 @@ export default function ListAllTellecaller({ popUser = () => {} }) {
                   <div className="cams">#{i?.id}</div>
                   <div>
                     <p>
-                      <span>{i?.username}</span>
+                      <span>{i?.client_name}</span>
                     </p>
                   </div>
 
-                  <div className="email">{i?.email}</div>
-                  <div>{i?.role}</div>
-                  <div className="iconn">
-                    <button
-                      className="wrong"
-                      onClick={() => handleClick(i.id, 1)}
-                    >
-                      Block
-                    </button>
-                  </div>
+                  <div className="email">{i?.company_name}</div>
+                  <div>{formatDate(i?.call_schedule_date)}</div>
+                  <div>{formatDate(i?.update_date)}</div>
+
                 </div>
               );
             })}
@@ -194,6 +162,7 @@ const Root = styled.section`
       background-color: #0088ff;
       text-align: center;
       color: white;
+      height: 7vh;
 
       > div {
         flex: 1;
@@ -203,7 +172,7 @@ const Root = styled.section`
     }
     .app_body {
       display: flex;
-      flex: 1;
+      height: 8vh;
       font-family: "Roboto", sans-serif;
       .email {
         font-size: 10px;
@@ -223,8 +192,7 @@ const Root = styled.section`
           color: white;
           border: 2px solid white;
           border-radius: 10px;
-          background-color: #0088ff;
-          padding: 10px;
+          background: #2372d3;          padding: 10px;
           font-weight: 600;
         }
       }
@@ -305,7 +273,8 @@ const Root = styled.section`
       height: 40px;
       border-radius: 10px;
       border: none;
-      background: #2372d3;      color: #ffffff;
+      background: #2372d3;
+      color: #ffffff;
       &:hover {
         box-shadow: 5px 5px 7px gray;
       }

@@ -173,6 +173,10 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+
+      <div className="dailyreport">
+        <h1>data daily</h1>
+      </div>
     </Root>
   );
 }
