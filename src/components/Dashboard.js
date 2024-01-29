@@ -11,7 +11,9 @@ import { EXCHANGE_URLS_ADMIN } from "./URLS";
 import axios from "axios";
 import { BsFillEyeFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-
+import ApexChart3 from "./CommonPages/admin/chart/ApexChart3";
+import "./Dashboard.css";
+import data from "../components/images/my.jpg";
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
   const day = date.getDate().toString().padStart(2, "0");
@@ -88,6 +90,12 @@ export default function Dashboard() {
         <div className="char1">
           <Mainchart />
         </div>
+        <div className="char2">
+          <h1>fdjh</h1>
+          <div>
+            <ApexChart3 />
+          </div>
+        </div>
         <div className="char">
           <Mainchart2 />
         </div>
@@ -142,34 +150,38 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="upcomming_child1">
-            {UniqueIdea &&
-              UniqueIdea.map((i) => {
-                return (
-                  <div className="data">
-                    <div>
-                      <img width="40px" 
-                        src={
-                          "https://cdn.pixabay.com/photo/2016/03/31/20/37/client-1295901_1280.png"
-                        }
-                        alt="img"
-                      />
-                      <h5>
-                        {i.client_name}{" "}
-                        <p>{formatDate(i?.call_schedule_date)}</p>
-                      </h5>
-                    </div>
-
-                    <div
-                      className="child11"
-                      onClick={() => {
-                        navigate(`/upcomingdata/${i?.id}`);
-                      }}
-                    >
-                      <BsFillEyeFill />
-                    </div>
+            {UniqueIdea && UniqueIdea.length > 0 ? (
+              UniqueIdea.map((i) => (
+                <div className="data" key={i.id}>
+                  <div>
+                    <img
+                      width="40px"
+                      src={
+                        "https://cdn.pixabay.com/photo/2016/03/31/20/37/client-1295901_1280.png"
+                      }
+                      alt="img"
+                    />
+                    <h5>
+                      {i.client_name} <p>{formatDate(i?.call_schedule_date)}</p>
+                    </h5>
                   </div>
-                );
-              })}
+
+                  <div
+                    className="child11"
+                    onClick={() => {
+                      navigate(`/upcomingdata/${i?.id}`);
+                    }}
+                  >
+                    <BsFillEyeFill />
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div>
+                <img src={data} alt="img" />
+                <p className="data22">No Upcoming Appointment This week</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -180,7 +192,6 @@ export default function Dashboard() {
     </Root>
   );
 }
-
 
 const Root = styled.section`
   display: flex;
@@ -204,15 +215,16 @@ const Root = styled.section`
     display: flex;
     margin-top: 23px;
     justify-content: space-between;
+
     .char1 {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
-      padding: 10px;
-      width: 40%;
+      background-color: #efefef !important;
+
+      width: 28%;
       border-radius: 1px;
-      background-color: #f8f9fa !important;
-      height: 60vh;
+      height: 54vh;
       .curent {
         font-size: 1.125rem;
         font-weight: 600;
@@ -228,20 +240,20 @@ const Root = styled.section`
       }
       p {
         margin-top: 5px;
-        margin: 4px;
-        margin-right: 12px;
-        font-size: 19px;
-        text-align: center;
-        color: rgba(55, 77, 103, 0.54) !important;
+    margin-right: 12px;
+    font-size: 17px;
+      padding: 0px;
+    text-align: center;
+    color: rgba(55, 77, 103, 0.54)!important;
       }
     }
     .char1:hover {
     }
 
     .char {
-      width: 50%;
-      margin-right: 34px;
-      background-color: #f8f9fa !important;
+      width: 40%;
+      /* margin-right: 34px; */
+      background-color: #efefef !important;
     }
   }
   .chart1 {
@@ -249,14 +261,14 @@ const Root = styled.section`
     justify-content: space-around;
     margin-top: 23px;
 
-    .upcoming {  
+    .upcoming {
       display: flex;
       flex-direction: column;
       width: 49%;
       padding: 9px;
       background-color: #f8f9fa !important;
       box-shadow: 0 0px 2px 0px rgba(0, 0, 0, 0.45) inset;
-      .div1 {  
+      .div1 {
         display: flex;
         justify-content: space-between;
         .none {
@@ -323,8 +335,41 @@ const Root = styled.section`
       .upcomming_child1 {
         display: flex;
         flex-direction: column;
-        margin-right: 14px;
+        margin-top: 72px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        > div {
+          display: flex;
+          flex-direction: column;
+          img {
+            width: 31%;
+            height: 16vh;
+            margin-left: 120px;
+            border-radius: 33px;
+          }
+          .data22 {
+            margin-left: 41px;
+    animation-duration: 3s;
+    animation-name: slidein;
+    color: red;
+    margin: 0px;
+    font-size: 21px;
+    margin-top: 12px;
+          }
 
+          @keyframes slidein {
+            from {
+              margin-left: 100%;
+              width: 300%;
+            }
+
+            to {
+              margin-left: 0%;
+              width: 100%;
+            }
+          }
+        }
         .cams {
           display: flex;
           flex-direction: row;
@@ -347,50 +392,50 @@ const Root = styled.section`
             cursor: pointer;
           }
         }
-          .data {
+        .data {
+          display: flex;
+          margin-top: 12px;
+          width: 100%;
+          padding: 6px;
+          background: #e1cdcdb5;
+          border-radius: 12px;
+          margin-bottom: 7px;
+
+          > div {
             display: flex;
-            margin-top: 12px;
-            width: 100%;
-            padding: 6px;
-            background: #e1cdcdb5;
-            border-radius: 12px;
-            margin-bottom: 7px;
-
-            > div {
-              display: flex;
-              font-size: 1.125rem;
-              font-weight: 600;
-              font-family: Roboto, sans-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            font-family: Roboto, sans-serif;
+            margin: 0;
+            width: 49%;
+            gap: 10px;
+            color: rgba(61, 78, 101, 0.84);
+            margin-right: 12px;
+            h5 {
               margin: 0;
-              width: 49%;
-              gap: 10px;
-              color: rgba(61, 78, 101, 0.84);
-              margin-right: 12px;
-              h5 {
-                margin: 0;
-                margin-top: 5px;
-                font-size: 18px;
-                font-family: Arial, Helvetica, sans-serif;
-              }
+              margin-top: 5px;
+              font-size: 18px;
+              font-family: Arial, Helvetica, sans-serif;
+            }
 
-              img {
-                width: 46px;
-                display: flex;
-                height: 46px;
-                justify-content: center;
-                text-align: center;
-                align-items: center;
-              }
-              p {
-                font-size: 17px;
-                font-weight: 400;
-                margin: -1px;
-                font-family: Arial, Helvetica, sans-serif;
-                padding: 0px;
-                margin-top: 3px;
-              }
+            img {
+              width: 46px;
+              display: flex;
+              height: 46px;
+              justify-content: center;
+              text-align: center;
+              align-items: center;
+            }
+            p {
+              font-size: 17px;
+              font-weight: 400;
+              margin: -1px;
+              font-family: Arial, Helvetica, sans-serif;
+              padding: 0px;
+              margin-top: 3px;
             }
           }
+        }
       }
     }
   }
@@ -433,6 +478,16 @@ const Root = styled.section`
         color: #112b4a;
         line-height: 2.1875rem;
       }
+    }
+  }
+  .char2 {
+    display: flex;
+    border-radius: 1px solid;
+    background-color: #efefef !important;
+    > div {
+      width: 24vw;
+      height: 100%;
+      margin-top: 54px;
     }
   }
 `;

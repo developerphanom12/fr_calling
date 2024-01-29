@@ -81,8 +81,9 @@ const Root = styled.section`
       }
       p {
         margin: 0;
-        font-size: 16px;
-        color: rgba(55, 77, 103, 0.54) !important;
+    font-size: 17px;
+    width: 100%;
+    color: rgba(55, 77, 103, 0.54)!important;
       }
       select {
         font-family: ui-serif;
