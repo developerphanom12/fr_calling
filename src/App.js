@@ -23,6 +23,8 @@ import ShareData from "./components/CommonPages/admin/sharedata/ShareData";
 import { DailyReport } from "./components/CommonPages/dailyreport/DailyReport";
 import  MasterSheet  from "./components/CommonPages/admin/mastersheet/MasterSheet";
 import AddData from "./components/CommonPages/admin/mastersheet/AddData";
+import Mainchart3 from "./components/CommonPages/admin/chart/Mainchart3";
+import ApexChart3 from "./components/CommonPages/admin/chart/ApexChart3";
 
 function App() {
   const userCheck = useSelector((state) => state?.users?.userCheck);
@@ -50,13 +52,10 @@ function App() {
               <>
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/history" element={<ClientHistory />} />
-                <Route
-                  path="/telleRegister"
-                  element={<TellecallerRegister />}
-                />
-
-             <Route path="/adddata" element={<AddData />} />
-
+                <Route path="/telleRegister" element={<TellecallerRegister />} />
+                <Route path="/apexdonut" element={<Mainchart3 />} />
+                <Route path="/apexdonuts" element={<ApexChart3 />} />
+                <Route path="/adddata" element={<AddData />} />
                 <Route path="/listalltelle" element={<ListAllTellecaller />} />
                 <Route path="/coldlead" element={<ColdLead />} />
                 <Route path="/detailview/:cd" element={<DetailView />} />

@@ -1,47 +1,51 @@
 import React from 'react';
 import ReactApexChart from 'react-apexcharts';
-class ApexChart3 extends React.Component {
-    constructor(props) {
-      super(props);
 
-      this.state = {
+class ApexChart3 extends React.Component {
+  constructor(props) {
+    super(props);
+
+    const seriesData = [props?.data?.close_status, props?.data?.hot_lead, props?.data?.cold_lead];
+    console.log("hash",seriesData)
+    this.state = {
+      series: [seriesData],
+      options: {
+        chart: {
+          type:'donut',  
+        },
       
-        series: [44, 55, 41, 17, 15],
-        options: {
-          chart: {
-            type: 'donut',
-          },
-          labels :["hot","hot","hot","hot","hot"],
-          responsive: [{
+        labels: ["close status","hot lead","cold lead"],
+        responsive: [
+          {
             breakpoint: 480,
             options: {
               chart: {
-                width: 200
+                width: 350,
+                type: 'donut', 
+              },
+              dataLabels: {
+                enabled: false,
               },
               legend: {
-                position: 'bottom'
-              }
-            }
-          }]
-        },
-      
-      
-      };
-    }
-
-  
-
-    render() {
-      return (
-        <div>
-          <div id="chart">
-            <ReactApexChart options={this.state.options} series={this.state.series} type="donut" />
-          </div>
-          <div id="html-dist"></div>
-        </div>
-      );
-    }
+                position: "bottom",
+              },
+            },
+          },
+        ],
+      },
+    };
   }
-
+  render() {
+    return (
+      <div id="chart">
+        <ReactApexChart
+          options={this.state.options}
+          series={this.state.series}
+          type="donut"
+        />
+      </div>
+    );
+  }
+}
 
 export default ApexChart3;

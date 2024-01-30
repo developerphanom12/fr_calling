@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import ApexChart3 from "./CommonPages/admin/chart/ApexChart3";
 import "./Dashboard.css";
 import data from "../components/images/my.jpg";
+import Mainchart3 from "./CommonPages/admin/chart/Mainchart3";
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
   const day = date.getDate().toString().padStart(2, "0");
@@ -91,9 +92,10 @@ export default function Dashboard() {
           <Mainchart />
         </div>
         <div className="char2">
-          <h1>fdjh</h1>
+          <h1>Monthly</h1>
+
           <div>
-            <ApexChart3 />
+            <Mainchart3 />
           </div>
         </div>
         <div className="char">
@@ -200,6 +202,7 @@ const Root = styled.section`
   padding: 16px;
   flex-wrap: wrap;
   justify-content: space-between;
+  /* background: #e4e6ec; */
 
   p {
     font-size: 1.2rem;
@@ -240,18 +243,18 @@ const Root = styled.section`
       }
       p {
         margin-top: 5px;
-    margin-right: 12px;
-    font-size: 17px;
-      padding: 0px;
-    text-align: center;
-    color: rgba(55, 77, 103, 0.54)!important;
+        margin-right: 12px;
+        font-size: 17px;
+        padding: 0px;
+        text-align: center;
+        color: rgba(55, 77, 103, 0.54) !important;
       }
     }
     .char1:hover {
     }
 
     .char {
-      width: 40%;
+      width: 38%;
       /* margin-right: 34px; */
       background-color: #efefef !important;
     }
@@ -350,12 +353,12 @@ const Root = styled.section`
           }
           .data22 {
             margin-left: 41px;
-    animation-duration: 3s;
-    animation-name: slidein;
-    color: red;
-    margin: 0px;
-    font-size: 21px;
-    margin-top: 12px;
+            animation-duration: 3s;
+            animation-name: slidein;
+            color: red;
+            margin: 0px;
+            font-size: 21px;
+            margin-top: 12px;
           }
 
           @keyframes slidein {
@@ -482,12 +485,17 @@ const Root = styled.section`
   }
   .char2 {
     display: flex;
+    /* text-align: center; */
     border-radius: 1px solid;
     background-color: #efefef !important;
+    width: 30%;
     > div {
-      width: 24vw;
-      height: 100%;
-      margin-top: 54px;
+      margin-top: 64px;
+      margin-right: 48px;
+    }
+    h1 {
+      margin-top: 25px;
+      display: flex;
     }
   }
 `;
