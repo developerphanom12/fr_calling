@@ -5,7 +5,7 @@ import styled from "styled-components";
 import ApexChart3 from "./ApexChart3";
 
 const Mainchart3 = () => {
-  const [salesData, setSalesData] = useState();
+  const [salesData, setSalesData] = useState({});
 console.log("dead",salesData)
   const getdata = async () => {
     const axiosConfig = {

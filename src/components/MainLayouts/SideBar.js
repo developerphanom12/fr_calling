@@ -12,6 +12,7 @@ import { IoMdCall } from "react-icons/io";
 import { FaShareAlt } from "react-icons/fa";
 import { TbReportMedical } from "react-icons/tb";
 import { ImDatabase } from "react-icons/im";
+import { TbFileReport } from "react-icons/tb";
 
 export default function SideBar() {
   const navigate = useNavigate();
@@ -93,6 +94,16 @@ export default function SideBar() {
                 <ImDatabase />
                 <p>MasterSheet</p>
               </div>
+
+              <div
+                className={activeParam === "negativelead" ? "active" : ""}
+                onClick={() => {
+                  navigate("/negativelead");
+                }}
+              >
+                <TbFileReport />
+                <p>Negative Lead</p>
+              </div>
             </>
           ) : (
             ""
@@ -145,6 +156,16 @@ export default function SideBar() {
               >
                 <TbReportMedical />
                 <p>Daily Report</p>
+              </div>
+
+              <div
+                className={activeParam === "telenegativelead" ? "active" : ""}
+                onClick={() => {
+                  navigate("/telenegativelead");
+                }}
+              >
+                <TbFileReport />
+                <p>Negative Lead</p>
               </div>
             </>
           ) : (

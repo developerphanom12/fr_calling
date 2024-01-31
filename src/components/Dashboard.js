@@ -15,6 +15,10 @@ import ApexChart3 from "./CommonPages/admin/chart/ApexChart3";
 import "./Dashboard.css";
 import data from "../components/images/my.jpg";
 import Mainchart3 from "./CommonPages/admin/chart/Mainchart3";
+// import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
   const day = date.getDate().toString().padStart(2, "0");
@@ -92,16 +96,14 @@ export default function Dashboard() {
           <Mainchart />
         </div>
         <div className="char2">
-          <h1>Monthly</h1>
-
-          <div>
             <Mainchart3 />
-          </div>
         </div>
         <div className="char">
           <Mainchart2 />
         </div>
       </div>
+
+   
       <p> Current Month</p>
       <div className="hotlead">
         <div className="cold">
@@ -192,6 +194,7 @@ export default function Dashboard() {
         <h1>data daily</h1>
       </div>
     </Root>
+    
   );
 }
 
@@ -223,7 +226,7 @@ const Root = styled.section`
       display: flex;
       flex-direction: column;
       justify-content: space-around;
-      background-color: #efefef !important;
+      /* background-color: #efefef !important; */
 
       width: 28%;
       border-radius: 1px;
@@ -256,7 +259,7 @@ const Root = styled.section`
     .char {
       width: 38%;
       /* margin-right: 34px; */
-      background-color: #efefef !important;
+      /* background-color: #efefef !important; */
     }
   }
   .chart1 {
@@ -487,7 +490,7 @@ const Root = styled.section`
     display: flex;
     /* text-align: center; */
     border-radius: 1px solid;
-    background-color: #efefef !important;
+    /* background-color: #efefef !important; */
     width: 30%;
     > div {
       margin-top: 64px;

@@ -25,6 +25,9 @@ import  MasterSheet  from "./components/CommonPages/admin/mastersheet/MasterShee
 import AddData from "./components/CommonPages/admin/mastersheet/AddData";
 import Mainchart3 from "./components/CommonPages/admin/chart/Mainchart3";
 import ApexChart3 from "./components/CommonPages/admin/chart/ApexChart3";
+import NegativeLead from "./components/CommonPages/admin/sharedata/NegativeLead";
+import TellecallerNegativeLead from "./components/CommonPages/admin/sharedata/TellecallerNegativeLead";
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const userCheck = useSelector((state) => state?.users?.userCheck);
@@ -46,6 +49,7 @@ function App() {
                 <Route path="/refrencedata" element={<RefrenceData />} />
                 <Route path="/upcomingdata/:id" element={<UpcomingGet />} />
                 <Route path="/dailyreport" element={<DailyReport />} />
+                <Route path="/telenegativelead" element={<TellecallerNegativeLead />} />
 
               </>
             ) : userDetails?.role === "admin" ? (
@@ -66,6 +70,8 @@ function App() {
                 <Route path="/apex22" element={<ApexChart2 />} />
                 <Route path="/sharedata" element={<ShareData />} />
                 <Route path="/mastersheet" element={<MasterSheet />} />
+                <Route path="/negativelead" element={<NegativeLead />} />
+
 
               </>
             ) : (
