@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactApexChart from 'react-apexcharts';
+import styled from 'styled-components';
 
 class ApexChart3 extends React.Component {
   constructor(props) {
@@ -37,15 +38,28 @@ class ApexChart3 extends React.Component {
   }
   render() {
     return (
-      <div id="chart">
+      <Root>
+
+
+      <div className="chaasasart">
         <ReactApexChart
           options={this.state.options}
           series={this.state.series}
           type="donut"
         />
       </div>
+      </Root>
     );
   }
 }
 
 export default ApexChart3;
+
+
+const Root = styled.section`
+
+
+.chaasasart{
+  margin-top: 39px;
+}
+`;

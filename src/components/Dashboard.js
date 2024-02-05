@@ -15,9 +15,8 @@ import ApexChart3 from "./CommonPages/admin/chart/ApexChart3";
 import "./Dashboard.css";
 import data from "../components/images/my.jpg";
 import Mainchart3 from "./CommonPages/admin/chart/Mainchart3";
+import TelleReport from "./CommonPages/admin/chart/TelleReport";
 // import 'bootstrap/dist/css/bootstrap.min.css';
-
-
 
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
@@ -96,17 +95,52 @@ export default function Dashboard() {
           <Mainchart />
         </div>
         <div className="char2">
-            <Mainchart3 />
+          <Mainchart3 />
         </div>
         <div className="char">
           <Mainchart2 />
         </div>
       </div>
+      <div className="telledata">
+        <div></div>
 
-   
+        <div className="data12">
+          <div className="data">
+            <div className="activity">
+              <div className="cold">
+                <h1>Close Client</h1>
+                <p>4.1K</p>
+              </div>
+              <div className="cold">
+                <h1>Hot Client</h1>
+                <p>5.0K</p>{" "}
+              </div>
+              <div className="cold">
+                <h1>Negative Client</h1>
+                <p>3.2K</p>{" "}
+              </div>
+              <div className="cold">
+                <h1>Ghost Client</h1>
+                <p>2.2K</p>{" "}
+              </div>
+            </div>
+
+            <TelleReport />
+          </div>
+          <div className="datass">
+            <p>Daily Report</p>
+
+            <div className="datafetch">
+           
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
       <p> Current Month</p>
       <div className="hotlead">
-        <div className="cold">
+        <div className="cold ">
           <h1>Close Client</h1>
           <p>
             <span>{applications?.close_status}</span>
@@ -194,18 +228,14 @@ export default function Dashboard() {
         <h1>data daily</h1>
       </div>
     </Root>
-    
   );
 }
 
 const Root = styled.section`
   display: flex;
   flex-direction: column;
-  margin-top: 12px;
+  /* margin-top: 12px; */
   padding: 16px;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  /* background: #e4e6ec; */
 
   p {
     font-size: 1.2rem;
@@ -487,10 +517,7 @@ const Root = styled.section`
     }
   }
   .char2 {
-    display: flex;
-    /* text-align: center; */
     border-radius: 1px solid;
-    /* background-color: #efefef !important; */
     width: 30%;
     > div {
       margin-top: 64px;
@@ -499,6 +526,53 @@ const Root = styled.section`
     h1 {
       margin-top: 25px;
       display: flex;
+    }
+  }
+
+  .telledata {
+    width: 100%;
+margin-top: 25px;
+    .data12 {
+      display: flex;
+      justify-content: space-around;
+      .datass {
+        width: 30vw;
+        justify-content: center;
+        display: flex;
+        margin: 0px;
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; 
+        p{
+        margin: 0px;
+        font-size: 20px;
+        margin-top: 12px;
+        }
+      }
+
+      .data {
+        width: 50vw;
+        border: 1px solid #dbcccc;
+        margin-right: 10px;
+        border-radius: 11px;
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;        .activity {
+          display: flex;
+          gap: 0px;
+          p {
+            margin: 8px;
+          }
+          h1 {
+            color: #888484;
+          }
+          .cold {
+            width: 10vw;
+            /* background-color: red; */
+            margin: 10px;
+            /* padding: 0px; */
+          }
+        }
+      }
+      .datassqaaqs {
+        width: 30vw;
+      }
     }
   }
 `;
