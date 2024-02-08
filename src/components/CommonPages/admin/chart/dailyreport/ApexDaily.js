@@ -2,7 +2,7 @@ import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 import styled from 'styled-components';
 
-class ApexChart3 extends React.Component {
+class ApexDaily extends React.Component {
   constructor(props) {
     super(props);
 
@@ -10,30 +10,30 @@ class ApexChart3 extends React.Component {
     console.log("hash",seriesData)
     this.state = {
       series: [11,11,11,11],
+     options: {
+  chart: {
+    type: 'donut',
+  },
+  labels: ["Close Status", "Hot Lead", "Cold Lead", "Negative Lead"],
+  responsive: [
+    {
+      breakpoint: 480,
       options: {
         chart: {
-          type:'donut',  
+          width: 350,
+          type: 'donut',
         },
-      
-        labels: ["Close Status","Hot Lead","Cold Lead","Negative Lead"],
-        responsive: [
-          {
-            breakpoint: 480,
-            options: {
-              chart: {
-                width: 350,
-                type: 'donut', 
-              },
-              dataLabels: {
-                enabled: false,
-              },
-              legend: {
-                position: "bottom",
-              },
-            },
-          },
-        ],
+        dataLabels: {
+          enabled: false,
+        },
+        legend: {
+          position: "bottom", // Change position to "bottom"
+        },
       },
+    },
+  ],
+},
+
     };
   }
   render() {
@@ -53,7 +53,7 @@ class ApexChart3 extends React.Component {
   }
 }
 
-export default ApexChart3;
+export default ApexDaily;
 
 
 const Root = styled.section`

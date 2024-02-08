@@ -65,12 +65,12 @@ class TelleReport extends React.Component {
 
   render() {
     return (
-      <div>
-        <div id="chart">
+      <Root>
+        <div className="chart">
           <ReactApexChart options={this.state.options} series={this.state.series} type="line" height={350} />
         </div>
         <div id="html-dist"></div>
-      </div>
+      </Root>
     );
   }
 }
@@ -80,8 +80,8 @@ export default TelleReport;
 const Root = styled.section`
 
 
-.chaasasart{
-  margin-top: 39px;
+.chart{
+width:100%;
 }
 `;
 

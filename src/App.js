@@ -27,7 +27,8 @@ import Mainchart3 from "./components/CommonPages/admin/chart/Mainchart3";
 import ApexChart3 from "./components/CommonPages/admin/chart/ApexChart3";
 import NegativeLead from "./components/CommonPages/admin/sharedata/NegativeLead";
 import TellecallerNegativeLead from "./components/CommonPages/admin/sharedata/TellecallerNegativeLead";
-import TelleReport from "./components/CommonPages/admin/chart/TelleReport";
+import TelleReport from "./components/CommonPages/admin/chart/dailyreport/TelleReport";
+import ViewStat from "./components/CommonPages/admin/chart/dailyreport/ViewStat";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -73,6 +74,7 @@ function App() {
                 <Route path="/mastersheet" element={<MasterSheet />} />
                 <Route path="/negativelead" element={<NegativeLead />} />
                 <Route path="/tellereport" element={<TelleReport />} />
+                <Route path="/viewstat" element={<ViewStat />} />
 
               </>
             ) : (

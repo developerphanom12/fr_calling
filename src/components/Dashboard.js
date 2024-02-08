@@ -15,7 +15,7 @@ import ApexChart3 from "./CommonPages/admin/chart/ApexChart3";
 import "./Dashboard.css";
 import data from "../components/images/my.jpg";
 import Mainchart3 from "./CommonPages/admin/chart/Mainchart3";
-import TelleReport from "./CommonPages/admin/chart/TelleReport";
+import TelleReport from "./CommonPages/admin/chart/dailyreport/TelleReport";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 const formatDate = (isoDate) => {
@@ -107,21 +107,30 @@ export default function Dashboard() {
         <div className="data12">
           <div className="data">
             <div className="activity">
-              <div className="cold">
+              <div className="cold1">
                 <h1>Close Client</h1>
                 <p>4.1K</p>
               </div>
-              <div className="cold">
+              <div className="cold1">
                 <h1>Hot Client</h1>
                 <p>5.0K</p>{" "}
               </div>
-              <div className="cold">
+              <div className="cold1">
                 <h1>Negative Client</h1>
                 <p>3.2K</p>{" "}
               </div>
-              <div className="cold">
+              <div className="cold1">
                 <h1>Ghost Client</h1>
                 <p>2.2K</p>{" "}
+              </div>
+
+              <div
+                className="viewstat"
+                onClick={() => {
+                  navigate("/viewstat");
+                }}
+              >
+                <p>View Stat</p>
               </div>
             </div>
 
@@ -130,10 +139,7 @@ export default function Dashboard() {
           <div className="datass">
             <p>Daily Report</p>
 
-            <div className="datafetch">
-           
-              
-            </div>
+            <div className="datafetch"></div>
           </div>
         </div>
       </div>
@@ -251,13 +257,14 @@ const Root = styled.section`
     display: flex;
     margin-top: 23px;
     justify-content: space-between;
-
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+          rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     .char1 {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
       /* background-color: #efefef !important; */
-
+      
       width: 28%;
       border-radius: 1px;
       height: 54vh;
@@ -290,6 +297,7 @@ const Root = styled.section`
       width: 38%;
       /* margin-right: 34px; */
       /* background-color: #efefef !important; */
+      
     }
   }
   .chart1 {
@@ -517,8 +525,9 @@ const Root = styled.section`
     }
   }
   .char2 {
-    border-radius: 1px solid;
-    width: 30%;
+   
+    width: 27%;
+    
     > div {
       margin-top: 64px;
       margin-right: 48px;
@@ -531,20 +540,22 @@ const Root = styled.section`
 
   .telledata {
     width: 100%;
-margin-top: 25px;
+    margin-top: 25px;
     .data12 {
       display: flex;
       justify-content: space-around;
+      margin: 0px;
+      padding: 43px;
       .datass {
         width: 30vw;
         justify-content: center;
         display: flex;
         margin: 0px;
-        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; 
-        p{
-        margin: 0px;
-        font-size: 20px;
-        margin-top: 12px;
+      
+        p {
+          margin: 0px;
+          font-size: 20px;
+          margin-top: 12px;
         }
       }
 
@@ -553,7 +564,9 @@ margin-top: 25px;
         border: 1px solid #dbcccc;
         margin-right: 10px;
         border-radius: 11px;
-        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;        .activity {
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+          rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        .activity {
           display: flex;
           gap: 0px;
           p {
@@ -562,17 +575,39 @@ margin-top: 25px;
           h1 {
             color: #888484;
           }
-          .cold {
-            width: 10vw;
-            /* background-color: red; */
+          .cold1 {
             margin: 10px;
-            /* padding: 0px; */
+            p{
+              color: black;
+
+            }
           }
+          
+         
+          .viewstat {
+            display: flex;
+    width: 9vw;
+    margin-left: 90px;
+    justify-content: center;
+    height: 5vh;
+    border-radius: 8px;
+    margin-top: 8px;
+    background: #0088ff;
+    cursor: pointer;
+}
+            p {
+              color: #e8dbdb;
+    font-weight: 500;
+    font-family: 'Roboto';
+            }
+          }
+
+          
         }
       }
       .datassqaaqs {
         width: 30vw;
       }
     }
-  }
+  
 `;
