@@ -176,11 +176,11 @@ export default function Dashboard() {
           <div className="div1">
             <p className="none">Recent Activity</p>
             <div className="datapicker">
-              <DatePicker
-                className="p1"
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-              />
+                <DatePicker
+                  className="p1"
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                />
             </div>
           </div>
           <TelleData />

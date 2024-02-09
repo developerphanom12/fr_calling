@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import TelleReport from "./TelleReport";
 import Mainchart3 from "../Mainchart3";
 import CircleChat from "./CircleChat";
+import { EXCHANGE_URLS_ADMIN } from "../../../../URLS";
+import axios from "axios";
 
 const ViewStat = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [telle , settelle] = useState([]);
 
   const handleStartDateChange = (e) => {
     setStartDate(e.target.value);
@@ -15,6 +18,31 @@ const ViewStat = () => {
   const handleEndDateChange = (e) => {
     setEndDate(e.target.value);
   };
+
+
+
+  const teleldata = async () => {
+    try {
+      const axiosConfig = {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
+      const res = await axios.get(
+        `${EXCHANGE_URLS_ADMIN}/getallrecv`,
+        axiosConfig
+      );
+      if (res?.status === 201) {
+        settelle(res?.data.data);
+      }
+    } catch (err) {
+      console.log("err", err);
+    }
+  };
+
+  useEffect (() =>{
+    teleldata()
+  },[])
 
   return (
     <Root>
@@ -25,12 +53,11 @@ const ViewStat = () => {
             <div className="dat1">
               <h1>select</h1>
               <select>
-                <option>List of telecaller</option>
-                <option>Shekher</option>
-                <option>Tanvi</option>
-                <option>Jasmm</option>
-                <option>Anhishek</option>
-                <option>Kirti</option>
+                <option>Select Telecaller</option>
+                {telle &&
+                    telle.map((i) => {
+                      return <option value={i?.id}>{i.username}</option>;
+                    })}
               </select>
             </div>
             <div className="checkdate">
@@ -75,12 +102,14 @@ const ViewStat = () => {
 
       <div className="calldata">
         <div className="datamm">
-          <p>call data</p>
+          <p>Daily Call data</p>
         </div>
-        <div className="datamm">
+        <div className="datamm1">
           <p>call data</p>
         </div>
       </div>
+
+      <p>end</p>
     </Root>
   );
 };
@@ -102,7 +131,7 @@ const Root = styled.section`
     justify-content: space-around;
     margin: 0px;
     margin-top: 5px;
-    padding: 40px;
+    padding: 17px;
 
     .datatatata {
       justify-content: space-between;
@@ -117,7 +146,8 @@ const Root = styled.section`
         padding: 4px;
         border-radius: 8px;
         text-decoration: none;
-        box-shadow: inset 0 0 8px -2px rgba(0, 0, 0, 0.8);
+        box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+        rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
         background-color: #fff4f4;
         input {
           border: none;
@@ -149,11 +179,13 @@ const Root = styled.section`
 
         select {
           display: flex;
-          width: 8vw;
+          width: 10vw;
           height: 4vh;
           margin-top: 9px;
           font-size: 14px;
           border-radius: 5px;
+          box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+        rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
         }
 
         option {
@@ -166,7 +198,8 @@ const Root = styled.section`
       width: 30vw;
       justify-content: center;
       margin: 0px;
-      box-shadow: inset 0 0 8px -2px rgba(0, 0, 0, 0.8);
+      box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+        rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
       margin-left: 15px;
       p {
         margin: 0px;
@@ -182,14 +215,14 @@ const Root = styled.section`
       }
       .datafetch {
         display: flex;
-    /* gap: initial; */
-    justify-content: space-around;
-        .negativ{
+        /* gap: initial; */
+        justify-content: space-around;
+        .negativ {
           font-size: 15px;
         }
       }
 
-      .totalbyjus{
+      .totalbyjus {
         margin-left: 12px;
       }
     }
@@ -199,8 +232,8 @@ const Root = styled.section`
       border: 1px solid #dbcccc;
       margin-right: 10px;
       border-radius: 11px;
-      box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.38);
-
+      box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+        rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
       .activity {
         display: flex;
         gap: 0px;
@@ -236,21 +269,35 @@ const Root = styled.section`
       }
     }
   }
-
   .calldata {
     display: flex;
-    width: 100%;
     justify-content: space-around;
     .datamm {
+      margin-left: 72px;
+      color: red;
+      display: flex;
+      /* gap: 28px; */
+      width: 40vw;
+      height: 34vh;
+      justify-content: center;
+      box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+        rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+      p {
+        font-size: 23px;
+      }
+    }
+    .datamm1 {
       color: red;
       display: flex;
       gap: 28px;
-      width: 50%;
-      text-align: center;
+      width: 29vw;
+      height: 34vh;
       justify-content: center;
+      box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+        rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+      margin-left: 67px;
       p {
         font-size: 23px;
-        background-color: black;
       }
     }
   }

@@ -67,9 +67,9 @@ class TelleReport extends React.Component {
     return (
       <Root>
         <div className="chart">
-          <ReactApexChart options={this.state.options} series={this.state.series} type="line" height={350} />
+          <ReactApexChart   options={this.state.options} series={this.state.series} type="line" height={300} />
         </div>
-        <div id="html-dist"></div>
+       
       </Root>
     );
   }
