@@ -8,10 +8,10 @@ import { EXACHANGE_URLS_TELLE, EXCHANGE_URLS_ADMIN } from "../../../../URLS";
 const ViewStat = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [telecallers, setTelecallers] = useState([]);
+  const [telecallers, setTelecallers] = useState(["21"]);
   const [selectedTelecaller, setSelectedTelecaller] = useState("");
   const [selectedPeriod, setSelectedPeriod] = useState("");
-  const [salesData, setSalesData] = useState([]);
+  const [salesData, setSalesData] = useState(["today"]);
 
   useEffect(() => {
     fetchTelecallers();
@@ -122,10 +122,24 @@ const ViewStat = () => {
           </div>
           <h1 className="totalbyjus">Total :</h1>
           <div className="datafetch">
-            <p className="negativ"> Close</p>
-            <p className="negativ"> Negative</p>
-            <p className="negativ"> Hot</p>
-            <p className="negativ">Cold</p>
+            <p className="negativ"> Close <span>
+            {salesData?.totalcount?.close_status_count}
+              </span></p>
+            <p className="negativ"> Negative
+            <span>
+            {salesData?.totalcount?.negative_client_count}
+              </span></p>
+
+            <p className="negativ"> Hot
+            <span>
+            {salesData?.totalcount?.hot_lead_count}
+              </span>
+            </p>
+            <p className="negativ">Cold
+            <span>
+            {salesData?.totalcount?.cold_count}
+              </span>
+            </p>
           </div>
         </div>
       </div>
@@ -250,6 +264,10 @@ const Root = styled.section`
         justify-content: space-around;
         .negativ {
           font-size: 15px;
+          span{
+
+            display : flex;
+          }
         }
       }
 

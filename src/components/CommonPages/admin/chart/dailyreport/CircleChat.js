@@ -9,8 +9,8 @@ class CircleChat extends React.Component {
     const seriesData = [props?.data?.totalcount?.cold_count,props?.data?.totalcount?.ghost_client_count, props?.data?.totalcount?.close_status_count,props?.data?.totalcount?.hot_lead_count,props?.data?.totalcount?.negative_client_count,props?.data?.totalcount?.prospective_client_count];
     console.log("hash",seriesData)
     this.state = {
-      series: seriesData,
-     options: {
+      series: [...seriesData],
+      options: {
   chart: {
     type: 'donut',
   },
@@ -27,7 +27,7 @@ class CircleChat extends React.Component {
           enabled: false,
         },
         legend: {
-          position: "bottom", // Change position to "bottom"
+          position: "bottom",
         },
       },
     },
