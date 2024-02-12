@@ -1,88 +1,56 @@
 import React from 'react';
 import ReactApexChart from 'react-apexcharts';
-import styled from 'styled-components';
+
 class TelleReport extends React.Component {
   constructor(props) {
-    super(props);
+    super(props); 
 
-    this.state = {
+    const seriesData = props.data?.data ? props.data?.data.map(item => item.total_sales) : [0];
+    const categories = props.data?.data ? props.data?.data.map(item => item.day) : [0];
     
+    this.state = {
       series: [{
-        name: 'Sales',
-        data: [4, 3, 10, 9, 29, 19, 22, 9, 12, 7, 19, 5, 13, 9, 17, 2, 7, 5]
+        name: 'Total Sales', 
+        data: seriesData,
       }],
       options: {
         chart: {
-          height: 350,
-          type: 'line',
-        },
-        
-        stroke: {
-          width: 5,
-          curve: 'smooth'
+          height: 250,
+          type: 'bar',
         },
         xaxis: {
-          type: 'datetime',
-          categories: ['1/11/2000', '2/11/2000', '3/11/2000', '4/11/2000', '5/11/2000', '6/11/2000', '7/11/2000', '8/11/2000', '9/11/2000', '10/11/2000', '11/11/2000', '12/11/2000', '1/11/2001', '2/11/2001', '3/11/2001','4/11/2001' ,'5/11/2001' ,'6/11/2001'],
-          tickAmount: 10,
-          labels: {
-            formatter: function(value, timestamp, opts) {
-              return opts.dateFormatter(new Date(timestamp), 'dd MMM')
-            }
-          }
-        },
-        title: {
-          text: 'Telecaller Data',
-          align: 'left',
-          style: {
-            fontSize: "16px",
-            color: '#666'
-          }
-        },
-        fill: {
-          type: 'gradient',
-          gradient: {
-            shade: 'dark',
-            gradientToColors: [ '#FDD835'],
-            shadeIntensity: 1,
-            type: 'horizontal',
-            opacityFrom: 1,
-            opacityTo: 1,
-            stops: [0, 100, 100, 100]
+          categories: categories,
+          title: {
+            text: 'Day',
           },
-        },
+        }, 
         yaxis: {
-          min: -10,
-          max: 40
-        }
+          title: {
+            text: 'Total Sales',
+          },
+        }, 
+        title: {
+          text: 'Today\'s Sales',
+        },
       },
-    
-    
     };
+
+    console.log("series", this.state.series);
+    console.log("categories", categories);
   }
-
-
-
   render() {
-    return (
-      <Root>
-        <div className="chart">
-          <ReactApexChart   options={this.state.options} series={this.state.series} type="line" height={300} />
-        </div>
-       
-      </Root>
+    console.log("props",this.props); 
+    return (   
+      <div id="chart">
+        <ReactApexChart
+          options={this.state.options}
+          series={this.state.series}
+          type="bar"
+          height={250}  
+        />
+      </div>
     );
   }
-}
+}    
+
 export default TelleReport;
-
-
-const Root = styled.section`
-
-
-.chart{
-width:100%;
-}
-`;
-
-

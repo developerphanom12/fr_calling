@@ -1,48 +1,77 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import TelleReport from "./TelleReport";
-import Mainchart3 from "../Mainchart3";
 import CircleChat from "./CircleChat";
-import { EXCHANGE_URLS_ADMIN } from "../../../../URLS";
 import axios from "axios";
+import { EXACHANGE_URLS_TELLE, EXCHANGE_URLS_ADMIN } from "../../../../URLS";
 
 const ViewStat = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [telle , settelle] = useState([]);
+  const [telecallers, setTelecallers] = useState([]);
+  const [selectedTelecaller, setSelectedTelecaller] = useState("");
+  const [selectedPeriod, setSelectedPeriod] = useState("");
+  const [salesData, setSalesData] = useState([]);
 
-  const handleStartDateChange = (e) => {
-    setStartDate(e.target.value);
-  };
+  useEffect(() => {
+    fetchTelecallers();
+  }, []);
 
-  const handleEndDateChange = (e) => {
-    setEndDate(e.target.value);
-  };
+  useEffect(() => {
+    if (selectedTelecaller && telecallers) {
+      fetchData();
+    }
+  }, [selectedTelecaller, selectedPeriod]);
 
-
-
-  const teleldata = async () => {
+  const fetchTelecallers = async () => {
     try {
+      const token = localStorage.getItem("token");
       const axiosConfig = {
         headers: {
-          authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${token}`,
         },
       };
+
       const res = await axios.get(
         `${EXCHANGE_URLS_ADMIN}/getallrecv`,
         axiosConfig
       );
       if (res?.status === 201) {
-        settelle(res?.data.data);
+        setTelecallers(res.data.data);
       }
     } catch (err) {
-      console.log("err", err);
+      console.log("Error fetching telecallers:", err);
     }
   };
 
-  useEffect (() =>{
-    teleldata()
-  },[])
+  const fetchData = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const axiosConfig = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const res = await axios.get(
+        `${EXACHANGE_URLS_TELLE}/tellesalescheck?selection=${selectedPeriod}&id=${selectedTelecaller}`,
+        axiosConfig
+      );
+      if (res?.status === 200) {
+        setSalesData(res?.data?.data);
+      }
+    } catch (err) {
+      console.log("Error fetching data:", err);
+    }
+  };
+
+  const handleTelecallerChange = (e) => {
+    setSelectedTelecaller(e.target.value);
+  };
+
+  const handlePeriodChange = (e) => {
+    setSelectedPeriod(e.target.value);
+  };
 
   return (
     <Root>
@@ -52,43 +81,44 @@ const ViewStat = () => {
           <div className="datatatata">
             <div className="dat1">
               <h1>select</h1>
-              <select>
+              <select onChange={handleTelecallerChange}>
                 <option>Select Telecaller</option>
-                {telle &&
-                    telle.map((i) => {
-                      return <option value={i?.id}>{i.username}</option>;
-                    })}
+                {telecallers.map((telecaller) => (
+                  <option key={telecaller.id} value={telecaller.id}>
+                    {telecaller.username}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="checkdate">
-              <select>
-                <option>select date</option>
-                <option>Today</option>
-                <option>Yesterday</option>
-                <option>Last 7 days</option>
-                <option>Last 14 Days</option>
-                <option>Last 28 days</option>
+              <select onChange={handlePeriodChange} value={selectedPeriod}>
+                <option value="today">Today</option>
+                <option value="yesterday">Yesterday</option>
+                <option value="last7days">Last 7 days</option>
+                <option value="last14days">Last 14 Days</option>
+                <option value="last28days">Last 28 days</option>
               </select>
               <input
                 type="date"
-                placeholder="data"
+                placeholder="Start Date"
                 value={startDate}
-                onChange={handleStartDateChange}
+                onChange={(e) => setStartDate(e.target.value)}
               />
               <input
                 type="date"
+                placeholder="End Date"
                 value={endDate}
-                onChange={handleEndDateChange}
+                onChange={(e) => setEndDate(e.target.value)}
               />
             </div>
           </div>
 
-          <TelleReport />
+          <TelleReport key={JSON.stringify(salesData)} data={salesData}  />
         </div>
         <div className="datass">
           <p>Daily Report</p>
           <div className="datachild">
-            <CircleChat />
+            <CircleChat key={JSON.stringify(salesData)} data={salesData} />
           </div>
           <h1 className="totalbyjus">Total :</h1>
           <div className="datafetch">
@@ -115,6 +145,7 @@ const ViewStat = () => {
 };
 
 export default ViewStat;
+
 
 const Root = styled.section`
   display: flex;
@@ -302,3 +333,57 @@ const Root = styled.section`
     }
   }
 `;
+
+
+
+
+
+
+
+
+
+
+
+
+
+// <div className="data12">
+// <div className="data">
+//   <div className="datatatata">
+//     <div className="dat1">
+//       <h1>select</h1>
+//       <select onChange={handleTelecallerChange}>
+//         <option>Select Telecaller</option>
+//         {telecallers.map((telecaller) => (
+//           <option key={telecaller.id} value={telecaller.id}>
+//             {telecaller.username}
+//           </option>
+//         ))}
+//       </select>
+//     </div>
+//     <div className="checkdate">
+//       <select onChange={handlePeriodChange} value={selectedPeriod}>
+//         <option value="today">Today</option>
+//         <option value="yesterday">Yesterday</option>
+//         <option value="last7days">Last 7 days</option>
+//         <option value="last14days">Last 14 Days</option>
+//         <option value="last28days">Last 28 days</option>
+//       </select>
+//       <input
+//         type="date"
+//         placeholder="Start Date"
+//         value={startDate}
+//         onChange={(e) => setStartDate(e.target.value)}
+//       />
+//       <input
+//         type="date"
+//         placeholder="End Date"
+//         value={endDate}
+//         onChange={(e) => setEndDate(e.target.value)}
+//       />
+//     </div>
+//     <TelleReport />
+//   </div>
+
+//   <TelleReport data={salesData} />
+// </div>
+// </div>
