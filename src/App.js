@@ -53,7 +53,7 @@ function App() {
                 <Route path="/upcomingdata/:id" element={<UpcomingGet />} />
                 <Route path="/dailyreport" element={<DailyReport />} />
                 <Route path="/telenegativelead" element={<TellecallerNegativeLead />} />
-              
+                <Route path="/otpverify" element={<Otp />} />
               </>
             ) : userDetails?.role === "admin" ? (
               <>
@@ -88,7 +88,7 @@ function App() {
             <Route path="/employerlogin" element={<Employerlogin />} />
             <Route path="/" element={<AllPages />} />
             <Route path="/allpages" element={<AllPages />} />
-            <Route path="/otpverify" element={<Otp />} />
+            
 
           </>
         )}

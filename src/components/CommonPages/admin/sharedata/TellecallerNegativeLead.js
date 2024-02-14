@@ -34,12 +34,13 @@ export default function TellecallerNegativeLead({ popUser = () => {} }) {
     };
     try {
       const res = await axios.get(
-        `${EXCHANGE_URLS_ADMIN}/tellenegativelead`,
+        `${EXCHANGE_URLS_ADMIN}/negativelead`,
         axiosConfig
       );
       if (res.status === 201) {
         setApplications(res?.data?.data);
       }
+      console.log("sabasbasbas",res)
     } catch (e) {
       console.log(e);
     }

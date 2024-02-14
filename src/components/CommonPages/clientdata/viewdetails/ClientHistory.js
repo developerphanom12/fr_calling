@@ -224,7 +224,7 @@ const Root = styled.section`
     display: flex;
     flex-direction: column;
     width: 88%;
-    margin: 10px;
+    margin-left: 60px;
     font-family: "Roboto", "sana-serif";
     .app_header {
       display: flex;

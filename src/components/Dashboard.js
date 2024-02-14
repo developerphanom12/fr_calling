@@ -13,7 +13,7 @@ import { BsFillEyeFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import ApexChart3 from "./CommonPages/admin/chart/ApexChart3";
 import "./Dashboard.css";
-import data from "../components/images/my.jpg";
+import data from "../components/images/nodatra.png";
 import Mainchart3 from "./CommonPages/admin/chart/Mainchart3";
 import TelleReport from "./CommonPages/admin/chart/dailyreport/TelleReport";
 
@@ -195,9 +195,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="dailyreport">
-        <h1>data daily</h1>
-      </div>
+    
     </Root>
   );
 }
@@ -506,7 +504,7 @@ const Root = styled.section`
     color: white;
     border: 1px solid;
     margin: 4px;
-    margin-top: 31px;
+    margin-top: 20px;
     margin-right: 11px;
     width: 8vw;
     display: flex;

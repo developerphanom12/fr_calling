@@ -137,7 +137,7 @@ const Root = styled.section`
   align-items: center;
   margin-top: 230px;
   .app_table {
-    border: 3px solid #c2b4ce;
+    /* border: 3px solid #c2b4ce; */
     border-radius: 12px;
     transform: translate(0, -50%);
     padding: 10px;
@@ -145,7 +145,7 @@ const Root = styled.section`
     width: 100%;
     max-height: 40vh;
     height: 100%;
-    > div {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);    > div {
       .heading {
         display: flex;
         justify-content: center;

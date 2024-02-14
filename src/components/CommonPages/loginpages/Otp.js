@@ -42,37 +42,27 @@ export default function Otp() {
   return (
     <Root>
       {" "}
-      <h3>Verify Otp ...</h3>
       <div className="main_div_pass">
+      <h3>Enter Email ...</h3>
         <div className="pass1">
-          Enter Your ID
+          Enter Your Email
           <input
-            type="text"
-            placeholder="---id---"
+            type="email"
+            placeholder="Enter Your Email"
             value={changePass?.id}
             onChange={(e) =>
               setChangePass({ ...changePass, id: e.target.value })
             }
           />
         </div>
-        <div className="pass1">
-          Enter Your OTP
-          <input
-            type="text"
-            placeholder="---Enter Otp---"
-            value={changePass?.otp}
-            onChange={(e) =>
-              setChangePass({ ...changePass, otp: e.target.value })
-            }
-          />
-        </div>
+            
         <div className="box1">
           <button
             onClick={() => {
               handleChangePassword();
             }}
           >
-           Verify Otp
+           Send
           </button>
         </div>
       </div>
@@ -90,6 +80,8 @@ const Root = styled.section`
   h3 {
     font-weight: 500;
     font-family: "Roboto", "sans-serif";
+    display: flex;
+    justify-content: center;
   }
   .main_div_pass {
     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,

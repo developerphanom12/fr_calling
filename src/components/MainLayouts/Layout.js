@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import NavBar from "./NavBar";
 import { useSelector } from "react-redux";
 import SideBar from "./SideBar";
+import  Otp  from "../../../src/components/CommonPages/loginpages/Otp";
 
 export default function Layout({ children }) {
   const userCheck = useSelector((state) => state?.users?.userCheck);
   const token = localStorage.getItem("token");
+  const [isOtpVerified, setIsOtpVerified] = useState(false);
+
+  useEffect(() => {
+    const fetchOtpVerification = async () => {
+      try {
+        const otpVerified = await Otp();
+        setIsOtpVerified(otpVerified);
+      } catch (error) {
+        console.error("Error verifying OTP:", error);
+      }
+    };
+
+    fetchOtpVerification();
+  }, []);
+
   return (
     <Root>
-      {userCheck && token ? (
+      {userCheck && token && isOtpVerified ? (
         <div className="sideBar">
           <SideBar />
         </div>
@@ -18,13 +34,11 @@ export default function Layout({ children }) {
       )}
 
       <div className="main_bar">
-        {token && userCheck ? (
-          ""
-        ) : (
+        {!token || !isOtpVerified ? (
           <div className="pre_nav">
             <NavBar />
           </div>
-        )}
+        ) : null}
         <div className="main_body">{children}</div>
       </div>
     </Root>

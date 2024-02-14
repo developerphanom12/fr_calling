@@ -12,6 +12,7 @@ import { BsFillEyeFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import ReactDatePicker, { Data } from "react-datepicker";
 import TelleData from "../../TelleData/TelleData";
+import data from "../../images/nodatra.png";
 
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
@@ -74,6 +75,17 @@ export default function ClientDashboard() {
         </div>
       </div>
 
+      <div className="dailydata">
+       
+       {/* <div className="datacalss">
+        <h1> Calls Data</h1>
+       </div>
+       <div className="datacalss">
+        <h1> Calls Data</h1>
+       </div>
+    */}
+      </div>
+
       <div className="chart1">
         <div className="upcoming">
           <div className="div1">
@@ -97,36 +109,38 @@ export default function ClientDashboard() {
             </div>
           </div>
           <div className="upcomming_child1">
-            <div>
-              {UniqueIdea &&
-                UniqueIdea.map((i) => {
-                  return (
-                    <div className="data">
-                      <div>
-                        <img
-                          src={
-                            "https://cdn.pixabay.com/photo/2016/03/31/20/37/client-1295901_1280.png"
-                          }
-                          alt="hloo"
-                        />
-                        <h5>
-                          {i.client_name}{" "}
-                          <p>{formatDate(i?.call_schedule_date)}</p>
-                        </h5>
-                      </div>
+            {UniqueIdea && UniqueIdea.length > 0 ? (
+              UniqueIdea.map((i) => (
+                <div className="data" key={i.id}>
+                  <div>
+                    <img
+                      width="40px"
+                      src={
+                        "https://cdn.pixabay.com/photo/2016/03/31/20/37/client-1295901_1280.png"
+                      }
+                      alt="img"
+                    />
+                    <h5>
+                      {i.client_name} <p>{formatDate(i?.call_schedule_date)}</p>
+                    </h5>
+                  </div>
 
-                      <div
-                        className="child11"
-                        onClick={() => {
-                          navigate(`/upcomingdata/${i?.id}`);
-                        }}
-                      >
-                        <BsFillEyeFill />
-                      </div>
-                    </div>
-                  );
-                })}
-            </div>
+                  <div
+                    className="child11"
+                    onClick={() => {
+                      navigate(`/upcomingdata/${i?.id}`);
+                    }}
+                  >
+                    <BsFillEyeFill />
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div>
+                <img src={data} alt="img" />
+                <p className="data22">No Upcoming Appointment This week</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -286,6 +300,7 @@ const Root = styled.section`
         flex-direction: column;
         margin-right: 14px;
 
+       
         .cams {
           display: flex;
           flex-direction: row;
@@ -297,8 +312,16 @@ const Root = styled.section`
         > div {
           display: flex;
           flex-direction: column;
-          align-items: left;
-
+          align-items: center;
+          img {
+            width: 31%;
+            height: 16vh;
+            border-radius: 33px;
+            margin-top: 34px  ;
+          }
+          .data22{
+          margin: 12px;
+          }
           .child11 {
             display: flex;
             width: 90%;
@@ -570,6 +593,16 @@ const Root = styled.section`
           }
         }
       }
+    }
+  }
+
+  .dailydata{
+    background-color: red;
+    display: flex;
+    .datacalss{
+      display: flex;
+      flex-direction: column;
+      width: 20%;
     }
   }
 `;

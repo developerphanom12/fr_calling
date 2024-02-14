@@ -76,7 +76,7 @@ export default function SideBar() {
                 <p>Tellecaller List</p>
               </div>
 
-              <div
+              {/* <div
                 className={activeParam === "sharedata" ? "active" : ""}
                 onClick={() => {
                   navigate("/sharedata");
@@ -84,7 +84,7 @@ export default function SideBar() {
               >
                 <FaShareAlt />
                 <p>Share Data</p>
-              </div>
+              </div> */}
               <div
                 className={activeParam === "mastersheet" ? "active" : ""}
                 onClick={() => {
@@ -138,7 +138,7 @@ export default function SideBar() {
                 {<MdWorkHistory />}
                 <p>Client History</p>
               </div>
-              <div
+              {/* <div
                 className={activeParam === "refrencedata" ? "active" : ""}
                 onClick={() => {
                   navigate("/refrencedata");
@@ -146,7 +146,7 @@ export default function SideBar() {
               >
                 {<MdWorkHistory />}
                 <p>Refrence Data</p>
-              </div>
+              </div> */}
 
               <div
                 className={activeParam === "dailyreport" ? "active" : ""}
