@@ -6,16 +6,16 @@ class ApexChart3 extends React.Component {
   constructor(props) {
     super(props);
 
-    const seriesData = [props?.data?.close_status, props?.data?.hot_lead, props?.data?.cold_lead,props?.data?.cold_lead];
-    console.log("hash",seriesData)
+    const seriesData = [props?.data?.close_status, props?.data?.hot_lead, props?.data?.cold_lead,props?.data?.totaldata];
+    console.log("hash111111",seriesData)
     this.state = {
-      series: [11,11,11,11],
+      series: seriesData,
       options: {
         chart: {
           type:'donut',  
         },
       
-        labels: ["Close Status","Hot Lead","Cold Lead","Negative Lead"],
+        labels: ["Close Client","Hot Client","Cold Client","Total Client"],
         responsive: [
           {
             breakpoint: 480,

@@ -5,32 +5,36 @@ import styled from "styled-components";
 import ApexChart3 from "./ApexChart3";
 
 const Mainchart3 = () => {
-  const [salesData, setSalesData] = useState({});
-console.log("dead",salesData)
-  const getdata = async () => {
-    const axiosConfig = {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    };
-    try {
-      const res = await axios.get(
-        `${EXACHANGE_URLS_TELLE}/getcallstatus`,
-        axiosConfig
-      );
-      console.log("aasasas", res);
-      if (res.status === 201) {
-        setSalesData(res?.data?.data);
-      }
-    } catch (e) {
-      console.log(e);   
-    }
-  };
+  const [salesData, setSalesData] = useState({
+    close_status: 0,
+    hot_lead: 0,
+    cold_lead: 0,
+    totaldata: 0
+  });
 
- useEffect(() =>{
-  getdata();
- },[])
- 
+  useEffect(() => {
+    const fetchData = async () => {
+      const axiosConfig = {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
+      try {
+        const res = await axios.get(
+          `${EXACHANGE_URLS_TELLE}/getcallstatus`,
+          axiosConfig
+        );
+        if (res.status === 200) {
+          const responseData = res.data.data;
+          setSalesData(responseData);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <Root>

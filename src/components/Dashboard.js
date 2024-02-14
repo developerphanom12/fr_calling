@@ -16,7 +16,6 @@ import "./Dashboard.css";
 import data from "../components/images/my.jpg";
 import Mainchart3 from "./CommonPages/admin/chart/Mainchart3";
 import TelleReport from "./CommonPages/admin/chart/dailyreport/TelleReport";
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
@@ -95,7 +94,16 @@ export default function Dashboard() {
           <Mainchart />
         </div>
         <div className="char2">
+          <h1>Total Client</h1>
           <Mainchart3 />
+          <div
+                className="viewstat"
+                onClick={() => {
+                  navigate("/viewstat");
+                }}
+              >
+                <p>View Stats</p>
+              </div>
         </div>
         <div className="char">
           <Mainchart2 />
@@ -104,49 +112,12 @@ export default function Dashboard() {
       <div className="telledata">
         <div></div>
 
-        <div className="data12">
-          <div className="data">
-            <div className="activity">
-              <div className="cold1">
-                <h1>Close Client</h1>
-                <p>4.1K</p>
-              </div>
-              <div className="cold1">
-                <h1>Hot Client</h1>
-                <p>5.0K</p>{" "}
-              </div>
-              <div className="cold1">
-                <h1>Negative Client</h1>
-                <p>3.2K</p>{" "}
-              </div>
-              <div className="cold1">
-                <h1>Ghost Client</h1>
-                <p>2.2K</p>{" "}
-              </div>
-
-              <div
-                className="viewstat"
-                onClick={() => {
-                  navigate("/viewstat");
-                }}
-              >
-                <p>View Stat</p>
-              </div>
-            </div>
-
-            <TelleReport />
-          </div>
-          <div className="datass">
-            <p>Daily Report</p>
-
-            <div className="datafetch"></div>
-          </div>
-        </div>
+        
       </div>
 
-      <p> Current Month</p>
+      <p>Current Month</p>
       <div className="hotlead">
-        <div className="cold ">
+        <div className="cold">
           <h1>Close Client</h1>
           <p>
             <span>{applications?.close_status}</span>
@@ -175,13 +146,7 @@ export default function Dashboard() {
         <div className="upcoming">
           <div className="div1">
             <p className="none">Recent Activity</p>
-            <div className="datapicker">
-                <DatePicker
-                  className="p1"
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                />
-            </div>
+          
           </div>
           <TelleData />
         </div>
@@ -257,14 +222,14 @@ const Root = styled.section`
     display: flex;
     margin-top: 23px;
     justify-content: space-between;
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-          rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+
     .char1 {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
       /* background-color: #efefef !important; */
-      
+      box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+        rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
       width: 28%;
       border-radius: 1px;
       height: 54vh;
@@ -297,7 +262,8 @@ const Root = styled.section`
       width: 38%;
       /* margin-right: 34px; */
       /* background-color: #efefef !important; */
-      
+      box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+        rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     }
   }
   .chart1 {
@@ -525,16 +491,46 @@ const Root = styled.section`
     }
   }
   .char2 {
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+      rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    width: 31%;
    
-    width: 27%;
-    
+    .viewstat{
+      display: flex;
+    margin: 0px;
+    justify-content: right;
+     text-align: center;
+    p{
+      background: rebeccapurple;
+    font-size: 20px;
+    color: white;
+    border: 1px solid;
+    margin: 4px;
+    margin-top: 31px;
+    margin-right: 11px;
+    width: 8vw;
+    display: flex;
+    font-family: auto;
+    padding: 2px;
+    border-radius: 7px;
+    height: 4vh;
+    justify-content: center;
+    padding: 5px;
+    align-items: center;
+    cursor: pointer;
+    }
+    }
     > div {
       margin-top: 64px;
       margin-right: 48px;
     }
     h1 {
-      margin-top: 25px;
+      margin-top: 11px;
       display: flex;
+      justify-content: center;
+      font-family: serif;
+      font-weight: 600;
+      font-size: 23px;
     }
   }
 
@@ -551,7 +547,7 @@ const Root = styled.section`
         justify-content: center;
         display: flex;
         margin: 0px;
-      
+
         p {
           margin: 0px;
           font-size: 20px;
@@ -577,37 +573,32 @@ const Root = styled.section`
           }
           .cold1 {
             margin: 10px;
-            p{
+            p {
               color: black;
-
             }
           }
-          
-         
+
           .viewstat {
             display: flex;
-    width: 9vw;
-    margin-left: 90px;
-    justify-content: center;
-    height: 5vh;
-    border-radius: 8px;
-    margin-top: 8px;
-    background: #0088ff;
-    cursor: pointer;
-}
-            p {
-              color: #e8dbdb;
-    font-weight: 500;
-    font-family: 'Roboto';
-            }
+            width: 9vw;
+            margin-left: 90px;
+            justify-content: center;
+            height: 5vh;
+            border-radius: 8px;
+            margin-top: 8px;
+            background: #0088ff;
+            cursor: pointer;
           }
-
-          
+          p {
+            color: #e8dbdb;
+            font-weight: 500;
+            font-family: "Roboto";
+          }
         }
       }
-      .datassqaaqs {
-        width: 30vw;
-      }
     }
-  
+    .datassqaaqs {
+      width: 30vw;
+    }
+  }
 `;

@@ -89,6 +89,7 @@ export default function MasterSheet({ popUser = () => {} }) {
             <div>Client Name</div>
             <div>Company Name</div>
             <div>Call Scheduled ate</div>
+            <div>Status</div>
             <div>Date</div>
           </div>
           {uniqueApplications &&
@@ -108,7 +109,8 @@ export default function MasterSheet({ popUser = () => {} }) {
                   </div>
 
                   <div className="email">{i?.company_name}</div>
-                  <div>{formatDate(i?.call_schedule_date)}</div>
+                  <div>{formatDate(i?.callschedule_date)}</div>
+                  <div>{i?.call_status}</div>
                   <div>{formatDate(i?.update_date)}</div>
 
                 </div>

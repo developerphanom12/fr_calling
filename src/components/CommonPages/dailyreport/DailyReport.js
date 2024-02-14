@@ -100,7 +100,7 @@ export const DailyReport = ({ popUser = () => {} }) => {
                 </div>
                 <div>
                   <p>
-                    <span>{formatDate(i?.call_schedule_date)}</span>
+                    <span>{formatDate(i?.callschedule_date)}</span>
                   </p>
                 </div>
                 <div>

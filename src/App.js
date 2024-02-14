@@ -29,6 +29,7 @@ import NegativeLead from "./components/CommonPages/admin/sharedata/NegativeLead"
 import TellecallerNegativeLead from "./components/CommonPages/admin/sharedata/TellecallerNegativeLead";
 import TelleReport from "./components/CommonPages/admin/chart/dailyreport/TelleReport";
 import ViewStat from "./components/CommonPages/admin/chart/dailyreport/ViewStat";
+import Otp from "./components/CommonPages/loginpages/Otp";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -52,7 +53,7 @@ function App() {
                 <Route path="/upcomingdata/:id" element={<UpcomingGet />} />
                 <Route path="/dailyreport" element={<DailyReport />} />
                 <Route path="/telenegativelead" element={<TellecallerNegativeLead />} />
-
+              
               </>
             ) : userDetails?.role === "admin" ? (
               <>
@@ -63,7 +64,6 @@ function App() {
                 <Route path="/apexdonuts" element={<ApexChart3 />} />
                 <Route path="/adddata" element={<AddData />} />
                 <Route path="/listalltelle" element={<ListAllTellecaller />} />
-                <Route path="/coldlead" element={<ColdLead />} />
                 <Route path="/detailview/:cd" element={<DetailView />} />
                 <Route path="/upcomingdata/:id" element={<UpcomingGet />} />
                 <Route path="/apex" element={<Mainchart />} />
@@ -88,6 +88,8 @@ function App() {
             <Route path="/employerlogin" element={<Employerlogin />} />
             <Route path="/" element={<AllPages />} />
             <Route path="/allpages" element={<AllPages />} />
+            <Route path="/otpverify" element={<Otp />} />
+
           </>
         )}
       </Routes>

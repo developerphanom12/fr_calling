@@ -200,6 +200,7 @@ const Root = styled.section`
           font-family: Helvetica;
           font-weight: 900;
           color: black;
+          margin: 1px;
                     @media (max-width: 789px) {
             font-size: 10px;
           }

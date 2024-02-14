@@ -4,6 +4,7 @@ import TelleReport from "./TelleReport";
 import CircleChat from "./CircleChat";
 import axios from "axios";
 import { EXACHANGE_URLS_TELLE, EXCHANGE_URLS_ADMIN } from "../../../../URLS";
+import cogoToast from "cogo-toast";
 
 const ViewStat = () => {
   const [startDate, setStartDate] = useState("");
@@ -11,10 +12,20 @@ const ViewStat = () => {
   const [telecallers, setTelecallers] = useState(["21"]);
   const [selectedTelecaller, setSelectedTelecaller] = useState("");
   const [selectedPeriod, setSelectedPeriod] = useState("");
-  const [salesData, setSalesData] = useState(["today"]);
+  const [salesData, setSalesData] = useState({
+    cold_count: 0,
+    hot_lead_count: 0,
+    ghost_client_count: 0,
+    negative_client_count: 0,
+    close_status_count:0,
+    prospective_client_count :0
+  });
+  const [error, setError] = useState("");
 
   useEffect(() => {
     fetchTelecallers();
+    setSelectedTelecaller("");
+    setSelectedPeriod("");
   }, []);
 
   useEffect(() => {
@@ -58,10 +69,15 @@ const ViewStat = () => {
         axiosConfig
       );
       if (res?.status === 200) {
-        setSalesData(res?.data?.data);
+        if (res.data.data) {
+          setSalesData(res.data.data);
+          cogoToast.success("Data Fetch SuccessFully");
+        } else {
+          setSalesData(null);
+        }
       }
     } catch (err) {
-      console.log("Error fetching data:", err);
+      cogoToast.error("No sales data available for the selected options.");
     }
   };
 
@@ -76,6 +92,7 @@ const ViewStat = () => {
   return (
     <Root>
       <h1 className="h1">Report snapshot :</h1>
+      {error && <p>{error}</p>}
       <div className="data12">
         <div className="data">
           <div className="datatatata">
@@ -92,6 +109,7 @@ const ViewStat = () => {
             </div>
             <div className="checkdate">
               <select onChange={handlePeriodChange} value={selectedPeriod}>
+                <option>Select Option</option>
                 <option value="today">Today</option>
                 <option value="yesterday">Yesterday</option>
                 <option value="last7days">Last 7 days</option>
@@ -112,33 +130,28 @@ const ViewStat = () => {
               />
             </div>
           </div>
-
-          <TelleReport key={JSON.stringify(salesData)} data={salesData}  />
+          <TelleReport key={JSON.stringify(salesData)} data={salesData} />
         </div>
         <div className="datass">
-          <p>Daily Report</p>
+          <p>Report</p>
           <div className="datachild">
             <CircleChat key={JSON.stringify(salesData)} data={salesData} />
           </div>
           <h1 className="totalbyjus">Total :</h1>
           <div className="datafetch">
-            <p className="negativ"> Close <span>
-            {salesData?.totalcount?.close_status_count}
-              </span></p>
-            <p className="negativ"> Negative
-            <span>
-            {salesData?.totalcount?.negative_client_count}
-              </span></p>
-
-            <p className="negativ"> Hot
-            <span>
-            {salesData?.totalcount?.hot_lead_count}
-              </span>
+            <p className="negativ">
+              Close <span>{salesData?.totalcount?.close_status_count}</span>
             </p>
-            <p className="negativ">Cold
-            <span>
-            {salesData?.totalcount?.cold_count}
-              </span>
+            <p className="negativ">
+              Negative{" "}
+              <span>{salesData?.totalcount?.negative_client_count}</span>
+            </p>
+
+            <p className="negativ">
+              Hot <span>{salesData?.totalcount?.hot_lead_count}</span>
+            </p>
+            <p className="negativ">
+              Cold <span>{salesData?.totalcount?.cold_count}</span>
             </p>
           </div>
         </div>
@@ -146,10 +159,20 @@ const ViewStat = () => {
 
       <div className="calldata">
         <div className="datamm">
-          <p>Daily Call data</p>
+          <p>Total Attend Calls </p>
+          <div className="negativee">
+            Number of calls :     <span>{salesData?.totalcall}</span>
+          </div>
+
+          
         </div>
-        <div className="datamm1">
-          <p>call data</p>
+        <div className="datamm">
+          <p>Total Client Add </p>
+          <div className="negativee">
+          Number of Client Add  :     <span>{salesData?.totalclientadd}</span>
+          </div>
+
+          
         </div>
       </div>
 
@@ -159,7 +182,6 @@ const ViewStat = () => {
 };
 
 export default ViewStat;
-
 
 const Root = styled.section`
   display: flex;
@@ -192,7 +214,7 @@ const Root = styled.section`
         border-radius: 8px;
         text-decoration: none;
         box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-        rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+          rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
         background-color: #fff4f4;
         input {
           border: none;
@@ -230,7 +252,7 @@ const Root = styled.section`
           font-size: 14px;
           border-radius: 5px;
           box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-        rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+            rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
         }
 
         option {
@@ -260,13 +282,20 @@ const Root = styled.section`
       }
       .datafetch {
         display: flex;
-        /* gap: initial; */
         justify-content: space-around;
+        width: 27vw;
+        margin-left: 23px;
+        box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+          rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+        margin-top: 12px;
         .negativ {
           font-size: 15px;
-          span{
-
-            display : flex;
+          display: flex;
+          flex-direction: column;
+          margin: 12px;
+          span {
+            margin: 5px;
+            font-size: 19px;
           }
         }
       }
@@ -320,24 +349,44 @@ const Root = styled.section`
   }
   .calldata {
     display: flex;
-    justify-content: space-around;
     .datamm {
       margin-left: 72px;
-      color: red;
-      display: flex;
-      /* gap: 28px; */
-      width: 40vw;
-      height: 34vh;
-      justify-content: center;
-      box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-        rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    color: red;
+    display: flex;
+    width: 18vw;
+    display: flex;
+    border-radius: 11px;
+    flex-direction: column;
+    height: 14vh;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+
       p {
-        font-size: 23px;
+    font-family: serif;
+    font-weight: 600;
+    background: #3f78e3;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    color: white;
+      }
+
+      .negativee {
+        display: flex;
+    /* flex-direction: column; */
+    margin-top: 13px;
+    margin-left: 11px;
+    color: black;
+    font-size: 17px;
+    font-weight: 400;
+    gap: 8px;
+
+
       }
     }
     .datamm1 {
       color: red;
       display: flex;
+      /* flex-direction: column; */
       gap: 28px;
       width: 29vw;
       height: 34vh;
@@ -345,24 +394,9 @@ const Root = styled.section`
       box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
         rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
       margin-left: 67px;
-      p {
-        font-size: 23px;
-      }
     }
   }
 `;
-
-
-
-
-
-
-
-
-
-
-
-
 
 // <div className="data12">
 // <div className="data">

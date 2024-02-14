@@ -199,6 +199,7 @@ const Root = styled.section`
           font-weight: 900;
           font-size: 16px;
           color: black;
+          margin: 1px;
           @media (max-width: 789px) {
             font-size: 10px;
           }

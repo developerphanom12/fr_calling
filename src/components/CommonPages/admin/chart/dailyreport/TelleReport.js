@@ -16,7 +16,7 @@ class TelleReport extends React.Component {
       options: {
         chart: {
           height: 350,
-          type: 'area', // Use area chart with spline interpolation
+          type: 'area', 
           toolbar: {
             show: false
           }
@@ -36,7 +36,7 @@ class TelleReport extends React.Component {
           text: 'Today\'s Sales',
         },
         fill: {
-          type: 'gradient', // Use gradient fill for smoother appearance
+          type: 'gradient',
           gradient: {
             shadeIntensity: 1,
             opacityFrom: 0.7,
@@ -60,7 +60,7 @@ class TelleReport extends React.Component {
           series={this.state.series}
           type="area"
           height={350}
-          width={500}
+          
         />
       </div>
     );
