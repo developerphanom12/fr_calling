@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { EXACHANGE_URLS_TELLE } from "../../URLS";
+import { EXACHANGE_URLS_TELLE, EXCHANGE_URLS_ADMIN } from "../../URLS";
 import axios from "axios";
 import cogoToast from "cogo-toast";
 import styled from "styled-components";
@@ -8,11 +8,10 @@ import { useNavigate } from "react-router-dom";
 export default function Otp() {
   const navigate = useNavigate();
   const [changePass, setChangePass] = useState({
-    id: "",
-    otp: "",
+    email: "",
   });
 
-  const ChangePassApi = async (old, newP) => {
+  const ChangePassApi = async (newP) => {
     const axiosConfig = {
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -20,30 +19,32 @@ export default function Otp() {
     };
     try {
       const data = {
-        id: old,
-        otp: newP,
+        email: newP,
       };
       const res = await axios.post(
-        `${EXACHANGE_URLS_TELLE}/change-password`,
+        `${EXCHANGE_URLS_ADMIN}/otpsend`,
         data,
         axiosConfig
       );
-      setChangePass({ id: "", otp: "" });
-      navigate("/studash");
-      cogoToast.success("Otp verify successfully");
+
+      if (res.status === 200) {
+        setChangePass({ email: "" });
+        cogoToast.success("Otp verify successfully");
+       
+      }
     } catch (err) {
       cogoToast.error("Error");
     }
   };
   const handleChangePassword = () => {
-    ChangePassApi(changePass?.id, changePass?.otp);
+    ChangePassApi(changePass?.email);
   };
 
   return (
     <Root>
       {" "}
       <div className="main_div_pass">
-      <h3>Enter Email ...</h3>
+        <h3>Enter Email ...</h3>
         <div className="pass1">
           Enter Your Email
           <input
@@ -51,18 +52,18 @@ export default function Otp() {
             placeholder="Enter Your Email"
             value={changePass?.id}
             onChange={(e) =>
-              setChangePass({ ...changePass, id: e.target.value })
+              setChangePass({ ...changePass, email: e.target.value })
             }
           />
         </div>
-            
+
         <div className="box1">
           <button
             onClick={() => {
               handleChangePassword();
             }}
           >
-           Send
+            Send
           </button>
         </div>
       </div>
@@ -76,7 +77,6 @@ const Root = styled.section`
   gap: 10px;
   align-items: center;
   font-family: "Roboto", "sans-serif";
-
   h3 {
     font-weight: 500;
     font-family: "Roboto", "sans-serif";
@@ -85,7 +85,7 @@ const Root = styled.section`
   }
   .main_div_pass {
     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-          rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+      rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
     border-radius: 20px;
     padding: 20px;
     .pass1 {

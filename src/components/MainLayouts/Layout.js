@@ -1,27 +1,28 @@
-import React, { useEffect, useState } from "react";
+// Layout.js
+
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import NavBar from "./NavBar";
 import { useSelector } from "react-redux";
 import SideBar from "./SideBar";
-import  Otp  from "../../../src/components/CommonPages/loginpages/Otp";
+import VerifyOtp from "../CommonPages/loginpages/VerifyOtp";
 
 export default function Layout({ children }) {
+  const [isOtpVerified, setIsOtpVerified] = useState(false);
   const userCheck = useSelector((state) => state?.users?.userCheck);
   const token = localStorage.getItem("token");
-  const [isOtpVerified, setIsOtpVerified] = useState(false);
 
   useEffect(() => {
-    const fetchOtpVerification = async () => {
-      try {
-        const otpVerified = await Otp();
-        setIsOtpVerified(otpVerified);
-      } catch (error) {
-        console.error("Error verifying OTP:", error);
-      }
-    };
-
-    fetchOtpVerification();
+    const storedOtpStatus = localStorage.getItem("isOtpVerified");
+    if (storedOtpStatus) {
+      setIsOtpVerified(JSON.parse(storedOtpStatus));
+    }
   }, []);
+
+  const handleOtpVerification = (status) => {
+    setIsOtpVerified(status);
+    localStorage.setItem("isOtpVerified", JSON.stringify(status));
+  };
 
   return (
     <Root>
@@ -34,11 +35,15 @@ export default function Layout({ children }) {
       )}
 
       <div className="main_bar">
-        {!token || !isOtpVerified ? (
+        {token && userCheck && !isOtpVerified ? (
+          <VerifyOtp onVerification={handleOtpVerification} />
+        ) : token && userCheck ? (
+          ""
+        ) : (
           <div className="pre_nav">
             <NavBar />
           </div>
-        ) : null}
+        )}
         <div className="main_body">{children}</div>
       </div>
     </Root>

@@ -30,6 +30,7 @@ import TellecallerNegativeLead from "./components/CommonPages/admin/sharedata/Te
 import TelleReport from "./components/CommonPages/admin/chart/dailyreport/TelleReport";
 import ViewStat from "./components/CommonPages/admin/chart/dailyreport/ViewStat";
 import Otp from "./components/CommonPages/loginpages/Otp";
+import VerifyOtp from "./components/CommonPages/loginpages/VerifyOtp";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -54,6 +55,8 @@ function App() {
                 <Route path="/dailyreport" element={<DailyReport />} />
                 <Route path="/telenegativelead" element={<TellecallerNegativeLead />} />
                 <Route path="/otpverify" element={<Otp />} />
+                <Route path="/otpverifycode" element={<VerifyOtp />} />
+                
               </>
             ) : userDetails?.role === "admin" ? (
               <>

@@ -37,7 +37,6 @@ export default function Tellelogin() {
         localStorage.setItem("token", res?.data?.data?.token);
         dispatch(userDataAction(res?.data?.data));
         dispatch(userCheckAction(true));
-        navigate("/otpverify");
         cogoToast.success("Login Successfully");
       }
     } catch (err) {
