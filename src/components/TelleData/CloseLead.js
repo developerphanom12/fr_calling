@@ -101,7 +101,8 @@ export default function CloseLead() {
 const Root = styled.section`
   display: flex;
   flex-direction: column;
-
+overflow-y: scroll;
+overflow-x: hidden;
   width: 100%;
   height: 39vh;
 
@@ -198,7 +199,7 @@ const Root = styled.section`
         @media (max-width: 789px) {
           font-size: 10px;
         }
-      }
+      }  
       p {
         font-weight: 600;
         text-align: left;

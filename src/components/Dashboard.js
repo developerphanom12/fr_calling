@@ -145,7 +145,7 @@ export default function Dashboard() {
       <div className="chart1">
         <div className="upcoming">
           <div className="div1">
-            <p className="none">Recent Activity</p>
+            <p className="none">Total Activity</p>
           
           </div>
           <TelleData />
@@ -158,11 +158,11 @@ export default function Dashboard() {
               <TfiMenu />
             </div>
           </div>
-          <div className="upcomming_child1">
+          <div className="upcomming_child1_div">
             {UniqueIdea && UniqueIdea.length > 0 ? (
               UniqueIdea.map((i) => (
-                <div className="data" key={i.id}>
-                  <div>
+                <div className="data_div" key={i.id}>
+                  <div className="img_text">
                     <img
                       width="40px"
                       src={
@@ -171,7 +171,10 @@ export default function Dashboard() {
                       alt="img"
                     />
                     <h5>
-                      {i.client_name} <p>{formatDate(i?.call_schedule_date)}</p>
+                      {i.client_name}{" "}
+                      <p className="p_tag">
+                        {formatDate(i?.call_schedule_date)}
+                      </p>
                     </h5>
                   </div>
 
@@ -313,6 +316,8 @@ const Root = styled.section`
       display: flex;
       flex-direction: column;
       padding: 10px;
+      overflow-y: scroll;
+
       width: 36%;
       background-color: #f8f9fa !important;
       box-shadow: 0 0px 2px 0px rgba(0, 0, 0, 0.45) inset;
@@ -340,108 +345,61 @@ const Root = styled.section`
           }
         }
       }
-      .upcomming_child1 {
+      .upcomming_child1_div {
         display: flex;
         flex-direction: column;
-        margin-top: 72px;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        > div {
-          display: flex;
-          flex-direction: column;
-          img {
-            width: 31%;
-            height: 16vh;
-            margin-left: 120px;
-            border-radius: 33px;
-          }
-          .data22 {
-            margin-left: 41px;
-            animation-duration: 3s;
-            animation-name: slidein;
-            color: red;
-            margin: 0px;
-            font-size: 21px;
-            margin-top: 12px;
-          }
+        margin-right: 14px;
+        overflow-y: scroll;
+        .data22 {
+          margin: 12px;
+        }
 
-          @keyframes slidein {
-            from {
-              margin-left: 100%;
-              width: 300%;
-            }
-
-            to {
-              margin-left: 0%;
-              width: 100%;
-            }
-          }
-        }
-        .cams {
-          display: flex;
-          flex-direction: row;
-        }
-        h1 {
-          display: flex;
-          margin: 0;
-        }
-        > div {
-          display: flex;
-          align-items: left;
-
-          .child11 {
-            display: flex;
-            width: 90%;
-            align-items: center;
-            justify-content: right;
-            margin-right: 12px;
-            align-items: center;
-            cursor: pointer;
-          }
-        }
-        .data {
+        .data_div {
           display: flex;
           margin-top: 12px;
-          width: 100%;
           padding: 6px;
-          background: #e1cdcdb5;
           border-radius: 12px;
           margin-bottom: 7px;
-
-          > div {
+          justify-content: space-between;
+          .img_text {
             display: flex;
             font-size: 1.125rem;
             font-weight: 600;
             font-family: Roboto, sans-serif;
-            margin: 0;
-            width: 49%;
             gap: 10px;
             color: rgba(61, 78, 101, 0.84);
             margin-right: 12px;
+            img {
+              width: 50px;
+              height: 50px;
+              border-radius: 33px;
+              margin-top: 5px;
+            }
             h5 {
+              display: flex;
               margin: 0;
+              align-items: center;
+              justify-content: center;
               margin-top: 5px;
               font-size: 18px;
               font-family: Arial, Helvetica, sans-serif;
+              padding: 10px;
+              gap: 40px;
+              .p_tag {
+                font-size: 17px;
+                font-weight: 400;
+                margin: 0px;
+                font-family: Arial, Helvetica, sans-serif;
+                padding: 0px;
+              }
             }
-
-            img {
-              width: 46px;
-              display: flex;
-              height: 46px;
-              justify-content: center;
-              text-align: center;
-              align-items: center;
-            }
-            p {
-              font-size: 17px;
-              font-weight: 400;
-              margin: -1px;
-              font-family: Arial, Helvetica, sans-serif;
-              padding: 0px;
-              margin-top: 3px;
-            }
+          }
+          .child11 {
+            display: flex;
+            align-items: center;
+            justify-content: right;
+            cursor: pointer;
+            color: #0088ff;
           }
         }
       }

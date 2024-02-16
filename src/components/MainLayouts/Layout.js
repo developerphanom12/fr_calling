@@ -33,7 +33,7 @@ export default function Layout({ children }) {
       ) : (
         ""
       )}
-
+      
       <div className="main_bar">
         {token && userCheck && !isOtpVerified ? (
           <VerifyOtp onVerification={handleOtpVerification} />

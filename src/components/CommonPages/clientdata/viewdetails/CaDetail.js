@@ -12,7 +12,6 @@ const formatDate = (isoDate) => {
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 };
-
 export default function CaDetail({ detail }) {
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
@@ -22,7 +21,7 @@ export default function CaDetail({ detail }) {
     ca_accountant_name: "",
     ca_company_name: "",
     ca_accountant_number: "",
-    // company_address: "",
+    company_address: "",
   });
 
   let { ca_id } = useParams();
@@ -55,10 +54,10 @@ export default function CaDetail({ detail }) {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       };
-      const caId = detail?.cadetails?.ca_id;
-      console.log("datatatatatta",caId)
+      const id = detail?.cadetails?.ca_id;
+      console.log("datatatatatta",id)
       const res = await axios.put(
-        `${EXACHANGE_URLS_TELLE}/updateadetail/${caId}`,
+        `${EXACHANGE_URLS_TELLE}/updateadetail/${id}`,
         update,
         axiosConfig
       );
@@ -97,7 +96,7 @@ export default function CaDetail({ detail }) {
           <div>CA Accountant Name</div>
           <div>CA Company Name</div>
           <div>CA Accountant Number</div>
-          {/* <div>Company Address</div> */}
+          <div>Company Address</div>
           {/* <div>Date</div> */}
         </div>
 
@@ -165,7 +164,7 @@ export default function CaDetail({ detail }) {
                     }
                   />
                 </div>
-                {/* <div>
+                <div>
                   <input
                     type="text"
                     value={update.company_address}
@@ -176,10 +175,8 @@ export default function CaDetail({ detail }) {
                       })
                     }
                   />
-                </div> */}
-                {/* <div>
-                  <p>{formatDate(detail?.cadetails?.updated_at)}</p>
-                </div> */}
+                </div>
+               
               </>
             ) : (
               <>
@@ -197,6 +194,9 @@ export default function CaDetail({ detail }) {
                 </div>
                 <div>
                   <p>{detail?.cadetails?.ca_accountant_number}</p>
+                </div>
+                <div>
+                  <p>{detail?.cadetails?.company_address}</p>
                 </div>
                 {/* <div>
                   <p>{detail?.cadetails?.company_address}</p>
@@ -257,6 +257,18 @@ export default function CaDetail({ detail }) {
                     setUpdate({
                       ...update,
                       ca_accountant_number: e.target.value,
+                    });
+                  }}
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  value={update?.company_address}
+                  onChange={(e) => {
+                    setUpdate({
+                      ...update,
+                      company_address: e.target.value,
                     });
                   }}
                 />

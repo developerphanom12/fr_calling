@@ -95,6 +95,7 @@ export default function ColdLead() {
 const Root = styled.section`
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 
   width: 100%;
   height: 39vh;

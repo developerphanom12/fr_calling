@@ -76,7 +76,6 @@ const Root = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-bottom: 20px;
   .nav_tab {
     display: flex;
     flex-wrap: wrap;

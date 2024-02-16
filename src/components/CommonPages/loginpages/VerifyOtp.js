@@ -79,6 +79,7 @@ export default function VerifyOtp({ onVerification }) {
       {!verificationFailed ? (
         <>
           <div className="otptable">
+            
             <h3>Enter OTP</h3>
             <input
               type="number"
@@ -95,6 +96,8 @@ export default function VerifyOtp({ onVerification }) {
           </div>
         </>
       ) : null}
+
+      
     </Root>
   );
 }
@@ -108,24 +111,88 @@ const Root = styled.section`
   backdrop-filter: blur(5px);
   width: 100%;
   height: 100%;
+min-height:100vh;
+background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+margin: auto;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow: auto;
+    background: linear-gradient(315deg, rgba(101,0,94,1) 3%, rgba(60,132,206,1) 38%, rgba(48,238,226,1) 68%, rgba(255,25,25,1) 98%);
+    animation: gradient 15s ease infinite;
+    background-size: 400% 400%;
+    background-attachment: fixed;
 
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+.wave {
+    background: rgb(255 255 255 / 25%);
+    border-radius: 1000% 1000% 0 0;
+    position: fixed;
+    width: 200%;
+    height: 12em;
+    animation: wave 10s -3s linear infinite;
+    transform: translate3d(0, 0, 0);
+    opacity: 0.8;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.wave:nth-of-type(2) {
+    bottom: -1.25em;
+    animation: wave 18s linear reverse infinite;
+    opacity: 0.8;
+}
+
+.wave:nth-of-type(3) {
+    bottom: -2.5em;
+    animation: wave 20s -1s reverse infinite;
+    opacity: 0.9;
+}
+
+@keyframes wave {
+    2% {
+        transform: translateX(1);
+    }
+
+    25% {
+        transform: translateX(-25%);
+    }
+
+    50% {
+        transform: translateX(-50%);
+    }
+
+    75% {
+        transform: translateX(-25%);
+    }
+
+    100% {
+        transform: translateX(1);
+    }
+}
   .otptable {
     display: flex;
+    margin: 0px;
     flex-direction: column;
     width: 35%;
-    /* border: 1px solid; */
-    height: 74%;
-    top: 41%;
-    border-radius: 23px;
-    padding: 20px;
-    position: absolute;
+    height: 35%;
     align-items: center;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-      rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-    input,
-    button {
+    border-radius: 9px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;    button {
       margin: 10px;
       padding: 5px;
+      
     }
     .thatones {
       margin: 10px;
@@ -134,7 +201,7 @@ const Root = styled.section`
       font-size: 17px;
       padding: 9px;
       border-radius: 16px;
-      background: #de7187;
+      background: #00000047;;
       border: 1px;
       color: white;
     }
@@ -149,6 +216,7 @@ const Root = styled.section`
       align-items: center;
       border-radius: 6px;
       padding: 11px;
+      margin-top: 24px;
     }
     .links {
       background: none;
@@ -162,9 +230,18 @@ const Root = styled.section`
 
     h3 {
       font-weight: 500;
-      font-family: "Roboto", "sans-serif";
-      display: flex;
-      justify-content: center;
+    font-family: "Roboto","sans-serif";
+    display: flex;
+    justify-content: center;
+    margin: 0px;
+    width: 100%;
+    height: 22%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: white;
+    border-radius: 7px;
     }
     .main_div_pass {
       box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
@@ -182,6 +259,7 @@ const Root = styled.section`
           padding: 5px 10px;
           color: #202020;
           width: 240px;
+          
           text-decoration: none;
           border: 1px solid black;
           @media (max-width: 600px) {

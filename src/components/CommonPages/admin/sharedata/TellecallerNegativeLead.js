@@ -114,11 +114,18 @@ export default function TellecallerNegativeLead({ popUser = () => {} }) {
                   <p>
                     Client Name <span>{i?.client_name}</span>
                   </p>
+                  <p>
+                    Client No: <span>{i?.client_phonenumber}</span>
+                  </p>
+                  <p>
+                    Client Email: <span>{i?.client_email}</span>
+                  </p>
                 </div>
                 <div>
                   <p>
                     Company Name: <span>{i?.company_name}</span>
                   </p>
+                 
                 </div>
 
                 <div>
@@ -258,6 +265,8 @@ const Root = styled.section`
           &:hover {
             color: green;
           }
+        }
+        p{
         }
       }
       > div {

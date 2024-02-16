@@ -76,8 +76,7 @@ export default function ClientDashboard() {
       </div>
 
       <div className="dailydata">
-       
-       {/* <div className="datacalss">
+        {/* <div className="datacalss">
         <h1> Calls Data</h1>
        </div>
        <div className="datacalss">
@@ -89,14 +88,7 @@ export default function ClientDashboard() {
       <div className="chart1">
         <div className="upcoming">
           <div className="div1">
-            <p className="none">Recent Activity</p>
-            <div className="datapicker">
-              <DatePicker
-                className="p1"
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-              />
-            </div>
+            <p className="none">Total Lead</p>
           </div>
           <TelleData />
         </div>
@@ -108,11 +100,11 @@ export default function ClientDashboard() {
               <TfiMenu />
             </div>
           </div>
-          <div className="upcomming_child1">
+          <div className="upcomming_child1_div">
             {UniqueIdea && UniqueIdea.length > 0 ? (
               UniqueIdea.map((i) => (
-                <div className="data" key={i.id}>
-                  <div>
+                <div className="data_div" key={i.id}>
+                  <div className="img_text">
                     <img
                       width="40px"
                       src={
@@ -121,7 +113,10 @@ export default function ClientDashboard() {
                       alt="img"
                     />
                     <h5>
-                      {i.client_name} <p>{formatDate(i?.call_schedule_date)}</p>
+                      {i.client_name}{" "}
+                      <p className="p_tag">
+                        {formatDate(i?.call_schedule_date)}
+                      </p>
                     </h5>
                   </div>
 
@@ -156,7 +151,7 @@ const Root = styled.section`
   flex-wrap: wrap;
   justify-content: space-between;
 
-  p {
+  /* p {
     font-size: 1.2rem;
     font-weight: 600;
     font-family: Roboto, sans-serif;
@@ -164,7 +159,7 @@ const Root = styled.section`
     color: rgba(61, 78, 101, 0.84);
     margin-top: 50px;
     margin-left: 13px;
-  }
+  } */
 
   .chartmain {
     display: flex;
@@ -226,7 +221,7 @@ const Root = styled.section`
       padding: 9px;
       border-radius: 5px;
       background-color: #f8f9fa !important;
-      box-shadow: 1px 1px 5px 1px lightgray  ;
+      box-shadow: 1px 1px 5px 1px lightgray;
       .div1 {
         display: flex;
         justify-content: space-between;
@@ -269,7 +264,7 @@ const Root = styled.section`
       padding: 11.5px;
       width: 36%;
       border-radius: 5px;
-      box-shadow: 1px 1px 5px 1px lightgray  ;
+      box-shadow: 1px 1px 5px 1px lightgray;
       h1 {
         font-size: 1.125rem;
         font-weight: 600;
@@ -295,85 +290,60 @@ const Root = styled.section`
           }
         }
       }
-      .upcomming_child1 {
+      .upcomming_child1_div {
         display: flex;
         flex-direction: column;
         margin-right: 14px;
-
-       
-        .cams {
-          display: flex;
-          flex-direction: row;
-        }
-        h1 {
-          display: flex;
-          margin: 0;
-        }
-        > div {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          img {
-            width: 31%;
-            height: 16vh;
-            border-radius: 33px;
-            margin-top: 34px  ;
-          }
-          .data22{
+        overflow-y: scroll;
+        overflow-x: hidden;
+        .data22 {
           margin: 12px;
+        }
+
+        .data_div {
+          display: flex;
+          padding: 6px;
+          border-radius: 12px;
+          justify-content: space-between;
+          .img_text {
+            display: flex;
+            font-size: 1.125rem;
+            font-weight: 600;
+            font-family: Roboto, sans-serif;
+            gap: 10px;
+            color: rgba(61, 78, 101, 0.84);
+            margin-right: 12px;
+            img {
+              width: 40px;
+              height: 40px;
+              border-radius: 33px;
+              margin-top: 5px;
+            }
+            h5 {
+              display: flex;
+              margin: 0;
+              align-items: center;
+              justify-content: center;
+              margin-top: 5px;
+              font-size: 18px;
+              font-family: Arial, Helvetica, sans-serif;
+              padding: 10px;
+              gap: 40px;
+              .p_tag {
+                font-size: 17px;
+                font-weight: 400;
+                margin: 0px;
+                font-family: Arial, Helvetica, sans-serif;
+                padding: 0px;
+              }
+            }
           }
           .child11 {
             display: flex;
-            width: 90%;
             align-items: center;
             justify-content: right;
-            margin-right: 12px;
-            align-items: center;
             cursor: pointer;
             color: #0088ff;
-          }
-          .data {
-            display: flex;
-            margin-top: 12px;
-            width: 100%;
-            padding: 6px;
-            border-radius: 12px;
-            margin-bottom: 7px;
-
-            > div {
-              font-size: 1.125rem;
-              font-weight: 600;
-              font-family: Roboto, sans-serif;
-              margin: 0;
-              width: 60%;
-              display: flex;
-              gap: 10px;
-              color: rgba(61, 78, 101, 0.84);
-              margin-right: 12px;
-              h5 {
-                margin: 0;
-                margin-top: 5px;
-                font-size: 18px;
-                font-family: Arial, Helvetica, sans-serif;
-              }
-
-              img {
-                width: 46px;
-                display: flex;
-                height: 46px;
-                justify-content: center;
-                text-align: center;
-                align-items: center;
-              }
-              p {
-                font-size: 17px;
-                font-weight: 400;
-                margin: -1px;
-                font-family: Arial, Helvetica, sans-serif;
-                padding: 0px;
-                margin-top: 3px;
-              }
-            }
           }
         }
       }
@@ -383,14 +353,14 @@ const Root = styled.section`
   .char:hover {
   }
 
-  p {
+  /* p {
     font-size: 1.2rem;
     font-weight: 600;
     font-family: Roboto, sans-serif;
     letter-spacing: 0;
     color: rgba(61, 78, 101, 0.84);
     margin-top: 50px;
-  }
+  } */
   .hotlead {
     color: white;
     cursor: pointer;
@@ -522,7 +492,7 @@ const Root = styled.section`
         }
       }
     }
-    .upcomming_child1 {
+    /* .upcomming_child1 {
       display: flex;
       flex-direction: column;
       margin-right: 14px;
@@ -593,13 +563,13 @@ const Root = styled.section`
           }
         }
       }
-    }
+    } */
   }
 
-  .dailydata{
+  .dailydata {
     background-color: red;
     display: flex;
-    .datacalss{
+    .datacalss {
       display: flex;
       flex-direction: column;
       width: 20%;

@@ -16,10 +16,9 @@ export default function ClientData() {
     client_phonenumber:"",
     client_email:"",
     remark:"",
-    attach_file:"",
+    attach_file:null,
     call_status: "",
   });
-
   const [add, setAdd] = useState({
     ca_name: "",
     ca_number: "",
@@ -42,11 +41,22 @@ export default function ClientData() {
     data.append("client_anniversary", formData.client_anniversary);
     data.append("call_schedule_date", formData.call_schedule_date);
     data.append("call_status", formData.call_status);
-    data.append("attach_file", formData.attach_file);
-    Object.keys(add).forEach((key) => {
-      data.append(`ca_data[${key}]`, add[key]);
-    });
-
+  
+    if (
+      add.ca_name ||
+      add.ca_number ||
+      add.ca_accountant_name ||
+      add.ca_company_name ||
+      add.ca_accountant_number ||
+      add.company_address
+    ) {
+      Object.keys(add).forEach((key) => {
+        if (add[key]) {
+          data.append(`ca_data[${key}]`, add[key]);
+        }
+      });
+    }
+  
     try {
       const axiosConfig = {
         headers: {
@@ -58,7 +68,7 @@ export default function ClientData() {
         data,
         axiosConfig
       );
-
+  
       if (res?.status === 200) {
         cogoToast.success("Registered Successfully");
         setFormData({
@@ -68,8 +78,8 @@ export default function ClientData() {
           client_anniversary: "",
           call_schedule_date: "",
           call_status: "",
-          attach_file: "",
-          remark:"",
+          attach_file: null,
+          remark: "",
         });
         setAdd({
           ca_name: "",
@@ -77,26 +87,20 @@ export default function ClientData() {
           ca_accountant_name: "",
           ca_company_name: "",
           ca_accountant_number: "",
+          company_address: "",
         });
-        navigate("/dashboard");
+        navigate("/history");
       }
     } catch (err) {
       console.error("Error:", err);
       cogoToast.error("Registration Failed");
     }
   };
-
-  const handleImage = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFormData({ ...formData, attach_file: file });
-    } else {
-      setFormData({ ...formData, attach_file: "" });
-    }
-  };
+  
   const handleRegisterClick = () => {
     registerApi();
   };
+
   return (
     <Root>
       <h4>Your Client Data :-</h4>
@@ -297,7 +301,7 @@ export default function ClientData() {
           Attach Any File
           <input
               type="file"
-              onChange={handleImage}
+              // onChange={handleImage}
             />
         </div>
       </div>
