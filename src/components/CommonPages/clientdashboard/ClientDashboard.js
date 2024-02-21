@@ -346,6 +346,25 @@ const Root = styled.section`
             color: #0088ff;
           }
         }
+        div{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+          img{
+            width: 74px;
+            height: 64px;
+            margin-top: 74px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+          }
+        }
       }
     }
   }

@@ -1,28 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 import { IoSearchSharp } from "react-icons/io5";
-import { IoMdStarOutline } from "react-icons/io";
-import { IoStar } from "react-icons/io5";
 import { RiStarSmileFill } from "react-icons/ri";
-import groupiiimg from "../../images/homeimages.jpeg";
 import round from "../../images/contemporary-art-collage-creative-design-two-women-employees-working-on-ladder-of-success-2HJPF9Y.jpg";
+import telecallerImg from "../../images/homeimages.jpeg";
 
 export default function Page1() {
   return (
     <Root>
       <div className="childfirst">
         <div className="child1">
-          <h1>Check Portfilo.</h1>
-          <h1>Tellecallerr</h1>
-          <h1>Find Best Solution</h1>
-          <h1>You Can Trust.</h1>
+          <h1>Empowering Telecallers</h1>
+          <h1>with Success Tools</h1>
+          <h1>You Can Rely On</h1>
         </div>
         <div className="child2">
-          <input />
+          <input placeholder="Search for tools..." />
           <button>
-            {" "}
             <IoSearchSharp />
-            search
+            Search
           </button>
         </div>
       </div>
@@ -39,19 +35,16 @@ export default function Page1() {
             <div className="semicircle"></div>
             <div className="square"></div>
             <div className="semisquare"></div>
-            <IoMdStarOutline />
+            <IoSearchSharp />
           </div>
         </div>
         <div className="grpimg">
-          <IoStar />
           <div className="grp1">
-            <img src={round} alt="img" />
+            <img src={round} alt="Telecaller Success" />
           </div>
-
           <div className="grp2">
-            <img src={groupiiimg} alt="img" />
+            <img src={telecallerImg} alt="Telecaller Team" />
           </div>
-          <IoStar />
         </div>
       </div>
     </Root>
@@ -154,6 +147,10 @@ const Root = styled.section`
     @media (max-width: 989px) {
       width: 100%;
       height: 30%;
+    }
+
+    img{
+      width: 100%;
     }
     .child3 {
       display: flex;

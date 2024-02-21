@@ -8,8 +8,7 @@ export default function Page4() {
       <div className="main">
         {" "}
         <div className="head">
-          <h1>Hire Smarter With The Review App</h1>
-          <p>Keep Review Me in your pocket. Read Review and write them</p>
+          <h1>Hire Smarter With The Telecaller App</h1>
         </div>
         <div className="mainbody">
           <div className="bodyy">

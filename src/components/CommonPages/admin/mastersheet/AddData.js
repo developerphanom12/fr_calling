@@ -48,7 +48,7 @@ export default function AddData() {
 
   return (
     <Root>
-      <div>
+      <div className="sheet">
         <h3>Add Mastersheet Data</h3>
         <div className="name">
           User Name
@@ -74,64 +74,68 @@ export default function AddData() {
 
 const Root = styled.section`
  
-  h3 {
-    text-shadow: 4px 5px 5px gray;
-    margin: 10px;
-  }
-  .name {
-    display: flex;
-    flex-direction: column;
-    font-size: small;
-    width: 80%;
-    margin-right: 10px;
-    padding: 10px;
-    gap: 10px;
-    color: black;
 
-    select {
-      background-color: white;
-      color: black;
-      text-decoration: none;
-      border: 2px solid lightgray;
-      line-height: 1.5em;
-      padding: 10px;
-      width: 50%;
-      border-radius: 10px;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      background-image: linear-gradient(45deg, transparent 50%, black 50%),
-        linear-gradient(135deg, black 50%, transparent 50%),
-        linear-gradient(to right, dodgerblue, skyblue);
-      background-position: calc(100% - 20px) calc(1em + 2px),
-        calc(100% - 15px) calc(1em + 2px), 100% 0;
-      background-size: 5px 5px, 5px 5px, 40px 45px;
-      background-repeat: no-repeat;
-      &:hover {
-        box-shadow: 4px 4px 5px darkgray;
-        transition: all 0.1s ease-in-out 0s;
-      }
-      @media (max-width: 555px) {
-        padding: 8px;
-        width: 100%;
-        background-size: 5px 5px, 5px 5px, 30px 45px;
-        align-items: center;
-      }
+ .sheet{
 
-      select:focus {
-        background-image: linear-gradient(45deg, white 50%, transparent 50%),
-          linear-gradient(135deg, transparent 50%, white 50%),
-          linear-gradient(to right, gray, gray);
-        background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em,
-          100% 0;
-        background-size: 5px 5px, 5px 5px, 2.5em 2.5em;
-        background-repeat: no-repeat;
-        border-color: grey;
-        outline: 0;
-      }
-    }
+   h3 {
+     text-shadow: 4px 5px 5px gray;
+     margin: 10px;
+   }
+   .name {
+     display: flex;
+     flex-direction: column;
+     font-size: small;
+     width: 80%;
+     margin-right: 10px;
+     padding: 10px;
+     gap: 10px;
+     color: black;
+ 
+     select {
+       background-color: white;
+       color: black;
+       text-decoration: none;
+       border: 2px solid lightgray;
+       line-height: 1.5em;
+       padding: 10px;
+       width: 50%;
+       border-radius: 10px;
+       -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+       box-sizing: border-box;
+       -webkit-appearance: none;
+       -moz-appearance: none;
+       background-image: linear-gradient(45deg, transparent 50%, black 50%),
+         linear-gradient(135deg, black 50%, transparent 50%),
+         linear-gradient(to right, dodgerblue, skyblue);
+       background-position: calc(100% - 20px) calc(1em + 2px),
+         calc(100% - 15px) calc(1em + 2px), 100% 0;
+       background-size: 5px 5px, 5px 5px, 40px 45px;
+       background-repeat: no-repeat;
+       &:hover {
+         box-shadow: 4px 4px 5px darkgray;
+         transition: all 0.1s ease-in-out 0s;
+       }
+       @media (max-width: 555px) {
+         padding: 8px;
+         width: 100%;
+         background-size: 5px 5px, 5px 5px, 30px 45px;
+         align-items: center;
+       }
+ 
+       select:focus {
+         background-image: linear-gradient(45deg, white 50%, transparent 50%),
+           linear-gradient(135deg, transparent 50%, white 50%),
+           linear-gradient(to right, gray, gray);
+         background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em,
+           100% 0;
+         background-size: 5px 5px, 5px 5px, 2.5em 2.5em;
+         background-repeat: no-repeat;
+         border-color: grey;
+         outline: 0;
+       }
+     }
+   }
   }
   > div {
     .regis {

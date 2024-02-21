@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import cogoToast from "cogo-toast";
 import { appDetailsAction } from "../../../../redux/users/action";
 import { EXCHANGE_URLS_ADMIN } from "../../../URLS";
 

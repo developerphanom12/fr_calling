@@ -66,6 +66,9 @@ export default function ClientDetail({ detail }) {
           <div>Company Name</div>
           <div>DOB Client</div>
           <div>Client Aniversary</div>
+          <div>Client Email</div>
+          <div>Client Phonenumber </div>
+          <div>Client Companyaddress </div>
           <div>Call Status</div>
           <div>Date</div>
         </div>
@@ -81,7 +84,16 @@ export default function ClientDetail({ detail }) {
             <p>{formatDate(detail?.dob_client)}</p>
           </div>
           <div>
-            <p>{detail?.client_anniversary}</p>
+            <p>{formatDate(detail?.client_anniversary)}</p>
+          </div>
+          <div>
+            <p>{detail?.client_email}</p>
+          </div>
+          <div>
+            <p>{detail?.client_phonenumber}</p>
+          </div>
+          <div>
+            <p>{detail?.client_companyaddress}</p>
           </div>
           <div>
             <p>{detail?.call_status}</p>

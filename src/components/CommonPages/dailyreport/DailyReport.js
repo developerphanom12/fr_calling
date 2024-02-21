@@ -113,17 +113,20 @@ export const DailyReport = ({ popUser = () => {} }) => {
                     <span>{formatDate(i?.update_date)}</span>
                   </p>
                 </div>
+
+                <div className="btn1">
+          <button className="nt2" onClick={handleNext}>
+            Next
+          </button>
+        </div>
               </div>
             ))
           ) : (
             <div className="no-data-message">No data available at this time.</div>
           )}
+          
         </div>
-        <div className="btn1">
-          <button className="nt2" onClick={handleNext}>
-            Next
-          </button>
-        </div>
+       
       </div>
     </Root>
   );
