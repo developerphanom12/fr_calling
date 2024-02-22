@@ -40,38 +40,38 @@ export default function CaDetail({ detail }) {
     }
   };
 
-  const updateApiData = async () => {
-    try {
-      const axiosConfig = {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      };
-      const id = detail?.cadetails?.ca_id;
-      console.log("datatatatatta",id)
-      const res = await axios.put(
-        `${EXACHANGE_URLS_TELLE}/updateadetail/${id}`,
-        update,
-        axiosConfig
-      );
-      console.log("ressponnse", res);
-      if (res?.status === 200) {
-        navigate("/studash");
-      }
-    } catch (err) {
-      console.log("err", err);
-    }
-  };
+  // const updateApiData = async () => {
+  //   try {
+  //     const axiosConfig = {
+  //       headers: {
+  //         authorization: `Bearer ${localStorage.getItem("token")}`,
+  //       },
+  //     };
+  //     const id = detail?.cadetails?.ca_id;
+  //     console.log("datatatatatta",id)
+  //     const res = await axios.put(
+  //       `${EXACHANGE_URLS_TELLE}/updateadetail/${id}`,
+  //       update,
+  //       axiosConfig
+  //     );
+  //     console.log("ressponnse", res);
+  //     if (res?.status === 200) {
+  //       navigate("/studash");
+  //     }
+  //   } catch (err) {
+  //     console.log("err", err);
+  //   }
+  // };
   const handleSubmit = () => {
     postApiData();
   };
   const handleEditClick = () => {
     setIsEditing(true);
   };
-  const handleDoneEditing = () => {
-    setIsEditing(false);
-    updateApiData();
-  }; 
+  // const handleDoneEditing = () => {
+  //   setIsEditing(false);
+  //   updateApiData();
+  // }; 
 
   return (
     <Root>
