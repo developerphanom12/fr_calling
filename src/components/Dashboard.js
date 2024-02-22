@@ -7,7 +7,7 @@ import { useState } from "react";
 import Mainchart from "./CommonPages/admin/chart/Mainchart";
 import Mainchart2 from "./CommonPages/admin/chart/Mainchart2";
 import { EXCHANGE_URLS_ADMIN } from "./URLS";
-import axios from "axios";   
+import axios from "axios";
 import { BsFillEyeFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
@@ -93,13 +93,13 @@ export default function Dashboard() {
           <h1>Total Client</h1>
           <Mainchart3 />
           <div
-                className="viewstat"
-                onClick={() => {
-                  navigate("/viewstat");
-                }}
-              >
-                <p>View Stats</p>
-              </div>
+            className="viewstat"
+            onClick={() => {
+              navigate("/viewstat");
+            }}
+          >
+            <p>View Stats</p>
+          </div>
         </div>
         <div className="char">
           <Mainchart2 />
@@ -107,8 +107,6 @@ export default function Dashboard() {
       </div>
       <div className="telledata">
         <div></div>
-
-        
       </div>
 
       <p>Current Month</p>
@@ -142,7 +140,6 @@ export default function Dashboard() {
         <div className="upcoming">
           <div className="div1">
             <p className="none">Total Activity</p>
-          
           </div>
           <TelleData />
         </div>
@@ -193,8 +190,6 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-
-    
     </Root>
   );
 }
@@ -398,26 +393,25 @@ const Root = styled.section`
             color: #0088ff;
           }
         }
-        div{
-        display: flex;
-        justify-content: center;
-        text-align: center;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        width: 100%;
-        height: 100%;
-          img{
+        >div {
+          display: flex;
+          justify-content: center;
+          text-align: center;
+          /* flex-direction: column; */
+          align-items: center;
+          text-align: center;
+          width: 100%;
+          height: 100%;
+          img {
             width: 74px;
             height: 64px;
-            margin-top: 74px;     
+            margin-top: 74px;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
           }
         }
-
       }
     }
   }
@@ -466,31 +460,31 @@ const Root = styled.section`
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
       rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     width: 31%;
-   
-    .viewstat{
+
+    .viewstat {
       display: flex;
-    margin: 0px;
-    justify-content: right;
-     text-align: center;
-    p{
-      background: rebeccapurple;
-    font-size: 20px;
-    color: white;
-    border: 1px solid;
-    margin: 4px;
-    margin-top: 20px;
-    margin-right: 11px;
-    width: 8vw;
-    display: flex;
-    font-family: auto;
-    padding: 2px;
-    border-radius: 7px;
-    height: 4vh;
-    justify-content: center;
-    padding: 5px;
-    align-items: center;
-    cursor: pointer;
-    }
+      margin: 0px;
+      justify-content: right;
+      text-align: center;
+      p {
+        background: rebeccapurple;
+        font-size: 20px;
+        color: white;
+        border: 1px solid;
+        margin: 4px;
+        margin-top: 20px;
+        margin-right: 11px;
+        width: 8vw;
+        display: flex;
+        font-family: auto;
+        padding: 2px;
+        border-radius: 7px;
+        height: 4vh;
+        justify-content: center;
+        padding: 5px;
+        align-items: center;
+        cursor: pointer;
+      }
     }
     > div {
       margin-top: 64px;
@@ -572,5 +566,14 @@ const Root = styled.section`
     .datassqaaqs {
       width: 30vw;
     }
+  }
+  .MEtAH .chart1 .upcoming1 .upcomming_child1_div div {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
   }
 `;

@@ -7,30 +7,29 @@ export default function Page5() {
     <Root>
       <div className="main1">
         <h2>
-          Be Heard
+          Your Feedback Matters
           <IoStar />
         </h2>
         <p>
-          ReviewMe is a review platform that’s open to everyone. Share your
-          experiences to help others make better choices and encourage companies
-          and employees to up their game.
+          Welcome to CallReview, where your voice shapes our service. Share your
+          thoughts to help us improve and deliver better experiences to our customers.
         </p>
       </div>
       <div className="main2">
         <div className="child1">
           <h1>
-            Our 2023 Transparency Report has landed
+            Explore Our Latest Reports
             <IoStar />
           </h1>
           <p>
-            We’re looking back on a year unlike any other. Read about how we
-            ensure our platform’s integrity.
+            Dive into our most recent insights and performance metrics. Learn how we strive for excellence in every call.
           </p>
         </div>
       </div>
     </Root>
   );
 }
+
 const Root = styled.section`
   background-color: rgba(2, 83, 185, 1);
   color: white;

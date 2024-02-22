@@ -10,6 +10,7 @@ import { BsFillEyeFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import TelleData from "../../TelleData/TelleData";
 import data from "../../images/nodatra.png";
+import imgofshilpa from "../../images/client-1295901_1280.webp";
 
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
@@ -101,13 +102,7 @@ export default function ClientDashboard() {
               UniqueIdea.map((i) => (
                 <div className="data_div" key={i.id}>
                   <div className="img_text">
-                    <img
-                      width="40px"
-                      src={
-                        "https://cdn.pixabay.com/photo/2016/03/31/20/37/client-1295901_1280.png"
-                      }
-                      alt="img"
-                    />
+                    <img width="40px" src={imgofshilpa} alt="img" />
                     <h5>
                       {i.client_name}{" "}
                       <p className="p_tag">
@@ -288,7 +283,6 @@ const Root = styled.section`
       }
       .upcomming_child1_div {
         display: flex;
-        flex-direction: column;
         margin-right: 14px;
         overflow-y: scroll;
         overflow-x: hidden;
@@ -342,16 +336,16 @@ const Root = styled.section`
             color: #0088ff;
           }
         }
-        div{
-        display: flex;
-        justify-content: center;
-        text-align: center;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        width: 100%;
-        height: 100%;
-          img{
+        > div {
+          display: flex;
+          justify-content: center;
+          text-align: center;
+          /* flex-direction: column; */
+          align-items: center;
+          text-align: center;
+          width: 100%;
+          height: 100%;
+          img {
             width: 74px;
             height: 64px;
             margin-top: 74px;
@@ -474,113 +468,7 @@ const Root = styled.section`
       }
     }
   }
-  .upcoming1 {
-    display: flex;
-    flex-direction: column;
-    margin-top: 35px;
-    padding: 11.5px;
-    width: 36%;
-    background-color: #f8f9fa !important;
-    box-shadow: 0 0px 2px 0px rgba(0, 0, 0, 0.45) inset;
-    h1 {
-      font-size: 1.125rem;
-      font-weight: 600;
-      font-family: Roboto, sans-serif;
-      letter-spacing: 0;
-      color: rgba(61, 78, 101, 0.84);
-    }
-    .upcomming_child {
-      .child1 {
-        display: flex;
-        align-items: center;
-        text-align: center;
-        padding: 10px;
-        justify-content: space-between;
-        cursor: pointer;
-        p {
-          font-size: 25px;
-          display: flex;
-          margin: 0;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-        }
-      }
-    }
-    /* .upcomming_child1 {
-      display: flex;
-      flex-direction: column;
-      margin-right: 14px;
-
-      .cams {
-        display: flex;
-        flex-direction: row;
-      }
-      h1 {
-        display: flex;
-        margin: 0;
-      }
-      > div {
-        display: flex;
-        flex-direction: column;
-        align-items: left;
-
-        .child11 {
-          display: flex;
-          width: 90%;
-          align-items: center;
-          justify-content: right;
-          margin-right: 12px;
-          align-items: center;
-          cursor: pointer;
-        }
-        .data {
-          display: flex;
-          margin-top: 12px;
-          width: 100%;
-          padding: 6px;
-          border-bottom: 1px solid lightgray;
-          margin-bottom: 7px;
-
-          > div {
-            font-size: 1.125rem;
-            font-weight: 600;
-            font-family: Roboto, sans-serif;
-            margin: 0;
-            width: 60%;
-            display: flex;
-            gap: 10px;
-            color: rgba(61, 78, 101, 0.84);
-            margin-right: 12px;
-            h5 {
-              margin: 0;
-              margin-top: 5px;
-              font-size: 18px;
-              font-family: Arial, Helvetica, sans-serif;
-            }
-
-            img {
-              width: 46px;
-              display: flex;
-              height: 46px;
-              justify-content: center;
-              text-align: center;
-              align-items: center;
-            }
-            p {
-              font-size: 17px;
-              font-weight: 400;
-              margin: -1px;
-              font-family: Arial, Helvetica, sans-serif;
-              padding: 0px;
-              margin-top: 3px;
-            }
-          }
-        }
-      }
-    } */
-  }
-
+   
   .dailydata {
     background-color: red;
     display: flex;

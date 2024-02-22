@@ -31,7 +31,6 @@ import TelleReport from "./components/CommonPages/admin/chart/dailyreport/TelleR
 import ViewStat from "./components/CommonPages/admin/chart/dailyreport/ViewStat";
 import Otp from "./components/CommonPages/loginpages/Otp";
 import VerifyOtp from "./components/CommonPages/loginpages/VerifyOtp";
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const userCheck = useSelector((state) => state?.users?.userCheck);

@@ -29,77 +29,78 @@ export default function ClientData() {
   });
 
   const navigate = useNavigate();
-  const registerApi = async () => {
-    const data = new FormData();
-    data.append("client_name", formData.client_name);
-    data.append("client_email", formData.client_email);
-    data.append("client_phonenumber", formData.client_phonenumber);
-    data.append("client_companyaddress", formData.client_companyaddress);
-    data.append("company_name", formData.company_name);
-    data.append("remark", formData.remark);
-    data.append("dob_client", formData.dob_client);
-    data.append("client_anniversary", formData.client_anniversary);
-    data.append("call_schedule_date", formData.call_schedule_date);
-    data.append("call_status", formData.call_status);
-  
-    if (
-      add.ca_name ||
-      add.ca_number ||
-      add.ca_accountant_name ||
-      add.ca_company_name ||
-      add.ca_accountant_number ||
-      add.company_address
-    ) {
-      Object.keys(add).forEach((key) => {
-        if (add[key]) {
-          data.append(`ca_data[${key}]`, add[key]);
-        }
+const validateForm = () => {
+  if (
+    formData.client_name === "" ||
+    formData.company_name === "" ||
+    formData.client_email === "" ||
+    formData.client_phonenumber === "" ||
+    formData.dob_client === "" ||
+    formData.call_schedule_date === "" ||
+    formData.call_status === "" ||
+    formData.remark === "" ||
+    formData.client_companyaddress === "" || 
+    formData.client_anniversary === "" 
+  ) {
+    cogoToast.error("Please fill out all required fields");
+    return false;
+  }
+  return true;
+};
+
+const registerApi = async () => {
+  if (!validateForm()) {
+    return;
+  }
+
+  const data = new FormData();
+  data.append("client_name", formData.client_name);
+  data.append("client_email", formData.client_email);
+  data.append("client_phonenumber", formData.client_phonenumber);
+  data.append("client_companyaddress", formData.client_companyaddress);
+  data.append("company_name", formData.company_name);
+  data.append("remark", formData.remark);
+  data.append("dob_client", formData.dob_client);
+  data.append("client_anniversary", formData.client_anniversary);
+  data.append("call_schedule_date", formData.call_schedule_date);
+  data.append("call_status", formData.call_status);
+
+  try {
+    const axiosConfig = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+    const res = await axios.post(
+      `${EXACHANGE_URLS_TELLE}/addclientdata`,
+      data,
+      axiosConfig
+    );
+
+    if (res?.status === 200) {
+      cogoToast.success("Registered Successfully");
+      setFormData({
+        client_name: "",
+        company_name: "",
+        dob_client: "",
+        client_anniversary: "",    
+        call_schedule_date: "",
+        call_status: "",
+        attach_file: null,
+        remark: "",
       });
+      navigate("/history");
     }
-  
-    try {
-      const axiosConfig = {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      };
-      const res = await axios.post(
-        `${EXACHANGE_URLS_TELLE}/addclientdata`,
-        data,
-        axiosConfig
-      );
-  
-      if (res?.status === 200) {
-        cogoToast.success("Registered Successfully");
-        setFormData({
-          client_name: "",
-          company_name: "",
-          dob_client: "",
-          client_anniversary: "",    
-          call_schedule_date: "",
-          call_status: "",
-          attach_file: null,
-          remark: "",
-        });
-        setAdd({
-          ca_name: "",
-          ca_number: "",
-          ca_accountant_name: "",
-          ca_company_name: "",
-          ca_accountant_number: "",
-          company_address: "",
-        });
-        navigate("/history");
-      }
-    } catch (err) {
-      console.error("Error:", err);
-      cogoToast.error("Registration Failed");
-    }
-  };
-  
-  const handleRegisterClick = () => {
-    registerApi();
-  };
+  } catch (err) {
+    console.error("Error:", err);
+    cogoToast.error("Registration Failed");
+  }
+};
+
+const handleRegisterClick = () => {
+  registerApi();
+};
+
 
   return (
     <Root>
@@ -107,7 +108,7 @@ export default function ClientData() {
       <div className="first_box1">
         <div className="name">
           {" "}
-          Client Name
+          Client Name *
           <input
             type="name"
             value={formData?.client_name}
@@ -119,7 +120,7 @@ export default function ClientData() {
         </div>
         <div className="name">
           {" "}
-          Client Email
+          Client Email*
           <input
             type="email"
             value={formData?.client_email}
@@ -131,7 +132,7 @@ export default function ClientData() {
         </div>
         <div className="name">
           {" "}
-          Client Number
+          Client Number*
           <input
             type="email"
             value={formData?.client_phonenumber}
@@ -143,7 +144,7 @@ export default function ClientData() {
         </div>
         <div className="name">
           {" "}
-          Company name
+          Company name*
           <input
             type="name"
             value={formData?.company_name}
@@ -155,7 +156,7 @@ export default function ClientData() {
         </div>
         <div className="name">
           {" "}
-          Company Address
+          Company Address*
           <input
             type="name"
             value={formData?.client_companyaddress}
@@ -167,7 +168,7 @@ export default function ClientData() {
         </div>
 
         <div className="name">
-          Dob CLient
+          Dob CLient*
           <input
             type="date"
             pattern="\d{2}/\d{2}/\d{4}"
@@ -179,7 +180,7 @@ export default function ClientData() {
           />
         </div>
         <div className="name">
-          Client Aniversary (optional)
+          Client Aniversary*
           <input
             type="date"
             pattern="\d{2}/\d{2}/\d{4}"
@@ -194,7 +195,7 @@ export default function ClientData() {
           />
         </div>
         <div className="name">
-          Call Schedule
+          Call Schedule*
           <input
             type="date"
             pattern="\d{2}/\d{2}/\d{4}"
@@ -209,20 +210,24 @@ export default function ClientData() {
           />
         </div>
         <div className="name">
-          Call Status
+          Call Status*
           <select
             onChange={(e) => {
               setFormData({ ...formData, call_status: e.target.value });
             }}
           >
             <option value="">Please Select</option>
-            <option value="cold_lead">cold_lead</option>
-            <option value="hot_lead">hot_lead</option>
+            <option value="cold_lead">Cold Lead</option>
+            <option value="prospective_client">Prospective Client</option>
+            <option value="ghost_client">Ghost Client</option>
+            <option value="negative_client">Negative Client</option>
+            <option value="close_status">Close Status</option>
+            <option value="hot_lead">Hot Lead</option>
           </select>
         </div>
         <div className="name">
           {" "}
-           Remark  
+           Remark*
           <input
             type="name"
             value={formData?.remark}
@@ -236,7 +241,7 @@ export default function ClientData() {
       <h4> Your CA Details :-</h4>{" "}
       <div className="second_div">
         <div className="name">
-          CA Name
+          CA Name (Optional)
           <input
             value={add?.ca_name}
             onChange={(e) => {
@@ -246,7 +251,7 @@ export default function ClientData() {
           />
         </div>
         <div className="name">
-          CA Number
+          CA Number (Optional)
           <input
             type="number"
             value={add?.ca_number}
@@ -257,7 +262,7 @@ export default function ClientData() {
           />
         </div>
         <div className="name">
-          CA Company Name
+          CA Company Name (Optional)
           <input
             value={add?.ca_company_name}
             onChange={(e) => {
@@ -267,7 +272,7 @@ export default function ClientData() {
           />
         </div>
         <div className="name">
-        CA Address
+        CA Address (Optional)
           <input
             value={add?.company_address}
             onChange={(e) => {
@@ -277,7 +282,7 @@ export default function ClientData() {
           />
         </div>
         <div className="name">
-          Accountant Name
+          Accountant Name (Optional)
           <input
             value={add?.ca_accountant_name}
             onChange={(e) => {
@@ -287,7 +292,7 @@ export default function ClientData() {
           />
         </div>
         <div className="name">
-          Accountant Number
+          Accountant Number (Optional)
           <input
             type="number"
             value={add.ca_accountant_number}
@@ -298,7 +303,7 @@ export default function ClientData() {
           />
         </div>
         <div className="name">
-          Attach Any File
+          Attach Any File (Optional)
           <input
               type="file"
               // onChange={handleImage}
@@ -501,3 +506,4 @@ const Root = styled.section`
     }
   }
 `;
+
