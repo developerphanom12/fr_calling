@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { EXACHANGE_URLS_TELLE, EXCHANGE_URLS_ADMIN } from "../../URLS";
+import { EXCHANGE_URLS_ADMIN } from "../../URLS";
 import axios from "axios";
 import cogoToast from "cogo-toast";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 
 export default function Otp() {
-  const navigate = useNavigate();
   const [changePass, setChangePass] = useState({
     email: "",
   });

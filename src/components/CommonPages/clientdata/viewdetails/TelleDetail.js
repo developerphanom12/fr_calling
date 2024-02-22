@@ -21,7 +21,7 @@ export default function TelleDetail({ detail }) {
           <div>
             <p>{detail?.user?.email}</p>
           </div>
-
+    
           <div>
             <p>{detail?.user?.role}</p>
           </div>

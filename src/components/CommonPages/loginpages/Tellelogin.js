@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { IoEyeOffSharp, IoEyeSharp } from "react-icons/io5";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
@@ -16,14 +15,13 @@ const schema = yup.object().shape({
   username: yup.string().required("username is required."),
   passsword: yup.string().required("Password is required."),
 });
-
+ 
 export default function Tellelogin() {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
@@ -44,7 +42,7 @@ export default function Tellelogin() {
       cogoToast.error("Invalid User");
     }
   };
-
+ 
   const {
     register,
     handleSubmit,

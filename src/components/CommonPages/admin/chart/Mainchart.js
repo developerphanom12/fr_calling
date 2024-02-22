@@ -13,7 +13,7 @@ const Mainchart = () => {
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-    };
+    }; 
     try {
       const res = await axios.get(
         `${EXACHANGE_URLS_TELLE}/admincheckaalsales?selection=${selection}`,

@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { BsFillEyeFill } from "react-icons/bs";
-import { useNavigate, useParams } from "react-router-dom";
-import Download from "../DownloadData";
+import { useNavigate} from "react-router-dom";
 import { appDetailsAction } from "../../../../redux/users/action";
 import { EXCHANGE_URLS_ADMIN } from "../../../URLS";
 
@@ -14,7 +13,6 @@ export default function ClientHistory({ popUser = () => {} }) {
   const [selectedTele, setSelectedTele] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  let { cd } = useParams;
   const getHistory = async () => {
     const axiosConfig = {
       headers: {
@@ -230,7 +228,7 @@ const Root = styled.section`
       display: flex;
       background:#5d05abb8;
       text-align: center;
-      color: white;
+      color: white;     
       border-bottom: 4px solid #4b217b;
       > div {
         flex: 1;

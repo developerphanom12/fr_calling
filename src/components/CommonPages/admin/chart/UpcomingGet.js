@@ -10,7 +10,7 @@ import ClientDetail from "../../clientdata/viewdetails/ClientDetail";
 import CaDetail from "../../clientdata/viewdetails/CaDetail";
 
 export default function UpcomingGet() {
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState(""); 
   const [user, setUser] = useState();
 
   let { id } = useParams();

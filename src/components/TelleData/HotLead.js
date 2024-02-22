@@ -10,7 +10,7 @@ const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString(undefined, options);
 };
 
-export default function HotLead() {
+export default function HotLead() {    
   const { callStatus = "hot_lead" } = useParams();
   const [applications, setApplications] = useState([]);
 

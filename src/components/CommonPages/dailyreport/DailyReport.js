@@ -73,7 +73,7 @@ export const DailyReport = ({ popUser = () => {} }) => {
     <Root>
       <div className="app_table">
         <div>
-          <p className="heading">Daily Report</p>
+          <p className="heading">Daily Report</p>   
         </div>
         <div className="app_header">
           <div className="ap1">Client Name </div>

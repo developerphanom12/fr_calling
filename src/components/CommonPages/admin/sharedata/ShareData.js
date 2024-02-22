@@ -11,7 +11,7 @@ export default function ShareData() {
  const [sendername  , setendername] = useState([]);
   const [formData, setFormData] = useState({
     reciever_id: "",
-    share_id: "",
+    share_id: "", 
     call_status : ""
   });
 

@@ -90,7 +90,7 @@ export default function ColdLead() {
     </Root>
   );
 }
-
+   
 
 const Root = styled.section`
   display: flex;

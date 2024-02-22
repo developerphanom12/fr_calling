@@ -13,7 +13,7 @@ class ApexChart extends React.Component {
         name: 'Total Sales', 
         data: seriesData,
       }],
-      options: {
+      options: { 
         chart: {
           height: 250,
           type: 'bar',

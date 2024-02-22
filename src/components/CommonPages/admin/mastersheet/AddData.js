@@ -75,7 +75,7 @@ export default function AddData() {
 const Root = styled.section`
  
 
- .sheet{
+ .sheet{  
 
    h3 {
      text-shadow: 4px 5px 5px gray;

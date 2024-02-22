@@ -45,7 +45,7 @@ export default function ListAllTellecaller({ popUser = () => {} }) {
     try {
       const response = await axios.post(
         `${EXCHANGE_URLS_ADMIN}/deleteuser`,
-        status,
+        status,       
         axiosConfig
       );
 

@@ -11,7 +11,7 @@ class ApexChart3 extends React.Component {
     this.state = {
       series: seriesData,
       options: {
-        chart: {
+        chart: { 
           type:'donut',  
         },
       

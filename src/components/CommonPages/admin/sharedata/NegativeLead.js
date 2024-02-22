@@ -5,13 +5,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { BsFillEyeFill } from "react-icons/bs";
-import { useNavigate, useParams } from "react-router-dom";
 import { EXCHANGE_URLS_ADMIN } from "../../../URLS";
 import { appDetailsAction } from "../../../../redux/users/action";
 import download from '../../../images/swsws.jpeg'
 
-
+ 
 
 const formatDate = (isoDate) => {
     const date = new Date(isoDate);

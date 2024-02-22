@@ -60,7 +60,7 @@ class TelleReport extends React.Component {
           series={this.state.series}
           type="area"
           height={350}
-          
+           
         />
       </div>
     );

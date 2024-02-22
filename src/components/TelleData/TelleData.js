@@ -8,7 +8,7 @@ import NegativeClient from "./NegativeClient";
 
 export default function TelleData() {
   const [active, setActive] = useState("CloseLead");
-
+    
   return (
     <Root>
       <div className="nav_tab">

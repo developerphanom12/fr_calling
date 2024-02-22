@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { EXACHANGE_URLS_TELLE } from "../../URLS";
-import ApexChartClient from "./ApexChartClient";
 import ApexChart2 from "./ApexChart2";
 
 const   ClientMainchart2 = () => {

@@ -9,7 +9,7 @@ function Download() {
       
     axios({
       method: "get",
-      url: excelDownloadUrl,
+      url: excelDownloadUrl,    
       responseType: "blob", 
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,

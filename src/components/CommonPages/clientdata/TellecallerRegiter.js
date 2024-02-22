@@ -12,7 +12,7 @@ export default function TelleRegister() {
     username: "",
     passsword: "",
     email: ""
-  });
+  });    
 
   const staffApi = async () => {
     const { confirm_password, ...data } = formData;

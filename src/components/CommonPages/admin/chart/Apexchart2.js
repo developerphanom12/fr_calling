@@ -12,7 +12,7 @@ class ApexChart2 extends  React.Component {
       options: {
         chart: {
           height: 300,
-          type: "line",
+          type: "line",  
           zoom: {
             enabled: false,
           },

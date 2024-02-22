@@ -1,6 +1,6 @@
 // VerifyOtp.js
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import cogoToast from "cogo-toast";
 import styled from "styled-components";
@@ -8,7 +8,7 @@ import { EXCHANGE_URLS_ADMIN } from "../../URLS";
 import { useNavigate } from "react-router-dom";
 
 export default function VerifyOtp({ onVerification }) {
-  const navigate = useNavigate();
+  const navigate = useNavigate();    
   const [otp, setOtp] = useState("");
   const [verificationFailed, setVerificationFailed] = useState(false);
 

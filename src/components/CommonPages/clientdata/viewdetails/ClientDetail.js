@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { IoMdAdd } from "react-icons/io";
 
 const formatDate = (isoDate) => {
-  const date = new Date(isoDate);
+  const date = new Date(isoDate);   
   const day = date.getDate().toString().padStart(2, "0");
   const month = (date.getMonth() + 1).toString().padStart(2, "0");
   const year = date.getFullYear();

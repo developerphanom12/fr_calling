@@ -142,7 +142,7 @@ const ViewStat = () => {
             <p className="negativ">
               Close <span>{salesData?.totalcount?.close_status_count}</span>
             </p>
-            <p className="negativ">
+            <p className="negativ"> 
               Negative{" "}
               <span>{salesData?.totalcount?.negative_client_count}</span>
             </p>

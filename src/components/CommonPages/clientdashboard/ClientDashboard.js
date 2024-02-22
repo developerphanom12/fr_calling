@@ -1,30 +1,26 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
-import DatePicker from "react-datepicker";
 import ClientMainchart from "./ClientMainchart";
-import ClientMainchart2 from "./ClientMainchart2";
 import CLientMainchart2 from "./ClientMainchart2";
 import { TfiMenu } from "react-icons/tfi";
 import { EXCHANGE_URLS_ADMIN } from "../../URLS";
 import axios from "axios";
 import { BsFillEyeFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import ReactDatePicker, { Data } from "react-datepicker";
 import TelleData from "../../TelleData/TelleData";
 import data from "../../images/nodatra.png";
 
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
   const day = date.getDate().toString().padStart(2, "0");
-  const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 };
 
 export default function ClientDashboard() {
   const [week, weekCount] = useState([]);
-  const [startDate, setStartDate] = useState(new Date());
 
   const navigate = useNavigate();
 

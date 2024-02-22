@@ -39,7 +39,7 @@ export default function MasterSheet({ popUser = () => {} }) {
       if (res.status === 201) {
         setApplications(res?.data?.data);
       }
-    } catch (e) {
+    } catch (e) { 
       console.log(e);
     }
   };

@@ -75,7 +75,7 @@ export default function ClientData() {
           client_name: "",
           company_name: "",
           dob_client: "",
-          client_anniversary: "",
+          client_anniversary: "",    
           call_schedule_date: "",
           call_status: "",
           attach_file: null,

@@ -2,20 +2,17 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { TfiMenu } from "react-icons/tfi";
 import TelleData from "./TelleData/TelleData";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import Mainchart from "./CommonPages/admin/chart/Mainchart";
 import Mainchart2 from "./CommonPages/admin/chart/Mainchart2";
 import { EXCHANGE_URLS_ADMIN } from "./URLS";
-import axios from "axios";
+import axios from "axios";   
 import { BsFillEyeFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import ApexChart3 from "./CommonPages/admin/chart/ApexChart3";
 import "./Dashboard.css";
 import data from "../components/images/nodatra.png";
 import Mainchart3 from "./CommonPages/admin/chart/Mainchart3";
-import TelleReport from "./CommonPages/admin/chart/dailyreport/TelleReport";
 
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
@@ -26,7 +23,6 @@ const formatDate = (isoDate) => {
 };
 
 export default function Dashboard() {
-  const [startDate, setStartDate] = useState(new Date());
   const [applications, Setcount] = useState([]);
   const [week, weekCount] = useState([]);
 
@@ -414,7 +410,7 @@ const Root = styled.section`
           img{
             width: 74px;
             height: 64px;
-            margin-top: 74px;
+            margin-top: 74px;     
             display: flex;
             justify-content: center;
             align-items: center;

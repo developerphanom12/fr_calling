@@ -10,7 +10,7 @@ class ApexDaily extends React.Component {
     console.log("hash",seriesData)
     this.state = {
       series: [11,11,11,11],
-     options: {
+     options: {    
   chart: {
     type: 'donut',
   },
@@ -27,7 +27,7 @@ class ApexDaily extends React.Component {
           enabled: false,
         },
         legend: {
-          position: "bottom", // Change position to "bottom"
+          position: "bottom",
         },
       },
     },

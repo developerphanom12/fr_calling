@@ -151,7 +151,7 @@ export default function DetailView() {
         ) : active === "cadetail" ? (
           <CaDetail detail={user} />
         ) : active === "profitdetail" ? (
-          <ProfitDetail detail={user} />
+          <ProfitDetail detail={user} />   
         ) : active === "bankdetail" ? (
           <BankDetail detail={user} />
         ) : active === "postprofit" ? (

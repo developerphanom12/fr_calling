@@ -14,7 +14,7 @@ class CircleChat extends React.Component {
       props?.data?.totalcount?.negative_client_count || 0,
       props?.data?.totalcount?.prospective_client_count || 0
     ];
-
+ 
     this.state = {
       series: seriesData,
       options: {
