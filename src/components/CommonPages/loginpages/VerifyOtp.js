@@ -6,16 +6,17 @@ import cogoToast from "cogo-toast";
 import styled from "styled-components";
 import { EXCHANGE_URLS_ADMIN } from "../../URLS";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function VerifyOtp({ onVerification }) {
   const navigate = useNavigate();    
   const [otp, setOtp] = useState("");
   const [verificationFailed, setVerificationFailed] = useState(false);
+  const userDetails = useSelector((state) => state?.users.user);
 
   const [otpintial, setChangePass] = useState({
     email: "ashimavineet2729@gmail.com",
   });
-
   const handleChange = (e) => {
     setOtp(e.target.value);
   };
@@ -35,7 +36,11 @@ export default function VerifyOtp({ onVerification }) {
       if (response.status === 200) {
         onVerification(true);
         cogoToast.success("OTP Verified");
-        navigate("/studash");
+        if (userDetails?.role === "admin") {
+          navigate("/dashboard");
+        } else if (userDetails?.role === "telecaller") {
+          navigate("/studash"); 
+        }
       } else {
         setVerificationFailed(true);
       }
