@@ -306,7 +306,6 @@ const handleRegisterClick = () => {
           Attach Any File (Optional)
           <input
               type="file"
-              // onChange={handleImage}
             />
         </div>
       </div>

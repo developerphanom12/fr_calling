@@ -10,7 +10,6 @@ import TellecallerRegister from "./components/CommonPages/clientdata/Tellecaller
 import ClientHistory from "./components/CommonPages/clientdata/viewdetails/ClientHistory";
 import ListAllTellecaller from "./components/CommonPages/admin/ListAllTellecaller";
 import ClientData from "./components/CommonPages/clientdata/ClientData";
-import ColdLead from "./components/TelleData/ColdLead";
 import DetailView from "./components/CommonPages/clientdata/viewdetails/DetailView";
 import ApexChart from "./components/CommonPages/admin/chart/ApexChart";
 import Mainchart from "./components/CommonPages/admin/chart/Mainchart";

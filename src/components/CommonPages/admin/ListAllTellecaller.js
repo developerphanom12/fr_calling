@@ -85,13 +85,14 @@ export default function ListAllTellecaller({ popUser = () => {} }) {
         is_deleted: isApproved ? 1 : 0,
       });
       if (status.is_deleted === 1) {
-        cogoToast.warning("Caller Blocked");
+        cogoToast.warn("Caller Blocked");
       }
       statusApi();
     } else {
       cogoToast.error("User not found");
     }
   };
+  
 
   return (
     <Root>
@@ -188,7 +189,6 @@ const Root = styled.section`
     flex-direction: column;
     margin: 10px;
     width: 98%;
-    margin-left: 67px;
     font-family: "Roboto", "sana-serif";
     .app_header {
       display: flex;

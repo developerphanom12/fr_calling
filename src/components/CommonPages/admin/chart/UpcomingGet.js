@@ -84,7 +84,7 @@ export default function UpcomingGet() {
               ) : active === "cadetail" ? (
                 <CaDetail detail={user} />
               ) : (
-                <ClientDetail />
+                <ClientDetail  detail={user}/>
               )}
             </div>
           </div>
