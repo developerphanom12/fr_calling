@@ -201,9 +201,12 @@ margin: auto;
       font-size: 17px;
       padding: 9px;
       border-radius: 16px;
-      background: #00000047;;
+      background: #ff121247;
       border: 1px;
       color: white;
+      font-weight: 600;
+      cursor: pointer;
+      
     }
 
     
@@ -220,12 +223,17 @@ margin: auto;
     }
     .links {
       background: none;
-      color: #007bff; /* Blue color for links */
-      border: none;
-      padding: 0;
-      font: inherit;
-      cursor: pointer;
-      text-decoration: underline;
+    color: #ffef01;
+    border: none;
+    padding: 0;
+    font: inherit;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 900;
+    display: flex;
+    width: 20%;
+    justify-content:right;
     }
 
     h3 {
@@ -242,6 +250,9 @@ margin: auto;
     font-size: 24px;
     color: white;
     border-radius: 7px;
+    color: yellow;
+    text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
+    0px -4px 10px rgba(255,255,255,0.3);
     }
     .main_div_pass {
       box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
