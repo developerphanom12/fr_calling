@@ -1,13 +1,9 @@
-
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { EXACHANGE_URLS_TELLE } from "../../URLS";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { appDetailsAction } from "../../../redux/users/action";
-
-
-
 
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
@@ -16,7 +12,6 @@ const formatDate = (isoDate) => {
   const year = date.getFullYear();
   return `${day}-${month}-${year}`;
 };
-
 
 export const DailyReport = ({ popUser = () => {} }) => {
   const [data, setData] = useState([]);
@@ -30,18 +25,18 @@ export const DailyReport = ({ popUser = () => {} }) => {
         authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
-  
+
     try {
       const res = await axios.get(
         `${EXACHANGE_URLS_TELLE}/getMaster?page=${currentPage}`,
         axiosConfig
       );
-  
+
       console.log("data", res);
-  
+
       if (res.status === 200) {
         const responseData = res?.data?.data?.data;
-  
+
         if (Array.isArray(responseData)) {
           setData(responseData);
         } else if (responseData) {
@@ -52,7 +47,7 @@ export const DailyReport = ({ popUser = () => {} }) => {
       console.log(e);
     }
   };
-  
+
   useEffect(() => {
     getdata();
   }, [currentPage]);
@@ -63,8 +58,10 @@ export const DailyReport = ({ popUser = () => {} }) => {
     popUser(true);
   };
   const handleNext = () => {
-    const isConfirmed = window.confirm("Are you sure you want to submit this data and show the next data?");
-    
+    const isConfirmed = window.confirm(
+      "Are you sure you want to submit this data and show the next data?"
+    );
+
     if (isConfirmed) {
       setCurrentPage(currentPage + 1);
     }
@@ -73,7 +70,7 @@ export const DailyReport = ({ popUser = () => {} }) => {
     <Root>
       <div className="app_table">
         <div>
-          <p className="heading">Daily Report</p>   
+          <p className="heading">Daily Report</p>
         </div>
         <div className="app_header">
           <div className="ap1">Client Name </div>
@@ -82,51 +79,52 @@ export const DailyReport = ({ popUser = () => {} }) => {
           <div>Status</div>
           <div>Date</div>
         </div>
-        <div className="app_body">
+        <div>
           {Array.isArray(data) && data.length > 0 ? (
             data.map((i) => (
-              <div
-                key={i.id}
-                className="app_body"
-                onClick={() => {
-                  handlePassData(i);
-                }}
-              >
-                <div className="cams">{i?.client_name}</div>
-                <div>
-                  <p>
-                    <span>{i?.company_name}</span>
-                  </p>
+              <>
+                <div
+                  key={i.id}
+                  className="app_body"
+                  onClick={() => {
+                    handlePassData(i);
+                  }}
+                >
+                  <div className="cams">{i?.client_name}</div>
+                  <div>
+                    <p>
+                      <span>{i?.company_name}</span>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <span>{formatDate(i?.callschedule_date)}</span>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <span>Hot Client</span>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <span>{formatDate(i?.update_date)}</span>
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p>
-                    <span>{formatDate(i?.callschedule_date)}</span>
-                  </p>
-                </div>
-                <div>
-                  <p>
-                    <span>Hot Client</span>
-                  </p>
-                </div>
-                <div>
-                  <p>
-                    <span>{formatDate(i?.update_date)}</span>
-                  </p>
-                </div>
-
                 <div className="btn1">
-          <button className="nt2" onClick={handleNext}>
-            Next
-          </button>
-        </div>
-              </div>
+                  <button className="nt2" onClick={handleNext}>
+                    Next
+                  </button>
+                </div>
+              </>
             ))
           ) : (
-            <div className="no-data-message">No data available at this time.</div>
+            <div className="no-data-message">
+             <p> No data available at this time.</p>
+            </div>
           )}
-          
         </div>
-       
       </div>
     </Root>
   );
@@ -144,11 +142,12 @@ const Root = styled.section`
     border-radius: 12px;
     transform: translate(0, -50%);
     padding: 10px;
-    max-width: 40vw;
-    width: 100%;
-    max-height: 40vh;
-    height: 100%;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);    > div {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    > div {
       .heading {
         display: flex;
         justify-content: center;
@@ -166,16 +165,15 @@ const Root = styled.section`
     display: flex;
     background-color: #5d05abb8;
     border: 1px solid #dee2e6;
-    
+
     > div {
       font-weight: 500;
       display: flex;
       align-items: center;
       border: 1px solid #dee2e6;
       width: 100%;
-      max-width: 13vw;
       color: white;
-      height: 5vh;
+      padding: 15px;
       justify-content: center;
       text-align: center;
       font-size: 12px;
@@ -185,15 +183,16 @@ const Root = styled.section`
     display: flex;
     /* gap: 54px; */
     border-radius: 0px;
-    height: 6vh;
+     
     > div {
       border: 1px solid #dee2e6;
-      width: 40vw;
+      width: 100%;
       justify-content: center;
       text-align: center;
       align-items: center;
       display: flex;
-      height: 5vh
+      padding:10px;
+      /* height: 5vh; */
     }
     .btnus {
       color: black;
@@ -203,32 +202,38 @@ const Root = styled.section`
       text-align: center;
       align-items: center;
     }
-    .no-data-message{
-      color: red;
+  }
+  .no-data-message {
+    color: red;
     font-family: -webkit-body;
     margin-top: 13px;
     font-size: 21px;
     font-weight: 900;
+    padding: 34px;
+   margin: 0px;
+    p{
+      display: flex;
+    justify-content: center;
+    font-size: 32px;
+    margin: 0px;
+    font-weight: 900;
     }
   }
   .btn1 {
-    margin-top: 35px;
     display: flex;
     align-items: center;
     text-align: center;
     justify-content: center;
+    margin: 10px;
     .nt2 {
-      font-size: 24px;
-    width: 101px;
-    height: 5vh;
-    font-weight: 900;
-    padding: 0px;
-    color: white;
-    border: 1px solid #005aff;
-    background: #005aff;
-    border-radius: 8px;
-    cursor: pointer;
+      font-size: 18px;
+      font-weight: 600;
+      padding:5px 20px;
+      color: white;
+      border: 1px solid #005aff;
+      background: #005aff;
+      border-radius: 8px;
+      cursor: pointer;
     }
   }
 `;
-

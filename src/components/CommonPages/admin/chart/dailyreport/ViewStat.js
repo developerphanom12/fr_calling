@@ -77,7 +77,7 @@ const ViewStat = () => {
         }
       }
     } catch (err) {
-      cogoToast.error("No sales data available for the selected options.");
+      cogoToast.error("Please select range.");
     }
   };
 

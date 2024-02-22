@@ -33,7 +33,6 @@ export default function Employerlogin() {
         localStorage.setItem("token", res?.data?.data?.token);
         dispatch(userDataAction(res?.data?.data));
         dispatch(userCheckAction(true));
-        navigate("/dashboard");
         cogoToast.success("Login Successfully");
       }
     } catch (err) {

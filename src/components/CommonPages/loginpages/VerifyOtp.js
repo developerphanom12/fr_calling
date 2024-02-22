@@ -1,4 +1,3 @@
-// VerifyOtp.js
 
 import React, { useState } from "react";
 import axios from "axios";
@@ -15,7 +14,7 @@ export default function VerifyOtp({ onVerification }) {
   const userDetails = useSelector((state) => state?.users.user);
 
   const [otpintial, setChangePass] = useState({
-    email: "ashimavineet2729@gmail.com",
+    email: "karan.sharma111@yahoo.co.in",
   });
   const handleChange = (e) => {
     setOtp(e.target.value);
