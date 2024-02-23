@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 
 export default function CaDetail({ detail }) {
-  const [isEditing, setIsEditing] = useState(false);
+  // const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
   const [update, setUpdate] = useState({
     ca_name: "",
@@ -65,23 +65,15 @@ export default function CaDetail({ detail }) {
   const handleSubmit = () => {
     postApiData();
   };
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
+
   // const handleDoneEditing = () => {
   //   setIsEditing(false);
   //   updateApiData();
-  // }; 
+  // };
 
   return (
     <Root>
       <h4>Application : {detail?.cadetails?.ca_id}</h4>
-      <div className="edit_button_div">
-        <button onClick={isEditing ? handleDoneEditing : handleEditClick}>
-          {isEditing ? "Done Editing" : "Edit"}
-          <HiOutlinePencilSquare />
-        </button>
-      </div>
       <div className="app_table">
         <div className="app_header">
           <div>CA Name</div>
@@ -91,182 +83,101 @@ export default function CaDetail({ detail }) {
           <div>CA Accountant Number</div>
           <div>Company Address</div>
         </div>
-
-        {detail?.cadetails && detail?.cadetails ? (
-          <div className="app_body">
-            {isEditing ? (
-              <>
+        <div className="app_body">
+          {detail?.cadetails && detail?.cadetails ? (
+            <>
+              <div>
+                <p>{detail?.cadetails?.ca_name}</p>
+              </div>
+              <div>
+                <p>{detail?.cadetails?.ca_number}</p>
+              </div>
+              <div>
+                <p>{detail?.cadetails?.ca_accountant_name}</p>
+              </div>
+              <div>
+                <p>{detail?.cadetails?.ca_company_name}</p>
+              </div>
+              <div>
+                <p>{detail?.cadetails?.ca_accountant_number}</p>
+              </div>
+              <div>
+                <p>{detail?.cadetails?.company_address}</p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="app_body">
                 <div>
                   <input
                     type="text"
-                    value={update.ca_name}
-                    onChange={(e) =>
-                      setUpdate({
-                        ...update,
-                        ca_name: e.target.value,
-                      })
-                    }
+                    value={update?.ca_name}
+                    onChange={(e) => {
+                      setUpdate({ ...update, ca_name: e.target.value });
+                    }}
+                  />
+                </div>
+                <div>
+                  <input
+                    type="number"
+                    value={update?.ca_number}
+                    onChange={(e) => {
+                      setUpdate({ ...update, ca_number: e.target.value });
+                    }}
                   />
                 </div>
                 <div>
                   <input
                     type="text"
-                    value={update.ca_number}
-                    onChange={(e) =>
-                      setUpdate({
-                        ...update,
-                        ca_number: e.target.value,
-                      })
-                    }
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    value={update.ca_accountant_name}
-                    onChange={(e) =>
+                    value={update?.ca_accountant_name}
+                    onChange={(e) => {
                       setUpdate({
                         ...update,
                         ca_accountant_name: e.target.value,
-                      })
-                    }
+                      });
+                    }}
                   />
                 </div>
                 <div>
                   <input
                     type="text"
-                    value={update.ca_company_name}
-                    onChange={(e) =>
-                      setUpdate({
-                        ...update,
-                        ca_company_name: e.target.value,
-                      })
-                    }
+                    value={update?.ca_company_name}
+                    onChange={(e) => {
+                      setUpdate({ ...update, ca_company_name: e.target.value });
+                    }}
                   />
                 </div>
                 <div>
                   <input
-                    type="text"
-                    value={update.ca_accountant_number}
-                    onChange={(e) =>
+                    type="number"
+                    value={update?.ca_accountant_number}
+                    onChange={(e) => {
                       setUpdate({
                         ...update,
                         ca_accountant_number: e.target.value,
-                      })
-                    }
+                      });
+                    }}
                   />
                 </div>
                 <div>
                   <input
                     type="text"
-                    value={update.company_address}
-                    onChange={(e) =>
+                    value={update?.company_address}
+                    onChange={(e) => {
                       setUpdate({
                         ...update,
                         company_address: e.target.value,
-                      })
-                    }
+                      });
+                    }}
                   />
                 </div>
-               
-              </>
-            ) : (
-              <>
-                <div>
-                  <p>{detail?.cadetails?.ca_name}</p>
-                </div>
-                <div>
-                  <p>{detail?.cadetails?.ca_number}</p>
-                </div>
-                <div>
-                  <p>{detail?.cadetails?.ca_accountant_name}</p>
-                </div>
-                <div>
-                  <p>{detail?.cadetails?.ca_company_name}</p>
-                </div>
-                <div>
-                  <p>{detail?.cadetails?.ca_accountant_number}</p>
-                </div>
-                <div>
-                  <p>{detail?.cadetails?.company_address}</p>
-                </div>
-               
-              </>
-            )}
-          </div>
-        ) : (
-          <>
-            <div className="app_body">
-              <div>
-                <input
-                  type="text"
-                  value={update?.ca_name}
-                  onChange={(e) => {
-                    setUpdate({ ...update, ca_name: e.target.value });
-                  }}
-                />
               </div>
               <div>
-                <input
-                  type="number"
-                  value={update?.ca_number}
-                  onChange={(e) => {
-                    setUpdate({ ...update, ca_number: e.target.value });
-                  }}
-                />
+                <button onClick={handleSubmit}>submit</button>
               </div>
-              <div>
-                <input
-                  type="text"
-                  value={update?.ca_accountant_name}
-                  onChange={(e) => {
-                    setUpdate({
-                      ...update,
-                      ca_accountant_name: e.target.value,
-                    });
-                  }}
-                />
-              </div>
-              <div>
-                <input
-                  type="text"
-                  value={update?.ca_company_name}
-                  onChange={(e) => {
-                    setUpdate({ ...update, ca_company_name: e.target.value });
-                  }}
-                />
-              </div>
-              <div>
-                <input
-                  type="number"
-                  value={update?.ca_accountant_number}
-                  onChange={(e) => {
-                    setUpdate({
-                      ...update,
-                      ca_accountant_number: e.target.value,
-                    });
-                  }}
-                />
-              </div>
-              <div>
-                <input
-                  type="text"
-                  value={update?.company_address}
-                  onChange={(e) => {
-                    setUpdate({
-                      ...update,
-                      company_address: e.target.value,
-                    });
-                  }}
-                />
-              </div>
-             
-            </div>
-            <div>
-              <button onClick={handleSubmit}>submit</button>
-            </div>
-          </>
-        )}
+            </>
+          )}
+        </div>
       </div>
     </Root>
   );

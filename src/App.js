@@ -4,7 +4,6 @@ import PageNF from "./components/PageNF";
 import AllPages from "./components/CommonPages/HomePages/AllPages";
 import { useSelector } from "react-redux";
 import Tellelogin from "./components/CommonPages/loginpages/Tellelogin";
-import Employerlogin from "./components/CommonPages/loginpages/AdminLogin";
 import Dashboard from "./components/Dashboard";
 import TellecallerRegister from "./components/CommonPages/clientdata/TellecallerRegiter";
 import ClientHistory from "./components/CommonPages/clientdata/viewdetails/ClientHistory";
@@ -30,6 +29,7 @@ import TelleReport from "./components/CommonPages/admin/chart/dailyreport/TelleR
 import ViewStat from "./components/CommonPages/admin/chart/dailyreport/ViewStat";
 import Otp from "./components/CommonPages/loginpages/Otp";
 import VerifyOtp from "./components/CommonPages/loginpages/VerifyOtp";
+import Adminlogin from "./components/CommonPages/loginpages/AdminLogin";
 
 function App() {
   const userCheck = useSelector((state) => state?.users?.userCheck);
@@ -85,8 +85,8 @@ function App() {
         ) : (
           <>
             <Route path="*" element={<PageNF />} />
-            <Route path="/employlogin" element={<Tellelogin />} />
-            <Route path="/employerlogin" element={<Employerlogin />} />
+            <Route path="/tellelogin" element={<Tellelogin />} />
+            <Route path="/adminlogin" element={<Adminlogin />} />
             <Route path="/" element={<AllPages />} />
             <Route path="/allpages" element={<AllPages />} />
             

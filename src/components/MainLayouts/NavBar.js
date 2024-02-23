@@ -27,19 +27,19 @@ export default function NavBar() {
         <div
           className="login"
           onClick={() => {
-            navigate("/employlogin");
+            navigate("/tellelogin");
           }}
         >
           TELE LOGIN
         </div>
-        <div
+        {/* <div
           className="login"
           onClick={() => {
-            navigate("/employerlogin");
+            navigate("/adminlogin");
           }}
         >
           ADMIN LOGIN
-        </div>
+        </div> */}
       </div>
       <div
         className="menu"
@@ -57,19 +57,19 @@ export default function NavBar() {
         <div
           className="login"
           onClick={() => {
-            navigate("/employlogin");
+            navigate("/tellelogin");
           }}
         >
-          EMPLOYEE LOGIN
+          Telle LOGIN
         </div>
-        <div
+        {/* <div
           className="login"
           onClick={() => {
-            navigate("/employerlogin");
+            navigate("/adminlogin");
           }}
         >
-          EMPLOYER LOGIN
-        </div>
+          Admin LOGIN
+        </div> */}
       </div>
     </Root>
   );

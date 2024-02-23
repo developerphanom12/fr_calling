@@ -17,7 +17,7 @@ const schema = yup.object().shape({
   password: yup.string().required("Password is required."),
 });
 
-export default function Employerlogin() {  
+export default function Adminlogin() {  
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -54,7 +54,7 @@ export default function Employerlogin() {
     <Root>
       <div className="main1">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h1>Welcome To Employer Professional Community</h1>
+          <h1>Welcome To Admin Professional Community</h1>
           <div className="child">
             <div className="child_box">
               <p>Email or Phone</p>
