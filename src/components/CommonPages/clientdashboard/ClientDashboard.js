@@ -110,7 +110,6 @@ export default function ClientDashboard() {
                       </p>
                     </h5>
                   </div>
-
                   <div
                     className="child11"
                     onClick={() => {
@@ -122,7 +121,7 @@ export default function ClientDashboard() {
                 </div>
               ))
             ) : (
-              <div>
+              <div className="none_image">
                 <img src={data} alt="img" />
                 <p className="data22">No Upcoming Appointment This week</p>
               </div>
@@ -286,8 +285,13 @@ const Root = styled.section`
         margin-right: 14px;
         overflow-y: scroll;
         overflow-x: hidden;
-        .data22 {
-          margin: 12px;
+        .none_image {
+          display: flex;
+          flex-direction: column;
+          .data22 {
+            margin: 12px;
+            width: 100%;
+          }
         }
 
         .data_div {
@@ -340,7 +344,6 @@ const Root = styled.section`
           display: flex;
           justify-content: center;
           text-align: center;
-          /* flex-direction: column; */
           align-items: center;
           text-align: center;
           width: 100%;
@@ -468,7 +471,7 @@ const Root = styled.section`
       }
     }
   }
-   
+
   .dailydata {
     background-color: red;
     display: flex;

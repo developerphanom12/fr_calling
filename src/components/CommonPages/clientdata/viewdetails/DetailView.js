@@ -48,102 +48,99 @@ export default function DetailView() {
   console.log("userr", user);
   return (
     <Root>
-
-{userDetails.role === "admin" ? (
-     <>
-      <div className="nav_tab">
-        <button
-          className={active === "telledetail" ? "btn_1 active" : "btn_1"}
-          onClick={() => {
-            setActive("telledetail");
-          }}
-        >
-          Tellecaller Detail
-        </button>
-        <button
-          className={active === "clientdetail" ? "btn_1 active" : "btn_1"}
-          onClick={() => {
-            setActive("clientdetail");
-          }}
-        >
-          Client Detail
-        </button>
-        <button
-          className={active === "cadetail" ? "btn_1 active" : "btn_1"}
-          onClick={() => {
-            setActive("cadetail");
-          }}
-        >
-          CA Detail
-        </button>
-        <button
-          className={active === "profitdetail" ? "btn_1 active" : "btn_1"}
-          onClick={() => {
-            setActive("profitdetail");
-          }}
-        >
-          Profit Detail
-        </button>
-        <button
-          className={active === "bankdetail" ? "btn_1 active" : "btn_1"}
-          onClick={() => {
-            setActive("bankdetail");
-          }}
-        >
-          Bank Detail
-        </button>
-      </div>
-      <div className="post_detail">
-        <button
-          className={active === "postprofit" ? "btn_1 active" : "btn_1"}
-          onClick={() => {
-            setActive("postprofit");
-          }}
-        >
-          Add Profit Detail
-        </button>
-        <button
-          className={active === "postbank" ? "btn_1 active" : "btn_1"}
-          onClick={() => {
-            setActive("postbank");
-          }}
-        >
-          Add Bank Detail
-        </button>
-      </div>
-      </>
-): (
-  <div className="nav_tab">
-  <button
-    className={active === "telledetail" ? "btn_1 active" : "btn_1"}
-    onClick={() => {
-      setActive("telledetail");
-    }}
-  >
-    Tellecaller Detail
-  </button>
-  <button
-    className={active === "clientdetail" ? "btn_1 active" : "btn_1"}
-    onClick={() => {
-      setActive("clientdetail");
-    }}
-  >
-    Client Detail
-  </button>
-  <button
-    className={active === "cadetail" ? "btn_1 active" : "btn_1"}
-    onClick={() => {
-      setActive("cadetail");
-    }}
-  >
-    CA Detail
-  </button>
-  </div>
-)},
+      {userDetails.role === "admin" ? (
+        <>
+          <div className="nav_tab">
+            <button
+              className={active === "telledetail" ? "btn_1 active" : "btn_1"}
+              onClick={() => {
+                setActive("telledetail");
+              }}
+            >
+              Tellecaller Detail
+            </button>
+            <button
+              className={active === "clientdetail" ? "btn_1 active" : "btn_1"}
+              onClick={() => {
+                setActive("clientdetail");
+              }}
+            >
+              Client Detail
+            </button>
+            <button
+              className={active === "cadetail" ? "btn_1 active" : "btn_1"}
+              onClick={() => {
+                setActive("cadetail");
+              }}
+            >
+              CA Detail
+            </button>
+            <button
+              className={active === "profitdetail" ? "btn_1 active" : "btn_1"}
+              onClick={() => {
+                setActive("profitdetail");
+              }}
+            >
+              Profit Detail
+            </button>
+            <button
+              className={active === "bankdetail" ? "btn_1 active" : "btn_1"}
+              onClick={() => {
+                setActive("bankdetail");
+              }}
+            >
+              Bank Detail
+            </button>
+          </div>
+          <div className="post_detail">
+            <button
+              className={active === "postprofit" ? "btn_1 active" : "btn_1"}
+              onClick={() => {
+                setActive("postprofit");
+              }}
+            >
+              Add Profit Detail
+            </button>
+            <button
+              className={active === "postbank" ? "btn_1 active" : "btn_1"}
+              onClick={() => {
+                setActive("postbank");
+              }}
+            >
+              Add Bank Detail
+            </button>
+          </div>
+        </>
+      ) : (
+        <div className="nav_tab">
+          <button
+            className={active === "telledetail" ? "btn_1 active" : "btn_1"}
+            onClick={() => {
+              setActive("telledetail");
+            }}
+          >
+            Tellecaller Detail
+          </button>
+          <button
+            className={active === "clientdetail" ? "btn_1 active" : "btn_1"}
+            onClick={() => {
+              setActive("clientdetail");
+            }}
+          >
+            Client Detail
+          </button>
+          <button
+            className={active === "cadetail" ? "btn_1 active" : "btn_1"}
+            onClick={() => {
+              setActive("cadetail");
+            }}
+          >
+            CA Detail
+          </button>
+        </div>
+      )}
 
       <div>
-        
-  
         {active === "telledetail" ? (
           <TelleDetail detail={user} />
         ) : active === "clientdetail" ? (
@@ -151,7 +148,7 @@ export default function DetailView() {
         ) : active === "cadetail" ? (
           <CaDetail detail={user} />
         ) : active === "profitdetail" ? (
-          <ProfitDetail detail={user} />   
+          <ProfitDetail detail={user} />
         ) : active === "bankdetail" ? (
           <BankDetail detail={user} />
         ) : active === "postprofit" ? (

@@ -3,22 +3,26 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { EXACHANGE_URLS_TELLE } from "../../../URLS";
 import { useNavigate, useParams } from "react-router-dom";
-import { HiOutlinePencilSquare } from "react-icons/hi2";
+import cogoToast from "cogo-toast";
 
 export default function CaDetail({ detail }) {
-  // const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
   const [update, setUpdate] = useState({
-    ca_name: "",
-    ca_number: "",
-    ca_accountant_name: "",
-    ca_company_name: "",
-    ca_accountant_number: "",
-    company_address: "",
+    clientid: detail.cd.toString(),
+    ca_name: null,
+    ca_number: null,
+    ca_accountant_name: null,
+    ca_company_name: null,
+    ca_accountant_number: null,
+    company_address: null,
   });
 
   let { ca_id } = useParams();
   console.log("iddd", ca_id);
+
+  let { cd } = useParams();
+  console.log("ccdddiddd", cd);
 
   const postApiData = async () => {
     try {
@@ -27,50 +31,48 @@ export default function CaDetail({ detail }) {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       };
+
+      const requestData = Object.fromEntries(
+        Object.entries(update).filter(([key, value]) => value !== null)
+      );
+
       const res = await axios.post(
         `${EXACHANGE_URLS_TELLE}/cadataAdd`,
-        update,
+        requestData,
         axiosConfig
       );
+
       if (res?.status === 201) {
         navigate("/studash");
       }
     } catch (err) {
-      console.log("err", err);
+      if (err.response && err.response.status === 400) {
+        cogoToast.error(err.response.data.error);
+      } else {
+        console.log("err", err);
+      }
     }
   };
 
-  // const updateApiData = async () => {
-  //   try {
-  //     const axiosConfig = {
-  //       headers: {
-  //         authorization: `Bearer ${localStorage.getItem("token")}`,
-  //       },
-  //     };
-  //     const id = detail?.cadetails?.ca_id;
-  //     console.log("datatatatatta",id)
-  //     const res = await axios.put(
-  //       `${EXACHANGE_URLS_TELLE}/updateadetail/${id}`,
-  //       update,
-  //       axiosConfig
-  //     );
-  //     console.log("ressponnse", res);
-  //     if (res?.status === 200) {
-  //       navigate("/studash");
-  //     }
-  //   } catch (err) {
-  //     console.log("err", err);
-  //   }
+  // const handleSubmit = () => {
+  //   postApiData();
   // };
-  const handleSubmit = () => {
+  const handleEditClick = () => {
+    setIsEditing(true);
+    setUpdate({
+      clientid: detail.cd.toString(),
+      ca_name: null,
+      ca_number: null,
+      ca_accountant_name: null,
+      ca_company_name: null,
+      ca_accountant_number: null,
+      company_address: null,
+    });
+  };
+  const handleDoneClick = () => {
+    setIsEditing(false);
     postApiData();
   };
-
-  // const handleDoneEditing = () => {
-  //   setIsEditing(false);
-  //   updateApiData();
-  // };
-
   return (
     <Root>
       <h4>Application : {detail?.cadetails?.ca_id}</h4>
@@ -83,101 +85,105 @@ export default function CaDetail({ detail }) {
           <div>CA Accountant Number</div>
           <div>Company Address</div>
         </div>
-        <div className="app_body">
-          {detail?.cadetails && detail?.cadetails ? (
-            <>
-              <div>
-                <p>{detail?.cadetails?.ca_name}</p>
-              </div>
-              <div>
-                <p>{detail?.cadetails?.ca_number}</p>
-              </div>
-              <div>
-                <p>{detail?.cadetails?.ca_accountant_name}</p>
-              </div>
-              <div>
-                <p>{detail?.cadetails?.ca_company_name}</p>
-              </div>
-              <div>
-                <p>{detail?.cadetails?.ca_accountant_number}</p>
-              </div>
-              <div>
-                <p>{detail?.cadetails?.company_address}</p>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="app_body">
-                <div>
-                  <input
-                    type="text"
-                    value={update?.ca_name}
-                    onChange={(e) => {
-                      setUpdate({ ...update, ca_name: e.target.value });
-                    }}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="number"
-                    value={update?.ca_number}
-                    onChange={(e) => {
-                      setUpdate({ ...update, ca_number: e.target.value });
-                    }}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    value={update?.ca_accountant_name}
-                    onChange={(e) => {
-                      setUpdate({
-                        ...update,
-                        ca_accountant_name: e.target.value,
-                      });
-                    }}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    value={update?.ca_company_name}
-                    onChange={(e) => {
-                      setUpdate({ ...update, ca_company_name: e.target.value });
-                    }}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="number"
-                    value={update?.ca_accountant_number}
-                    onChange={(e) => {
-                      setUpdate({
-                        ...update,
-                        ca_accountant_number: e.target.value,
-                      });
-                    }}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    value={update?.company_address}
-                    onChange={(e) => {
-                      setUpdate({
-                        ...update,
-                        company_address: e.target.value,
-                      });
-                    }}
-                  />
-                </div>
-              </div>
-              <div>
-                <button onClick={handleSubmit}>submit</button>
-              </div>
-            </>
-          )}
-        </div>
+        {detail?.cadetails &&
+        Object.values(detail.cadetails).every((val) => val === null) ? (
+          <div className="app_body">
+            <div>
+              <input
+                type="text"
+                value={update?.ca_name}
+                onChange={(e) => {
+                  setUpdate({ ...update, ca_name: e.target.value });
+                }}
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                value={update?.ca_number}
+                onChange={(e) => {
+                  setUpdate({ ...update, ca_number: e.target.value });
+                }}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                value={update?.ca_accountant_name}
+                onChange={(e) => {
+                  setUpdate({
+                    ...update,
+                    ca_accountant_name: e.target.value,
+                  });
+                }}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                value={update?.ca_company_name}
+                onChange={(e) => {
+                  setUpdate({ ...update, ca_company_name: e.target.value });
+                }}
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                value={update?.ca_accountant_number}
+                onChange={(e) => {
+                  setUpdate({
+                    ...update,
+                    ca_accountant_number: e.target.value,
+                  });
+                }}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                value={update?.company_address}
+                onChange={(e) => {
+                  setUpdate({
+                    ...update,
+                    company_address: e.target.value,
+                  });
+                }}
+              />
+            </div>
+          </div>
+        ) : (
+          <div className="app_body">
+            <div>
+              <p>{detail?.cadetails?.ca_name}</p>
+            </div>
+            <div>
+              <p>{detail?.cadetails?.ca_number}</p>
+            </div>
+            <div>
+              <p>{detail?.cadetails?.ca_accountant_name}</p>
+            </div>
+            <div>
+              <p>{detail?.cadetails?.ca_company_name}</p>
+            </div>
+            <div>
+              <p>{detail?.cadetails?.ca_accountant_number}</p>
+            </div>
+            <div>
+              <p>{detail?.cadetails?.company_address}</p>
+            </div>
+          </div>
+        )}
+      </div>
+      {/* <div>
+          <button onClick={handleSubmit}>Edit</button>
+        </div> */}
+      <div>
+        {isEditing ? (
+          <button onClick={handleDoneClick}>Done</button>
+        ) : (
+          <button onClick={handleEditClick}>Edit</button>
+        )}
       </div>
     </Root>
   );
@@ -186,24 +192,7 @@ export default function CaDetail({ detail }) {
 const Root = styled.section`
   display: flex;
   flex-direction: column;
-  .edit_button_div {
-    display: flex;
-    justify-content: center;
-    button {
-      background: none;
-      border: none;
-      color: #63276f;
-      padding: 5px 10px;
-      display: flex;
-      align-items: center;
-      font-size: 15px;
-      svg {
-        width: 20px;
-        height: 20px;
-        padding-left: 5px;
-      }
-    }
-  }
+
   .app_table {
     display: flex;
     flex: 1;
@@ -250,15 +239,19 @@ const Root = styled.section`
         }
       }
     }
-    > div {
-      button {
-        margin: 5px;
-        padding: 10px;
-        border: none;
-        color: #ffffff;
-        border-radius: 10px;
-        background-color: #63276f;
-      }
+  }
+  > div {
+    display: flex;
+    justify-content: center;
+    button {
+      margin: 5px;
+      padding: 7px 20px;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      color: #ffffff;
+      border-radius: 10px;
+      background-color: #63276f;
     }
   }
 `;

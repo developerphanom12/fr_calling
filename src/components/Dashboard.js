@@ -182,7 +182,7 @@ export default function Dashboard() {
                 </div>
               ))
             ) : (
-              <div>
+              <div className="none_image">
                 <img src={data} alt="img" />
                 <p className="data22">No Upcoming Appointment This week</p>
               </div>
@@ -341,8 +341,13 @@ const Root = styled.section`
         flex-direction: column;
         margin-right: 14px;
         /* overflow-y: scroll; */
-        .data22 {
-          margin: 12px;
+        .none_image {
+          display: flex;
+          flex-direction: column;
+          .data22 {
+            margin: 12px;
+            width: 100%;
+          }
         }
 
         .data_div {
