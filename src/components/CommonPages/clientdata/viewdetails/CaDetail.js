@@ -225,6 +225,7 @@ const Root = styled.section`
         text-transform: capitalize;
         align-items: center;
         padding: 10px;
+        width: 200px;
         input {
           border: none;
           outline: solid 2px white;
