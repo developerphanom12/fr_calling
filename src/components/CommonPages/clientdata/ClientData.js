@@ -72,17 +72,41 @@ export default function ClientData() {
     data.append("client_companyaddress", formData.client_companyaddress);
     data.append("company_name", formData.company_name);
     data.append("remark", formData.remark);
-    data.append("dob_client", formData.dob_client);
-    data.append("client_anniversary", formData.client_anniversary);
     data.append("call_schedule_date", formData.call_schedule_date);
     data.append("call_status", formData.call_status);
   
    
 
+    if (formData.client_number_additional !== "") {
+      data.append("client_number_additional", formData.client_number_additional);
+    }
+
     if (formData.company_constitution !== "") {
       data.append("company_constitution", formData.company_constitution);
     }
 
+    if (formData.call_date !== "") {
+      data.append("call_date", formData.call_date);
+    }
+    if (formData.appointment_date !== "") {
+      data.append("appointment_date", formData.appointment_date);
+    }
+
+    if (formData.referal_id !== "") {
+      data.append("referal_id", formData.referal_id);
+    }
+
+    if (formData.industry_type !== "") {
+      data.append("industry_type", formData.industry_type);
+    }
+
+    if (formData.client_anniversary !== "") {
+      data.append("client_anniversary", formData.client_anniversary);
+    }
+
+    if (formData.dob_client !== "") {
+      data.append("dob_client", formData.dob_client);
+    }
     Object.keys(add).forEach((key) => {
       if (add[key] !== "") {
         data.append(`ca_data[${key}]`, add[key]);
@@ -217,7 +241,7 @@ export default function ClientData() {
         </div>
 
         <div className="name">
-          Dob CLient*
+          Dob CLient(Optional)
           <input
             type="date"
             pattern="\d{2}/\d{2}/\d{4}"
@@ -229,7 +253,7 @@ export default function ClientData() {
           />
         </div>
         <div className="name">
-          Client Aniversary*
+          Client Aniversary(Optional)
           <input
             type="date"
             pattern="\d{2}/\d{2}/\d{4}"
@@ -547,10 +571,11 @@ const Root = styled.section`
       padding: 12px 20px;
       box-sizing: border-box;
       border: 2px solid #ccc;
-      border-radius: 4px;
+      border-radius: 25px;
       background-color: #f8f8f8;
       font-size: 16px;
       resize: none;
+      margin-top: 9px;
     }
 
     .name11:focus-visible {
