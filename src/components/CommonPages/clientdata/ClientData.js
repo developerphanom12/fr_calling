@@ -12,12 +12,18 @@ export default function ClientData() {
     dob_client: "",
     client_anniversary: "",
     call_schedule_date: "",
-    client_companyaddress:"",
-    client_phonenumber:"",
-    client_email:"",
-    remark:"",
-    attach_file:null,
+    client_companyaddress: "",
+    client_phonenumber: "",
+    client_email: "",
+    remark: "",
+    attach_file: null,
     call_status: "",
+    client_number_additional: "",
+    call_date: "",
+    appointment_date: "",
+    referal_id: "",
+    company_constitution: "",
+    industry_type: ""
   });
   const [add, setAdd] = useState({
     ca_name: "",
@@ -25,82 +31,110 @@ export default function ClientData() {
     ca_accountant_name: "",
     ca_company_name: "",
     ca_accountant_number: "",
-    company_address:"",
+    company_address: "",
   });
 
   const navigate = useNavigate();
-const validateForm = () => {
-  if (
-    formData.client_name === "" ||
-    formData.company_name === "" ||
-    formData.client_email === "" ||
-    formData.client_phonenumber === "" ||
-    formData.dob_client === "" ||
-    formData.call_schedule_date === "" ||
-    formData.call_status === "" ||
-    formData.remark === "" ||
-    formData.client_companyaddress === "" || 
-    formData.client_anniversary === "" 
-  ) {
-    cogoToast.error("Please fill out all required fields");
-    return false;
-  }
-  return true;
-};
-
-const registerApi = async () => {
-  if (!validateForm()) {
-    return;
-  }
-
-  const data = new FormData();
-  data.append("client_name", formData.client_name);
-  data.append("client_email", formData.client_email);
-  data.append("client_phonenumber", formData.client_phonenumber);
-  data.append("client_companyaddress", formData.client_companyaddress);
-  data.append("company_name", formData.company_name);
-  data.append("remark", formData.remark);
-  data.append("dob_client", formData.dob_client);
-  data.append("client_anniversary", formData.client_anniversary);
-  data.append("call_schedule_date", formData.call_schedule_date);
-  data.append("call_status", formData.call_status);
-
-  try {
-    const axiosConfig = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    };
-    const res = await axios.post(
-      `${EXACHANGE_URLS_TELLE}/addclientdata`,
-      data,
-      axiosConfig
-    );
-
-    if (res?.status === 200) {
-      cogoToast.success("Registered Successfully");
-      setFormData({
-        client_name: "",
-        company_name: "",
-        dob_client: "",
-        client_anniversary: "",    
-        call_schedule_date: "",
-        call_status: "",
-        attach_file: null,
-        remark: "",
-      });
-      navigate("/history");
+  const validateForm = () => {
+    const requiredFields = [
+      "client_name",
+      "company_name",
+      "client_email",
+      "client_phonenumber",
+      "dob_client",
+      "call_schedule_date",
+      "call_status",
+      "remark",
+      "client_companyaddress",
+    ];
+  
+    for (const field of requiredFields) {
+      if (formData[field] === "") {
+        cogoToast.error(`${field.replace("_", " ").toUpperCase()} is required`);
+        return false;
+      }
     }
-  } catch (err) {
-    console.error("Error:", err);
-    cogoToast.error("Registration Failed");
-  }
-};
+  
+  
+    return true;
+  };
+  
+  const registerApi = async () => {
+    if (!validateForm()) {
+      return;
+    }
 
-const handleRegisterClick = () => {
-  registerApi();
-};
 
+    const data = new FormData();
+    data.append("client_name", formData.client_name);
+    data.append("client_email", formData.client_email);
+    data.append("client_phonenumber", formData.client_phonenumber);
+    data.append("client_companyaddress", formData.client_companyaddress);
+    data.append("company_name", formData.company_name);
+    data.append("remark", formData.remark);
+    data.append("dob_client", formData.dob_client);
+    data.append("client_anniversary", formData.client_anniversary);
+    data.append("call_schedule_date", formData.call_schedule_date);
+    data.append("call_status", formData.call_status);
+  
+   
+
+    if (formData.company_constitution !== "") {
+      data.append("company_constitution", formData.company_constitution);
+    }
+
+    Object.keys(add).forEach((key) => {
+      if (add[key] !== "") {
+        data.append(`ca_data[${key}]`, add[key]);
+      }
+    });
+   
+    try {
+      const axiosConfig = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
+      const res = await axios.post(
+        `${EXACHANGE_URLS_TELLE}/addclientdata`,
+        data,
+        axiosConfig
+      );
+  
+      if (res?.status === 200) {
+        cogoToast.success("Registered Successfully");
+        setFormData({
+          client_name: "",
+          company_name: "",
+          dob_client: "",
+          client_anniversary: "",
+          call_schedule_date: "",
+          call_status: "",
+          attach_file: null,
+          remark: "",
+        });
+        setAdd({
+          ca_name: "",
+          ca_number: "",
+          ca_accountant_name: "",
+          ca_company_name: "",
+          ca_accountant_number: "",
+          company_address: "",
+        });
+        navigate("/history");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      cogoToast.error("Registration Failed");
+    }
+  };
+  
+  
+  const handleRegisterClick = () => {
+    registerApi();
+  };
+  
+  
 
   return (
     <Root>
@@ -144,6 +178,18 @@ const handleRegisterClick = () => {
         </div>
         <div className="name">
           {" "}
+          Additional Client Number(Optional)
+          <input
+            type="number"
+            value={formData?.client_number_additional}
+            onChange={(e) => {
+              setFormData({ ...formData, client_number_additional: e.target.value });
+            }}
+            placeholder="Number"
+          />
+        </div>
+        <div className="name">
+          {" "}
           Company name*
           <input
             type="name"
@@ -161,7 +207,10 @@ const handleRegisterClick = () => {
             type="name"
             value={formData?.client_companyaddress}
             onChange={(e) => {
-              setFormData({ ...formData, client_companyaddress: e.target.value });
+              setFormData({
+                ...formData,
+                client_companyaddress: e.target.value,
+              });
             }}
             placeholder="Company Address"
           />
@@ -210,6 +259,38 @@ const handleRegisterClick = () => {
           />
         </div>
         <div className="name">
+          {" "}
+          Call Date(Optional)
+          <input
+            type="date"
+            pattern="\d{2}/\d{2}/\d{4}"
+            value={formData?.call_date}
+            onChange={(e) => {
+              setFormData({
+                ...formData,
+                call_date: e.target.value,
+              });
+            }}
+            placeholder="Call Date on which date"
+          />
+        </div>
+        <div className="name">
+          {" "}
+          Appointment Date(Optional)
+          <input
+            type="date"
+            pattern="\d{2}/\d{2}/\d{4}"
+            value={formData?.appointment_date}
+            onChange={(e) => {
+              setFormData({
+                ...formData,
+                appointment_date: e.target.value,
+              });
+            }}
+            placeholder="Appointment  on which date"
+          />  
+        </div>
+        <div className="name">
           Call Status*
           <select
             onChange={(e) => {
@@ -226,23 +307,65 @@ const handleRegisterClick = () => {
           </select>
         </div>
         <div className="name">
-          {" "}
-           Remark*
+          Referal Id(Optional)
           <input
-            type="name"
-            value={formData?.remark}
+            type="text"
+            value={formData?.referal_id}
             onChange={(e) => {
-              setFormData({ ...formData, remark: e.target.value });
+              setFormData({
+                ...formData,
+                referal_id: e.target.value,
+              });
             }}
-            placeholder="Remark  "
+            placeholder="Referal Id"
           />
         </div>
+        <div className="name">
+          Industry Type(Optional)
+          <input
+            type="text"
+            value={formData?.industry_type}
+            onChange={(e) => {
+              setFormData({
+                ...formData,
+                industry_type: e.target.value,
+              });
+            }}
+            placeholder="Industry Type"
+          />
+        </div>
+        <div className="name">
+          Company Constitution(Optional)
+          <input
+            type="text"
+            value={formData?.company_constitution}
+            onChange={(e) => {
+              setFormData({
+                ...formData,
+                company_constitution: e.target.value,
+              });
+            }}
+            placeholder="Company Constitution"
+          />
+        </div>
+      </div>
+      <div className="name1">
+        Remark*
+        <textarea
+          className="name11"
+          value={formData?.remark}
+          onChange={(e) => {
+            setFormData({ ...formData, remark: e.target.value });
+          }}
+          placeholder="Remark"
+        />
       </div>
       <h4> Your CA Details :-</h4>{" "}
       <div className="second_div">
         <div className="name">
           CA Name (Optional)
           <input
+          type="text"
             value={add?.ca_name}
             onChange={(e) => {
               setAdd({ ...add, ca_name: e.target.value });
@@ -272,7 +395,7 @@ const handleRegisterClick = () => {
           />
         </div>
         <div className="name">
-        CA Address (Optional)
+          CA Address (Optional)
           <input
             value={add?.company_address}
             onChange={(e) => {
@@ -304,9 +427,7 @@ const handleRegisterClick = () => {
         </div>
         <div className="name">
           Attach Any File (Optional)
-          <input
-              type="file"
-            />
+          <input type="file" />
         </div>
       </div>
       <div className="regis">
@@ -334,7 +455,7 @@ const Root = styled.section`
 
   h4 {
     color: #461c6c;
-    margin: 10px 0px;
+    margin: 0px;
     padding: 5px;
   }
 
@@ -410,69 +531,123 @@ const Root = styled.section`
     width: 90%;
     box-shadow: 1px 1px 5px 1px gray;
     border-radius: 10px;
+  }
 
-    .name {
+  .name1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 90%;
+    margin: 12px;
+    justify-content: left;
+    text-align: left;
+    .name11 {
+      width: 38%;
+      height: 150px;
+      padding: 12px 20px;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      background-color: #f8f8f8;
+      font-size: 16px;
+      resize: none;
+    }
+
+    .name11:focus-visible {
+      outline: 2px solid white;
+      border-radius: 3px;
+    }
+    .regis {
       display: flex;
-      flex-direction: column;
-      font-size: 13px;
-      width: 24%;
-      padding: 5px;
-      color: black;
-      input {
-        border-radius: 10px;
-        padding: 5px;
-        color: #202020;
-        width: 90%;
-        margin: 10px 0px;
-        text-decoration: none;
-        border: 1px solid #623084;
-        @media (max-width: 900px) {
-          width: 100%;
-        }
-      }
-
-      input:focus,
-      input:active {
-        border-color: #ff6525;
-      }
-      input[type="file"]::file-selector-button {
-        background-color: #623084;
-        border: 1px solid #3a1864;
-        padding: 0.2em 0.4em;
-        border-radius: 0.4em;
-        transition: 1s;
-        color: #fff;
-        cursor: pointer;
-        margin-left: 10px;
-      }
-
-      input[type="file"]::file-selector-button:hover {
-        border: 1px solid #119af6;
-        background-color: #62bdfa;
-      }
-      .imgg {
-        text-align: center;
-        position: relative;
-        cursor: pointer;
-        width: 40px;
-        height: 40px;
+      justify-content: flex-end;
+      padding: 10px;
+      .btnn {
+        padding: 10px;
+        border-radius: 50px;
+        font-size: small;
+        border: none;
+        width: 200px;
+        font-size: medium;
+        color: #ffffff;
+        margin-right: 108px;
+        background-image: linear-gradient(to right, #3a1864, #623084, #461c6c);
+        background-size: 300% 100%;
+        transition: all 0.3s ease-in-out 0s;
+        text-transform: uppercase;
         &:hover {
-          opacity: 0.5;
-        }
-        .inside_img {
-          width: 60px;
-          object-fit: contain;
-        }
-        input {
-          position: absolute;
-          height: 100%;
-          width: 100%;
-          opacity: 0;
+          box-shadow: 1px 1px 5px 1px gray;
+          transition: all 0.2s ease-in-out 0s;
+          background: linear-gradient(
+            -25deg,
+            #3a1864 20%,
+            #461c6c 49%,
+            #471f75 100%
+          );
         }
       }
+    }
+  }
+  .name {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    width: 24%;
+    padding: 5px;
+    color: black;
+    input {
+      border-radius: 10px;
+      padding: 5px;
+      color: #202020;
+      width: 90%;
+      margin: 10px 0px;
+      text-decoration: none;
+      border: 1px solid #623084;
       @media (max-width: 900px) {
-        width: 90%;
+        width: 100%;
       }
+    }
+
+    input:focus,
+    input:active {
+      border-color: #ff6525;
+    }
+    input[type="file"]::file-selector-button {
+      background-color: #623084;
+      border: 1px solid #3a1864;
+      padding: 0.2em 0.4em;
+      border-radius: 0.4em;
+      transition: 1s;
+      color: #fff;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    input[type="file"]::file-selector-button:hover {
+      border: 1px solid #119af6;
+      background-color: #62bdfa;
+    }
+    .imgg {
+      text-align: center;
+      position: relative;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      &:hover {
+        opacity: 0.5;
+      }
+      .inside_img {
+        width: 60px;
+        object-fit: contain;
+      }
+      input {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+      }
+    }
+    @media (max-width: 900px) {
+      width: 90%;
     }
   }
   .regis {
