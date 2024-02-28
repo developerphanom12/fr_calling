@@ -3,11 +3,19 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { BsFillEyeFill } from "react-icons/bs";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { appDetailsAction } from "../../../../redux/users/action";
 import { EXCHANGE_URLS_ADMIN } from "../../../URLS";
 
-export default function ClientHistory({ popUser = () => {} }) {
+const formatDate = (isoDate) => {
+  const date = new Date(isoDate);
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+};
+
+export default function ClientHistory({ detail }, { popUser = () => {} }) {
   const [applications, setApplications] = useState([]);
   const [uniqueClientNames, setUniqueClientNames] = useState([]);
   const [selectedTele, setSelectedTele] = useState("");
@@ -79,18 +87,17 @@ export default function ClientHistory({ popUser = () => {} }) {
             </option>
           ))}
         </select>
-       
-     
       </div>
 
       <div className="app_table">
         <div className="app_header">
           <div> Id</div>
-          <div>Client Details</div>
-          <div>Tellecaller Name</div>
-          <div>CA Name</div>
+
+          <div>Client Detail</div>
+          <div>CA detail</div>
+          <div>Date</div>
           <div>Status</div>
-          <div>View</div>
+          <div>Tellecaller</div>
         </div>
         {filteredApplications &&
           filteredApplications.map((i) => {
@@ -102,37 +109,105 @@ export default function ClientHistory({ popUser = () => {} }) {
                 }}
               >
                 <div className="cams">#{i?.cd}</div>
-                <div>
+
+                <div className="clientname">
                   <p>
-                    Client Name <span>{i?.client_name}</span>
+                    Name <span>{i?.client_name}</span>
                   </p>
+
+                  <p>
+                    Email: <span>{i?.client_email}</span>
+                  </p>
+                  <p>
+                    Phonenumber <span>{i?.client_phonenumber}</span>
+                  </p>
+                  <p>
+                    Company Address: <span>{i?.client_companyaddress}</span>
+                  </p>
+
                   <p>
                     Company Name: <span>{i?.company_name}</span>
                   </p>
-                </div>
-                <div>
                   <p>
-                    Tellecaller name : <span>{i?.user?.username}</span>
+                    Appointment Date: <span>{i?.appointment_date}</span>
+                  </p>
+                  <p>
+                    Call Date: <span>{i?.call_date}</span>
+                  </p>
+
+                  <p>
+                    Company Constitution: <span>{i?.company_constitution}</span>
+                  </p>
+                  <p>
+                    Industry Type: <span>{i?.industry_type}</span>
+                  </p>
+                </div>
+                <div className="statusdata">
+                  <p>
+                    CA Name <span>{i?.client_name}</span>
+                  </p>
+                  <p>
+                    CA PhoneNumber: <span>{i?.company_name}</span>
+                  </p>
+                  <p>
+                    CA Accountant Name: <span>{i?.company_name}</span>
+                  </p>
+                  <p>
+                    CA Accountant Number: <span>{i?.company_name}</span>
+                  </p>
+                  <p>
+                    Company Address: <span>{i?.company_name}</span>
                   </p>
                 </div>
 
-                <div>
-                  <p>{i?.ca?.ca_name}</p>
+                <div className="statusdata">
+                  <p>
+                    <h4>Client addon: </h4>
+                    <p>
+                      {i?.created_at ? formatDate(i?.created_at) : "No Date"}
+                    </p>
+                  </p>
+                  <p>
+                    <h4> Appointment Date: </h4>
+                    <p>
+                      {i?.appointment ? formatDate(i?.appointment) : "No Date"}
+                    </p>
+                  </p>
+                  <p>
+                    <h4>Call Date: </h4>
+                    <p>{i?.call_date ? formatDate(i?.call_date) : "No Date"}</p>
+                  </p>
                 </div>
-                <div>
-                  <p>{i?.call_status}</p>
+                <div className="statusdata">
+                  <p>
+                    <h4>First Status: </h4>
+                    <p>{i?.call_status}</p>
+                  </p>
+
+                  <p>
+                    <h4>Second Status: </h4>{" "}
+                    <p>{i?.statuss[0]?.call_status || "No Data"}</p>
+                  </p>
+                  <p>
+                    <h4>Third Status:</h4>{" "}
+                    <p>{i?.statuss[1]?.call_status || "NO Data"}</p>
+                  </p>
                 </div>
-                <div
-                  className="iconn"
-                  onClick={() => {
-                    navigate(`/detailview/${i?.cd}`);
-                  }}
-                >
-                  <BsFillEyeFill />
-                </div>
+                <div></div>
               </div>
             );
           })}
+      </div>
+      <div>
+        <p>{detail?.user?.username}</p>
+      </div>
+
+      <div>
+        <p>{detail?.user?.email}</p>
+      </div>
+
+      <div>
+        <p>{detail?.user?.role}</p>
       </div>
     </Root>
   );
@@ -141,11 +216,10 @@ const Root = styled.section`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background-color: #f8f8f8;
   color: #202020;
   font-family: "Roboto", sans-serif;
   height: 100%;
-
+  overflow: auto;
   .header {
     display: flex;
     align-items: center;
@@ -193,43 +267,41 @@ const Root = styled.section`
       }
     }
 
- 
+    button {
+      padding: 5px;
+      border-radius: 20px;
+      font-size: 13px;
+      border: none;
+      color: #ffffff;
+      background-image: linear-gradient(to right, #3a1864, #623084, #461c6c);
+      transition: all 0.3s ease-in-out 0s;
+      text-transform: uppercase;
+      &:hover {
+        cursor: pointer;
+        transition: all 0.2s ease-in-out 0s;
+        background: linear-gradient(
+          -25deg,
+          #3a1864 20%,
+          #461c6c 49%,
+          #471f75 100%
+        );
+      }
+    }
+  }
 
-   button {
-     padding: 5px;
-     border-radius: 20px;
-     font-size: 13px;
-     border: none;
-     color: #ffffff;
-     background-image: linear-gradient(to right, #3a1864, #623084, #461c6c);
-     transition: all 0.3s ease-in-out 0s;
-     text-transform: uppercase;
-     &:hover {
-      cursor: pointer;
-       transition: all 0.2s ease-in-out 0s;
-       background: linear-gradient(
-         -25deg,
-         #3a1864 20%,
-         #461c6c 49%,
-         #471f75 100%
-       );
-     }
-   }
- }
- 
-  
   .app_table {
     display: flex;
     flex-direction: column;
-    width: 88%;
-    margin-left: 60px;
+    width: 150%;
+    /* margin-left: 60px; */
     font-family: "Roboto", "sana-serif";
     .app_header {
       display: flex;
-      background:#5d05abb8;
+      background: #5d05abb8;
       text-align: center;
-      color: white;     
-      border-bottom: 4px solid #4b217b;
+      color: white;
+      /* border-bottom: 4px solid #4b217b; */
+      width: 135vw;
       > div {
         flex: 1;
         border: 1px solid #dee2e6;
@@ -239,7 +311,9 @@ const Root = styled.section`
     .app_body {
       display: flex;
       font-family: "Roboto", sans-serif;
-
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
       .cams {
         text-align: center;
         display: flex;
@@ -260,45 +334,74 @@ const Root = styled.section`
           }
         }
       }
+
+      .statusdata {
+        p {
+          display: flex;
+          justify-content: space-between;
+          width: 80%;
+          align-items: center;
+          font-size: 14px;
+          h4{
+            margin: 5px 0px;
+            color: #000;
+          }
+        }
+        
+      }
+      .clientname {
+        flex: 1;
+        border: 0.3px solid #7352d07d;
+        text-transform: capitalize;
+        background-color: #fff;
+        text-align: center;
+        padding: 26px 5px;
+
+        p {
+          display: flex;
+          gap: 10px;
+        }
+      }
+
       > div {
         flex: 1;
-        border: 0.3px solid #fbfbfd;
+        border: 0.3px solid #7352d07d;
         text-transform: capitalize;
-        background-color: #e7e7e8;
+        background-color: #fff;
         text-align: center;
-        padding: 10px 5px;
-        .person {
-          color: #8995ad;
-          font-size: 14px;
-          @media (max-width: 789px) {
-            font-size: 10px;
-          }
+        padding: 26px 5px;
+      }
+      .person {
+        color: #8995ad;
+        font-size: 14px;
+        @media (max-width: 789px) {
+          font-size: 10px;
         }
-        p {
-          font-weight: 500;
-          text-align: left;
+      }
+      p {
+        font-weight: 500;
+        text-align: left;
+        font-size: 13px;
+        @media (max-width: 789px) {
+          font-size: 10px;
+        }
+        span {
           font-size: 13px;
-          @media (max-width: 789px) {
-            font-size: 10px;
-          }
-          span {
-            font-size: 13px;
-            font-weight: 500;
-          }
-        }
-
-        &:nth-child(odd) {
-          background-color: #a061ef26;
-        }
-
-        &:nth-child(even) {
-          background-color: white;
+          font-weight: 500;
         }
       }
-      &:hover {
-        background-color: lightgray;
-        cursor: pointer;
+
+      &:nth-child(odd) {
+        /* background-color: #a061ef26; */
       }
+
+      &:nth-child(even) {
+        background-color: white;
+      }
+    }
+    &:hover {
+      background-color: lightgray;
+      cursor: pointer;
     }
   }
 

@@ -566,7 +566,7 @@ const Root = styled.section`
     justify-content: left;
     text-align: left;
     .name11 {
-      width: 38%;
+      width: 100%;
       height: 150px;
       padding: 12px 20px;
       box-sizing: border-box;
