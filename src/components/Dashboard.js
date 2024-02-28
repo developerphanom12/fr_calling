@@ -340,6 +340,7 @@ const Root = styled.section`
         display: flex;
         flex-direction: column;
         margin-right: 14px;
+        height: 24vh;
         /* overflow-y: scroll; */
         .none_image {
           display: flex;
@@ -353,7 +354,7 @@ const Root = styled.section`
         .data_div {
           display: flex;
           margin-top: 12px;
-          padding: 6px;
+          padding: 1px;
           border-radius: 12px;
           margin-bottom: 7px;
           justify-content: space-between;

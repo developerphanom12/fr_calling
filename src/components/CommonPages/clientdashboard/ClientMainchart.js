@@ -3,6 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import ApexChartClient from "./ApexChartClient";
 import { EXACHANGE_URLS_TELLE } from "../../URLS";
+import cogoToast from "cogo-toast";
 
 const ClientMainchart = () => {
   const [salesData, setSalesData] = useState([]);
@@ -23,8 +24,12 @@ const ClientMainchart = () => {
       if (res.status === 201) {
         setSalesData(res?.data?.data);
       }
-    } catch (e) {
-      console.log(e);
+    }catch (err) {
+      if (err.response && err.response.status === 404) {
+        cogoToast.error(err.response.data.error);
+      } else {
+        console.log("err", err);
+      }
     }
   };
 

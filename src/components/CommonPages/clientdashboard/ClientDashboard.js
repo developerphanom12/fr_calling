@@ -282,12 +282,15 @@ const Root = styled.section`
       }
       .upcomming_child1_div {
         display: flex;
-        margin-right: 14px;
-        overflow-y: scroll;
-        overflow-x: hidden;
+    flex-direction: column;
+    margin-right: 14px;
+    overflow-y: scroll;
+    width: 101%;
+    overflow-x: hidden;
+    height: 90%;
         .none_image {
           display: flex;
-          flex-direction: column;
+          flex-direction: column !important;
           .data22 {
             margin: 12px;
             width: 100%;
@@ -300,6 +303,7 @@ const Root = styled.section`
           border-radius: 12px;
           justify-content: space-between;
           .img_text {
+        
             display: flex;
             font-size: 1.125rem;
             font-weight: 600;
@@ -338,6 +342,7 @@ const Root = styled.section`
             justify-content: right;
             cursor: pointer;
             color: #0088ff;
+            margin-right: 15px;
           }
         }
         > div {
