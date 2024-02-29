@@ -110,54 +110,101 @@ export default function ClientHistory({ detail }, { popUser = () => {} }) {
               >
                 <div className="cams">#{i?.cd}</div>
 
-                <div className="clientname">
+                <div className="statusdata">
+
+                <p>
+                    <h4> Name: </h4>
+                    <p>
+                    {i?.client_name}
+                    </p>
+                  </p>
                   <p>
-                    Name <span>{i?.client_name}</span>
+                    <h4> Email: </h4>
+                    <p>
+                    {i?.client_email}
+                    </p>
+                  </p>
+                  <p>
+                    <h4> Phone Number: </h4>
+                    <p>
+                    {i?.client_phonenumber}
+                    </p>
+                  </p>
+                  <p>
+                    <h4> Company Address: </h4>
+                    <p>
+                    {i?.client_companyaddress}
+                    </p>
+                  </p>
+                 
+                  <p>
+                    <h4> Company Name: </h4>
+                    <p>
+                    {i?.company_name}
+                    </p>
                   </p>
 
                   <p>
-                    Email: <span>{i?.client_email}</span>
+                    <h4> Company Constitution: </h4>
+                    <p>
+                    {i?.company_constitution}
+                    </p>
                   </p>
+                 
                   <p>
-                    Phonenumber <span>{i?.client_phonenumber}</span>
+                    <h4> Industry Type: </h4>
+                    <p>
+                    {i?.industry_type}
+                    </p>
                   </p>
-                  <p>
-                    Company Address: <span>{i?.client_companyaddress}</span>
-                  </p>
+                 
+                 
 
-                  <p>
-                    Company Name: <span>{i?.company_name}</span>
-                  </p>
-                  <p>
-                    Appointment Date: <span>{i?.appointment_date}</span>
-                  </p>
-                  <p>
-                    Call Date: <span>{i?.call_date}</span>
-                  </p>
-
-                  <p>
-                    Company Constitution: <span>{i?.company_constitution}</span>
-                  </p>
-                  <p>
-                    Industry Type: <span>{i?.industry_type}</span>
-                  </p>
+                 
+                
                 </div>
                 <div className="statusdata">
-                  <p>
-                    CA Name <span>{i?.client_name}</span>
+
+                <p>
+                    <h4> CA Name: </h4>
+                    <p>
+                    {i?.ca?.ca_name}
+                    </p>
                   </p>
                   <p>
-                    CA PhoneNumber: <span>{i?.company_name}</span>
+                    <h4> CA PhoneNumber: </h4>
+                    <p>
+                    {i?.ca?.ca_number}
+                    </p>
+                  </p>
+
+                  <p>
+                    <h4> CA Accountant Name: </h4>
+                    <p>
+                    {i?.ca?.ca_accountant_name}
+                    </p>
+                  </p>
+                 
+                  <p>
+                    <h4>CA Accountant Number: </h4>
+                    <p>
+                    {i?.ca?.ca_accountant_number}
+                    </p>
+                  </p>
+                 
+                  <p>
+                    <h4>CA Company Name: </h4>
+                    <p>
+                    {i?.ca?.ca_company_name}
+                    </p>
                   </p>
                   <p>
-                    CA Accountant Name: <span>{i?.company_name}</span>
+                    <h4> Company Address: </h4>
+                    <p>
+                    {i?.ca?.company_address}
+                    </p>
                   </p>
-                  <p>
-                    CA Accountant Number: <span>{i?.company_name}</span>
-                  </p>
-                  <p>
-                    Company Address: <span>{i?.company_name}</span>
-                  </p>
+                
                 </div>
 
                 <div className="statusdata">
@@ -193,22 +240,20 @@ export default function ClientHistory({ detail }, { popUser = () => {} }) {
                     <p>{i?.statuss[1]?.call_status || "NO Data"}</p>
                   </p>
                 </div>
-                <div></div>
+
+                
+                <div className="statusdata11">
+
+                <p>
+                    <h4>Tellecaller Name:</h4>{" "}
+                    <p>{i?.user?.username}</p>
+                  </p>
+                </div>
               </div>
             );
           })}
       </div>
-      <div>
-        <p>{detail?.user?.username}</p>
-      </div>
-
-      <div>
-        <p>{detail?.user?.email}</p>
-      </div>
-
-      <div>
-        <p>{detail?.user?.role}</p>
-      </div>
+     
     </Root>
   );
 }
@@ -342,6 +387,40 @@ const Root = styled.section`
           width: 80%;
           align-items: center;
           font-size: 14px;
+          h4{
+           
+            margin: 9px 0px;
+    color: #000;
+    width: 100%;
+          }
+        }
+        
+      }
+
+      .statusdata11 {
+        p {
+          display: flex;
+          justify-content: space-between;
+          width: 80%;
+          align-items: center;
+          font-size: 14px;
+          h4{
+          
+            margin: 9px 0px;
+    color: #000;
+    width: 100%;
+          }
+        }
+        
+      }
+      .statusdata1 {
+        p {
+          display: flex;
+          justify-content: space-between;
+          width: 80%;
+          align-items: center;
+          font-size: 14px;
+        padding:5px;
           h4{
             margin: 5px 0px;
             color: #000;
