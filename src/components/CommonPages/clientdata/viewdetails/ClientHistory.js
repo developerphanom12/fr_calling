@@ -211,7 +211,7 @@ export default function ClientHistory({ popUser = () => {} }) {
                       </button>
                     ) : null}
                   </div>
-                  <div className="notedit">
+                  <div className="edit">
                     {i?.ca &&
                     Object.values(i.ca).every((value) => value === null) ? (
                       <button onClick={() => handleAddButtonClick(i.cd)}>
@@ -425,6 +425,29 @@ const Root = styled.section`
             width: 100%;
           }
         }
+
+        .edit{
+          display: flex;
+    width: 100%;
+    justify-content: right;
+
+    button{
+      width: 22%;
+    padding: 0px;
+    height: 100%;
+    padding: 3px;
+    font-size: 20px;
+    border-radius: 9px;
+    cursor: pointer;
+    margin-right: 8px;
+    font-family: sans-serif;
+    font-weight: 500;
+    background: #5d05abb8;
+    color: white;
+    border: 2px solid #5d05abb8;
+    }
+        }
+        
       }
 
       .statusdata11 {
