@@ -204,7 +204,8 @@ export default function ClientHistory({ detail }, { popUser = () => {} }) {
                     {i?.ca?.company_address}
                     </p>
                   </p>
-                
+
+                 
                 </div>
 
                 <div className="statusdata">
@@ -231,14 +232,34 @@ export default function ClientHistory({ detail }, { popUser = () => {} }) {
                     <p>{i?.call_status}</p>
                   </p>
 
-                  <p>
-                    <h4>Second Status: </h4>{" "}
-                    <p>{i?.statuss[0]?.call_status || "No Data"}</p>
-                  </p>
-                  <p>
-                    <h4>Third Status:</h4>{" "}
-                    <p>{i?.statuss[1]?.call_status || "NO Data"}</p>
-                  </p>
+                  { 
+  i.statuss && i.statuss.length >= 0 ? (
+    <>
+      <p>
+        <h4>Second Status: </h4>{" "}
+        <p>{i.statuss[0]?.call_status || "No Data"}</p>
+      </p>
+      <p>
+        <h4>Third Status:</h4>{" "}
+        <p>{i.statuss[1]?.call_status || "No Data"}</p>
+      </p>
+    </>
+  ) : (
+    <>
+      <p>
+        <h4>Second Status: </h4>{" "}
+        <p>No data</p>
+      </p>
+      <p>
+        <h4>Third Status: </h4>{" "}
+        <p>No data</p>
+      </p>
+    </>
+  )
+}
+
+
+
                 </div>
 
                 
