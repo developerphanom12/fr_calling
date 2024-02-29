@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
-import { BsFillEyeFill } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
-import { appDetailsAction } from "../../../../redux/users/action";
+import { useDispatch, useSelector } from "react-redux";
+import { appDetailsAction, openModal } from "../../../../redux/users/action";
 import { EXCHANGE_URLS_ADMIN } from "../../../URLS";
+import Updateapi from "./editpages/Updateapi";
+import Postapi from "./editpages/Postapi";
 
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
@@ -15,12 +15,42 @@ const formatDate = (isoDate) => {
   return `${day}/${month}/${year}`;
 };
 
-export default function ClientHistory({ detail }, { popUser = () => {} }) {
+export default function ClientHistory({ popUser = () => {} }) {
   const [applications, setApplications] = useState([]);
   const [uniqueClientNames, setUniqueClientNames] = useState([]);
   const [selectedTele, setSelectedTele] = useState("");
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
+  const { modalIsOpen, modalType } = useSelector((state) => state?.users);
+
+  const handleOpenModal = (type) => {
+    dispatch(openModal(type));
+  };
+
+  const [selectedCd, setSelectedCd] = useState(null);
+  const handleAddButtonClick = (cd) => {
+    setSelectedCd(cd);
+    handleOpenModal("postapi");
+  };
+
+  const [selectedCA, setSelectedCA] = useState(null);
+  const handleAddButtonClickca = (ca_id) => {
+    setSelectedCA(ca_id);
+    handleOpenModal("updateapi");
+  };
+
+  const renderModalContent = () => {
+    console.log("Modal_Type", modalType);
+    switch (modalType) {
+      case "updateapi":
+        return <Updateapi ca_id = {selectedCA}/>;
+      case "postapi":
+        return <Postapi cd={selectedCd} />;
+
+      default:
+        return null;
+    }
+  };
   const getHistory = async () => {
     const axiosConfig = {
       headers: {
@@ -111,101 +141,84 @@ export default function ClientHistory({ detail }, { popUser = () => {} }) {
                 <div className="cams">#{i?.cd}</div>
 
                 <div className="statusdata">
-
-                <p>
+                  <p>
                     <h4> Name: </h4>
-                    <p>
-                    {i?.client_name}
-                    </p>
+                    <p>{i?.client_name}</p>
                   </p>
                   <p>
                     <h4> Email: </h4>
-                    <p>
-                    {i?.client_email}
-                    </p>
+                    <p>{i?.client_email}</p>
                   </p>
                   <p>
                     <h4> Phone Number: </h4>
-                    <p>
-                    {i?.client_phonenumber}
-                    </p>
+                    <p>{i?.client_phonenumber}</p>
                   </p>
                   <p>
                     <h4> Company Address: </h4>
-                    <p>
-                    {i?.client_companyaddress}
-                    </p>
+                    <p>{i?.client_companyaddress}</p>
                   </p>
-                 
+
                   <p>
                     <h4> Company Name: </h4>
-                    <p>
-                    {i?.company_name}
-                    </p>
+                    <p>{i?.company_name}</p>
                   </p>
 
                   <p>
                     <h4> Company Constitution: </h4>
-                    <p>
-                    {i?.company_constitution}
-                    </p>
+                    <p>{i?.company_constitution}</p>
                   </p>
-                 
+
                   <p>
                     <h4> Industry Type: </h4>
-                    <p>
-                    {i?.industry_type}
-                    </p>
+                    <p>{i?.industry_type}</p>
                   </p>
-                 
-                 
-
-                 
-                
                 </div>
                 <div className="statusdata">
-
-                <p>
+                  <p>
                     <h4> CA Name: </h4>
-                    <p>
-                    {i?.ca?.ca_name}
-                    </p>
+                    <p>{i?.ca?.ca_name}</p>
                   </p>
                   <p>
                     <h4> CA PhoneNumber: </h4>
-                    <p>
-                    {i?.ca?.ca_number}
-                    </p>
+                    <p>{i?.ca?.ca_number}</p>
                   </p>
-
                   <p>
                     <h4> CA Accountant Name: </h4>
-                    <p>
-                    {i?.ca?.ca_accountant_name}
-                    </p>
+                    <p>{i?.ca?.ca_accountant_name}</p>
                   </p>
-                 
                   <p>
                     <h4>CA Accountant Number: </h4>
-                    <p>
-                    {i?.ca?.ca_accountant_number}
-                    </p>
+                    <p>{i?.ca?.ca_accountant_number}</p>
                   </p>
-                 
                   <p>
                     <h4>CA Company Name: </h4>
-                    <p>
-                    {i?.ca?.ca_company_name}
-                    </p>
+                    <p>{i?.ca?.ca_company_name}</p>
                   </p>
                   <p>
                     <h4> Company Address: </h4>
-                    <p>
-                    {i?.ca?.company_address}
-                    </p>
+                    <p>{i?.ca?.company_address}</p>
                   </p>
-
-                 
+                  <div className="edit">
+                    {i?.ca &&
+                    Object.values(i.ca).some((value) => value !== null) ? (
+                      <button
+                        className="editbutton"
+                        onClick={() => {
+                          handleAddButtonClickca(i.ca.ca_id); // Pass ca_id to the function
+                        }}
+                      >
+                        Edit
+                      </button>
+                    ) : null}
+                  </div>
+                  <div className="notedit">
+                    {i?.ca &&
+                    Object.values(i.ca).every((value) => value === null) ? (
+                      <button onClick={() => handleAddButtonClick(i.cd)}>
+                        Add
+                      </button>
+                    ) : null}
+                  </div>
                 </div>
 
                 <div className="statusdata">
@@ -232,49 +245,39 @@ export default function ClientHistory({ detail }, { popUser = () => {} }) {
                     <p>{i?.call_status}</p>
                   </p>
 
-                  { 
-  i.statuss && i.statuss.length >= 0 ? (
-    <>
-      <p>
-        <h4>Second Status: </h4>{" "}
-        <p>{i.statuss[0]?.call_status || "No Data"}</p>
-      </p>
-      <p>
-        <h4>Third Status:</h4>{" "}
-        <p>{i.statuss[1]?.call_status || "No Data"}</p>
-      </p>
-    </>
-  ) : (
-    <>
-      <p>
-        <h4>Second Status: </h4>{" "}
-        <p>No data</p>
-      </p>
-      <p>
-        <h4>Third Status: </h4>{" "}
-        <p>No data</p>
-      </p>
-    </>
-  )
-}
-
-
-
+                  {i.statuss && i.statuss.length >= 0 ? (
+                    <>
+                      <p>
+                        <h4>Second Status: </h4>{" "}
+                        <p>{i.statuss[0]?.call_status || "No Data"}</p>
+                      </p>
+                      <p>
+                        <h4>Third Status:</h4>{" "}
+                        <p>{i.statuss[1]?.call_status || "No Data"}</p>
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <p>
+                        <h4>Second Status: </h4> <p>No data</p>
+                      </p>
+                      <p>
+                        <h4>Third Status: </h4> <p>No data</p>
+                      </p>
+                    </>
+                  )}
                 </div>
 
-                
                 <div className="statusdata11">
-
-                <p>
-                    <h4>Tellecaller Name:</h4>{" "}
-                    <p>{i?.user?.username}</p>
+                  <p>
+                    <h4>Tellecaller Name:</h4> <p>{i?.user?.username}</p>
                   </p>
                 </div>
               </div>
             );
           })}
       </div>
-     
+      {modalIsOpen && <div className="open_page">{renderModalContent()}</div>}
     </Root>
   );
 }
@@ -286,6 +289,14 @@ const Root = styled.section`
   font-family: "Roboto", sans-serif;
   height: 100%;
   overflow: auto;
+  .open_page {
+    z-index: 1000;
+    position: fixed;
+    top: 0px;
+    left: 1px;
+    width: 100%;
+    backdrop-filter: blur(2px);
+  }
   .header {
     display: flex;
     align-items: center;
@@ -408,14 +419,12 @@ const Root = styled.section`
           width: 80%;
           align-items: center;
           font-size: 14px;
-          h4{
-           
+          h4 {
             margin: 9px 0px;
-    color: #000;
-    width: 100%;
+            color: #000;
+            width: 100%;
           }
         }
-        
       }
 
       .statusdata11 {
@@ -425,14 +434,12 @@ const Root = styled.section`
           width: 80%;
           align-items: center;
           font-size: 14px;
-          h4{
-          
+          h4 {
             margin: 9px 0px;
-    color: #000;
-    width: 100%;
+            color: #000;
+            width: 100%;
           }
         }
-        
       }
       .statusdata1 {
         p {
@@ -441,13 +448,12 @@ const Root = styled.section`
           width: 80%;
           align-items: center;
           font-size: 14px;
-        padding:5px;
-          h4{
+          padding: 5px;
+          h4 {
             margin: 5px 0px;
             color: #000;
           }
         }
-        
       }
       .clientname {
         flex: 1;

@@ -3,8 +3,8 @@ const initialState = {
   userCheck: false,
   role: "",
   appDetails: {},
-
-
+  modalIsOpen: false,
+  modalType: null,
 };
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -17,6 +17,18 @@ const UserReducer = (state = initialState, action) => {
       return {
         ...state,
         userCheck: action.payload,
+      };
+    case "OPEN_MODAL":
+      return {
+        ...state,
+        modalIsOpen: true,
+        modalType: action.payload.modalType,
+      };
+    case "CLOSE_MODAL":
+      return {
+        ...state,
+        modalIsOpen: false,
+        modalType: null,
       };
     case "APP_DETAILS":
       return {

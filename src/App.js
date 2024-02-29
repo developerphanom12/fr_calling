@@ -30,6 +30,8 @@ import ViewStat from "./components/CommonPages/admin/chart/dailyreport/ViewStat"
 import Otp from "./components/CommonPages/loginpages/Otp";
 import VerifyOtp from "./components/CommonPages/loginpages/VerifyOtp";
 import Adminlogin from "./components/CommonPages/loginpages/AdminLogin";
+import Updateapi from "./components/CommonPages/clientdata/viewdetails/editpages/Updateapi";
+import Postapi from "./components/CommonPages/clientdata/viewdetails/editpages/Postapi";
 
 function App() {
   const userCheck = useSelector((state) => state?.users?.userCheck);
@@ -54,6 +56,9 @@ function App() {
                 <Route path="/telenegativelead" element={<TellecallerNegativeLead />} />
                 <Route path="/otpverify" element={<Otp />} />
                 <Route path="/otpverifycode" element={<VerifyOtp />} />
+                <Route path="/updateapi" element={<Updateapi />} />
+                <Route path="/postapi" element={<Postapi />} />
+
                 
               </>
             ) : userDetails?.role === "admin" ? (
