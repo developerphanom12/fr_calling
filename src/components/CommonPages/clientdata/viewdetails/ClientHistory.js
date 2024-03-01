@@ -4,8 +4,11 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { appDetailsAction, openModal } from "../../../../redux/users/action";
 import { EXCHANGE_URLS_ADMIN } from "../../../URLS";
-import Updateapi from "./editpages/Updateapi";
-import Postapi from "./editpages/Postapi";
+import Updateapi from "./editpages/CaDataUpdateapi";
+import Postapi from "./editpages/CAdataPostapi";
+import Callstatus from "./editpages/Callstatus";
+import { FaPen } from "react-icons/fa";
+import OtherStatusUpdate from "./editpages/OtherStatusUpdate";
 
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
@@ -39,14 +42,30 @@ export default function ClientHistory({ popUser = () => {} }) {
     handleOpenModal("updateapi");
   };
 
+  const handleAddButtonClickStatus = (cd) => {
+    setSelectedCd(cd);
+    handleOpenModal("callstatus");
+  };
+
+  const [selectedOtherStatus, setSelectedUpdateStatus] = useState(null);
+  const handleAddButtonClickOtherStatus = (cd) => {
+    setSelectedUpdateStatus(cd);
+    handleOpenModal("othercallstatus");
+  };
+
   const renderModalContent = () => {
     console.log("Modal_Type", modalType);
     switch (modalType) {
       case "updateapi":
-        return <Updateapi ca_id = {selectedCA}/>;
+        return <Updateapi ca_id={selectedCA} />;
       case "postapi":
         return <Postapi cd={selectedCd} />;
 
+      case "callstatus":
+        return <Callstatus cd={selectedCd} />;
+
+      case "othercallstatus":
+        return <OtherStatusUpdate cd={selectedOtherStatus} />;
       default:
         return null;
     }
@@ -239,21 +258,58 @@ export default function ClientHistory({ popUser = () => {} }) {
                     <p>{i?.call_date ? formatDate(i?.call_date) : "No Date"}</p>
                   </p>
                 </div>
-                <div className="statusdata">
+                <div className="statusdatas">
+                 
                   <p>
                     <h4>First Status: </h4>
                     <p>{i?.call_status}</p>
+                    <button
+                      className="editbutton"
+                      onClick={() => {
+                        handleAddButtonClickStatus(i.cd);
+                      }}
+                    >
+                      <FaPen />
+                    </button>
                   </p>
-
+                
                   {i.statuss && i.statuss.length >= 0 ? (
                     <>
                       <p>
                         <h4>Second Status: </h4>{" "}
                         <p>{i.statuss[0]?.call_status || "No Data"}</p>
+                        <p> Update On :
+                          {isNaN(Date.parse(i.statuss[0]?.updates_date))
+                            ? "No Data"
+                            : formatDate(i.statuss[0]?.updates_date)}
+                        </p>
+                        <button
+                          className="editbutton"
+                          onClick={() => {
+                            handleAddButtonClickOtherStatus(i.cd);
+                          }}
+                        >
+                          <FaPen />
+                        </button>
                       </p>
                       <p>
                         <h4>Third Status:</h4>{" "}
                         <p>{i.statuss[1]?.call_status || "No Data"}</p>
+                        <h4>Update On : </h4>{""}
+                         <p>
+                           {isNaN(Date.parse(i.statuss[1]?.updates_date))
+                            ? "No Data"
+                            : formatDate(i.statuss[1]?.updates_date)}
+                        
+                          </p>
+                        <button
+                          className="editbutton"
+                          onClick={() => {
+                            handleAddButtonClickOtherStatus(i.cd);
+                          }}
+                        >
+                          <FaPen />
+                        </button>
                       </p>
                     </>
                   ) : (
@@ -370,15 +426,13 @@ const Root = styled.section`
     display: flex;
     flex-direction: column;
     width: 150%;
-    /* margin-left: 60px; */
     font-family: "Roboto", "sana-serif";
     .app_header {
       display: flex;
       background: #5d05abb8;
       text-align: center;
       color: white;
-      /* border-bottom: 4px solid #4b217b; */
-      width: 135vw;
+      width: 136vw;
       > div {
         flex: 1;
         border: 1px solid #dee2e6;
@@ -426,28 +480,73 @@ const Root = styled.section`
           }
         }
 
-        .edit{
+        .edit {
           display: flex;
-    width: 100%;
-    justify-content: right;
+          width: 100%;
+          justify-content: right;
 
-    button{
-      width: 22%;
-    padding: 0px;
-    height: 100%;
-    padding: 3px;
-    font-size: 20px;
-    border-radius: 9px;
-    cursor: pointer;
-    margin-right: 8px;
-    font-family: sans-serif;
-    font-weight: 500;
-    background: #5d05abb8;
-    color: white;
-    border: 2px solid #5d05abb8;
-    }
+          button {
+            width: 22%;
+            padding: 0px;
+            height: 100%;
+            padding: 3px;
+            font-size: 20px;
+            border-radius: 9px;
+            cursor: pointer;
+            margin-right: 8px;
+            font-family: sans-serif;
+            font-weight: 500;
+            background: #5d05abb8;
+            color: white;
+            border: 2px solid #5d05abb8;
+          }
         }
-        
+      }
+      .statusdatas {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        p {
+          display: flex;
+          
+          justify-content: space-between;
+          width: 87%;
+          align-items: center;
+          font-size: 14px;
+          h4 {
+            margin: 9px 0px;
+            color: #000;
+            width: 100%;
+          }
+
+          .editbutton {
+            font-size: 17px;
+            border: none;
+            color: #5d05abb8;
+          }
+        }
+
+        .edit {
+          display: flex;
+          width: 100%;
+          justify-content: right;
+
+          button {
+            width: 22%;
+            padding: 0px;
+            height: 100%;
+            padding: 3px;
+            font-size: 20px;
+            border-radius: 9px;
+            cursor: pointer;
+            margin-right: 8px;
+            font-family: sans-serif;
+            font-weight: 500;
+            background: #5d05abb8;
+            color: white;
+            border: 2px solid #5d05abb8;
+          }
+        }
       }
 
       .statusdata11 {

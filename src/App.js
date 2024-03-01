@@ -30,8 +30,9 @@ import ViewStat from "./components/CommonPages/admin/chart/dailyreport/ViewStat"
 import Otp from "./components/CommonPages/loginpages/Otp";
 import VerifyOtp from "./components/CommonPages/loginpages/VerifyOtp";
 import Adminlogin from "./components/CommonPages/loginpages/AdminLogin";
-import Updateapi from "./components/CommonPages/clientdata/viewdetails/editpages/Updateapi";
-import Postapi from "./components/CommonPages/clientdata/viewdetails/editpages/Postapi";
+import Updateapi from "./components/CommonPages/clientdata/viewdetails/editpages/CaDataUpdateapi";
+import Postapi from "./components/CommonPages/clientdata/viewdetails/editpages/CAdataPostapi";
+import Callstatus from "./components/CommonPages/clientdata/viewdetails/editpages/Callstatus";
 
 function App() {
   const userCheck = useSelector((state) => state?.users?.userCheck);
@@ -58,6 +59,8 @@ function App() {
                 <Route path="/otpverifycode" element={<VerifyOtp />} />
                 <Route path="/updateapi" element={<Updateapi />} />
                 <Route path="/postapi" element={<Postapi />} />
+                <Route path="/callstatus" element={<Callstatus />} />
+
 
                 
               </>
