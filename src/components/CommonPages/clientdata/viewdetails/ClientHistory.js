@@ -162,13 +162,11 @@ export default function ClientHistory({ popUser = () => {} }) {
       <div className="app_table">
         <div className="app_header">
           <div> Id</div>
-
           <div>Client Detail</div>
           <div>CA detail</div>
           <div>Date</div>
           <div>Status</div>
           <div>Tellecaller</div>
-          <div>Other Details</div>
         </div>
         {filteredApplications &&
           filteredApplications.map((i) => {
@@ -291,17 +289,21 @@ export default function ClientHistory({ popUser = () => {} }) {
                 </div>
                 <div className="statusdatas">
                   <p>
-                    <h4>First Status: </h4>
-                    <p>{i?.call_status}</p>
-                    <p>Update On:{formatDate(i?.created_at)}</p>
-                    <button
-                      className="editbutton"
-                      onClick={() => {
-                        handleAddButtonClickStatus(i.cd);
-                      }}
-                    >
-                      <FaPen />
-                    </button>
+                    <div>
+                      <h4>First Status: </h4>
+                    </div>
+                    <div>
+                      <p>{i?.call_status}</p>
+                      <p>Update On:{formatDate(i?.created_at)}</p>
+                      <button
+                        className="editbutton"
+                        onClick={() => {
+                          handleAddButtonClickStatus(i.cd);
+                        }}
+                      >
+                        <FaPen />
+                      </button>
+                    </div>
                   </p>
 
                   {i.statuss && i.statuss.length >= 0 ? (
@@ -310,24 +312,28 @@ export default function ClientHistory({ popUser = () => {} }) {
                         <h4>Second Status: </h4>{" "}
                         {i.statuss[0]?.call_status ? (
                           <>
-                            <p>{i.statuss[0].call_status}</p>
-                            <p>
-                              {" "}
-                              Update On :
-                              {isNaN(Date.parse(i.statuss[0].update_dates))
-                                ? "No Data"
-                                : formatDate(i.statuss[0].update_dates)}
-                            </p>
-                            <button
-                              className="editbutton"
-                              onClick={() => {
-                                handleAddButtonClickOtherStatus(
-                                  i.statuss[0]?.status_id
-                                );
-                              }}
-                            >
-                              <FaPen />
-                            </button>
+                            <div>
+                              <p>{i.statuss[0].call_status}</p>
+
+                              <p>
+                                {" "}
+                                Update On :
+                                {isNaN(Date.parse(i.statuss[0].update_dates))
+                                  ? "No Data"
+                                  : formatDate(i.statuss[0].update_dates)}
+                              </p>
+
+                              <button
+                                className="editbutton"
+                                onClick={() => {
+                                  handleAddButtonClickOtherStatus(
+                                    i.statuss[0]?.status_id
+                                  );
+                                }}
+                              >
+                                <FaPen />
+                              </button>
+                            </div>
                           </>
                         ) : (
                           <>
@@ -347,37 +353,39 @@ export default function ClientHistory({ popUser = () => {} }) {
                         <h4>Third Status: </h4>{" "}
                         {i.statuss[1]?.call_status ? (
                           <>
-                            <p>{i.statuss[1].call_status}</p>
-                            <p>
-                              {" "}
-                              Update On :
-                              {isNaN(Date.parse(i.statuss[1].update_dates))
-                                ? "No Data"
-                                : formatDate(i.statuss[0].update_dates)}
-                            </p>
-                            <button
-                              className="editbutton"
-                              onClick={() => {
-                                handleAddButtonClickOtherStatus(
-                                  i.statuss[1]?.status_id
-                                );
-                              }}
-                            >
-                              <FaPen />
-                            </button>
+                            <div>
+                              <p>{i.statuss[1].call_status}</p>
+                              <p>
+                                {" "}
+                                Update On :
+                                {isNaN(Date.parse(i.statuss[1].update_dates))
+                                  ? "No Data"
+                                  : formatDate(i.statuss[0].update_dates)}
+                              </p>
+                              <button
+                                className="editbutton"
+                                onClick={() => {
+                                  handleAddButtonClickOtherStatus(
+                                    i.statuss[1]?.status_id
+                                  );
+                                }}
+                              >
+                                <FaPen />
+                              </button>
+                            </div>
                           </>
                         ) : (
-                          <>
+                          <div className="flexi">
                             <p>No Data</p>
                             <button
-                              className="editbutton"
+                              className="editbutton1"
                               onClick={() => {
                                 handleAddButtonClickOther(i.cd);
                               }}
                             >
                               <LuPlus />
                             </button>
-                          </>
+                          </div>
                         )}
                       </p>
                     </>
@@ -398,8 +406,6 @@ export default function ClientHistory({ popUser = () => {} }) {
                     <h4>Tellecaller Name:</h4> <p>{i?.user?.username}</p>
                   </p>
                 </div>
-
-                
               </div>
             );
           })}
@@ -585,21 +591,26 @@ const Root = styled.section`
         gap: 2px;
         p {
           display: flex;
-
-          justify-content: space-between;
-          width: 87%;
-          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          /* width: 87%; */
           font-size: 14px;
+          > div {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 10px;
+          }
           h4 {
-            margin: 9px 0px;
+            margin: 0px;
             color: #000;
-            width: 100%;
+            /* width: 100%; */
           }
 
           .editbutton {
             font-size: 17px;
             border: none;
             color: #5d05abb8;
+            background-color: #fff;
           }
         }
 
@@ -622,6 +633,15 @@ const Root = styled.section`
             background: #5d05abb8;
             color: white;
             border: 2px solid #5d05abb8;
+          }
+        }
+
+        .flexi {
+          display: flex;
+          button {
+            font-size: 26px;
+            border: none;
+            color: #5d05abb8;
           }
         }
       }
