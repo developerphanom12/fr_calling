@@ -1,53 +1,57 @@
-import cogoToast from "cogo-toast";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { RxCross2 } from "react-icons/rx";
 import { closeModal } from "../../../../../redux/users/action";
+import cogoToast from "cogo-toast";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import axios from "axios";
 import { EXACHANGE_URLS_TELLE } from "../../../../URLS";
+import './post.css'
+import { RxCross2 } from "react-icons/rx";
 
-export default function OtherStatusUpdate({ cd }) {
-  const [select, setSelect] = useState({
-    client_id: "",
-    call_status: "",
-  });
-  console.log("datassEERREERs", select);
+export default function UpdateOtherStatus({ status_id }) {
+    console.log("staus",status_id)
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const approveApi = async () => {
-    if (select.call_status === "blank" || select.call_status === "") {
-      cogoToast.warn("Please select status");
-    } else {
-      try {
-        const axiosConfig = {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        };
-        const res = await axios.post(
-          `${EXACHANGE_URLS_TELLE}/addstatus`,
-          select,
-          axiosConfig
-        );
-        if (res?.status === 200) {
-          cogoToast.success("Status Submitted");
-          navigate("/studash");
-          dispatch(closeModal());
-        }
-      } catch (err) {
-        if (err.response && err.response.status === 400) {
-          cogoToast.error(err.response.data.error);
-        } else {
-          console.log("err", err);
-        }
+  const [updateDatAgain, setUpdateDatAgain] = useState({
+    call_status: "",
+   
+  });
+
+  const updateCAData = async () => {
+    try {
+      const axiosConfig = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
+
+      const res = await axios.put(
+        `${EXACHANGE_URLS_TELLE}/datapass/${status_id}`,
+        updateDatAgain,
+        axiosConfig
+      );
+
+      if (res?.status === 200) {
+        cogoToast.success("Status updated successfully");
+        setUpdateDatAgain({
+          call_status: "",
+         
+        });
+        navigate("/studash");
+        dispatch(closeModal());
+      }
+    } catch (err) {
+      if (err.response && err.response.status === 400) {
+        cogoToast.error(err.response.data.error);
+      } else {
+        console.error("Error updating CA data:", err);
+        cogoToast.error("Failed to update CA data. Please try again later.");
       }
     }
   };
-  const handleSubmit = () => {
-    approveApi();
-  };
+ 
+
 
   return (
     <Root>
@@ -62,10 +66,9 @@ export default function OtherStatusUpdate({ cd }) {
             <div className="status">
               <select
                 onChange={(e) => {
-                  setSelect({
-                    ...select,
+                  setUpdateDatAgain({
+                    ...updateDatAgain,
                     call_status: e.target.value,
-                    client_id: cd,
                   });
                 }}
               >
@@ -80,9 +83,7 @@ export default function OtherStatusUpdate({ cd }) {
 
               <button
                 className="editbutton"
-                onClick={() => {
-                  handleSubmit();
-                }}
+                onClick={updateCAData}
               >
                 {" "}
                 Submit

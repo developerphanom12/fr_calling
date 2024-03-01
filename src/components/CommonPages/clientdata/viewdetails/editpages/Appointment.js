@@ -1,53 +1,57 @@
-import cogoToast from "cogo-toast";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { RxCross2 } from "react-icons/rx";
 import { closeModal } from "../../../../../redux/users/action";
+import cogoToast from "cogo-toast";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import axios from "axios";
 import { EXACHANGE_URLS_TELLE } from "../../../../URLS";
+import './post.css'
+import { RxCross2 } from "react-icons/rx";
 
-export default function OtherStatusUpdate({ cd }) {
-  const [select, setSelect] = useState({
-    client_id: "",
-    call_status: "",
-  });
-  console.log("datassEERREERs", select);
+export default function Appointment({ cd }) {
+    console.log("cdadd",cd)
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const approveApi = async () => {
-    if (select.call_status === "blank" || select.call_status === "") {
-      cogoToast.warn("Please select status");
-    } else {
-      try {
-        const axiosConfig = {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        };
-        const res = await axios.post(
-          `${EXACHANGE_URLS_TELLE}/addstatus`,
-          select,
-          axiosConfig
-        );
-        if (res?.status === 200) {
-          cogoToast.success("Status Submitted");
-          navigate("/studash");
-          dispatch(closeModal());
-        }
-      } catch (err) {
-        if (err.response && err.response.status === 400) {
-          cogoToast.error(err.response.data.error);
-        } else {
-          console.log("err", err);
-        }
+  const [updateDatAgain, setUpdateDatAgainAppointment] = useState({
+    appointment_date: "",
+   
+  });
+
+  const updateAppointmentData = async () => {
+    try {
+      const axiosConfig = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
+
+      const res = await axios.put(
+        `${EXACHANGE_URLS_TELLE}/updateappointmentdate/${cd}`,
+        updateDatAgain,
+        axiosConfig
+      );
+
+      if (res?.status === 200) {
+        cogoToast.success("Appointment updated successfully");
+        setUpdateDatAgainAppointment({
+          appointment_date: "",
+         
+        });
+        navigate("/studash");
+        dispatch(closeModal());
+      }
+    } catch (err) {
+      if (err.response && err.response.status === 400) {
+        cogoToast.error(err.response.data.error);
+      } else {
+        console.error("Error updating  data:", err);
+        cogoToast.error("Failed to update  data. Please try again later.");
       }
     }
   };
-  const handleSubmit = () => {
-    approveApi();
-  };
+ 
+
 
   return (
     <Root>
@@ -60,29 +64,21 @@ export default function OtherStatusUpdate({ cd }) {
         <div className="user-box1">
           <button>
             <div className="status">
-              <select
+              <input type="date"
+               pattern="\d{2}/\d{2}/\d{4}"
                 onChange={(e) => {
-                  setSelect({
-                    ...select,
-                    call_status: e.target.value,
-                    client_id: cd,
+                  setUpdateDatAgainAppointment({
+                    ...updateDatAgain,
+                    appointment_date: e.target.value,
                   });
                 }}
               >
-                <option value="blank">Select Status</option>
-                <option value="hot_lead">Hot Lead</option>
-                <option value="cold_lead">Cold Lead</option>
-                <option value="prospective_client">Prospective client </option>
-                <option value="ghost_client">Ghost Client </option>
-                <option value="negative_client">Negative Client</option>
-                <option value="close_status">Close Status</option>
-              </select>
+              
+              </input>
 
               <button
                 className="editbutton"
-                onClick={() => {
-                  handleSubmit();
-                }}
+                onClick={updateAppointmentData}
               >
                 {" "}
                 Submit
@@ -165,9 +161,10 @@ const Root = styled.section`
           font-weight: 900;
           color: white;
         }
-        select {
+        input {
           border-radius: 4px;
           border: none;
+          width: 180%;
           font-weight: 900;
           background-color: #00fff9;
           padding: 9px;

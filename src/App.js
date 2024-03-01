@@ -33,6 +33,9 @@ import Adminlogin from "./components/CommonPages/loginpages/AdminLogin";
 import Updateapi from "./components/CommonPages/clientdata/viewdetails/editpages/CaDataUpdateapi";
 import Postapi from "./components/CommonPages/clientdata/viewdetails/editpages/CAdataPostapi";
 import Callstatus from "./components/CommonPages/clientdata/viewdetails/editpages/Callstatus";
+import OtherStatusUpdate from "./components/CommonPages/clientdata/viewdetails/editpages/OtherStatusUpdate";
+import UpdateOtherStatus from "./components/CommonPages/clientdata/viewdetails/editpages/UpdateOtherStatus";
+import Appointment from "./components/CommonPages/clientdata/viewdetails/editpages/Appointment";
 
 function App() {
   const userCheck = useSelector((state) => state?.users?.userCheck);
@@ -60,6 +63,10 @@ function App() {
                 <Route path="/updateapi" element={<Updateapi />} />
                 <Route path="/postapi" element={<Postapi />} />
                 <Route path="/callstatus" element={<Callstatus />} />
+                <Route path="/otherstatus" element={<OtherStatusUpdate />} />
+                <Route path="/updatecallstatus" element={<UpdateOtherStatus />} />
+                <Route path="/appointment" element={<Appointment />} />
+
 
 
                 
