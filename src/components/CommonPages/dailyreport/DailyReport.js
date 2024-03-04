@@ -4,6 +4,9 @@ import { EXACHANGE_URLS_TELLE } from "../../URLS";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { appDetailsAction } from "../../../redux/users/action";
+import { FaRegEdit } from "react-icons/fa";
+import cogoToast from "cogo-toast";
+import { useNavigate } from "react-router-dom";
 
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
@@ -13,9 +16,18 @@ const formatDate = (isoDate) => {
   return `${day}-${month}-${year}`;
 };
 
-export const DailyReport = ({ popUser = () => {} }) => {
+export const DailyReport = ({ id }, { popUser = () => {} }) => {
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [updateStatus, setUpdateStatus] = useState({
+    call_status: "",
+  });
+
+  const [isPageRefreshed, setPageRefreshed] = useState(false);
+  const [isStatusUpdated, setStatusUpdated] = useState(false);
+
+  console.log("datawhy", updateStatus);
 
   const dispatch = useDispatch();
 
@@ -25,31 +37,75 @@ export const DailyReport = ({ popUser = () => {} }) => {
         authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
-
+  
     try {
       const res = await axios.get(
         `${EXACHANGE_URLS_TELLE}/getMaster?page=${currentPage}`,
         axiosConfig
       );
-
+  
       console.log("data", res);
-
+  
       if (res.status === 200) {
-        const responseData = res?.data?.data?.data;
-
+        const responseData = res?.data?.data;
+  
         if (Array.isArray(responseData)) {
           setData(responseData);
         } else if (responseData) {
           setData([responseData]);
         }
+      } else if (res.status === 404 && res?.data?.error === "No data found for the telecaller.") {
+        cogoToast.warn("No data available at this time."); 
       }
     } catch (e) {
       console.log(e);
     }
   };
+  
+  
+  
+  const updateStatusOne = async (itemId) => {
+    try {
+      const axiosConfig = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
+  
+      const res = await axios.put(
+        `${EXACHANGE_URLS_TELLE}/dailyreport/${itemId}`,
+        updateStatus,
+        axiosConfig
+      );
+  
+      if (res?.status === 200) {
+        cogoToast.success("Status updated successfully");
+        setStatusUpdated(true);
+        setUpdateStatus({
+          call_status: "",
+        });
+      }
+    } catch (err) {
+      if (err.response && err.response.status === 400) {
+        cogoToast.error(err.response.data.error);
+      } else {
+        console.error("Error updating Status data:", err);
+        cogoToast.error(
+          "Failed to update Status data. Please try again later."
+        );
+      }
+    }
+  };
 
   useEffect(() => {
     getdata();
+
+    const isRefreshed = sessionStorage.getItem('isRefreshed');
+    if (isRefreshed) {
+      cogoToast.warn("Page refreshed! Please update the status.");
+      setPageRefreshed(true);
+      sessionStorage.removeItem('isRefreshed');
+    }
   }, [currentPage]);
 
   const handlePassData = (i) => {
@@ -57,15 +113,28 @@ export const DailyReport = ({ popUser = () => {} }) => {
     dispatch(appDetailsAction(i));
     popUser(true);
   };
+
   const handleNext = () => {
+    if (!isStatusUpdated) {
+      cogoToast.warn("Please update the status before moving to the next data.");
+      return;
+    }
+
     const isConfirmed = window.confirm(
       "Are you sure you want to submit this data and show the next data?"
     );
 
     if (isConfirmed) {
       setCurrentPage(currentPage + 1);
+      setStatusUpdated(false);
     }
   };
+
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <Root>
       <div className="app_table">
@@ -103,8 +172,38 @@ export const DailyReport = ({ popUser = () => {} }) => {
                   </div>
                   <div>
                     <p>
-                      <span>Hot Client</span>
+                      <span>{i?.call_status}</span>
                     </p>
+
+                    <div>
+                      <div
+                        className="icons"
+                        onClick={toggleDropdown}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <FaRegEdit />
+                      </div>
+                      {isOpen && (
+                        <>
+                          <select
+                            name=""
+                            id="languages"
+                            onChange={(e) =>
+                              setUpdateStatus({ call_status: e.target.value })
+                            }
+                          >
+                            <option value="hot_lead">Hot Lead</option>
+                            <option value="cold_lead">Cold Lead</option>
+                            <option value="close_status">Close Status</option>
+                          </select>
+                          <div className="datarefresh">
+                            <button onClick={() => updateStatusOne(i.id)}>
+                              Done
+                            </button>
+                          </div>
+                        </>
+                      )}
+                    </div>
                   </div>
                   <div>
                     <p>
@@ -121,7 +220,7 @@ export const DailyReport = ({ popUser = () => {} }) => {
             ))
           ) : (
             <div className="no-data-message">
-             <p> No data available at this time.</p>
+              <p> No data available at this time.</p>
             </div>
           )}
         </div>
@@ -129,6 +228,8 @@ export const DailyReport = ({ popUser = () => {} }) => {
     </Root>
   );
 };
+
+
 const Root = styled.section`
   display: flex;
   max-width: 100vw;
@@ -183,7 +284,16 @@ const Root = styled.section`
     display: flex;
     /* gap: 54px; */
     border-radius: 0px;
-     
+
+    select {
+      color: black;
+      display: flex;
+      border-radius: 7px;
+      padding: 3px;
+      font-size: 12px;
+      font-weight: 500;
+      font-family: ui-serif;
+    }
     > div {
       border: 1px solid #dee2e6;
       width: 100%;
@@ -191,7 +301,8 @@ const Root = styled.section`
       text-align: center;
       align-items: center;
       display: flex;
-      padding:10px;
+      padding: 10px;
+      gap: 12px;
       /* height: 5vh; */
     }
     .btnus {
@@ -202,6 +313,12 @@ const Root = styled.section`
       text-align: center;
       align-items: center;
     }
+
+    .icons {
+      color: blue;
+      font-size: 19px;
+      margin-left: 13px;
+    }
   }
   .no-data-message {
     color: red;
@@ -210,13 +327,13 @@ const Root = styled.section`
     font-size: 21px;
     font-weight: 900;
     padding: 34px;
-   margin: 0px;
-    p{
-      display: flex;
-    justify-content: center;
-    font-size: 32px;
     margin: 0px;
-    font-weight: 900;
+    p {
+      display: flex;
+      justify-content: center;
+      font-size: 32px;
+      margin: 0px;
+      font-weight: 900;
     }
   }
   .btn1 {
@@ -228,7 +345,7 @@ const Root = styled.section`
     .nt2 {
       font-size: 18px;
       font-weight: 600;
-      padding:5px 20px;
+      padding: 5px 20px;
       color: white;
       border: 1px solid #005aff;
       background: #005aff;
