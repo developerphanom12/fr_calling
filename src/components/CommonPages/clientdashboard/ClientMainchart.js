@@ -56,6 +56,9 @@ const ClientMainchart = () => {
           >
             <option value="today">Today</option>
             <option value="last7days">Last 7 Days</option>
+            <option value="last28days">Last 28 Days</option>
+            <option value="last90days">Last 90 Days</option>
+
           </select>
         </div>
         <ApexChartClient key={JSON.stringify(salesData)} data={salesData} />

@@ -11,7 +11,8 @@ import { useNavigate } from "react-router-dom";
 import TelleData from "../../TelleData/TelleData";
 import data from "../../images/nodatra.png";
 import imgofshilpa from "../../images/client-1295901_1280.webp";
-
+import Mainchart3 from "../admin/chart/Mainchart3"
+import DailyReport from "./DailyReport";
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
   const day = date.getDate().toString().padStart(2, "0");
@@ -66,6 +67,12 @@ export default function ClientDashboard() {
           <div className="apex">
             <ClientMainchart />
           </div>
+        </div>
+
+        <div className="char2">
+          <h1>Daily Call</h1>
+          <DailyReport />
+          
         </div>
         <div className="char">
           <CLientMainchart2 />
@@ -155,12 +162,25 @@ const Root = styled.section`
     display: flex;
     margin-top: 23px;
     justify-content: space-between;
+
+    .char2{
+      width: 29%;
+      box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 2px 0px inset;
+      display: flex;
+      flex-direction:column;
+
+      h1{
+        display: flex;
+    justify-content: center;
+    margin-top: 15px;
+      }
+    }
     .char1 {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
       padding: 7px;
-      width: 38%;
+      width: 30%;
       border-radius: 1px;
       background-color: #f8f9fa !important;
       box-shadow: 0 0px 2px 0px rgba(0, 0, 0, 0.45) inset;
@@ -192,8 +212,7 @@ const Root = styled.section`
     }
 
     .char {
-      width: 50%;
-      margin-right: 34px;
+      width: 37%;
       background-color: #f8f9fa !important;
       box-shadow: 0 0px 2px 0px rgba(0, 0, 0, 0.45) inset;
     }
