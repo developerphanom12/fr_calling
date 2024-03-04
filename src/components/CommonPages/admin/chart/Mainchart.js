@@ -37,7 +37,8 @@ const Mainchart = () => {
     getHistory();
   }, [selection]);
 
-  const handleSelectionChange = (newSelection) => {
+  const handleSelectionChange = (e) => {
+    const newSelection = e.target.value;
     setSelection(newSelection);
   };
 
@@ -51,11 +52,14 @@ const Mainchart = () => {
           <label htmlFor="periodSelect">Select :</label>
           <select
             id="periodSelect"
-            onChange={(e) => handleSelectionChange(e.target.value)}
+            onChange={handleSelectionChange}
             value={selection}
           >
             <option value="today">Today</option>
             <option value="last7days">Last 7 Days</option>
+            <option value="last28days">Last 28 Days</option>
+            <option value="last90days">Last 90 Days</option>
+
           </select>
         </div>
         <ApexChart key={JSON.stringify(salesData)} data={salesData} />
