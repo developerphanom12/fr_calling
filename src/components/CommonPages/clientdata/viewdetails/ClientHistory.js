@@ -26,6 +26,7 @@ export default function ClientHistory({ popUser = () => {} }) {
   const [uniqueClientNames, setUniqueClientNames] = useState([]);
   const [selectedTele, setSelectedTele] = useState("");
   const dispatch = useDispatch();
+  const userDetails = useSelector((state) => state?.users.user);
 
   const { modalIsOpen, modalType } = useSelector((state) => state?.users);
 
@@ -237,27 +238,33 @@ export default function ClientHistory({ popUser = () => {} }) {
                     <h4> Company Address: </h4>
                     <p>{i?.ca?.company_address}</p>
                   </p>
-                  <div className="edit">
-                    {i?.ca &&
-                    Object.values(i.ca).some((value) => value !== null) ? (
-                      <button
-                        className="editbutton"
-                        onClick={() => {
-                          handleAddButtonClickca(i.ca.ca_id); // Pass ca_id to the function
-                        }}
-                      >
-                        Edit
-                      </button>
-                    ) : null}
-                  </div>
-                  <div className="edit">
-                    {i?.ca &&
-                    Object.values(i.ca).every((value) => value === null) ? (
-                      <button onClick={() => handleAddButtonClick(i.cd)}>
-                        Add
-                      </button>
-                    ) : null}
-                  </div>
+
+                  {userDetails?.role === "telecaller" && (
+                    <div className="edit">
+                      {i?.ca &&
+                        Object.values(i.ca).some((value) => value !== null) && (
+                          <button
+                            className="editbutton"
+                            onClick={() => {
+                              handleAddButtonClickca(i.ca.ca_id);
+                            }}
+                          >
+                            Edit
+                          </button>
+                        )}
+                    </div>
+                  )}
+
+                  {userDetails?.role === "telecaller" && (
+                    <div className="edit">
+                      {i?.ca &&
+                      Object.values(i.ca).every((value) => value === null) ? (
+                        <button onClick={() => handleAddButtonClick(i.cd)}>
+                          Add
+                        </button>
+                      ) : null}
+                    </div>
+                  )}
                 </div>
 
                 <div className="statusdata">
