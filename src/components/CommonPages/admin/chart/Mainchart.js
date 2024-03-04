@@ -72,7 +72,9 @@ export default Mainchart;
 
 const Root = styled.section`
 padding: 10px;
-  > div {
+    width: 96%;
+    height: 100%;
+      > div {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -84,7 +86,6 @@ padding: 10px;
       align-items: center;
       border-radius: 5px;
       > div {
-        margin-right: 65px;
         p {
         font-size: 16px;
         width:100px;
