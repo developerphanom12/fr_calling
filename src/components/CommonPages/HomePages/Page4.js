@@ -60,7 +60,7 @@ export default function Page4() {
             </div>
             <div class="col-md-6 col-lg-3 info_col">
               <div class="info_detail">
-                <h4>About TellCaller</h4>
+                <h4>About TeleCaller</h4>
                 <p>
                   TeleCaller is a revolutionary app designed to enhance your
                   calling experience. Our mission is to provide users with
