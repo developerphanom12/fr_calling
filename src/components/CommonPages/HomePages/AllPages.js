@@ -12,15 +12,14 @@ export default function AllPages() {
         <Page1 />
       </div>
       
-      <div>
-        <Page4 />
-      </div>
+     
       <div>
         <Page5 />
       </div>
       <div>
-        <Footer />
+        <Page4 />
       </div>
+    
      
     </Root>
   );

@@ -1,68 +1,65 @@
 import React from "react";
 import styled from "styled-components";
-import { IoSearchSharp } from "react-icons/io5";
-import { RiStarSmileFill } from "react-icons/ri";
-import round from "../../images/contemporary-art-collage-creative-design-two-women-employees-working-on-ladder-of-success-2HJPF9Y.jpg";
-import telecallerImg from "../../images/homeimages.jpeg";
+import "../../../css/style.css";
+import "../../../css/bootstrap.css";
+import "../../../css/responsive.css";
 
+import slider from "../../images/slider-img.png";
 export default function Page1() {
   return (
     <Root>
-      <div className="childfirst">
-        <div className="child1">
-          <h1>Empowering Telecallers</h1>
-          <h1>with Success Tools</h1>
-          <h1>You Can Rely On</h1>
-        </div>
-        <div className="child2">
-          <input placeholder="Search for tools..." />
-          <button>
-            <IoSearchSharp />
-            Search
-          </button>
-        </div>
-      </div>
-      <div className="childsecond">
-        <div className="child3">
-          <div className="child3-1">
-            <RiStarSmileFill />
-            <div className="square"></div>
-            <div className="circle"></div>
-            <div className="semicircle"></div>
+      <section class="slider_section ">
+        <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="container ">
+                <div class="row">
+                  <div class="col-md-6 ">
+                    <div className="detail-box">
+                      <h1>
+                        Telecaller <br />
+                        Application
+                      </h1>
+                      <p>
+                        The telecaller app optimizes communication and tasks,
+                        aiding call management, lead tracking, and productivity
+                        enhancement. With intuitive features and user-friendly
+                        interface, it streamlines telecalling operations,
+                        ensuring efficient workflow and customer engagement.
+                      </p>
+
+                      <div className="btn-box">
+                        <a href="#" className="btn1">
+                          Learn More
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="img-box">
+                      <img src={slider} alt="" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="child3-1">
-            <RiStarSmileFill />
-            <div className="semicircle"></div>
-            <div className="square"></div>
-            <div className="semisquare"></div>
-            <IoSearchSharp />
-          </div>
         </div>
-        <div className="grpimg">
-          <div className="grp1">
-            <img src={round} alt="Telecaller Success" />
-          </div>
-          <div className="grp2">
-            <img src={telecallerImg} alt="Telecaller Team" />
-          </div>
-        </div>
-      </div>
+      </section>
     </Root>
   );
 }
 const Root = styled.section`
-  background-image: radial-gradient(
-    circle farthest-corner at 22.4% 21.7%,
-    rgba(4, 189, 228, 1) 0%,
-    rgba(2, 83, 185, 1) 100.2%
-  );
+   background: linear-gradient(130deg, #231a6f, #0f054c);
+
   display: flex;
+  flex-direction: column;
   height: 100%;
   padding: 40px;
 
   @media (max-width: 989px) {
     flex-direction: column;
-    height: 70vh;
+    height: 110vh;
     padding: 0;
   }
 
@@ -84,7 +81,7 @@ const Root = styled.section`
       h1 {
         margin: 10px;
         font-size: 2.5em;
-        
+
         @media (max-width: 878px) {
           text-align: center;
           font-size: 1.6em;
@@ -149,7 +146,7 @@ const Root = styled.section`
       height: 30%;
     }
 
-    img{
+    img {
       width: 100%;
     }
     .child3 {
@@ -159,8 +156,8 @@ const Root = styled.section`
       gap: 20px;
       margin: 10px;
       @media (max-width: 988px) {
-          gap: 0px;
-        }
+        gap: 0px;
+      }
       .child3-1 {
         display: flex;
         margin: 10px;
@@ -232,9 +229,9 @@ const Root = styled.section`
           border-radius: 50%;
           width: 160px;
           height: 200px;
-          @media (max-width:677px){
+          @media (max-width: 677px) {
             width: 100px;
-          height: 140px;
+            height: 140px;
           }
         }
       }
@@ -243,9 +240,9 @@ const Root = styled.section`
           transform: skew(-0.06turn, 18deg);
           width: 160px;
           height: 200px;
-          @media (max-width:677px){
+          @media (max-width: 677px) {
             width: 100px;
-          height: 140px;
+            height: 140px;
           }
         }
       }
@@ -263,35 +260,29 @@ const Root = styled.section`
   }
   .childfirst .child1 h1 {
     animation: slideInFromLeft 2s ease-in-out forwards;
-
   }
 
   .childfirst .child1 h1:nth-child(1) {
     animation: slideInFromLeft 5s ease-in-out forwards;
     animation-delay: 1s;
-    animation-iteration-count:10;
-
+    animation-iteration-count: 10;
   }
 
   .childfirst .child1 h1:nth-child(2) {
     animation: slideInFromLeft 5s ease-in-out forwards;
     animation-delay: 1.5s;
-    animation-iteration-count:10;
-
+    animation-iteration-count: 10;
   }
 
   .childfirst .child1 h1:nth-child(3) {
     animation: slideInFromLeft 5s ease-in-out forwards;
     animation-delay: 2s;
-    animation-iteration-count:10;
-
+    animation-iteration-count: 10;
   }
 
   .childfirst .child1 h1:nth-child(4) {
     animation: slideInFromLeft 5s ease-in-out forwards;
     animation-delay: 2.5s;
-    animation-iteration-count:10;
-
+    animation-iteration-count: 10;
   }
-
 `;

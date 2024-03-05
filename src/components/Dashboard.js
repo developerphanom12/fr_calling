@@ -317,6 +317,7 @@ const Root = styled.section`
         font-family: Roboto, sans-serif;
         letter-spacing: 0;
         color: rgba(61, 78, 101, 0.84);
+        font-size: 21px;
       }
       .upcomming_child {
         .child1 {

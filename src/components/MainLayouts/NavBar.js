@@ -80,10 +80,12 @@ const Root = styled.section`
   text-align: center;
   align-items: center;
   justify-content: space-between;
+  background: linear-gradient(130deg, #231a6f, #0f054c);
+
   gap: 10px;
   .main1 {
     h3 {
-      color: #461c6c;
+      color: white;
       margin: 10px;
       padding-left: 50px;
       cursor: pointer;
@@ -93,18 +95,30 @@ const Root = styled.section`
         height: 28px;
       }
     }
+    h3{
+
+      @media (max-width: 887px) {
+    color: white;
+    font-size: 25px;
+    margin-left: -10px;
+    width: 100%;
+    
+        }
+    }
   }
+
 
   .main2 {
     display: flex;
     gap: 10px;
     margin-right: 20px;
     .login {
-      padding: 7px;
-      border-radius: 10px;
-      background-color: #461c6c;
-      color: #ffffff;
-      font-size: 11px;
+      padding: 13px;
+  
+    color: #ffffff;
+    font-size: 19px;
+    margin-right: 30px;
+
       &:hover {
         cursor: pointer;
         box-shadow: 3px 2px 2px gray;
@@ -121,7 +135,9 @@ const Root = styled.section`
     }
     @media (max-width: 887px) {
       display: block;
-      padding-right: 10px;
+    color: white;
+    padding-right: 10px;
+    font-size: 31px;
 
     }
   }

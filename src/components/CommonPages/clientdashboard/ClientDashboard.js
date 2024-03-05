@@ -70,7 +70,7 @@ export default function ClientDashboard() {
         </div>
 
         <div className="char2">
-          <h1>Daily Call</h1>
+          <h1>Total Call</h1>
           <DailyReport />
           
         </div>
@@ -164,7 +164,7 @@ const Root = styled.section`
     justify-content: space-between;
 
     .char2{
-      width: 29%;
+      width: 30%;
       box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 2px 0px inset;
       display: flex;
       flex-direction:column;
@@ -173,8 +173,22 @@ const Root = styled.section`
         display: flex;
     justify-content: center;
     margin-top: 15px;
+    font-size: 19px;
+    font-weight: 900;
+    font-family: serif;
       }
     }
+
+    
+ 
+.char2:hover {
+color: #ffffff !important;
+background:  #98bdeb;;
+border-color: #f6b93b !important;
+transition: all 0.4s ease 0s;
+}
+    
+
     .char1 {
       display: flex;
       flex-direction: column;

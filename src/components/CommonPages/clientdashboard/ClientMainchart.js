@@ -71,7 +71,6 @@ export default ClientMainchart;
 
 const Root = styled.section`
   > div {
-    margin-top: 63px;
     display: flex;
     flex-direction: column;
     .delta {

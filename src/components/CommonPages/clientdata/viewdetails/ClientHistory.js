@@ -297,7 +297,7 @@ export default function ClientHistory({ popUser = () => {} }) {
                 <div className="statusdatas">
                   <p>
                     <div>
-                      <h4>First Status: </h4>
+                      <h4 className="pipi">First Status: </h4>
                     </div>
                     <div>
                       <p>{i?.call_status}</p>
@@ -567,6 +567,7 @@ const Root = styled.section`
             margin: 9px 0px;
             color: #000;
             width: 100%;
+            font-size: 15px;
           }
         }
 
@@ -610,7 +611,8 @@ const Root = styled.section`
           h4 {
             margin: 0px;
             color: #000;
-            /* width: 100%; */
+            font-weight: 700;
+            font-size: 16px;
           }
 
           .editbutton {
@@ -661,9 +663,10 @@ const Root = styled.section`
           align-items: center;
           font-size: 14px;
           h4 {
-            margin: 9px 0px;
+            margin: 0px;
             color: #000;
-            width: 100%;
+            font-weight: 700;
+            font-size: 16px;
           }
         }
       }
