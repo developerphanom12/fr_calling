@@ -257,7 +257,8 @@ const Root = styled.section`
         }
 
         p {
-          font-size: small;
+         font-size: 13px;
+    margin: 2px;
           @media (max-width: 699px) {
             display: none;
           }

@@ -125,6 +125,7 @@ const Root = styled.section`
         margin: 25px;
         color: #f468e9;
         font-weight: 600;
+        font-size: 20px;
         display: flex;
         justify-content: center;
       }
