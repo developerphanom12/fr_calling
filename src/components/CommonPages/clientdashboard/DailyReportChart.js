@@ -2,52 +2,56 @@ import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 import styled from 'styled-components';
 
+
 class DailyReportChart extends React.Component {
   constructor(props) {
     super(props);
 
-    const seriesData = [props?.data?.close_status, props?.data?.hot_lead, props?.data?.cold_lead,props?.data?.totaldata];
-    console.log("hash111111",seriesData)
+    const seriesData = [
+      props?.data?.close_status || 0,
+      props?.data?.hot_lead || 0,
+      props?.data?.cold_lead || 0,
+      props?.data?.totaldata || 0
+    ];
+
     this.state = {
       series: seriesData,
       options: {
         chart: { 
-          type:'donut',  
+          type: 'donut'
         },
-      
-        labels: ["Close Client","Hot Client","Cold Client","Total Client"],
+        labels: ["Close Client", "Hot Client", "Cold Client", "Total Call"],
         responsive: [
           {
             breakpoint: 480,
             options: {
               chart: {
                 width: 350,
-                type: 'donut', 
+                type: 'donut'
               },
               dataLabels: {
-                enabled: false,
+                enabled: false
               },
               legend: {
-                position: "bottom",
-              },
-            },
-          },
-        ],
-      },
+                position: "bottom"
+              }
+            }
+          }
+        ]
+      }
     };
   }
+
   render() {
     return (
       <Root>
-
-
-      <div className="chaasasart">
-        <ReactApexChart
-          options={this.state.options}
-          series={this.state.series}
-          type="donut"
-        />
-      </div>
+        <div className="chart-container">
+          <ReactApexChart
+            options={this.state.options}
+            series={this.state.series}
+            type="donut"
+          />
+        </div>
       </Root>
     );
   }
@@ -58,8 +62,8 @@ export default DailyReportChart;
 
 const Root = styled.section`
 
+margin-top: 39px;
 
 .chaasasart{
-  margin-top: 39px;
 }
 `;
