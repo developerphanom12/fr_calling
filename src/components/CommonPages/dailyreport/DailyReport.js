@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { appDetailsAction } from "../../../redux/users/action";
 import { FaRegEdit } from "react-icons/fa";
 import cogoToast from "cogo-toast";
-import { useNavigate } from "react-router-dom";
 
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
@@ -16,8 +15,7 @@ const formatDate = (isoDate) => {
   return `${day}-${month}-${year}`;
 };
 
-export const DailyReport = ({ id }, { popUser = () => {} }) => {
-  const navigate = useNavigate();
+export const DailyReport = ( { popUser = () => {} }) => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [updateStatus, setUpdateStatus] = useState({

@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import TelleData from "../../TelleData/TelleData";
 import data from "../../images/nodatra.png";
 import imgofshilpa from "../../images/client-1295901_1280.webp";
-import Mainchart3 from "../admin/chart/Mainchart3"
 import DailyReport from "./DailyReport";
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);

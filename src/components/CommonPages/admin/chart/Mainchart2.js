@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ApexChart from "./ApexChart";
 import axios from "axios";
 import { EXACHANGE_URLS_TELLE } from "../../../URLS";
 import styled from "styled-components";
