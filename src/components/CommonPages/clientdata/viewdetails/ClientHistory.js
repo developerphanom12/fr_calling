@@ -278,7 +278,7 @@ export default function ClientHistory({ popUser = () => {} }) {
                     <h4> Appointment Date: </h4>
                     <p>
                       {i?.appointment ? formatDate(i?.appointment) : "No Date"}
-
+                      {userDetails?.role === "telecaller" && (
                       <button
                         className="editbutton"
                         onClick={() => {
@@ -287,6 +287,7 @@ export default function ClientHistory({ popUser = () => {} }) {
                       >
                         <FaPen />
                       </button>
+                      )}
                     </p>
                   </p>
                   <p>
@@ -302,6 +303,7 @@ export default function ClientHistory({ popUser = () => {} }) {
                     <div>
                       <p>{i?.call_status}</p>
                       <p>Update On:{formatDate(i?.created_at)}</p>
+                      {userDetails?.role === "telecaller" && (
                       <button
                         className="editbutton"
                         onClick={() => {
@@ -310,6 +312,7 @@ export default function ClientHistory({ popUser = () => {} }) {
                       >
                         <FaPen />
                       </button>
+                      )}
                     </div>
                   </p>
 
@@ -329,7 +332,7 @@ export default function ClientHistory({ popUser = () => {} }) {
                                   ? "No Data"
                                   : formatDate(i.statuss[0].update_dates)}
                               </p>
-
+                              {userDetails?.role === "telecaller" && (
                               <button
                                 className="editbutton"
                                 onClick={() => {
@@ -340,11 +343,13 @@ export default function ClientHistory({ popUser = () => {} }) {
                               >
                                 <FaPen />
                               </button>
+                              )}
                             </div>
                           </>
                         ) : (
                           <>
                             <p>No Data</p>
+                            {userDetails?.role === "telecaller" && (
                             <button
                               className="editbutton"
                               onClick={() => {
@@ -353,6 +358,7 @@ export default function ClientHistory({ popUser = () => {} }) {
                             >
                               <LuPlus />
                             </button>
+                            )}
                           </>
                         )}
                       </p>
@@ -369,6 +375,7 @@ export default function ClientHistory({ popUser = () => {} }) {
                                   ? "No Data"
                                   : formatDate(i.statuss[0].update_dates)}
                               </p>
+                              {userDetails?.role === "telecaller" && (
                               <button
                                 className="editbutton"
                                 onClick={() => {
@@ -379,11 +386,13 @@ export default function ClientHistory({ popUser = () => {} }) {
                               >
                                 <FaPen />
                               </button>
+                              )}
                             </div>
                           </>
                         ) : (
                           <div className="flexi">
                             <p>No Data</p>
+                            {userDetails?.role === "telecaller" && (
                             <button
                               className="editbutton1"
                               onClick={() => {
@@ -392,6 +401,7 @@ export default function ClientHistory({ popUser = () => {} }) {
                             >
                               <LuPlus />
                             </button>
+                            )}
                           </div>
                         )}
                       </p>
@@ -411,6 +421,10 @@ export default function ClientHistory({ popUser = () => {} }) {
                 <div className="statusdata11">
                   <p>
                     <h4>Tellecaller Name:</h4> <p>{i?.user?.username}</p>
+                   
+  {/* <p>{i?.remark}</p> */}
+
+
                   </p>
                 </div>
               </div>
@@ -516,7 +530,7 @@ const Root = styled.section`
       background: #5d05abb8;
       text-align: center;
       color: white;
-      width: 136vw;
+      width: 100%;
       > div {
         flex: 1;
         border: 1px solid #dee2e6;
@@ -557,7 +571,7 @@ const Root = styled.section`
           width: 96%;
           align-items: center;
           font-size: 14px;
-
+          margin: 0px;
           button {
             border: none;
             font-size: 19px;
@@ -658,15 +672,17 @@ const Root = styled.section`
       .statusdata11 {
         p {
           display: flex;
-          justify-content: space-between;
-          width: 80%;
-          align-items: center;
-          font-size: 14px;
+    justify-content: space-between;
+    width: 100%;
+    /* align-items: center; */
+    font-size: 14px;
           h4 {
             margin: 0px;
             color: #000;
             font-weight: 700;
             font-size: 16px;
+            width: 100%;
+
           }
         }
       }
