@@ -82,6 +82,7 @@ export default function VerifyOtp({ onVerification }) {
       {!verificationFailed ? (
         <>
           <div className="otptable">
+            <div>
             <h3>Enter OTP</h3>
             <input
               type="number"
@@ -95,6 +96,7 @@ export default function VerifyOtp({ onVerification }) {
             <button className="thatones" onClick={verifyOtp}>
               Verify OTP
             </button>
+              </div>
           </div>
         </>
       ) : null}
@@ -190,21 +192,25 @@ const Root = styled.section`
     display: flex;
     margin: 0px;
     flex-direction: column;
-    width: 35%;
-    height: 35%;
+    width: 100%;
+    /* height: 100%; */
     align-items: center;
     border-radius: 9px;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+   
+     >div{
+      display: flex;
+      flex-direction: column;
+      padding: 30px;
+      box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
       rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
       rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    button {
+      button {
       margin: 10px;
       padding: 5px;
     }
     .thatones {
       margin: 10px;
       padding: 5px;
-      width: 24%;
       font-size: 17px;
       padding: 9px;
       border-radius: 16px;
@@ -216,15 +222,14 @@ const Root = styled.section`
     }
 
     input {
-      width: 49%;
-      margin-left: 11px;
-      justify-content: center;
-      display: flex;
-      border: 1px solid;
-      align-items: center;
-      border-radius: 6px;
-      padding: 11px;
-      margin-top: 24px;
+    margin-left: 11px;
+    justify-content: center;
+    display: flex;
+    border: none;
+    align-items: center;
+    border-radius: 6px;
+    padding: 11px;
+    margin-top: 24px;
     }
     .links {
       background: none;
@@ -237,7 +242,6 @@ const Root = styled.section`
       text-decoration: none;
       font-weight: 900;
       display: flex;
-      width: 20%;
       justify-content: right;
     }
 
@@ -305,5 +309,6 @@ const Root = styled.section`
         }
       }
     }
+     }
   }
 `;
