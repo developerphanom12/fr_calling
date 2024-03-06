@@ -37,7 +37,11 @@ export default function Page5() {
               <div class="col-md-4 ">
                 <div class="box ">
                   <div class="img-box">
-                    <img src={slider5} alt="Placeholder Image" />
+                    <img
+                      className="imaging"
+                      src={slider5}
+                      alt="Placeholder Image"
+                    />
                   </div>
                   <div class="detail-box">
                     <h5>Call Script Generator</h5>
@@ -80,7 +84,6 @@ export default function Page5() {
                 </div>
               </div>
             </div>
-        
           </div>
         </div>
       </section>
@@ -215,35 +218,33 @@ export default function Page5() {
 }
 
 const Root = styled.section`
+  .detail-box {
+    p {
+      font-size: 13px;
+      font-weight: 300;
+    }
+    h5 {
+      font-size: 16px;
+      margin-top: 17px;
+      color: black;
+      font-family: inherit;
+      font-weight: 900;
+    }
+    a {
+      border: 1px solid;
+      padding: 9px;
+      font-weight: 400;
+      border-radius: 9px;
+      background: #4b9f0c;
+      color: white;
+    }
 
-
-.detail-box{
-
-  h5{
-    font-size: 1.25rem;
-    margin-top: 17px;
-    color: black;
-    font-family: inherit;
-    font-weight: 900;
+    .detail-box,
+    a :hover {
+      cursor: pointer;
+      background-color: red;
+    }
   }
-  a{
-
-
-    border: 1px solid;
-      padding: 12px;
-      border-radius: 16px;
-      text-decoration: none;
-      background: #5e5ede;
-            color: white;
-          
-
-  }
-
-  .detail-box ,a :hover{
-             cursor: pointer;
-             background-color: red;
-            }
-}
   .box {
     margin-top: 38px;
     display: flex;
@@ -253,11 +254,10 @@ const Root = styled.section`
     text-align: center;
   }
 
-  
   .img-box {
     img {
-      width: 150px;
-      height: 121px;
+      width: 96px;
+      height: 82px;
     }
   }
 `;
