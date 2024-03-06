@@ -343,12 +343,13 @@ const Root = styled.section`
     color: #6f00ff;
 
     h1{
-        margin: 5px;
+      margin: 6px;
     animation: blinkMe 2s linear infinite;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 11px;
+    font-size: 29px;
+    padding: 7px;
     }
     img{
         width: 42px;

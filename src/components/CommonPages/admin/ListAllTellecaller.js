@@ -192,14 +192,17 @@ const Root = styled.section`
     font-family: "Roboto", "sana-serif";
     .app_header {
       display: flex;
-      background-color: #0088ff;
-      text-align: center;
+      background: #5d05abb8;      text-align: center;
       color: white;
 
       > div {
         flex: 1;
-        border: 1px solid #dee2e6;
-        padding: 15px;
+    border: 1px solid #dee2e6;
+    padding: 4px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
       }
     }
     .app_body {
@@ -259,10 +262,20 @@ const Root = styled.section`
         }
         &:nth-child(odd) {
           background-color: #e7e7e8;
+    display: flex;
+    font-size: 14px;
+    justify-content: center;
+    color: black;
+    font-weight: 500;
         }
 
         &:nth-child(even) {
-          background-color: white;
+          background-color: #e7e7e8;
+    display: flex;
+    font-size: 14px;
+    justify-content: center;
+    color: black;
+    font-weight: 500;
         }
       }
       &:hover {

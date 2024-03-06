@@ -6,9 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { appDetailsAction } from "../../../../redux/users/action";
 import { EXCHANGE_URLS_ADMIN } from "../../../URLS";
 
-
-
-
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
   const day = date.getDate().toString().padStart(2, "0");
@@ -17,13 +14,11 @@ const formatDate = (isoDate) => {
   return `${day}-${month}-${year}`;
 };
 
-
 export default function MasterSheet({ popUser = () => {} }) {
   const [applications, setApplications] = useState([]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
 
   const getHistory = async () => {
     const axiosConfig = {
@@ -39,11 +34,10 @@ export default function MasterSheet({ popUser = () => {} }) {
       if (res.status === 201) {
         setApplications(res?.data?.data);
       }
-    } catch (e) { 
+    } catch (e) {
       console.log(e);
     }
   };
-
 
   useEffect(() => {
     getHistory();
@@ -65,7 +59,6 @@ export default function MasterSheet({ popUser = () => {} }) {
     return uniqueArray;
   }, []);
 
-  
   return (
     <Root>
       <>
@@ -108,10 +101,9 @@ export default function MasterSheet({ popUser = () => {} }) {
                   </div>
 
                   <div className="email">{i?.company_name}</div>
-                  <div>{formatDate(i?.callschedule_date)}</div>
-                  <div>{i?.call_status}</div>
-                  <div>{formatDate(i?.update_date)}</div>
-
+                  <div className="dateing">{formatDate(i?.callschedule_date)}</div>
+                  <div className="dateing">{i?.call_status}</div>
+                  <div className="dateing">{formatDate(i?.update_date)}</div>
                 </div>
               );
             })}
@@ -136,7 +128,8 @@ const Root = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 12px;    @media (max-width: 566px) {
+    margin-top: 12px;
+    @media (max-width: 566px) {
       padding: 10px;
       flex-direction: column;
       h1 {
@@ -160,7 +153,7 @@ const Root = styled.section`
     font-family: "Roboto", "sana-serif";
     .app_header {
       display: flex;
-      background-color: #0088ff;
+      background: #5d05abb8;
       text-align: center;
       color: white;
       height: 7vh;
@@ -175,8 +168,21 @@ const Root = styled.section`
       display: flex;
       height: 8vh;
       font-family: "Roboto", sans-serif;
+
+      >div{
+        p{
+          display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+        }
+      }
       .email {
-        font-size: 10px;
+        font-size: 16px;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        font-weight: 400;
       }
       .cams {
         text-align: center;
@@ -193,7 +199,8 @@ const Root = styled.section`
           color: white;
           border: 2px solid white;
           border-radius: 10px;
-          background: #2372d3;          padding: 10px;
+          background: #2372d3;
+          padding: 10px;
           font-weight: 600;
         }
       }
@@ -223,7 +230,7 @@ const Root = styled.section`
         }
 
         span {
-          font-weight: 600;
+          font-weight: 400;
         }
         &:nth-child(odd) {
           background-color: #e7e7e8;
@@ -261,6 +268,13 @@ const Root = styled.section`
         }
       }
     }
+  }
+
+  .dateing{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
 
   .addtelle {
