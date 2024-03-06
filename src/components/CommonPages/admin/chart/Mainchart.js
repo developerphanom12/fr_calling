@@ -14,7 +14,7 @@ const Mainchart = () => {
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-    }; 
+    };
     try {
       const res = await axios.get(
         `${EXACHANGE_URLS_TELLE}/admincheckaalsales?selection=${selection}`,
@@ -59,7 +59,6 @@ const Mainchart = () => {
             <option value="last7days">Last 7 Days</option>
             <option value="last28days">Last 28 Days</option>
             <option value="last90days">Last 90 Days</option>
-
           </select>
         </div>
         <ApexChart key={JSON.stringify(salesData)} data={salesData} />
@@ -71,10 +70,10 @@ const Mainchart = () => {
 export default Mainchart;
 
 const Root = styled.section`
-padding: 10px;
-    width: 96%;
-    height: 100%;
-      > div {
+  padding: 10px;
+  width: 96%;
+  height: 100%;
+  > div {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -87,27 +86,25 @@ padding: 10px;
       border-radius: 5px;
       > div {
         p {
-        font-size: 16px;
-        width:100px;
-        font-size: 23px;
+          font-size: 16px;
+          width: 100px;
+          font-size: 23px;
         }
       }
 
       label {
-        
-        font-size: 14px;
-    width: 100%;
+        margin-left: 28px;
+        gap: 12px;
+        display: flex;
       }
       select {
         font-family: ui-serif;
-    /* font-size: 13px; */
-    /* margin: 5px; */
-    /* width: 100px; */
-    /* font-weight: 400; */
     border: 1px solid dodgerblue;
     border-radius: 6px;
     height: 4vh;
+    margin: 0px;
     padding: 2px;
+    margin-bottom: 9px;
       }
     }
   }

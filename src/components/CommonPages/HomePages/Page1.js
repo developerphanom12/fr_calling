@@ -4,7 +4,7 @@ import "../../../css/style.css";
 import "../../../css/bootstrap.css";
 import "../../../css/responsive.css";
 
-import slider from "../../images/slider-img.png";
+import slider from "../../images/asusu.png";
 export default function Page1() {
   return (
     <Root>

@@ -74,26 +74,32 @@ const Root = styled.section`
     display: flex;
     flex-direction: column;
     .delta {
-     
-      width: 100%;
-      margin-bottom: 5px;
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      border-radius: 5px;
+      margin-top: 52px;
+    width: 100%;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 5px;
       > div {
-        margin-right: 54px;
+        /* margin-right: 54px; */
          
+        P{
+          font-size: 12px;
+        }
+
       }
 
       label {
-        /* justify-content: center; */
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 27%;
       }
       select {
         font-family: ui-serif;
         font-size: 16px;
-        margin: 5px;
-        width: 26%;
         font-weight: 400;
         border: 1px solid #35fddb;
         border-radius: 6px;
