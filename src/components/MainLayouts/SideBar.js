@@ -18,11 +18,12 @@ export default function SideBar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleLogoutClick = () => {
-    localStorage.setItem("token", "");
+    localStorage.clear();
     dispatch(userCheckAction(false));
     cogoToast.success("Logout Successfully");
     navigate("/allpages");
   };
+  
 
   const userDetails = useSelector((state) => state?.users.user);
   const currentUrl = window.location.href;
