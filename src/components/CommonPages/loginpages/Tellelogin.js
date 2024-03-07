@@ -10,6 +10,7 @@ import axios from "axios";
 import { EXCHANGE_URLS_ADMIN } from "../../URLS";
 import { userCheckAction, userDataAction } from "../../../redux/users/action";
 import cogoToast from "cogo-toast";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   username: yup.string().required("username is required."),
@@ -18,7 +19,7 @@ const schema = yup.object().shape({
  
 export default function Tellelogin() {
   const [showPassword, setShowPassword] = useState(false);
-
+  const navigate = useNavigate()
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
@@ -36,7 +37,13 @@ export default function Tellelogin() {
         dispatch(userDataAction(res?.data?.data));
         dispatch(userCheckAction(true));
         cogoToast.success("Login Successfully");
+        if (localStorage.getItem("isOtpVerified") === "true") {
+          navigate("/studash"); 
+        } else {
+          navigate("/otpverifycode"); 
+        }
       }
+      
     } catch (err) {
       console.log("err", err);
       cogoToast.error("Invalid User");

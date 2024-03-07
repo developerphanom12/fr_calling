@@ -1,16 +1,16 @@
-// Layout.js
-
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import NavBar from "./NavBar";
 import { useSelector } from "react-redux";
 import SideBar from "./SideBar";
 import VerifyOtp from "../CommonPages/loginpages/VerifyOtp";
+import { useNavigate } from "react-router-dom";
 
 export default function Layout({ children }) {
   const [isOtpVerified, setIsOtpVerified] = useState(false);
   const userCheck = useSelector((state) => state?.users?.userCheck);
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedOtpStatus = localStorage.getItem("isOtpVerified");
@@ -24,16 +24,20 @@ export default function Layout({ children }) {
     localStorage.setItem("isOtpVerified", JSON.stringify(status));
   };
 
+  const handleLogout = () => {
+    localStorage.setItem("isOtpVerified", JSON.stringify(false));
+    localStorage.removeItem("token");
+    navigate("/login"); 
+  };
+  console.log('hd',handleLogout)
   return (
     <Root>
-      {userCheck && token && isOtpVerified ? (
+      {(userCheck && token && isOtpVerified) && (
         <div className="sideBar">
           <SideBar />
         </div>
-      ) : (
-        ""
       )}
-      
+
       <div className="main_bar">
         {token && userCheck && !isOtpVerified ? (
           <VerifyOtp onVerification={handleOtpVerification} />
@@ -49,6 +53,7 @@ export default function Layout({ children }) {
     </Root>
   );
 }
+
 
 const Root = styled.section`
   display: flex;

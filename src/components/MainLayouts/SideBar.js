@@ -17,13 +17,15 @@ import { TbFileReport } from "react-icons/tb";
 export default function SideBar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleLogoutClick = () => {
-    localStorage.clear();
+  
+  const handleLogout = () => {
+    localStorage.setItem("isOtpVerified", JSON.stringify(false));
+    localStorage.removeItem("token");
     dispatch(userCheckAction(false));
     cogoToast.success("Logout Successfully");
     navigate("/allpages");
   };
-  
+
 
   const userDetails = useSelector((state) => state?.users.user);
   const currentUrl = window.location.href;
@@ -34,11 +36,12 @@ export default function SideBar() {
 
   return (
     <Root>
+      
       <div className="menu_top">
         <div
           className="logo"
           onClick={() => {
-            handleLogoutClick();
+            handleLogout();
           }}
         >
           <IoMdCall />
@@ -77,15 +80,7 @@ export default function SideBar() {
                 <p>Tellecaller List</p>
               </div>
 
-              {/* <div
-                className={activeParam === "sharedata" ? "active" : ""}
-                onClick={() => {
-                  navigate("/sharedata");
-                }}
-              >
-                <FaShareAlt />
-                <p>Share Data</p>
-              </div> */}
+            
               <div
                 className={activeParam === "mastersheet" ? "active" : ""}
                 onClick={() => {
@@ -139,16 +134,7 @@ export default function SideBar() {
                 {<MdWorkHistory />}
                 <p>Client History</p>
               </div>
-              {/* <div
-                className={activeParam === "refrencedata" ? "active" : ""}
-                onClick={() => {
-                  navigate("/refrencedata");
-                }}
-              >
-                {<MdWorkHistory />}
-                <p>Refrence Data</p>
-              </div> */}
-
+            
               <div
                 className={activeParam === "dailyreport" ? "active" : ""}
                 onClick={() => {
@@ -176,7 +162,7 @@ export default function SideBar() {
           <div
             className="logout"
             onClick={() => {
-              handleLogoutClick();
+              handleLogout();
             }}
           >
             <FiLogOut />
@@ -195,7 +181,7 @@ const Root = styled.section`
   height: 100%;
   max-height: 100vh;
   color: black;
-  background-image:  linear-gradient(to right, #3a1864, #623084 ,#461c6c);
+  background-image: linear-gradient(to right, #3a1864, #623084, #461c6c);
   font-family: "Roboto", sans-serif;
   overflow: hidden;
 
@@ -204,7 +190,7 @@ const Root = styled.section`
     flex-direction: column;
     position: fixed;
     .logo {
-      background-image: linear-gradient(to right #120422 ) ;
+      background-image: linear-gradient(to right #120422);
       border-radius: 4px;
       padding: 15px;
       margin: 20px 0px;
@@ -258,8 +244,8 @@ const Root = styled.section`
         }
 
         p {
-         font-size: 13px;
-    margin: 2px;
+          font-size: 13px;
+          margin: 2px;
           @media (max-width: 699px) {
             display: none;
           }
@@ -273,7 +259,6 @@ const Root = styled.section`
         color: #1e0945;
         background: #fff;
         padding: 4px;
-         
       }
     }
   }
