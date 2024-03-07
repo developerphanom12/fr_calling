@@ -91,7 +91,7 @@ export default function VerifyOtp({ onVerification }) {
               onChange={handleChange}
             />
             <p className="links" onClick={handleChangePassword}>
-              Send OTP
+              Resend OTP
             </p>
             <button className="thatones" onClick={verifyOtp}>
               Verify OTP

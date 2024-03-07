@@ -14,7 +14,7 @@ import { TbReportMedical } from "react-icons/tb";
 import { ImDatabase } from "react-icons/im";
 import { TbFileReport } from "react-icons/tb";
 
-export default function SideBar() {
+export default function SideBar() { 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
@@ -26,16 +26,18 @@ export default function SideBar() {
     navigate("/allpages");
   };
 
-
+  const userCheck = useSelector((state) => state?.users?.userCheck);
   const userDetails = useSelector((state) => state?.users.user);
   const currentUrl = window.location.href;
   console.log("currenturul", currentUrl);
   const activeParam = currentUrl.replace("?", "/").split("/")[3];
-
+  const token = localStorage.getItem("token");
+  const isOtpVerified = localStorage.getItem("isOtpVerified") === "true";
   console.log("activeparam", activeParam);
 
   return (
     <Root>
+      {(userCheck && token && isOtpVerified) && (
       
       <div className="menu_top">
         <div
@@ -170,6 +172,7 @@ export default function SideBar() {
           </div>
         </div>
       </div>
+      )}
     </Root>
   );
 }
