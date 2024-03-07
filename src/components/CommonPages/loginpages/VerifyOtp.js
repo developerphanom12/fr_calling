@@ -13,7 +13,7 @@ export default function VerifyOtp({ onVerification }) {
   const userDetails = useSelector((state) => state?.users.user);
 
   const [otpintial, setChangePass] = useState({
-    email: "avineetsingh78@gmail.com",
+    email: "karan.sharma111@yahoo.co.in",
   });
   const handleChange = (e) => {
     setOtp(e.target.value);
