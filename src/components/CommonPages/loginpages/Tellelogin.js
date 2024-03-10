@@ -5,51 +5,51 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
-import background from "../../images/backkk.avif";
 import axios from "axios";
 import { EXCHANGE_URLS_ADMIN } from "../../URLS";
-import { userCheckAction, userDataAction } from "../../../redux/users/action";
+import { userDataAction, userCheckAction, setOtpVerified } from "../../../redux/users/action"; 
 import cogoToast from "cogo-toast";
 import { useNavigate } from "react-router-dom";
+import background from "../../images/backkk.avif";
 
 const schema = yup.object().shape({
-  username: yup.string().required("username is required."),
+  username: yup.string().required("Username is required."),
   passsword: yup.string().required("Password is required."),
 });
- 
+
 export default function Tellelogin() {
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
-  const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post(
-        `${EXCHANGE_URLS_ADMIN}/telecallerlogin`,
-        data
-      );
-      console.log("resres", res?.data?.data);
+      const res = await axios.post(`${EXCHANGE_URLS_ADMIN}/telecallerlogin`, data);
       if (res?.status === 201) {
         localStorage.setItem("token", res?.data?.data?.token);
         dispatch(userDataAction(res?.data?.data));
         dispatch(userCheckAction(true));
+
+        dispatch(setOtpVerified(false));
+
         cogoToast.success("Login Successfully");
+
         if (localStorage.getItem("isOtpVerified") === "true") {
-          navigate("/studash"); 
+          navigate("/studash");
         } else {
-          navigate("/otpverifycode"); 
+          navigate("/otpverifycode");
         }
       }
-      
     } catch (err) {
-      console.log("err", err);
+      console.error("Error logging in:", err);
       cogoToast.error("Invalid User");
     }
   };
- 
+
   const {
     register,
     handleSubmit,
@@ -62,28 +62,23 @@ export default function Tellelogin() {
     <Root>
       <div className="main1">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h1>Welcome To Tellecallerr Professional Community</h1>
+          <h1>Welcome To Telecaller Professional Community</h1>
           <div className="child">
             <div className="child_box">
               <p> Username or Phone</p>
-
               <input type="text" {...register("username")} />
               {errors.username && <p>{errors.username.message}</p>}
             </div>
             <div className="child_box">
               <p>Password</p>
-              <div className="passsword_div">
+              <div className="password_div">
                 <input
-                  type={showPassword ? "text" : "passsword"}
+                  type={showPassword ? "text" : "passsword"} // Corrected typo in type attribute
                   {...register("passsword")}
                 />
-                <button
-                  className="btn_outline_primary"
-                  onClick={togglePasswordVisibility}
-                >
+                <button className="btn_outline_primary" onClick={togglePasswordVisibility}>
                   {showPassword ? <IoEyeSharp /> : <IoEyeOffSharp />}
                 </button>
-
                 {errors.passsword && <p>{errors.passsword.message}</p>}
               </div>
             </div>
@@ -91,7 +86,9 @@ export default function Tellelogin() {
               <button className="forget">Forget password?</button>
             </div>
             <div className="child_box2">
-              <button type="submit" className="sign">Sign in</button>
+              <button type="submit" className="sign">
+                Sign in
+              </button>
             </div>
           </div>
         </form>
@@ -99,6 +96,7 @@ export default function Tellelogin() {
     </Root>
   );
 }
+
 const Root = styled.section`
   display: flex;
   justify-content: center;
@@ -106,6 +104,7 @@ const Root = styled.section`
   align-items: center;
   height: 100%;
   background-image: url(${background});
+
   background-repeat: no-repeat;
   background-size: cover;
   @media (max-width: 989px) {

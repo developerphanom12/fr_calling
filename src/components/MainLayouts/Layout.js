@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import NavBar from "./NavBar";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import SideBar from "./SideBar";
 import VerifyOtp from "../CommonPages/loginpages/VerifyOtp";
+import { setOtpVerified } from "../../redux/users/action";
 import { useNavigate } from "react-router-dom";
 
 export default function Layout({ children }) {
-  const [isOtpVerified, setIsOtpVerified] = useState(false);
+  const dispatch = useDispatch();
+  const isOtpVerified = useSelector((state) => state?.users?.isOtpVerified);
+  console.log("dt",isOtpVerified)
   const userCheck = useSelector((state) => state?.users?.userCheck);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
@@ -15,45 +18,35 @@ export default function Layout({ children }) {
   useEffect(() => {
     const storedOtpStatus = localStorage.getItem("isOtpVerified");
     if (storedOtpStatus) {
-      setIsOtpVerified(JSON.parse(storedOtpStatus));
+      dispatch(setOtpVerified(JSON.parse(storedOtpStatus)));
     }
-  }, []);
+  }, [dispatch]);
 
-  const handleOtpVerification = (status) => {
-    setIsOtpVerified(status);
-    localStorage.setItem("isOtpVerified", JSON.stringify(status));
-  };
-
-  const handleLogout = () => {
-    localStorage.setItem("isOtpVerified", JSON.stringify(false));
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
-  console.log("hd", handleLogout);
-
+  
   return (
     <Root>
-      {userCheck && token && isOtpVerified && (
+      {userCheck && isOtpVerified && token && (
         <div className="sideBar">
           <SideBar />
         </div>
       )}
-
+  
       <div className="main_bar">
-        {token && userCheck && !isOtpVerified ? (
-          <VerifyOtp onVerification={handleOtpVerification} />
-        ) : token && userCheck ? (
-          ""
+        {userCheck && !isOtpVerified ? (
+          <VerifyOtp />
         ) : (
-          <div className="pre_nav">
-            <NavBar />
-          </div>
+          
+          <>
+           
+            <div className="main_body">{children}</div>
+          </>
         )}
-        <div className="main_body">{children}</div>
       </div>
     </Root>
   );
+  
 }
+
 
 const Root = styled.section`
   display: flex;

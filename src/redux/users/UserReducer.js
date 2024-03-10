@@ -1,3 +1,4 @@
+// UserReducer.js
 const initialState = {
   user: {},
   userCheck: false,
@@ -5,7 +6,9 @@ const initialState = {
   appDetails: {},
   modalIsOpen: false,
   modalType: null,
+  isOtpVerified: false,
 };
+
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
     case "USER_DATA":
@@ -34,6 +37,11 @@ const UserReducer = (state = initialState, action) => {
       return {
         ...state,
         appDetails: action.payload,
+      };
+    case "SET_OTP_VERIFIED":
+      return {
+        ...state,
+        isOtpVerified: action.payload,
       };
     default:
       return state;

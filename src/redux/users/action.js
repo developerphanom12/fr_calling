@@ -36,3 +36,9 @@ export const openModal = (modalType) => ({
 export const closeModal = () => ({
   type: "CLOSE_MODAL",
 });
+
+
+export const setOtpVerified = (isVerified) => ({
+  type: "SET_OTP_VERIFIED",
+  payload: isVerified,
+});

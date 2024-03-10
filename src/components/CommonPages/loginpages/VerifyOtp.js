@@ -4,20 +4,14 @@ import cogoToast from "cogo-toast";
 import styled from "styled-components";
 import { EXCHANGE_URLS_ADMIN } from "../../URLS";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setOtpVerified } from "../../../redux/users/action";
 
-export default function VerifyOtp({ onVerification }) {
+export default function VerifyOtp() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [otp, setOtp] = useState("");
-  const [verificationFailed, setVerificationFailed] = useState(false);
   const userDetails = useSelector((state) => state?.users.user);
-
-  const [otpintial, setChangePass] = useState({
-    email: "karan.sharma111@yahoo.co.in",
-  });
-  const handleChange = (e) => {
-    setOtp(e.target.value);
-  };
 
   const verifyOtp = async () => {
     try {
@@ -32,7 +26,7 @@ export default function VerifyOtp({ onVerification }) {
         axiosConfig
       );
       if (response.status === 200) {
-        onVerification(true);
+        dispatch(setOtpVerified(true));
         cogoToast.success("OTP Verified");
         if (userDetails?.role === "admin") {
           navigate("/dashboard");
@@ -40,70 +34,59 @@ export default function VerifyOtp({ onVerification }) {
           navigate("/studash");
         }
       } else {
-        setVerificationFailed(true);
+        cogoToast.error("Error verifying OTP");
       }
     } catch (error) {
-      setVerificationFailed(true);
       cogoToast.error("Error verifying OTP");
       console.error("Error verifying OTP:", error);
     }
   };
 
-  const ChangePassApi = async (newP) => {
-    const axiosConfig = {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    };
+  const handleChange = (e) => {
+    setOtp(e.target.value);
+  };
+
+  const resendOtp = async () => {
     try {
-      const data = {
-        email: newP,
+      const axiosConfig = {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       };
-      const res = await axios.post(
+      const response = await axios.post(
         `${EXCHANGE_URLS_ADMIN}/otpsend`,
-        data,
+        { email: userDetails.email },
         axiosConfig
       );
-
-      if (res.status === 200) {
-        setChangePass({ email: "" });
-        cogoToast.success("Otp send successfully");
+      if (response.status === 200) {
+        cogoToast.success("OTP Resent successfully");
       }
-    } catch (err) {
-      cogoToast.error("Error");
+    } catch (error) {
+      cogoToast.error("Error resending OTP");
+      console.error("Error resending OTP:", error);
     }
-  };
-  const handleChangePassword = () => {
-    ChangePassApi(otpintial?.email);
   };
 
   return (
     <Root>
-      {!verificationFailed ? (
-        <>
-          <div className="otptable">
-            <div>
-            <h3>Enter OTP</h3>
-            <input
-              type="number"
-              placeholder="Enter OTP"
-              value={otp}
-              onChange={handleChange}
-            />
-            <p className="links" onClick={handleChangePassword}>
-              Resend OTP
-            </p>
-            <button className="thatones" onClick={verifyOtp}>
-              Verify OTP
-            </button>
-              </div>
-          </div>
-        </>
-      ) : null}
+      <div className="otptable">
+        <h3>Enter OTP</h3>
+        <input
+          type="number"
+          placeholder="Enter OTP"
+          value={otp}
+          onChange={handleChange}
+        />
+        <button className="thatones" onClick={verifyOtp}>
+          Verify OTP
+        </button>
+        <p className="links" onClick={resendOtp}>
+          Resend OTP
+        </p>
+      </div>
     </Root>
   );
 }
-
 const Root = styled.section`
   display: flex;
   padding: 20px;

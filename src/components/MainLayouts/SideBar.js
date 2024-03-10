@@ -1,27 +1,28 @@
+import React from "react";
 import { FaHome } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { MdPersonSearch } from "react-icons/md";
 import { MdWorkHistory } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FaRegUser } from "react-icons/fa";
 import cogoToast from "cogo-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { userCheckAction } from "../../redux/users/action";
+import { userCheckAction, setOtpVerified } from "../../redux/users/action";
 import { IoMdCall } from "react-icons/io";
 import { FaShareAlt } from "react-icons/fa";
 import { TbReportMedical } from "react-icons/tb";
 import { ImDatabase } from "react-icons/im";
 import { TbFileReport } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
 
-export default function SideBar() { 
-  const navigate = useNavigate();
+export default function SideBar() {
   const dispatch = useDispatch();
-  
+  const navigate = useNavigate();
+
   const handleLogout = () => {
-    localStorage.setItem("isOtpVerified", JSON.stringify(false));
-    localStorage.removeItem("token");
     dispatch(userCheckAction(false));
+    dispatch(setOtpVerified(false));
+    localStorage.removeItem('token')
     cogoToast.success("Logout Successfully");
     navigate("/allpages");
   };
@@ -29,154 +30,148 @@ export default function SideBar() {
   const userCheck = useSelector((state) => state?.users?.userCheck);
   const userDetails = useSelector((state) => state?.users.user);
   const currentUrl = window.location.href;
-  console.log("currenturul", currentUrl);
   const activeParam = currentUrl.replace("?", "/").split("/")[3];
-  const token = localStorage.getItem("token");
-  const isOtpVerified = localStorage.getItem("isOtpVerified") === "true";
-  console.log("activeparam", activeParam);
+ const token = localStorage.getItem('token')
 
   return (
     <Root>
-      {(userCheck && token && isOtpVerified) && (
-      
-      <div className="menu_top">
-        <div
-          className="logo"
-          onClick={() => {
-            handleLogout();
-          }}
-        >
-          <IoMdCall />
-          <p>TeleCaller</p>
-        </div>
-        <div className="nav_section">
-          {userDetails.role === "admin" ? (
-            <>
-              <div
-                className={activeParam === "dashboardd" ? "active" : ""}
-                onClick={() => {
-                  navigate("/dashboard");
-                }}
-              >
-                <FaHome />
-                <p>Dashboard</p>
-              </div>
-
-              <div
-                className={activeParam === "history" ? "active" : ""}
-                onClick={() => {
-                  navigate("/history");
-                }}
-              >
-                {<MdWorkHistory />}
-                <p>Client History</p>
-              </div>
-
-              <div
-                className={activeParam === "listalltelle" ? "active" : ""}
-                onClick={() => {
-                  navigate("/listalltelle");
-                }}
-              >
-                <FaRegUser />
-                <p>Tellecaller List</p>
-              </div>
-
-            
-              <div
-                className={activeParam === "mastersheet" ? "active" : ""}
-                onClick={() => {
-                  navigate("/mastersheet");
-                }}
-              >
-                <ImDatabase />
-                <p>MasterSheet</p>
-              </div>
-
-              <div
-                className={activeParam === "negativelead" ? "active" : ""}
-                onClick={() => {
-                  navigate("/negativelead");
-                }}
-              >
-                <TbFileReport />
-                <p>Negative Lead</p>
-              </div>
-            </>
-          ) : (
-            ""
-          )}
-
-          {userDetails.role === "telecaller" ? (
-            <>
-              <div
-                className={activeParam === "studash" ? "active" : ""}
-                onClick={() => {
-                  navigate("/studash");
-                }}
-              >
-                <FaHome />
-                <p>Dashboard</p>
-              </div>
-              <div
-                className={activeParam === "clientdata" ? "active" : ""}
-                onClick={() => {
-                  navigate("/clientdata");
-                }}
-              >
-                {<MdPersonSearch />}
-                <p>Add Cleint Data</p>
-              </div>
-              <div
-                className={activeParam === "history" ? "active" : ""}
-                onClick={() => {
-                  navigate("/history");
-                }}
-              >
-                {<MdWorkHistory />}
-                <p>Client History</p>
-              </div>
-            
-              <div
-                className={activeParam === "dailyreport" ? "active" : ""}
-                onClick={() => {
-                  navigate("/dailyreport");
-                }}
-              >
-                <TbReportMedical />
-                <p>Daily Report</p>
-              </div>
-
-              <div
-                className={activeParam === "telenegativelead" ? "active" : ""}
-                onClick={() => {
-                  navigate("/telenegativelead");
-                }}
-              >
-                <TbFileReport />
-                <p>Negative Lead</p>
-              </div>
-            </>
-          ) : (
-            ""
-          )}
-
+      {(userCheck && token && setOtpVerified) &&  (
+        <div className="menu_top">
           <div
-            className="logout"
+            className="logo"
             onClick={() => {
               handleLogout();
             }}
           >
-            <FiLogOut />
-            <p>Logout</p>
+            <IoMdCall />
+            <p>TeleCaller</p>
+          </div>
+          <div className="nav_section">
+            {userDetails.role === "admin" ? (
+              <>
+                <div
+                  className={activeParam === "dashboardd" ? "active" : ""}
+                  onClick={() => {
+                    navigate("/dashboard");
+                  }}
+                >
+                  <FaHome />
+                  <p>Dashboard</p>
+                </div>
+
+                <div
+                  className={activeParam === "history" ? "active" : ""}
+                  onClick={() => {
+                    navigate("/history");
+                  }}
+                >
+                  {<MdWorkHistory />}
+                  <p>Client History</p>
+                </div>
+
+                <div
+                  className={activeParam === "listalltelle" ? "active" : ""}
+                  onClick={() => {
+                    navigate("/listalltelle");
+                  }}
+                >
+                  <FaRegUser />
+                  <p>Tellecaller List</p>
+                </div>
+
+                <div
+                  className={activeParam === "mastersheet" ? "active" : ""}
+                  onClick={() => {
+                    navigate("/mastersheet");
+                  }}
+                >
+                  <ImDatabase />
+                  <p>MasterSheet</p>
+                </div>
+
+                <div
+                  className={activeParam === "negativelead" ? "active" : ""}
+                  onClick={() => {
+                    navigate("/negativelead");
+                  }}
+                >
+                  <TbFileReport />
+                  <p>Negative Lead</p>
+                </div>
+              </>
+            ) : (
+              ""
+            )}
+
+            {userDetails.role === "telecaller" ? (
+              <>
+                <div
+                  className={activeParam === "studash" ? "active" : ""}
+                  onClick={() => {
+                    navigate("/studash");
+                  }}
+                >
+                  <FaHome />
+                  <p>Dashboard</p>
+                </div>
+                <div
+                  className={activeParam === "clientdata" ? "active" : ""}
+                  onClick={() => {
+                    navigate("/clientdata");
+                  }}
+                >
+                  {<MdPersonSearch />}
+                  <p>Add Cleint Data</p>
+                </div>
+                <div
+                  className={activeParam === "history" ? "active" : ""}
+                  onClick={() => {
+                    navigate("/history");
+                  }}
+                >
+                  {<MdWorkHistory />}
+                  <p>Client History</p>
+                </div>
+
+                <div
+                  className={activeParam === "dailyreport" ? "active" : ""}
+                  onClick={() => {
+                    navigate("/dailyreport");
+                  }}
+                >
+                  <TbReportMedical />
+                  <p>Daily Report</p>
+                </div>
+
+                <div
+                  className={activeParam === "telenegativelead" ? "active" : ""}
+                  onClick={() => {
+                    navigate("/telenegativelead");
+                  }}
+                >
+                  <TbFileReport />
+                  <p>Negative Lead</p>
+                </div>
+              </>
+            ) : (
+              ""
+            )}
+
+            <div
+              className="logout"
+              onClick={() => {
+                handleLogout();
+              }}
+            >
+              <FiLogOut />
+              <p>Logout</p>
+            </div>
           </div>
         </div>
-      </div>
       )}
     </Root>
   );
 }
-
 const Root = styled.section`
   display: flex;
   flex-direction: column;
