@@ -77,12 +77,15 @@ export default function VerifyOtp() {
           value={otp}
           onChange={handleChange}
         />
-        <button className="thatones" onClick={verifyOtp}>
-          Verify OTP
-        </button>
         <p className="links" onClick={resendOtp}>
           Resend OTP
         </p>
+        <button className="thatones" onClick={verifyOtp}>
+          Verify OTP
+        </button>
+
+
+        <p className="otpsend">OTP has been sent to Admin. Please check. </p>
       </div>
     </Root>
   );
@@ -97,137 +100,28 @@ const Root = styled.section`
   width: 100%;
   height: 100%;
   min-height: 100vh;
-  background-image: linear-gradient(-225deg, #e3fdf5 0%, #ffe6fa 100%);
   margin: auto;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  overflow: auto;
-  background: linear-gradient(
-    315deg,
-    rgba(101, 0, 94, 1) 3%,
-    rgba(60, 132, 206, 1) 38%,
-    rgba(48, 238, 226, 1) 68%,
-    rgba(255, 25, 25, 1) 98%
-  );
-  animation: gradient 15s ease infinite;
-  background-size: 400% 400%;
-  background-attachment: fixed;
+  background: linear-gradient(130deg, #231a6f, #0f054c);
 
-  @keyframes gradient {
-    0% {
-      background-position: 0% 0%;
-    }
-    50% {
-      background-position: 100% 100%;
-    }
-    100% {
-      background-position: 0% 0%;
-    }
-  }
 
-  .wave {
-    background: rgb(255 255 255 / 25%);
-    border-radius: 1000% 1000% 0 0;
-    position: fixed;
-    width: 200%;
-    height: 12em;
-    animation: wave 10s -3s linear infinite;
-    transform: translate3d(0, 0, 0);
-    opacity: 0.8;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-  }
-
-  .wave:nth-of-type(2) {
-    bottom: -1.25em;
-    animation: wave 18s linear reverse infinite;
-    opacity: 0.8;
-  }
-
-  .wave:nth-of-type(3) {
-    bottom: -2.5em;
-    animation: wave 20s -1s reverse infinite;
-    opacity: 0.9;
-  }
-
-  @keyframes wave {
-    2% {
-      transform: translateX(1);
-    }
-
-    25% {
-      transform: translateX(-25%);
-    }
-
-    50% {
-      transform: translateX(-50%);
-    }
-
-    75% {
-      transform: translateX(-25%);
-    }
-
-    100% {
-      transform: translateX(1);
-    }
-  }
   .otptable {
     display: flex;
     margin: 0px;
-    flex-direction: column;
     width: 100%;
-    /* height: 100%; */
-    align-items: center;
+    flex-direction: column;
+    width: 32%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;    align-items: center;
     border-radius: 9px;
+    border: 1px solid white;
    
-     >div{
-      display: flex;
-      flex-direction: column;
-      padding: 30px;
-      box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-      rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
-      rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-      button {
-      margin: 10px;
-      padding: 5px;
-    }
-    .thatones {
-      margin: 10px;
-      padding: 5px;
-      font-size: 17px;
-      padding: 9px;
-      border-radius: 16px;
-      background: #ff121247;
-      border: 1px;
+    .otpsend{
       color: white;
-      font-weight: 600;
-      cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    font-style: oblique;
+    font-family: 'Roboto';
     }
-
-    input {
-    margin-left: 11px;
-    justify-content: center;
-    display: flex;
-    border: none;
-    align-items: center;
-    border-radius: 6px;
-    padding: 11px;
-    margin-top: 24px;
-    }
-    .links {
-      background: none;
-      color: #ffef01;
-      border: none;
-      padding: 0;
-      font: inherit;
-      overflow: hidden;
-      cursor: pointer;
-      text-decoration: none;
-      font-weight: 900;
-      display: flex;
-      justify-content: right;
-    }
-
     h3 {
       font-weight: 500;
       font-family: "Roboto", "sans-serif";
@@ -246,52 +140,58 @@ const Root = styled.section`
       text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
         0px -4px 10px rgba(255, 255, 255, 0.3);
     }
-    .main_div_pass {
-      box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-        rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
-      border-radius: 20px;
-      padding: 20px;
-      .pass1 {
-        display: flex;
-        margin: 15px;
-        font-size: 13px;
-        flex-direction: column;
-        input {
-          text-align: center;
-          border-radius: 20px;
-          padding: 5px 10px;
-          color: #202020;
-          width: 240px;
 
-          text-decoration: none;
-          border: 1px solid black;
-          @media (max-width: 600px) {
-            min-width: 100px;
-            width: 100%;
-          }
-        }
+    input {
+      margin-left: 11px;
+      justify-content: center;
+      display: flex;
+      border: none;
+      align-items: center;
+      border-radius: 6px;
+      padding: 11px;
+      margin-top: 24px;
+
+      @media (max-width: 768px) {
+        padding: 5px;
+        margin-top: 16px;
+        width: 138px;
       }
-      .box1 {
-        text-align: center;
-        button {
-          background: #8656ec;
-          color: #ffffff;
-          padding: 5px 10px;
-          border-color: transparent;
-          font-size: 13px;
-          text-align: center;
-          margin: 5px;
-          cursor: pointer;
-          border-radius: 20px;
-          background-size: 300% 100%;
-          transition: all 0.2s ease-in-out 0s;
-          text-transform: uppercase;
-          &:hover {
-            box-shadow: 1px 1px 4px 1px gray;
-          }
-        }
       }
+   
+   
+    .thatones {
+      margin: 7px;
+      padding: 5px;
+      font-size: 16px;
+      padding: 7px;
+      border-radius: 16px;
+      background: #28a745;
+      border: 1px;
+      color: white;
+      width: 119px;
+      font-weight: 600;
+      cursor: pointer;
     }
-     }
+
+  
+    .links {
+      background: none;
+      color: #ffef01;
+      border: none;
+      padding: 0;
+      font: inherit;
+      overflow: hidden;
+      cursor: pointer;
+      width: 49%;
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      justify-content: right;
+      font-size: 12px;
+      margin-top: 8px;
+  
+    }
+
   }
+   
 `;
