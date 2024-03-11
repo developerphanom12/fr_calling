@@ -93,7 +93,7 @@ const Root = styled.section`
       }
 
       label {
-        margin-left: 28px;
+        margin-left: 26px;
         gap: 12px;
         display: flex;
       }

@@ -104,6 +104,7 @@ const Root = styled.section`
   align-items: center;
   height: 100%;
   background-image: url(${background});
+  margin-left: -11.5%;
 
   background-repeat: no-repeat;
   background-size: cover;

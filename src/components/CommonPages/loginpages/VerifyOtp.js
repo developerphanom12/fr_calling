@@ -55,7 +55,7 @@ export default function VerifyOtp() {
       };
       const response = await axios.post(
         `${EXCHANGE_URLS_ADMIN}/otpsend`,
-        { email: userDetails.email },
+        { email: "avineetsingh78@gmail.com" },
         axiosConfig
       );
       if (response.status === 200) {

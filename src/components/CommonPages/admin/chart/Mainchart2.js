@@ -81,7 +81,7 @@ const Root = styled.section`
       }
       p {
         margin: 0;
-    font-size: 17px;
+    font-size: 14px;
     width: 100%;
     color: rgba(55, 77, 103, 0.54)!important;
       }

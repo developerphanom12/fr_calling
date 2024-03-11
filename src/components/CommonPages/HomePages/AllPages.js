@@ -27,4 +27,6 @@ export default function AllPages() {
     </Root>
   );
 }
-const Root = styled.section``;
+const Root = styled.section`
+margin-left: -11.5%;
+`;
