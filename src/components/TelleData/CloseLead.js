@@ -114,10 +114,11 @@ overflow-x: hidden;
     font-family: "Roboto", "sana-serif";
     .app_header {
       display: flex;
-      background: #5d05abb8;
-      text-align: center;
-      color: white;
-
+    background-color: #0088ff;
+    text-align: center;
+    margin: 0px;
+    color: white;
+    font-size: 11px;
       > div {
         flex: 1;
         border: 1px solid #dee2e6;

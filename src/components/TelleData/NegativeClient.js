@@ -108,9 +108,11 @@ const Root = styled.section`
     font-family: "Roboto", "sana-serif";
     .app_header {
       display: flex;
-      background-color: #0088ff;
-      text-align: center;
-      color: white;
+    background-color: #0088ff;
+    text-align: center;
+    margin: 0px;
+    color: white;
+    font-size: 13px;
 
       > div {
         flex: 1;
@@ -154,6 +156,7 @@ const Root = styled.section`
           font-weight: 600;
           text-align: left;
           font-size: small;
+          margin: 0px;
           @media (max-width: 789px) {
             font-size: 10px;
           }
@@ -197,6 +200,7 @@ const Root = styled.section`
           font-weight: 600;
           text-align: left;
           font-size: small;
+          margin: 0px;
           @media (max-width: 789px) {
             font-size: 10px;
           }

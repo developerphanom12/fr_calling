@@ -395,6 +395,7 @@ transition: all 0.4s ease 0s;
             align-items: center;
             text-align: center;
           }
+          
         }
       }
     }

@@ -109,10 +109,11 @@ const Root = styled.section`
     font-family: "Roboto", "sana-serif";
     .app_header {
       display: flex;
-      background-color: #0088ff;
-      text-align: center;
-      color: white;
-
+    background-color: #0088ff;
+    text-align: center;
+    margin: 0px;
+    color: white;
+    font-size: 13px;
       > div {
         flex: 1;
     border: 1px solid #dee2e6;
@@ -177,7 +178,6 @@ const Root = styled.section`
       }
     }
   }
-  /* color: red; */
   .child1 {
     display: flex;
     > div {
@@ -200,9 +200,9 @@ const Root = styled.section`
           font-size: 16px;
           font-family: Helvetica;
           font-weight: 900;
-          color: black;
+          color: #0000008f;
           margin: 1px;
-                    @media (max-width: 789px) {
+          @media (max-width: 789px) {
             font-size: 10px;
           }
           span {

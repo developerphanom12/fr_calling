@@ -108,9 +108,11 @@ const Root = styled.section`
     font-family: "Roboto", "sana-serif";
     .app_header {
       display: flex;
-      background-color: #0088ff;
-      text-align: center;
-      color: white;
+    background-color: #0088ff;
+    text-align: center;
+    margin: 0px;
+    color: white;
+    font-size: 13px;
 
       > div {
         flex: 1;
@@ -142,7 +144,7 @@ const Root = styled.section`
         text-transform: capitalize;
         background-color: #e7e7e8;
         text-align: center;
-        padding: 15px 5px;
+        padding: 5px 5px;
         .person {
           color: #8995ad;
           font-size: 14px;
@@ -199,7 +201,7 @@ const Root = styled.section`
           font-family: Helvetica;
           font-weight: 900;
           font-size: 16px;
-          color: black;
+          color: #0000008f;
           margin: 1px;
           @media (max-width: 789px) {
             font-size: 10px;
