@@ -147,7 +147,7 @@ const Root = styled.section`
   flex-wrap: wrap;
   justify-content: space-between;
 
-  /* p {
+ p {
     font-size: 1.2rem;
     font-weight: 600;
     font-family: Roboto, sans-serif;
@@ -155,7 +155,7 @@ const Root = styled.section`
     color: rgba(61, 78, 101, 0.84);
     margin-top: 50px;
     margin-left: 13px;
-  } */
+  } 
 
   .chartmain {
     display: flex;
@@ -164,7 +164,7 @@ const Root = styled.section`
 
     .char2{
       width: 30%;
-      box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 2px 0px inset;
+      /* box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 2px 0px inset; */
       display: flex;
       flex-direction:column;
 
@@ -175,7 +175,7 @@ const Root = styled.section`
     font-size: 19px;
     font-weight: 900;
     font-family: serif;
-      }
+    color: rgba(55, 77, 103, 0.54)!important;      }
     }
 
     
@@ -225,9 +225,10 @@ transition: all 0.4s ease 0s;
     }
 
     .char {
-      width: 37%;
+      width: 40%;
       background-color: #f8f9fa !important;
       box-shadow: 0 0px 2px 0px rgba(0, 0, 0, 0.45) inset;
+
     }
   }
   .chart1 {

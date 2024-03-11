@@ -172,6 +172,8 @@ export default function SideBar() {
     </Root>
   );
 }
+
+
 const Root = styled.section`
   display: flex;
   flex-direction: column;
@@ -261,3 +263,4 @@ const Root = styled.section`
     }
   }
 `;
+

@@ -603,7 +603,7 @@ const Root = styled.section`
             font-weight: 500;
             background: #5d05abb8;
             color: white;
-            border: 2px solid #5d05abb8;
+            border:none;
           }
         }
       }

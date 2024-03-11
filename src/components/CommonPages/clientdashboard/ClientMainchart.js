@@ -74,7 +74,7 @@ const Root = styled.section`
     display: flex;
     flex-direction: column;
     .delta {
-      margin-top: 52px;
+      margin-top: 15px;
     width: 100%;
     font-size: 13px;
     display: flex;
